@@ -22,9 +22,7 @@ ___
 
 0- id
 
-1- id
-
-2- id_matiere
+1- id_matiere
 ____
 
 **tz_etudiant**
