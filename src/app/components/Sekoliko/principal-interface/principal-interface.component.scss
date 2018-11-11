@@ -1,0 +1,28 @@
+.principal-form {
+  min-width: 250px;
+  max-width: 600px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+button{
+  min-width: 100px;
+  width: 225px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 15px;
+}
+.center-button {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

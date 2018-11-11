@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+
+<div class="login-content">
+  <div class="flex-center">
+    <mat-card>
+      <form class="login-form" (ngSubmit)="onSubmit()" #boxFormView="ngForm">
+        <h2 style=" text-align: center">
+          Welcome to {{ title }}!
+        </h2>
+        <img width="300" alt="Maison Logo" src="../assets/icons/ecole.jpg" class="img-center">
+
+        <mat-form-field class="input-full-width">
+          <input matInput
+                 placeholder="Login"
+                 type="text"
+                 name="loginInput"
+                 required
+                 [(ngModel)]="login.username"
+                 #loginInput="ngModel">
+          <mat-error [hidden]="loginInput.valid || loginInput.untouched">
+            Le login est <strong>obligatoire</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="password-full-width">
+          <input matInput
+                 placeholder="Entrer votre mots de passe"
+                 [type]="hide ? 'password' : 'text'"
+                 name="password"
+                 required
+                 [(ngModel)]="login.password"
+                 #password="ngModel">
+          <mat-error [hidden]="password.valid || password.untouched">
+            Le mots de passe est <strong>obligatoire</strong>
+          </mat-error>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <div>
+          <!--<img *ngIf="loading" src="../assets/icons/loadtest.gif" class="loginImg"/>-->
+          <button mat-raised-button type="submit" class="button-right" [disabled]=" !boxFormView.form.valid"
+                  (click)="onclick(); auth(login); boxFormView.reset()">Connect
+          </button>
+        </div>
+      </form>
+    </mat-card>
+
+  </div>
+</div>
+
