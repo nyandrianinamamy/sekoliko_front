@@ -1,0 +1,4 @@
+services:
+#    commun.example:
+#        class: Bundle\CommunBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
