@@ -1,13 +1,16 @@
 commun:
-    resource: "@CommunBundle/Resources/config/routing.yml"
+    resource: "@CommunBundle/Controller"
+    type:     annotation
     prefix:   /
 
 user:
-    resource: "@UserBundle/Resources/config/routing.yml"
+    resource: "@UserBundle/Controller"
+    type:     annotation
     prefix:   /
 
 admin:
-    resource: "@AdminBundle/Resources/config/routing.yml"
+    resource: "@AdminBundle/Controller"
+    type:     annotation
     prefix:   /
 
 app:
@@ -16,3 +19,6 @@ app:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+api_login_check:
+    path: /api/users/login

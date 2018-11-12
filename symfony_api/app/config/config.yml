@@ -82,3 +82,14 @@ fos_user:
     from_email:
         address: "tahiana0@gmail.com"
         sender_name: "tahiana"
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener:
+        enabled: true
+        rules:
+           - { path: '^/api', priorities: ['json'], fallback_format: 'html'}
+           - { path: '^/', priorities: ['html'], fallback_format: 'html'}
+    versioning: true
+    view:
+        view_response_listener: 'force'
