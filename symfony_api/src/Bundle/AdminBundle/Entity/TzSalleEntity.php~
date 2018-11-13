@@ -24,28 +24,25 @@ class TzSalleEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"salle_etude"})
-     * @JMS\SerializedName("id")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salle_nom", type="string", length=80, nullable=false)
-     * @JMS\Groups({"salle_etude", "entite_juridique"})
+     * @ORM\Column(name="salle_nom", type="string", length=80, nullable=true)
      */
     private $nom;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="salle_date_debut_occupation", type="datetime",nullable=true)
+     * @ORM\Column(name="salle_date_debut_occupation", type="datetime",nullable=false)
      */
     private $dateDebutOccupation;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="salle_date_fin_occupation", type="datetime",nullable=true)
+     * @ORM\Column(name="salle_date_fin_occupation", type="datetime",nullable=false)
      */
     private $dateFinOccupation;
 
