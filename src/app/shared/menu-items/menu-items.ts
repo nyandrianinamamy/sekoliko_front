@@ -52,8 +52,15 @@ const MENUITEMS = [
       name: 'Utilisateurs',
       type: 'link',
       icon: 'account_circle'
-    }],
+    },
+      {
+        state: ['/', 'menu', 'salle'],
+        name: 'Gestion Salle',
+        type: 'link',
+        icon: 'home'
+      }],
   },
+
   {
     state: ['#'],
     type: 'expand',

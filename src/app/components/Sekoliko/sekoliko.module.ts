@@ -18,6 +18,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrincipalInterfaceComponent } from './principal-interface/principal-interface.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { ClassComponent } from './class/class.component';
+import { SalleComponent } from './salle/salle.component';
 
 @NgModule({
   imports: [
