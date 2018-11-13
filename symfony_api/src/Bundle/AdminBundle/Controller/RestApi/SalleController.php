@@ -88,6 +88,7 @@ class SalleController extends FOSRestController
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/salle/edit", name="salle_new", defaults={"salle": null})
      * @Rest\Post("/api/salle/edit/{salle}", name="salle_modify", requirements={"salle":"\d+"})
+     * @Rest\RequestParam(name="action", nullable=true)
      * @Rest\RequestParam(name="description", nullable=false, allowBlank = false)
      * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
      *
@@ -97,11 +98,20 @@ class SalleController extends FOSRestController
         $response = new JsonResponse();
         $new = false;
         $paramDescription = $paramFetcher->get('description');
+        $paramAction = $paramFetcher->get('action');
         $posServiceMsg = $this->get('ws.tz_msg');
         $em = $this->getDoctrine()->getManager();
         if (!$salle instanceof TzSalleEntity) {
             $salle = new TzSalleEntity();
             $new = true;
+        } else if ($paramAction == "delete"){
+            $em->remove($salle);
+            $text = sprintf("la salle %s est bien supprimée", $paramDescription);
+            $msgReturn = $posServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, null);
+            $response->setData($msgReturn);
+            $em->remove($salle);
+            $em->flush();
+            return $response;
         }
         try {
             $salle->setNom($paramDescription);
