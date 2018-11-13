@@ -58,6 +58,7 @@ class SalleController extends FOSRestController
      * @param integer $salle
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/salle/find", name="recherche_salle",defaults={"salle": null})
+     * @Rest\RequestParam(name="occupation", nullable=true)
      * @Rest\GET("/api/salle/find/{salle}", name="recherche_salle_by_id", requirements={"salle":"\d+"})
      * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
      * @return JsonResponse
@@ -69,14 +70,19 @@ class SalleController extends FOSRestController
             $data = $salle;
         } else {
             $repSalle = $this->getDoctrine()->getRepository(TzSalleEntity::class);
-            $data = $repSalle->findBy(array(), array('nom' => 'ASC'));
+            $paramOccupation = $paramFetcher->get('occupation');
+            if ($paramOccupation == false && !is_null($paramOccupation)) {
+                $data = $repSalle->getSalleLibre();
+            } else {
+                $data = $repSalle->findBy(array(), array('nom' => 'ASC'));
+            }
         }
         $resData = $this->setSuccessResponse($data, "json", array("salle_etude"));
         return $response->setData($resData);
     }
 
     /**
-     * Creation de salle
+     * Creation et edition de salle
      *
      * @param integer $salle
      * @param ParamFetcher $paramFetcher
