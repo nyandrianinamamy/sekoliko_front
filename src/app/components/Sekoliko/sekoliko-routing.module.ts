@@ -12,6 +12,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'principal-interface'},
       {path: 'not-found', component: NotFoundComponent},
       {path: 'principal-interface', component: PrincipalInterfaceComponent},
+      {path: 'etudiant', loadChildren: 'src/app/components/Sekoliko/Etudiant/etudiant.module#EtudiantModule'},
       { path: '**', redirectTo: 'not-found' }
     ]
   }

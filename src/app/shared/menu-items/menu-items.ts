@@ -33,7 +33,7 @@ const MENUITEMS = [
       type: 'link',
       icon: 'dns'
     }, {
-      state: ['/', 'menu'],
+      state: ['/', 'menu', 'etudiant'],
       name: 'Eleve',
       type: 'link',
       icon: 'accessibility'
