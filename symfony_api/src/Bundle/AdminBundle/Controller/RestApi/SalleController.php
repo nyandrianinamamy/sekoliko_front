@@ -161,7 +161,7 @@ class SalleController extends FOSRestController
                 $em->flush();
                 $code = ConstantSrv::CODE_SUCCESS;
             } else {
-                $text = sprintf("la salle est déjà bien réservée");
+                $text = sprintf("la salle est déjà réservée");
                 $code = ConstantSrv::CODE_DATA_NOTFOUND;
             }
         } else {
