@@ -105,7 +105,6 @@ class SalleController extends FOSRestController
             $salle = new TzSalleEntity();
             $new = true;
         } else if ($paramAction == "delete"){
-            $em->remove($salle);
             $text = sprintf("la salle %s est bien supprimée", $paramDescription);
             $msgReturn = $posServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, null);
             $response->setData($msgReturn);
@@ -129,6 +128,48 @@ class SalleController extends FOSRestController
         }
         $response->setData($msgReturn);
 
+        return $response;
+    }
+
+    /**
+     * Reservation de salle
+     *
+     * @param integer $salle
+     * @param ParamFetcher $paramFetcher
+     * @Rest\Post("/api/salle/reservation/{salle}", name="salle_reservation", requirements={"salle":"\d+"})
+     * @Rest\RequestParam(name="dateDebut", nullable=false)
+     * @Rest\RequestParam(name="dateFin", nullable=false)
+     * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
+     *
+     * @return JsonResponse
+     */
+    public function reservation($salle, ParamFetcher $paramFetcher) {
+        $response = new JsonResponse();
+        $posServiceMsg = $this->get('ws.tz_msg');
+        if ($salle instanceof TzSalleEntity) {
+            $paramDate = $paramFetcher->get('dateDebut');
+            $paramDateFin = $paramFetcher->get('dateFin');
+            $em = $this->getDoctrine()->getManager();
+            $dateOccupation = $salle->getDateFinOccupation();
+            $date = new \DateTime($paramDate);
+            $dateFin =  new \DateTime($paramDateFin);
+            if ($dateOccupation <= $date) {
+                $text = sprintf("la salle %s est bien réservée", $salle->getNom());
+                $salle->setDateDebutOccupation($date);
+                $salle->setDateFinOccupation($dateFin);
+                $em->persist($salle);
+                $em->flush();
+                $code = ConstantSrv::CODE_SUCCESS;
+            } else {
+                $text = sprintf("la salle est déjà bien réservée");
+                $code = ConstantSrv::CODE_DATA_NOTFOUND;
+            }
+        } else {
+            $text = sprintf("Veuillez saisir la salle");
+            $code = ConstantSrv::CODE_BAD_REQUEST;
+        }
+        $msgReturn = $posServiceMsg->getMsg($code, $text, $text, null);
+        $response->setData($msgReturn);
         return $response;
     }
 }
