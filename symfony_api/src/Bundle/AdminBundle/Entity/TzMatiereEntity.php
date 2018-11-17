@@ -8,6 +8,7 @@
 
 namespace Bundle\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 /**
  * TzEtablissement
  *
@@ -29,6 +30,7 @@ class TzMatiereEntity
      * @var string
      *
      * @ORM\Column(name="mat_nom", type="string", length=80, nullable=true)
+     * @JMS\Groups({"prof_list"})
      */
     private $description;
 

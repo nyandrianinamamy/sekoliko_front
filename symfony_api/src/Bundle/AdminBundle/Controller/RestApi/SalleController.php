@@ -82,13 +82,36 @@ class SalleController extends FOSRestController
     }
 
     /**
+     * Suppression de la salle
+     * @param integer $salle
+     * @Rest\Post("/api/salle/delete/{salle}", name="salle_delete", requirements={"salle":"\d+"})
+     * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
+     * @throws
+     * @return JsonResponse
+     */
+    public function deleteSalle($salle) {
+        $tzServiceMsg = $this->get('ws.tz_msg');
+        $response = new JsonResponse();
+        $em = $this->getDoctrine()->getManager();
+        if ($salle instanceof TzSalleEntity) {
+            $text = sprintf("la salle %s est bien supprimée", $salle->getNom());
+            $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, null);
+            $response->setData($msgReturn);
+            $em->remove($salle);
+            $em->flush();
+            return $response;
+        } else {
+            throw new \Exception("Salle not found");
+        }
+    }
+
+    /**
      * Creation et edition de salle
      *
      * @param integer $salle
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/salle/edit", name="salle_new", defaults={"salle": null})
      * @Rest\Post("/api/salle/edit/{salle}", name="salle_modify", requirements={"salle":"\d+"})
-     * @Rest\RequestParam(name="action", nullable=true)
      * @Rest\RequestParam(name="description", nullable=false, allowBlank = false)
      * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
      *
@@ -98,19 +121,11 @@ class SalleController extends FOSRestController
         $response = new JsonResponse();
         $new = false;
         $paramDescription = $paramFetcher->get('description');
-        $paramAction = $paramFetcher->get('action');
-        $posServiceMsg = $this->get('ws.tz_msg');
+        $tzServiceMsg = $this->get('ws.tz_msg');
         $em = $this->getDoctrine()->getManager();
         if (!$salle instanceof TzSalleEntity) {
             $salle = new TzSalleEntity();
             $new = true;
-        } else if ($paramAction == "delete"){
-            $text = sprintf("la salle %s est bien supprimée", $paramDescription);
-            $msgReturn = $posServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, null);
-            $response->setData($msgReturn);
-            $em->remove($salle);
-            $em->flush();
-            return $response;
         }
         try {
             $salle->setNom($paramDescription);
@@ -122,9 +137,9 @@ class SalleController extends FOSRestController
                 $text = sprintf("la salle %s est bien mise à jour", $salle->getNom());
             }
             $data = array('id' => $salle->getId());
-            $msgReturn = $posServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
+            $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
         } catch (\Exception $e) {
-            $msgReturn = $posServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $e->getMessage(), "Data not saved");
+            $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $e->getMessage(), "Data not saved");
         }
         $response->setData($msgReturn);
 
@@ -145,7 +160,7 @@ class SalleController extends FOSRestController
      */
     public function reservation($salle, ParamFetcher $paramFetcher) {
         $response = new JsonResponse();
-        $posServiceMsg = $this->get('ws.tz_msg');
+        $tzServiceMsg = $this->get('ws.tz_msg');
         if ($salle instanceof TzSalleEntity) {
             $paramDate = $paramFetcher->get('dateDebut');
             $paramDateFin = $paramFetcher->get('dateFin');
@@ -168,7 +183,7 @@ class SalleController extends FOSRestController
             $text = sprintf("Veuillez saisir la salle");
             $code = ConstantSrv::CODE_BAD_REQUEST;
         }
-        $msgReturn = $posServiceMsg->getMsg($code, $text, $text, null);
+        $msgReturn = $tzServiceMsg->getMsg($code, $text, $text, null);
         $response->setData($msgReturn);
         return $response;
     }

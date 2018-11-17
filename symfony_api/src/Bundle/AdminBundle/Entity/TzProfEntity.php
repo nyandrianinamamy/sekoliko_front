@@ -8,6 +8,8 @@
 
 namespace Bundle\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Bundle\AdminBundle\Entity\TzMatiereEntity;
+use JMS\Serializer\Annotation as JMS;
 /**
  * TzEtablissement
  *
@@ -22,6 +24,8 @@ class TzProfEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"prof_gest", "prof_list"})
+     * @JMS\SerializedName("id")
      */
     private $id;
 
@@ -29,13 +33,18 @@ class TzProfEntity
      * @var string
      *
      * @ORM\Column(name="prof_nom", type="string", length=80, nullable=true)
+     * @JMS\Groups({"prof_list"})
      */
     private $nom;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="id_matiere", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="TzMatiereEntity")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_matiere", referencedColumnName="id")
+     * })
+     * @JMS\Groups({"prof_list"})
+     * @JMS\Accessor(getter="getMatiereId")
      */
     private $matiereId;
 
