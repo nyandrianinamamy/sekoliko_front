@@ -55,6 +55,8 @@ class SalleController extends FOSRestController
     }
 
     /**
+     * Fonction de recherche de salle
+     *
      * @param integer $salle
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/salle/find", name="recherche_salle",defaults={"salle": null})
