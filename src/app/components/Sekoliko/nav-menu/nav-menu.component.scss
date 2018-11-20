@@ -34,7 +34,7 @@ footer {
   position: sticky;
   display: flow-root;
   bottom: 0;
-  background: #0062cc;
+  background: #2e6bb1;
 }
 .footer-text {
   padding: 5px;
@@ -70,6 +70,7 @@ footer {
   padding: 24px;
   border-radius: 2px;
   justify-content: center;
+  background-color: #e9ebee;
 }
 .container {
   position: absolute;
@@ -88,6 +89,7 @@ main {
 }
 
 .mat-sidenav {
+  background-color: #e9ebee;
   width: 250px;
 }
 
@@ -104,6 +106,7 @@ main {
 
 .no-shadow {
   box-shadow: none;
+  background-color: #e9ebee;
 }
 
 ::ng-deep .mat-expansion-panel-body {
@@ -113,6 +116,7 @@ main {
 
 .header-box-shadow {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+background-color: #2e6bb1;
 }
 
 .bottom-to-top {
@@ -123,4 +127,7 @@ main {
     linear-gradient(to top, #c1c1c1, rgba(0, 0, 0, 0)) 1 100%
 }
 
-
+mat-toolbar {
+  position: sticky;
+  // position: fixed;
+}

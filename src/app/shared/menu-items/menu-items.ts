@@ -38,7 +38,7 @@ const MENUITEMS = [
       type: 'link',
       icon: 'accessibility'
     },  {
-      state: ['/', 'menu'],
+      state: ['/', 'menu', 'administration'],
       name: 'Administration',
       type: 'link',
       icon: 'settings'
