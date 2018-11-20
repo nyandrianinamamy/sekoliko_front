@@ -25,19 +25,6 @@ use Bundle\AdminBundle\Entity\TzSalleEntity;
  */
 class ProfController extends FOSRestController
 {
-    /**
-     * @param mixed  $data
-     * @param string $format
-     * @param array  $context
-     *
-     * @return array
-     */
-    public function setSuccessResponse($data, $format, $context)
-    {
-        $posResponse = $this->get("tz.responses");
-        $resData = $posResponse->successSerialize($data, "json", $context);
-        return $resData;
-    }
 
     /**
      * suppression d'un prof
@@ -130,7 +117,8 @@ class ProfController extends FOSRestController
             $repProf = $this->getDoctrine()->getRepository(TzProfEntity::class);
             $data = $repProf->search($paramFetcher);
         }
-        $resData = $this->setSuccessResponse($data, "json", array("prof_list"));
+        $posResponse = $this->get("tz.responses");
+        $resData = $posResponse->setSuccessResponse($data, "json", array("prof_list"));
         return $response->setData($resData);
     }
 }

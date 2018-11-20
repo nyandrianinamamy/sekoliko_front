@@ -30,20 +30,6 @@ class ClasseController extends FOSRestController
     }
 
     /**
-     * @param mixed  $data
-     * @param string $format
-     * @param array  $context
-     *
-     * @return array
-     */
-    public function setSuccessResponse($data, $format, $context)
-    {
-        $posResponse = $this->get("tz.responses");
-        $resData = $posResponse->successSerialize($data, "json", $context);
-        return $resData;
-    }
-
-    /**
      * Creation et edition de classe
      *
      * @param integer $classe
@@ -113,7 +99,6 @@ class ClasseController extends FOSRestController
      * @param integer $classe
      *
      * @Rest\Post("/api/classe/find", name="recherche_classe",defaults={"classe": null})
-     * @Rest\RequestParam(name="occupation", nullable=true)
      * @Rest\GET("/api/classe/find/{classe}", name="recherche_classe_by_id", requirements={"classe":"\d+"})
      * @ParamConverter("classe",class="AdminBundle:TzClassEntity")
      * @return JsonResponse
@@ -127,7 +112,8 @@ class ClasseController extends FOSRestController
             $repclasse = $this->getDoctrine()->getRepository(TzClassEntity::class);
             $data = $repclasse->findBy(array(), array('description' => 'ASC'));
         }
-        $resData = $this->setSuccessResponse($data, "json", array("classe_etd"));
+        $posResponse = $this->get("tz.responses");
+        $resData = $posResponse->setSuccessResponse($data, "json", array("classe_etd"));
         return $response->setData($resData);
     }
 }

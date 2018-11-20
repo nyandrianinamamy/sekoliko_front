@@ -7,6 +7,7 @@
  */
 namespace Bundle\AdminBundle\Controller\RestApi;
 
+use Bundle\AdminBundle\Entity\TzClassEntity;
 use Bundle\CommunBundle\Utils\ConstantSrv;
 use FOS\RestBundle\Controller\Annotations as Rest,
     FOS\RestBundle\Request\ParamFetcher,
@@ -40,19 +41,6 @@ class SalleController extends FOSRestController
         );
     }
 
-    /**
-     * @param mixed  $data
-     * @param string $format
-     * @param array  $context
-     *
-     * @return array
-     */
-    public function setSuccessResponse($data, $format, $context)
-    {
-        $posResponse = $this->get("tz.responses");
-        $resData = $posResponse->successSerialize($data, "json", $context);
-        return $resData;
-    }
 
     /**
      * Fonction de recherche de salle
@@ -79,7 +67,8 @@ class SalleController extends FOSRestController
                 $data = $repSalle->findBy(array(), array('nom' => 'ASC'));
             }
         }
-        $resData = $this->setSuccessResponse($data, "json", array("salle_etude"));
+        $posResponse = $this->get("tz.responses");
+        $resData = $posResponse->setSuccessResponse($data, "json", array("salle_etude"));
         return $response->setData($resData);
     }
 
@@ -156,8 +145,9 @@ class SalleController extends FOSRestController
      * @Rest\Post("/api/salle/reservation/{salle}", name="salle_reservation", requirements={"salle":"\d+"})
      * @Rest\RequestParam(name="dateDebut", nullable=false)
      * @Rest\RequestParam(name="dateFin", nullable=false)
+     * @Rest\RequestParam(name="classe", nullable=true)
      * @ParamConverter("salle",class="AdminBundle:TzSalleEntity")
-     *
+     * @throws
      * @return JsonResponse
      */
     public function reservation($salle, ParamFetcher $paramFetcher) {
@@ -166,17 +156,25 @@ class SalleController extends FOSRestController
         if ($salle instanceof TzSalleEntity) {
             $paramDate = $paramFetcher->get('dateDebut');
             $paramDateFin = $paramFetcher->get('dateFin');
+            $paramClasse = $paramFetcher->get('classe');
             $em = $this->getDoctrine()->getManager();
             $dateOccupation = $salle->getDateFinOccupation();
             $date = new \DateTime($paramDate);
             $dateFin =  new \DateTime($paramDateFin);
+            $repClasse = $em->getRepository(TzClassEntity::class);
             if ($dateOccupation <= $date) {
-                $text = sprintf("la salle %s est bien réservée", $salle->getNom());
-                $salle->setDateDebutOccupation($date);
-                $salle->setDateFinOccupation($dateFin);
-                $em->persist($salle);
-                $em->flush();
-                $code = ConstantSrv::CODE_SUCCESS;
+                $repClasse = $repClasse->find($paramClasse);
+                if($repClasse instanceof TzClassEntity) {
+                    $text = sprintf("la salle %s est bien réservée", $salle->getNom());
+                    $salle->setDateDebutOccupation($date);
+                    $salle->setDateFinOccupation($dateFin);
+                    $salle->setClasse($paramClasse);
+                    $em->persist($salle);
+                    $em->flush();
+                    $code = ConstantSrv::CODE_SUCCESS;
+                } else {
+                    throw new \Exception("Classe not found");
+                }
             } else {
                 $text = sprintf("la salle est déjà réservée");
                 $code = ConstantSrv::CODE_DATA_NOTFOUND;

@@ -36,9 +36,6 @@ class TzProfRepository extends \Doctrine\ORM\EntityRepository
             );
         }
         $etat = $querybuilder->getQuery()->getResult();
-        if (count($etat) > 0) {
-            return $etat[0];
-        }
         return $etat;
     }
 }

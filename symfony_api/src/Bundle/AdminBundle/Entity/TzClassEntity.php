@@ -24,7 +24,7 @@ class TzClassEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"classe_etd"})
+     * @JMS\Groups({"classe_etd", "matiere_list"})
      * @JMS\SerializedName("id")
      */
     private $id;
@@ -33,7 +33,8 @@ class TzClassEntity
      * @var string
      *
      * @ORM\Column(name="classe_description", type="string", length=80, nullable=false)
-     * @JMS\Groups({"classe_etd"})
+     * @JMS\Groups({"classe_etd", "prof_list", "matiere_list"})
+     *
      */
     private $description;
 

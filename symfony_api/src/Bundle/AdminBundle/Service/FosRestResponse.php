@@ -29,6 +29,20 @@ class FosRestResponse
     }
 
     /**
+     * @param mixed  $data
+     * @param string $format
+     * @param array  $context
+     *
+     * @return array
+     */
+    public function setSuccessResponse($data, $format, $context)
+    {
+        $resData = $this->successSerialize($data, "json", $context);
+        return $resData;
+    }
+
+
+    /**
      * @param mixed $data
      * @param string $format
      * @param array $listContexts
