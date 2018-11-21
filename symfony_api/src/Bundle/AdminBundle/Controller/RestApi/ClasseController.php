@@ -23,6 +23,7 @@ class ClasseController extends FOSRestController
      * @Rest\Get("/api/class")
      * @return JsonResponse
      */
+
     public function getFonction() {
         $respone = new JsonResponse();
         $respone->setData('test');
