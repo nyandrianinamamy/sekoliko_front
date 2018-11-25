@@ -17,3 +17,15 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    #Configuration FOSUser
+    from_email_address : tahiana.rakotonirina@netapsys.fr
+    for_sender_name : Techzara
+    # configuration lexik_jwt_authentication:
+    #supported by the default encoder for the configured crypto engine :
+    #HS256, HS384, HS512 (HMAC)
+    #RS256, RS384, RS512 (RSA)
+    ##ES256, ES384, ES512 (ECDSA)
+    jwt_private_key_path: '%kernel.project_dir%/app/config/jwt/private.pem'
+    jwt_public_key_path:  '%kernel.project_dir%/app/config/jwt/public.pem'
+    jwt_key_pass_phrase: telma
+    jwt_token_ttl: 3600
