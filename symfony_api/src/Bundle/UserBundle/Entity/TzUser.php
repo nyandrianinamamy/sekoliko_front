@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 11/11/2018
  * Time: 14:42
  */

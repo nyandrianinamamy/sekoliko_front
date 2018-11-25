@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 19/11/2018
  * Time: 19:51
  */
@@ -16,8 +16,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-class MatiereController extends FOSRestController
+use Bundle\CommunBundle\Controller\RestApi\AbstractClassRestController;
+class MatiereController extends AbstractClassRestController
 {
 
     /**

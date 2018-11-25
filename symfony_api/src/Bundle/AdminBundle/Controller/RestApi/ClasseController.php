@@ -10,14 +10,14 @@ use FOS\RestBundle\Controller\FOSRestController;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Bundle\CommunBundle\Controller\RestApi\AbstractClassRestController;
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 12/11/2018
  * Time: 08:31
  */
-class ClasseController extends FOSRestController
+class ClasseController extends AbstractClassRestController
 {
     /**
      * @Rest\Get("/api/class")

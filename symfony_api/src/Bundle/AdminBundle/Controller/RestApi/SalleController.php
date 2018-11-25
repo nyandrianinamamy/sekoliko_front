@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 12/11/2018
  * Time: 18:34
  */
@@ -17,12 +17,12 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Bundle\AdminBundle\Entity\TzSalleEntity;
-
+use Bundle\CommunBundle\Controller\RestApi\AbstractClassRestController;
 /**
  * Class SalleController
  * @package Bundle\AdminBundle\Controller\RestApi
  */
-class SalleController extends FOSRestController
+class SalleController extends AbstractClassRestController
 {
 
     /**
