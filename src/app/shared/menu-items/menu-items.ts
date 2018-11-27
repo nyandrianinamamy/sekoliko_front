@@ -23,20 +23,20 @@ const MENUITEMS = [
     type: 'expand',
     icon: 'settings',
     child: [{
-      state: ['/', 'menu'],
-      name: 'Note',
+      state: ['/', 'menu', 'etudiant'],
+      name: 'Les etudiants',
       type: 'link',
-      icon: 'view_comfy'
+      icon: 'accessibility'
     }, {
       state: ['/', 'menu'],
-      name: 'Classe et Prof',
+      name: 'Les professeurs',
       type: 'link',
       icon: 'dns'
     }, {
-      state: ['/', 'menu', 'etudiant'],
-      name: 'Eleve',
+      state: ['/', 'menu'],
+      name: 'Les classes',
       type: 'link',
-      icon: 'accessibility'
+      icon: 'view_comfy'
     },  {
       state: ['/', 'menu', 'administration'],
       name: 'Administration',
