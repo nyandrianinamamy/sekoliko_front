@@ -26,6 +26,7 @@ class AuthentificationEventListener
     }
 
     /**
+     * Retour après authentification
      * @param AuthenticationSuccessEvent $event
      *
      * @throws
