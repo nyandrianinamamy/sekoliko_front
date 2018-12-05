@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="mt-3" *ngFor="let menuItem of menuItems.getMenuitem()">
-      <mat-nav-list class="ml-0" dense *ngIf="menuItem.child.length > 0;">
+      <mat-nav-list class="p-2" dense *ngIf="menuItem.child.length > 0;">
         <mat-list-item *ngFor="let child of menuItem.child" routerLinkActive="selected">
           <a [routerLink]="child.state">
             <div class="row">
