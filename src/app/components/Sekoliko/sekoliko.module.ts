@@ -18,6 +18,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrincipalInterfaceComponent } from './principal-interface/principal-interface.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { FooterComponent } from './footer/footer.component';
+import { ClassComponent } from './class/class.component';
+import { SalleComponent } from './salle/salle.component';
 
 @NgModule({
   imports: [
@@ -46,6 +49,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatTableModule,
     MaterialModule
   ],
-  declarations: [SekolikoComponent, NotFoundComponent, PrincipalInterfaceComponent, NavMenuComponent]
+  declarations: [SekolikoComponent, FooterComponent, NotFoundComponent, PrincipalInterfaceComponent, NavMenuComponent]
 })
 export class SekolikoModule { }

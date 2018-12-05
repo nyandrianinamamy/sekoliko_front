@@ -5,7 +5,7 @@ export const environment = {
   production: false,
   baseHref: '/',
   wsBasePath: './assets/api',
-  base_url_api: 'http://localhost:8080/pos-api/web/app.php/api'
+  base_url_api: 'http://localhost:8000/api'
 };
 
 /*

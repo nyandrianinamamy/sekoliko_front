@@ -21,7 +21,7 @@ export class NavMenuComponent {
       map(result => result.matches)
     );
 
-  constructor(media: ObservableMedia, private breakpointObserver: BreakpointObserver,  public menuItems: MenuItems, private router: Router) {
+constructor(media: ObservableMedia, private breakpointObserver: BreakpointObserver,  public menuItems: MenuItems, private router: Router) {
     this.watcher = media.subscribe((change: MediaChange) => {
       if (change.mqAlias === 'sm' || change.mqAlias === 'xs') {
         this.opened = false;

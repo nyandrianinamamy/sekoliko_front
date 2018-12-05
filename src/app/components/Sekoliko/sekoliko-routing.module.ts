@@ -13,6 +13,8 @@ const routes: Routes = [
       {path: 'not-found', component: NotFoundComponent},
       {path: 'principal-interface', component: PrincipalInterfaceComponent},
       {path: 'etudiant', loadChildren: 'src/app/components/Sekoliko/Etudiant/etudiant.module#EtudiantModule'},
+      {path: 'class', loadChildren: 'src/app/components/Sekoliko/class/class.module#ClassModule'},
+      {path: 'salle', loadChildren: 'src/app/components/Sekoliko/salle/salle.module#SalleModule'},
       { path: '**', redirectTo: 'not-found' }
     ]
   }

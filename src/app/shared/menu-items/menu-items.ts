@@ -23,22 +23,22 @@ const MENUITEMS = [
     type: 'expand',
     icon: 'settings',
     child: [{
-      state: ['/', 'menu'],
-      name: 'Note',
+      state: ['/', 'menu', 'etudiant'],
+      name: 'Les etudiants',
       type: 'link',
-      icon: 'view_comfy'
+      icon: 'accessibility'
     }, {
       state: ['/', 'menu'],
-      name: 'Classe et Prof',
+      name: 'Les professeurs',
       type: 'link',
       icon: 'dns'
     }, {
-      state: ['/', 'menu', 'etudiant'],
-      name: 'Eleve',
-      type: 'link',
-      icon: 'accessibility'
-    },  {
       state: ['/', 'menu'],
+      name: 'Les classes',
+      type: 'link',
+      icon: 'view_comfy'
+    },  {
+      state: ['/', 'menu', 'administration'],
       name: 'Administration',
       type: 'link',
       icon: 'settings'
@@ -52,39 +52,14 @@ const MENUITEMS = [
       name: 'Utilisateurs',
       type: 'link',
       icon: 'account_circle'
-    }],
-  },
-  {
-    state: ['#'],
-    type: 'expand',
-    name: 'Activité',
-    icon: 'inbox',
-    child: [{
-      state: ['/', 'menu'],
-      name: 'Business',
-      type: 'link',
-      icon: 'business_center'
     },
       {
-        state: ['/', 'menu'],
-        name: 'Nouvelles',
+        state: ['/', 'menu', 'salle'],
+        name: 'Gestion Salle',
         type: 'link',
-        icon: 'fiber_new'
-      },
-      {
-        state: ['/', 'menu', 'activity'],
-        name: 'Activités',
-        type: 'link',
-        icon: 'local_activity'
-      },
-      {
-        state: ['#'],
-        name: 'Evenement',
-        type: 'link',
-        icon: 'event_available'
-      }
-    ]
-  }
+        icon: 'home'
+      }],
+  },
 ];
 
 @Injectable({

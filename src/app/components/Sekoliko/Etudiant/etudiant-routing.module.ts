@@ -12,8 +12,15 @@ const routes: Routes = [
       {path: 'list-etudiant', component: ListEtudiantComponent},
       { path: '**', redirectTo: 'list-etudiant' }
     ]
+    
   }
 ];
+// const routes:Routes=[
+//   {path: '', component: EtudiantComponent},
+//   {path:'list',component:ListEtudiantComponent},
+//   // {path:'contact',component:RegisterComponent},
+//   {path:'',redirectTo:'/list',pathMatch:'full'}
+// ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
