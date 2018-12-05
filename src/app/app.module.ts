@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -53,26 +53,26 @@ import {MaterialModule} from './Utils/modules/Material.module';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatGridListModule,
-    FlexLayoutModule,
-    MatCardModule,
-    MatExpansionModule,
+    // MatToolbarModule,
+    // MatButtonModule,
+    // MatSidenavModule,
+    // MatIconModule,
+    // MatListModule,
+    // MatGridListModule,
+    // FlexLayoutModule,
+    // MatCardModule,
+    // MatExpansionModule,
     MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatButtonToggleModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatTableModule,
+    // MatFormFieldModule,
+    // MatSelectModule,
+    // MatCheckboxModule,
+    // ReactiveFormsModule,
+    // MatButtonToggleModule,
+    // MatInputModule,
+    // MatPaginatorModule,
+    // MatRadioModule,
+    // MatDatepickerModule,
+    // MatTableModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
@@ -84,6 +84,7 @@ import {MaterialModule} from './Utils/modules/Material.module';
       }
     })
   ],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: ProjectInterceptor,

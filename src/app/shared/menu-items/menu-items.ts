@@ -22,38 +22,33 @@ const MENUITEMS = [
     name: 'Paramétrage',
     type: 'expand',
     icon: 'settings',
-    child: [{
+    child: [
+    {
+        state: ['/', 'menu', 'dashboard'],
+        name: 'Dashboards',
+        type: 'link',
+        icon: 'accessibility'
+    }, {
       state: ['/', 'menu', 'etudiant'],
       name: 'Les etudiants',
       type: 'link',
       icon: 'accessibility'
     }, {
-      state: ['/', 'menu'],
+      state: ['/', 'menu', 'profs'],
       name: 'Les professeurs',
       type: 'link',
       icon: 'dns'
     }, {
-      state: ['/', 'menu'],
-      name: 'Les classes',
-      type: 'link',
-      icon: 'view_comfy'
-    },  {
-      state: ['/', 'menu', 'administration'],
+      state: ['/', 'menu', 'administratif'],
       name: 'Administration',
       type: 'link',
       icon: 'settings'
     }, {
-      state: ['/', 'menu'],
-      name: 'Ecolage',
+      state: ['/', 'menu', 'payement'],
+      name: 'Payement',
       type: 'link',
       icon: 'attach_money'
     }, {
-      state: ['/', 'menu'],
-      name: 'Utilisateurs',
-      type: 'link',
-      icon: 'account_circle'
-    },
-      {
         state: ['/', 'menu', 'salle'],
         name: 'Gestion Salle',
         type: 'link',
