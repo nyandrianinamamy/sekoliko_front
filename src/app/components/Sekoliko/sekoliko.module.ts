@@ -19,8 +19,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PrincipalInterfaceComponent } from './principal-interface/principal-interface.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { FooterComponent } from './footer/footer.component';
-import { ClassComponent } from './class/class.component';
-import { SalleComponent } from './salle/salle.component';
+import {TzDashboardComponent} from './tz-dashboard/tz-dashboard.component';
+import {TzEtudiantsComponent} from './tz-etudiants/tz-etudiants.component';
+import {TzSalleComponent} from './tz-salle/tz-salle.component';
+import {TzPayementsComponent} from './tz-payements/tz-payements.component';
+import {TzProfsComponent} from './tz-profs/tz-profs.component';
 
 @NgModule({
   imports: [
@@ -49,6 +52,7 @@ import { SalleComponent } from './salle/salle.component';
     MatTableModule,
     MaterialModule
   ],
-  declarations: [SekolikoComponent, FooterComponent, NotFoundComponent, PrincipalInterfaceComponent, NavMenuComponent]
+  declarations: [SekolikoComponent, TzDashboardComponent, TzEtudiantsComponent,
+TzSalleComponent, FooterComponent, NotFoundComponent, TzProfsComponent, TzPayementsComponent, PrincipalInterfaceComponent, NavMenuComponent]
 })
 export class SekolikoModule { }

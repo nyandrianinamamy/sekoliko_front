@@ -1,10 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatExpansionModule} from '@angular/material/expansion';
+
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -48,6 +50,7 @@ import {MaterialModule} from './Utils/modules/Material.module';
   imports: [
     BrowserModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
