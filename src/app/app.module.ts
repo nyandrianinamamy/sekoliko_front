@@ -40,6 +40,7 @@ registerLocaleData(localeFr);
 
 import {MaterialModule} from './Utils/modules/Material.module';
 
+
 @NgModule({
   declarations: [
     AppComponent

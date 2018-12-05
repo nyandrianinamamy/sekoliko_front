@@ -22,28 +22,16 @@
         </a>
       </div>
     </div>
-    <div class="mt-3">
-      <mat-nav-list>
-        <mat-accordion multi="true" *ngFor="let menuItem of menuItems.getMenuitem()">
-          <mat-expansion-panel class="no-shadow" *ngIf="menuItem.type !== 'link';" [expanded]="panelOpenState">
-            <mat-expansion-panel-header fxLayout="row">
-              <mat-panel-title>
-                <mat-icon>{{ menuItem.icon }}</mat-icon>
-                <span class="item">{{ menuItem.name }}</span>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-nav-list class="ml-0" dense *ngIf="menuItem.child.length > 0;">
-              <mat-list-item *ngFor="let child of menuItem.child" routerLinkActive="selected">
-                <a [routerLink]="child.state">
-                  <div class="row">
-                    <mat-icon>{{ child.icon }}</mat-icon>
-                    <span class="item">{{child.name}}</span>
-                  </div>
-                </a>
-              </mat-list-item>
-            </mat-nav-list>
-          </mat-expansion-panel>
-        </mat-accordion>
+    <div class="mt-3" *ngFor="let menuItem of menuItems.getMenuitem()">
+      <mat-nav-list class="ml-0" dense *ngIf="menuItem.child.length > 0;">
+        <mat-list-item *ngFor="let child of menuItem.child" routerLinkActive="selected">
+          <a [routerLink]="child.state">
+            <div class="row">
+              <mat-icon>{{ child.icon }}</mat-icon>
+              <span class="item">{{child.name}}</span>
+            </div>
+          </a>
+        </mat-list-item>
       </mat-nav-list>
     </div>
   </mat-sidenav>
@@ -77,18 +65,10 @@
       </div>
     </mat-toolbar>
     <div class="full-content">
-      <!--Change to condition when Logged when token ready-->
       <mat-card class="content-card">
         <router-outlet></router-outlet>
       </mat-card>
     </div>
-    <footer>
-      <div class="footer-text">
-        <p>
-          design by Techzara - © 2018  - Sekoliko
-        </p>
-      </div>
-    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

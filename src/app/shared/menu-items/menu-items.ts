@@ -60,38 +60,6 @@ const MENUITEMS = [
         icon: 'home'
       }],
   },
-
-  {
-    state: ['#'],
-    type: 'expand',
-    name: 'Activité',
-    icon: 'inbox',
-    child: [{
-      state: ['/', 'menu'],
-      name: 'Business',
-      type: 'link',
-      icon: 'business_center'
-    },
-      {
-        state: ['/', 'menu'],
-        name: 'Nouvelles',
-        type: 'link',
-        icon: 'fiber_new'
-      },
-      {
-        state: ['/', 'menu', 'activity'],
-        name: 'Activités',
-        type: 'link',
-        icon: 'local_activity'
-      },
-      {
-        state: ['#'],
-        name: 'Evenement',
-        type: 'link',
-        icon: 'event_available'
-      }
-    ]
-  }
 ];
 
 @Injectable({
