@@ -24,20 +24,20 @@ const MENUITEMS = [
     icon: 'settings',
     child: [
     {
-        state: ['/', 'menu', 'dashboard'],
-        name: 'Dashboards',
-        type: 'link',
-        icon: 'accessibility'
+      state: ['/', 'menu', 'dashboard'],
+      name: 'Dashboards',
+      type: 'link',
+      icon: 'dns'
     }, {
       state: ['/', 'menu', 'etudiant'],
       name: 'Les etudiants',
       type: 'link',
-      icon: 'accessibility'
+      icon: 'account_circle'
     }, {
       state: ['/', 'menu', 'profs'],
       name: 'Les professeurs',
       type: 'link',
-      icon: 'dns'
+      icon: 'perm_identity'
     }, {
       state: ['/', 'menu', 'administratif'],
       name: 'Administration',
