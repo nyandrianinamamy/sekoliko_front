@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {HttpClientModule} from '@angular/common/http';
 
 import { SekolikoRoutingModule } from './sekoliko-routing.module';
 import {SekolikoComponent} from './sekoliko.component';
@@ -25,11 +26,14 @@ import {TzSalleComponent} from './tz-salle/tz-salle.component';
 import {TzPayementsComponent} from './tz-payements/tz-payements.component';
 import {TzProfsComponent} from './tz-profs/tz-profs.component';
 import {TzAdministrationComponent} from './tz-administration/tz-administration.component';
+import {ListEtudiantsComponent} from './tz-etudiants/list-etudiants/list-etudiants.component';
+import {TzClasseComponent} from './tz-etudiants/tz-classe/tz-classe.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     SekolikoRoutingModule,
     MatToolbarModule,
     MatButtonModule,
@@ -57,6 +61,6 @@ import {TzAdministrationComponent} from './tz-administration/tz-administration.c
 ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   declarations: [SekolikoComponent, TzDashboardComponent, TzEtudiantsComponent,
 TzSalleComponent, FooterComponent, NotFoundComponent, TzProfsComponent, TzPayementsComponent,
-NavMenuComponent, TzAdministrationComponent]
+NavMenuComponent, TzAdministrationComponent, ListEtudiantsComponent, TzClasseComponent]
 })
 export class SekolikoModule { }

@@ -8,6 +8,8 @@ import {TzSalleComponent} from './tz-salle/tz-salle.component';
 import {TzProfsComponent} from './tz-profs/tz-profs.component';
 import {TzPayementsComponent} from './tz-payements/tz-payements.component';
 import {TzAdministrationComponent} from './tz-administration/tz-administration.component';
+import {ListEtudiantsComponent} from './tz-etudiants/list-etudiants/list-etudiants.component';
+import {TzClasseComponent} from './tz-etudiants/tz-classe/tz-classe.component';
 
 const routes: Routes = [
   {
@@ -20,8 +22,10 @@ const routes: Routes = [
       {path: 'etudiant', component: TzEtudiantsComponent},
       {path: 'profs', component: TzProfsComponent},
       {path: 'salle', component: TzSalleComponent},
+      {path: 'list-etudiant', component: ListEtudiantsComponent},
       {path: 'payement', component: TzPayementsComponent},
       {path: 'administratif', component: TzAdministrationComponent},
+      {path: 'classe', component: TzClasseComponent},
       { path: '**', redirectTo: 'not-found' }
     ]
   }
