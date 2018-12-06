@@ -45,7 +45,7 @@ import {MaterialModule} from './Utils/modules/Material.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
