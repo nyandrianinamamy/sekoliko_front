@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-tz-etudiants',
-  templateUrl: './tz-etudiants.component.html',
-  styleUrls: ['./tz-etudiants.component.scss']
+    selector: 'app-tz-etudiants',
+    templateUrl: './tz-etudiants.component.html',
+    styleUrls: ['./tz-etudiants.component.scss']
 })
 export class TzEtudiantsComponent implements OnInit {
+    details = 'Cliquer pour voir details';
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

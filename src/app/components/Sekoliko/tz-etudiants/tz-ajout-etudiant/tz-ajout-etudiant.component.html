@@ -1,10 +1,12 @@
-<h2 class="text-center font-bold pt-4 pb-5 mb-5"><strong>Ajout nouvelle étudiant</strong></h2>
 
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white"> Ajout nouvelle étudiant </h4>
+</div>
 <!-- First Step -->
 <form role="form" action=""  #form method="post">
   <div class="row setup-content-2" #step1 id="step-1">
     <div class="col-md-12">
-      <h3 class="font-weight-bold pl-0 my-4"><strong>Information de l'étudiant</strong></h3>
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information de l'étudiant</strong></h3>
       <div class="md-form">
         <input type="text" id="nom" name="nom" #nom class="form-control" mdbInputDirective>
         <label for="nom">Nom</label>
@@ -29,7 +31,7 @@
   <!-- Second Step -->
   <div class="row setup-content-2" #step2 id="step-2" style="display: none">
     <div class="col-md-12">
-      <h3 class="font-weight-bold pl-0 my-4"><strong>Information sur l'établissement</strong></h3>
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information sur l'établissement</strong></h3>
       <div class="md-form mt-3">
         <input type="text" #classe id="materialSubscriptionFormPasswords" class="form-control" mdbInputDirective>
         <label for="materialSubscriptionFormPasswords">Classe</label>
@@ -58,7 +60,7 @@
   <!-- Third Step -->
   <div class="row setup-content-2 " #step3 style="display: none" id="step-3">
     <div class="col-md-12">
-      <h2 class="text-center font-weight-bold my-4">Apropos de l'étudiant</h2>
+      <h2 class="text-center font-weight-bold my-4 text-center">Récapitulation nouveau l'étudiant</h2>
       <table class="w-100">
         <tr>
           <td>
@@ -83,7 +85,7 @@
       <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button"
               (click)="step2.style.display='block';step3.style.display='none'">Previous</button>
       <button class="btn btn-success btn-rounded float-right" type="submit">Submit</button>
-      <button class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</button>
+      <a href="menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
     </div>
   </div>
 </form>

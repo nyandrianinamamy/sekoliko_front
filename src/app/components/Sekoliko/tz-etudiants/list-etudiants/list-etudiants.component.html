@@ -1,6 +1,6 @@
 
       <div class="view gradient-card-header blue darken-2">
-        <h4 class="h4-responsive text-white">Liste TA1 </h4>
+        <h4 class="h4-responsive text-white">Liste TA1 : {{search().length}} </h4>
       </div>
         <div class="row  d-flex align-items-center justify-content-center">
           <div class="col-md-6 mx-auto">
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             <tr #list *ngFor="let data of search(); let i = index">
-              <th *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex" scope="row">{{data.id}}</th>
+              <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex" scope="row">{{data.id}}</td>
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.name}}</td>
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.email}}</td>
               <td class="text-center">
