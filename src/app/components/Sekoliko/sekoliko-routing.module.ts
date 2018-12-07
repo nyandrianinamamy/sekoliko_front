@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '',
     component: SekolikoComponent,
     children: [
-      {path: '', redirectTo: 'principal-interface'},
+      {path: '', redirectTo: 'dashboard'},
       {path: 'not-found', component: NotFoundComponent},
       {path: 'dashboard', component: TzDashboardComponent},
       {path: 'etudiant', component: TzEtudiantsComponent},
