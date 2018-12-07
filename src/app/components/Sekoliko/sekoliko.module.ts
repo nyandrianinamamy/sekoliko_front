@@ -28,6 +28,7 @@ import {TzProfsComponent} from './tz-profs/tz-profs.component';
 import {TzAdministrationComponent} from './tz-administration/tz-administration.component';
 import {ListEtudiantsComponent} from './tz-etudiants/list-etudiants/list-etudiants.component';
 import {TzClasseComponent} from './tz-etudiants/tz-classe/tz-classe.component';
+import {TzAjoutEtudiantComponent} from './tz-etudiants/tz-ajout-etudiant/tz-ajout-etudiant.component';
 
 
 @NgModule({
@@ -61,6 +62,6 @@ import {TzClasseComponent} from './tz-etudiants/tz-classe/tz-classe.component';
 ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   declarations: [SekolikoComponent, TzDashboardComponent, TzEtudiantsComponent,
 TzSalleComponent, FooterComponent, NotFoundComponent, TzProfsComponent, TzPayementsComponent,
-NavMenuComponent, TzAdministrationComponent, ListEtudiantsComponent, TzClasseComponent]
+NavMenuComponent, TzAdministrationComponent, ListEtudiantsComponent, TzClasseComponent, TzAjoutEtudiantComponent]
 })
 export class SekolikoModule { }
