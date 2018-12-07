@@ -1,29 +1,23 @@
-import {Component, OnInit, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {ElementRef, Injectable, QueryList, ViewChildren} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {TzGetAdmService} from './tz-get-adm.service';
 
-@Component({
-    selector: 'app-tz-administration',
-    templateUrl: './tz-administration.component.html',
-    styleUrls: ['./tz-administration.component.scss']
+@Injectable({
+    providedIn: 'root'
 })
-export class TzAdministrationComponent implements OnInit {
-
+export class TzGetAdmService {
     @ViewChildren('list') list: QueryList<ElementRef>;
     url: any = 'https://reqres.in/api/users?per_page=8';
     userList = [];
-
-    constructor(private http: HttpClient) {
-    }
-    // constructor(private getadm: TzGetAdmService) {
-    // }
 
     getData() {
         return this.http.get(this.url);
     }
 
-    ngOnInit() {
-        // this.getadm.fetchUser();
+    constructor(private http: HttpClient) {
+
+    }
+
+    fetchUser() {
         this.getData().subscribe((data: any) => {
             data.data.forEach((element: any) => {
                 this.userList.push({
@@ -38,5 +32,6 @@ export class TzAdministrationComponent implements OnInit {
             // console.log(data);
         });
     }
+
 
 }
