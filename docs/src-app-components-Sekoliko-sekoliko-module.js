@@ -265,7 +265,7 @@ var routes = [
         path: '',
         component: _sekoliko_component__WEBPACK_IMPORTED_MODULE_2__["SekolikoComponent"],
         children: [
-            { path: '', redirectTo: 'principal-interface' },
+            { path: '', redirectTo: 'dashboard' },
             { path: 'not-found', component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_3__["NotFoundComponent"] },
             { path: 'dashboard', component: _tz_dashboard_tz_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["TzDashboardComponent"] },
             { path: 'etudiant', component: _tz_etudiants_tz_etudiants_component__WEBPACK_IMPORTED_MODULE_5__["TzEtudiantsComponent"] },
