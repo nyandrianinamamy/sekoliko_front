@@ -5,7 +5,7 @@ export const environment = {
   production: false,
   baseHref: '/',
   wsBasePath: './assets/api',
-  base_url_api: 'http://localhost:8000/api'
+  base_url_api: 'https://jsonplaceholder.typicode.com'
 };
 
 /*

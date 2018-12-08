@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChildren, QueryList, ElementRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {TzGetAdmService} from './tz-get-adm.service';
 
 @Component({
     selector: 'app-tz-administration',
     templateUrl: './tz-administration.component.html',
     styleUrls: ['./tz-administration.component.scss']
 })
+
 export class TzAdministrationComponent implements OnInit {
 
     @ViewChildren('list') list: QueryList<ElementRef>;
@@ -15,6 +15,7 @@ export class TzAdministrationComponent implements OnInit {
 
     constructor(private http: HttpClient) {
     }
+
     // constructor(private getadm: TzGetAdmService) {
     // }
 

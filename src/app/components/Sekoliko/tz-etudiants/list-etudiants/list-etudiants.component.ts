@@ -1,5 +1,6 @@
 import {Component, OnInit, HostListener, ViewChildren, QueryList, ElementRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {urlList} from "../../../../Utils/api/urlList";
 
 @Component({
     selector: 'app-list-etudiants',
@@ -7,30 +8,32 @@ import {HttpClient} from '@angular/common/http';
     styleUrls: ['./list-etudiants.component.scss']
 })
 export class ListEtudiantsComponent implements OnInit {
-
     @ViewChildren('list') list: QueryList<ElementRef>;
     paginators: Array<any> = [];
     activePage: number = 1;
     firstVisibleIndex: number = 1;
     lastVisibleIndex: number = 10;
-    url: any = 'https://jsonplaceholder.typicode.com/users';
+    per_page: string = '?per_page=' + 30;
+    url: any = urlList.path_teste_user;
     tableData = [];
     sorted = false;
     searchText: string;
     firstPageNumber: number = 1;
     lastPageNumber: number;
-    maxVisibleItems: number = 20;
+    maxVisibleItems: number = 5;
 
     constructor(private http: HttpClient) {
     }
 
     getData() {
+        console.log(this.url);
         return this.http.get(this.url);
     }
 
     ngOnInit() {
         this.getData().subscribe((next: any) => {
             next.forEach((element: any) => {
+                console.log(element);
                 this.tableData.push({id: (element.id).toString(), name: element.name, email: element.email});
             });
         });

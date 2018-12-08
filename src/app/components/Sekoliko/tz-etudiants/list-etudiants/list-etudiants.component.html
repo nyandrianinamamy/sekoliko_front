@@ -2,6 +2,7 @@
       <div class="view gradient-card-header blue darken-2">
         <h4 class="h4-responsive text-white">Liste TA1 : {{search().length}} </h4>
       </div>
+      <div [innerHTML]="myText"></div>
         <div class="row  d-flex align-items-center justify-content-center">
           <div class="col-md-6 mx-auto">
             <div class="md-form">
@@ -31,7 +32,7 @@
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex" scope="row">{{data.id}}</td>
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.name}}</td>
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.email}}</td>
-              <td class="text-center">
+              <td class="text-center" *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">
                 <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="details.show()"
                    mdbWavesEffect class="m-1 tz-btn-circle relative waves-light" color="success">
                   <i class="fa fa-eye"></i>
