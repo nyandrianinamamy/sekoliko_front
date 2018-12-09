@@ -3,6 +3,32 @@ services:
         class: Bundle\CommunBundle\Service\PreFormatMsg
         public: true
         arguments: ["@service_container"]
+    sekoliko_api.authentication_success_listener:
+        class: Bundle\CommunBundle\EventListener\AuthentificationEventListener
+        arguments:  ["@service_container"]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+    sekoliko_api.authentication_failure_listener:
+        class: Bundle\CommunBundle\EventListener\AuthentificationEventListener
+        arguments:  ["@service_container"]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
 #    commun.example:
 #        class: Bundle\CommunBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    sekoliko_api.jwt_not_found_listener:
+        class: Bundle\CommunBundle\EventListener\JwtListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+    sekoliko_api.jwt_expired_listener:
+        class: Bundle\CommunBundle\EventListener\JwtListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+    sekoliko_api.jwt_invalid_listener:
+        class: Bundle\CommunBundle\EventListener\JwtListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: onJWTInvalid  }
+    sekoliko.rest_listener:
+        class: Bundle\CommunBundle\EventListener\RestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

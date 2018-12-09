@@ -8,6 +8,13 @@ imports:
 parameters:
     locale: en
 
+lexik_jwt_authentication:
+    secret_key: '%jwt_private_key_path%' # required for token creation
+    public_key: '%jwt_public_key_path%'  # required for token verification
+    pass_phrase: '%jwt_key_pass_phrase%' # required for token creation, usage of an environment variable is recommended
+    token_ttl: '%jwt_token_ttl%'
+    user_identity_field: username
+
 framework:
     serializer:
         enabled: true

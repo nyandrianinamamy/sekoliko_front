@@ -1,13 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 11/11/2018
  * Time: 17:14
  */
 
 namespace Bundle\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
+
 /**
  * TzEtablissement
  *
@@ -22,33 +24,47 @@ class TzEtudiantEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"Etudiant"})
+     *
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="etd_nom", type="string", length=80, nullable=true)
+     * @ORM\Column(name="etd_nom", type="string", length=100, nullable=false)
+     * @JMS\Groups({"Etudiant"})
      */
     private $non;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="edt_matricule", type="string", length=80, nullable=true)
+     * @ORM\Column(name="etd_age", type="integer", nullable=false)
+     * @JMS\Groups({"Etudiant"})
      */
-    private $matricule;
+    private $age;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="id_classe", type="integer", nullable=true)
+     * @ORM\Column(name="etd_sexe", type="string", length=1, nullable=false)
+     * @JMS\Groups({"Etudiant"})
      */
-    private $classeId;
+    private $sexe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etd_adresse", type="string", length=100, nullable=true)
+     * @JMS\Groups({"Etudiant"})
+     */
+    private $adr;
 
     /**
      * @return int
      */
+
     public function getId()
     {
         return $this->id;
@@ -71,37 +87,53 @@ class TzEtudiantEntity
         $this->non = $non;
     }
 
+
+    /**
+     * @return integer
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param integer $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+
     /**
      * @return string
      */
-    public function getMatricule()
+    public function getSexe()
     {
-        return $this->matricule;
+        return $this->sexe;
     }
 
     /**
-     * @param string $matricule
+     * @param string $sexe
      */
-    public function setMatricule($matricule)
+    public function setSexe($sexe)
     {
-        $this->matricule = $matricule;
+        $this->sexe = $sexe;
     }
 
     /**
      * @return string
      */
-    public function getClasseId()
+    public function getAdresse()
     {
-        return $this->classeId;
+        return $this->adr;
     }
 
     /**
-     * @param string $classeId
+     * @param string $adr
      */
-    public function setClasseId($classeId)
+    public function setAdresse($adr)
     {
-        $this->classeId = $classeId;
+        $this->adr = $adr;
     }
-
-
 }

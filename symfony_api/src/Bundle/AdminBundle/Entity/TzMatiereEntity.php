@@ -1,13 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 11/11/2018
  * Time: 17:18
  */
 
 namespace Bundle\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
+use Bundle\AdminBundle\Entity\TzClassEntity;
 /**
  * TzEtablissement
  *
@@ -29,6 +31,7 @@ class TzMatiereEntity
      * @var string
      *
      * @ORM\Column(name="mat_nom", type="string", length=80, nullable=true)
+     * @JMS\Groups({"prof_list", "matiere_list"})
      */
     private $description;
 
@@ -36,22 +39,21 @@ class TzMatiereEntity
      * @var string
      *
      * @ORM\Column(name="mat_coeff", type="integer", nullable=true)
+     * @JMS\Groups({"prof_list", "matiere_list"})
      */
     private $coefficient;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="id_class", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="TzClassEntity")
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="id_class", referencedColumnName="id")
+     * })
+     * @JMS\Groups({"prof_list", "matiere_list"})
      */
     private $classe;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="id_prof", type="integer", nullable=true)
-     */
-    private $prof;
 
     /**
      * @return int

@@ -2,7 +2,7 @@
 namespace Bundle\AdminBundle\Service;
 /**
  * Created by PhpStorm.
- * User: Predator
+ * User: Tahiana_Rakotonirina
  * Date: 13/11/2018
  * Time: 11:31
  */
@@ -29,6 +29,20 @@ class FosRestResponse
     }
 
     /**
+     * @param mixed  $data
+     * @param string $format
+     * @param array  $context
+     *
+     * @return array
+     */
+    public function setSuccessResponse($data, $format, $context)
+    {
+        $resData = $this->successSerialize($data, "json", $context);
+        return $resData;
+    }
+
+
+    /**
      * @param mixed $data
      * @param string $format
      * @param array $listContexts
@@ -46,4 +60,6 @@ class FosRestResponse
 
         return $res;
     }
+
+
 }

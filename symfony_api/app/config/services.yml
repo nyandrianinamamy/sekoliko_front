@@ -28,7 +28,10 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
+    tz.exception_listener:
+        class: Bundle\CommunBundle\EventListener\ExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception}
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
