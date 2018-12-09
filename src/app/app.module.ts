@@ -5,31 +5,11 @@ import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
-import {MatExpansionModule} from '@angular/material/expansion';
-
-import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatCheckboxModule,
-  MatButtonToggleModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  MatTableModule
-} from '@angular/material';
+import { MatMenuModule } from '@angular/material';
 import {PercentPipe, registerLocaleData} from '@angular/common';
-import { MatFormFieldModule } from '@angular/material';
 import localeFr from '@angular/common/locales/fr';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule,  ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AccessDeniedInterceptor} from './http-interceptors/access-denied-interceptor';
@@ -37,7 +17,6 @@ import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
 import {WSMain} from './shared/ws/WSMain';
 import {ProjectInterceptor} from './http-interceptors/project-interceptor';
-import {FlexLayoutModule} from '@angular/flex-layout';
 registerLocaleData(localeFr);
 
 import {MaterialModule} from './Utils/modules/Material.module';
@@ -53,26 +32,7 @@ import {MaterialModule} from './Utils/modules/Material.module';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     LayoutModule,
-    // MatToolbarModule,
-    // MatButtonModule,
-    // MatSidenavModule,
-    // MatIconModule,
-    // MatListModule,
-    // MatGridListModule,
-    // FlexLayoutModule,
-    // MatCardModule,
-    // MatExpansionModule,
     MatMenuModule,
-    // MatFormFieldModule,
-    // MatSelectModule,
-    // MatCheckboxModule,
-    // ReactiveFormsModule,
-    // MatButtonToggleModule,
-    // MatInputModule,
-    // MatPaginatorModule,
-    // MatRadioModule,
-    // MatDatepickerModule,
-    // MatTableModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,

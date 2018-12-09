@@ -14,6 +14,8 @@ import {TzListProfsComponent} from './tz-profs/tz-list-profs/tz-list-profs.compo
 import {TzAjoutProfsComponent} from './tz-profs/tz-ajout-profs/tz-ajout-profs.component';
 import {TzProfsComponent} from './tz-profs/tz-profs.component';
 import {TzAdmDetailsComponent} from './tz-administration/tz-adm-details/tz-adm-details.component';
+import {TzAjoutSalleComponent} from './tz-salle/tz-ajout-salle/tz-ajout-salle.component';
+import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajout-admin.component';
 
 const routes: Routes = [
     {
@@ -25,10 +27,12 @@ const routes: Routes = [
             {path: 'dashboard', component: TzDashboardComponent},
             {path: 'etudiant', component: TzEtudiantsComponent},
             {path: 'salle', component: TzSalleComponent},
+            {path:  'add-salle', component: TzAjoutSalleComponent},
             {path: 'list-etudiant', component: ListEtudiantsComponent},
             {path: 'add-etudiant', component: TzAjoutEtudiantComponent},
             {path: 'payement', component: TzPayementsComponent},
             {path: 'administratif', component: TzAdministrationComponent},
+            {path: 'add-admin', component: TzAjoutAdminComponent},
             {path: 'classe', component: TzClasseComponent},
             {path: 'profs', component: TzProfsComponent},
             {path: 'list-prof', component: TzListProfsComponent},

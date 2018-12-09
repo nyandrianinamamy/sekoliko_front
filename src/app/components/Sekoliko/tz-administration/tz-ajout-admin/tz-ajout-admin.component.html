@@ -1,12 +1,12 @@
 
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Ajout nouvelle étudiant </h4>
+  <h4 class="h4-responsive text-white"> Ajout nouvelle administrateur </h4>
 </div>
 <!-- First Step -->
-<form role="form" action="" [formGroup]="validatingForm" #form method="post">
+<form role="form" action=""  #form method="post">
   <div class="row setup-content-2" #step1 id="step-1">
     <div class="col-md-12">
-      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information de l'étudiant</strong></h3>
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information</strong></h3>
       <div class="md-form">
         <input type="text" id="nom" name="nom" #nom class="form-control" formControlName="required" mdbInputDirective>
         <label for="nom">Nom</label>
@@ -19,10 +19,6 @@
         <input type="text" id="adresse" #adresse class="form-control" formControlName="required" mdbInputDirective>
         <label for="adresse">Adresse</label>
       </div>
-      <div class="md-form">
-        <input type="text" id="contact" #contact class="form-control" formControlName="required" mdbInputDirective>
-        <label for="contact">Contact</label>
-      </div>
       <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button"
               (click)="step2.style.display='block';step1.style.display='none'">Next</button>
     </div>
@@ -31,24 +27,19 @@
   <!-- Second Step -->
   <div class="row setup-content-2" #step2 id="step-2" style="display: none">
     <div class="col-md-12">
-      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information sur l'établissement</strong></h3>
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information sur l'administration</strong></h3>
       <div class="md-form mt-3">
         <input type="text" #classe id="materialSubscriptionFormPasswords" class="form-control" formControlName="required" mdbInputDirective>
         <label for="materialSubscriptionFormPasswords">Classe</label>
       </div>
       <div class="md-form">
         <input type="text" id="resp" #resp class="form-control" formControlName="required" mdbInputDirective>
-        <label for="resp">Résponsable</label>
+        <label for="resp">Role</label>
       </div>
       <div class="md-form">
-        <input type="text" id="contact-parent" #contactparent class="form-control" formControlName="required" mdbInputDirective>
-        <label for="contact-parent">Contact parentalle</label>
+        <input type="text" id="contact" #contact class="form-control" formControlName="required" mdbInputDirective>
+        <label for="contact">Contact</label>
       </div>
-      <div class="md-form">
-        <input type="text" id="addr-parent" #adrparent class="form-control" formControlName="required" mdbInputDirective>
-        <label for="addr-parent">Adresse parentalle</label>
-      </div>
-
       <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left"
               (click)="step1.style.display='block';step2.style.display='none'" type="button">Previous</button>
       <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right"
@@ -60,7 +51,7 @@
   <!-- Third Step -->
   <div class="row setup-content-2 " #step3 style="display: none" id="step-3">
     <div class="col-md-12">
-      <h2 class="text-center font-weight-bold my-4 text-center">Récapitulation nouveau l'étudiant</h2>
+      <h2 class="text-center font-weight-bold my-4 text-center">Récapitulation nouveau administrateur</h2>
       <table class="w-100">
         <tr>
           <td>
@@ -68,15 +59,13 @@
               <li class="list-group-item">{{nom.value}}</li>
               <li class="list-group-item">{{prenom.value}}</li>
               <li class="list-group-item">{{adresse.value}}</li>
-              <li class="list-group-item">{{contact.value}}</li>
             </ul>
           </td>
           <td>
             <ul class="list-group">
               <li class="list-group-item">{{classe.value}}</li>
               <li class="list-group-item">{{resp.value}}</li>
-              <li class="list-group-item">{{adrparent.value}}</li>
-              <li class="list-group-item">{{contactparent.value}}</li>
+              <li class="list-group-item">{{contact.value}}</li>
             </ul>
           </td>
         </tr>

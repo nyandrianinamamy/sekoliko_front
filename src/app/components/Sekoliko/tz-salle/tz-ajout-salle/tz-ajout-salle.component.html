@@ -1,0 +1,17 @@
+
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white"> Ajout nouvelle salle </h4>
+</div>
+<!-- First Step -->
+<form role="form" action=""  #form method="post">
+  <div class="row setup-content-2" #step1 id="step-1">
+    <div class="col-md-12">
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Ajouter nouveau salle</strong></h3>
+      <div class="md-form">
+        <input type="text" id="nom" name="nom" #nom class="form-control" formControlName="required" mdbInputDirective>
+        <label for="nom">Nom du salle</label>
+      </div>
+      <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Enregistrer</button>
+    </div>
+  </div>
+</form>

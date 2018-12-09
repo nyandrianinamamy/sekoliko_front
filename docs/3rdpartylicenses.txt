@@ -433,7 +433,7 @@ MIT
 MIT
 MIT
 
-@angular/cdk@6.4.0
+@angular/cdk@7.0.0-beta.0
 MIT
 The MIT License
 

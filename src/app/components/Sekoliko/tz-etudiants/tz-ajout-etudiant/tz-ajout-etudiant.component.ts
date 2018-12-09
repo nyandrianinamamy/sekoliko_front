@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 
 @Component({
     selector: 'app-tz-ajout-etudiant',
@@ -7,8 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TzAjoutEtudiantComponent implements OnInit {
 
-    constructor() {
+    validatingForm: FormGroup;
+
+    constructor(private fb: FormBuilder) {
+        this.validatingForm = fb.group({
+            'required': [null, Validators.required],
+        });
     }
+
+    // constructor() {
+    // }
 
     ngOnInit() {
     }
