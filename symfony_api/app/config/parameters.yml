@@ -1,0 +1,20 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: api_sekoliko
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: ThisTokenIsNotSoSecretChangeIt
+    from_email_address: tahiana.rakotonirina@netapsys.fr
+    for_sender_name: Techzara
+    jwt_private_key_path: '%kernel.project_dir%/app/config/JWT/private.pem'
+    jwt_public_key_path: '%kernel.project_dir%/app/config/JWT/public.pem'
+#    JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+#    JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+    jwt_key_pass_phrase: telma
+    jwt_token_ttl: 3600
