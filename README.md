@@ -100,15 +100,15 @@ ___
 
 **Thanks for our team
 
-<p align="center">
+<p float="left">
   <h4>Tahiana</h4>
-  <img src="https://avatars3.githubusercontent.com/u/32259364?s=400&v=4" width="50" height="50" title="hover text">
+  <img src="https://avatars3.githubusercontent.com/u/32259364?s=400&v=4" style="float: left" width="50" height="50" title="hover text">
   <h4>Ny Antso</h4>
-  <img src="https://avatars1.githubusercontent.com/u/35923219?s=400&v=4" width="50" height="50" alt="accessibility text">
+  <img src="https://avatars1.githubusercontent.com/u/35923219?s=400&v=4" style="float: left" width="50" height="50" alt="accessibility text">
   <h4>Daulis</h4>
-  <img src="https://avatars1.githubusercontent.com/u/21168538?s=400&v=4" width="50" height="50" alt="accessibility text">
+  <img src="https://avatars1.githubusercontent.com/u/21168538?s=400&v=4" style="float: left" width="50" height="50" alt="accessibility text">
   <h4>Julien</h4>
-  <img src="https://avatars1.githubusercontent.com/u/30557565?s=460&v=4" width="50" height="50" alt="accessibility text">
+  <img src="https://avatars1.githubusercontent.com/u/30557565?s=460&v=4" style="float: left" width="50" height="50" alt="accessibility text">
   <h4>Solofo Ralitera</h4>
-  <img src="https://avatars2.githubusercontent.com/u/13257963?s=400&v=4" width="50" height="50" alt="accessibility text">
+  <img src="https://avatars2.githubusercontent.com/u/13257963?s=400&v=4" style="float: left" width="50" height="50" alt="accessibility text">
 </p>
