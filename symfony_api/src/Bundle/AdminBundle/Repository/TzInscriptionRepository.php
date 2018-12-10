@@ -17,18 +17,10 @@ use Bundle\AdminBundle\Entity\TzEtudiantEntity;
 class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * Recherche si id est dans la tabla tz_etudiant
-     * @return boolean
+     * @return array
      */
 
-    public function isIdIn($id){
+    public function getInsAs($as){
 
-        $em = $this->getDoctrine()->getManager();
-        $result = $em->getRepository(TzEtudiantEntity::class)->find($id);
-
-        if(!is_null($result)){
-            return true;
-        }
-        return false;
     }
 }
