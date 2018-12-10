@@ -32,10 +32,10 @@
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.name}}</td>
               <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.email}}</td>
               <td class="text-center" *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">
-                <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="details.show()"
+                <button mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="details.show()"
                    mdbWavesEffect class="m-1 tz-btn-circle relative waves-light" color="success">
                   <i class="fa fa-eye"></i>
-                </a>
+                </button>
 
                 <!-- Modal details-->
                 <div mdbModal #details="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
@@ -60,10 +60,10 @@
                 </div>
                 <!-- Modal -->
 
-                <a mdbBtn color="default" mdbWavesEffect data-target="#detailsModal" (click)="edit.show()"
+                <button mdbBtn color="default" mdbWavesEffect data-target="#detailsModal" (click)="edit.show()"
                     class="m-1 tz-btn-circle relative waves-light">
                   <i class="fa fa-edit"></i>
-                </a>
+                </button>
                 <!-- Modal edit-->
                 <div mdbModal #edit="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
                      aria-hidden="true"  [config]="{backdrop: false, ignoreBackdropClick: false}">
@@ -97,10 +97,10 @@
                 </div>
                 <!-- Modal -->
 
-                <a mdbBtn color="danger" mdbWavesEffect data-target="#deleteModal" (click)="deleteModal.show()"
+                <button mdbBtn color="danger" mdbWavesEffect data-target="#deleteModal" (click)="deleteModal.show()"
                    class="m-1 tz-btn-circle relative waves-light">
                   <i class="fa fa-trash"></i>
-                </a>
+                </button>
                 <!-- Delete modal-->
                 <div mdbModal #deleteModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
                      aria-hidden="true"  [config]="{backdrop: false, ignoreBackdropClick: false}">

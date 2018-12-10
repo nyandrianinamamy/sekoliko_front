@@ -5,7 +5,7 @@ export const environment = {
   production: false,
   baseHref: '/',
   wsBasePath: './assets/api',
-  base_url_api: 'https://jsonplaceholder.typicode.com'
+  base_url_api: 'https://www.techzara.org/sekoliko-api/api'
 };
 
 /*
