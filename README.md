@@ -98,7 +98,7 @@ ___
 
 1- classe_numero
 
-**Thanks for our team
+**Thanks for our team**
 <table>
   
   </table>
