@@ -128,6 +128,45 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
+            elseif (0 === strpos($pathinfo, '/api/add')) {
+                // _admin_restapi_anneescolaire_addasco
+                if ('/api/addas' === $pathinfo) {
+                    $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\AnneeScolaireController::addAsco',  '_route' => '_admin_restapi_anneescolaire_addasco',);
+                    if (!in_array($requestMethod, array('POST'))) {
+                        $allow = array_merge($allow, array('POST'));
+                        goto not__admin_restapi_anneescolaire_addasco;
+                    }
+
+                    return $ret;
+                }
+                not__admin_restapi_anneescolaire_addasco:
+
+                // _admin_restapi_etudiant_addetd
+                if ('/api/addEtd' === $pathinfo) {
+                    $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\EtudiantController::addEtd',  '_route' => '_admin_restapi_etudiant_addetd',);
+                    if (!in_array($requestMethod, array('POST'))) {
+                        $allow = array_merge($allow, array('POST'));
+                        goto not__admin_restapi_etudiant_addetd;
+                    }
+
+                    return $ret;
+                }
+                not__admin_restapi_etudiant_addetd:
+
+                // _admin_restapi_inscription_addins
+                if ('/api/addins' === $pathinfo) {
+                    $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\InscriptionController::addIns',  '_route' => '_admin_restapi_inscription_addins',);
+                    if (!in_array($requestMethod, array('POST'))) {
+                        $allow = array_merge($allow, array('POST'));
+                        goto not__admin_restapi_inscription_addins;
+                    }
+
+                    return $ret;
+                }
+                not__admin_restapi_inscription_addins:
+
+            }
+
             // _admin_restapi_classe_getfonction
             if ('/api/class' === $pathinfo) {
                 $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\ClasseController::getFonction',  '_route' => '_admin_restapi_classe_getfonction',);
@@ -209,106 +248,97 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
-            // _admin_restapi_etudiant_addetd
-            if ('/api/addEtd' === $pathinfo) {
-                $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\EtudiantController::addEtd',  '_route' => '_admin_restapi_etudiant_addetd',);
-                if (!in_array($requestMethod, array('POST'))) {
-                    $allow = array_merge($allow, array('POST'));
-                    goto not__admin_restapi_etudiant_addetd;
-                }
-
-                return $ret;
-            }
-            not__admin_restapi_etudiant_addetd:
-
-            // _admin_restapi_inscription_addins
-            if ('/api/addIns' === $pathinfo) {
-                $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\InscriptionController::addIns',  '_route' => '_admin_restapi_inscription_addins',);
-                if (!in_array($requestMethod, array('POST'))) {
-                    $allow = array_merge($allow, array('POST'));
-                    goto not__admin_restapi_inscription_addins;
-                }
-
-                return $ret;
-            }
-            not__admin_restapi_inscription_addins:
-
-            // _admin_restapi_etudiant_modifyetd
-            if ('/api/modifyEtd' === $pathinfo) {
-                $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\EtudiantController::modifyEtd',  '_route' => '_admin_restapi_etudiant_modifyetd',);
-                if (!in_array($requestMethod, array('POST'))) {
-                    $allow = array_merge($allow, array('POST'));
-                    goto not__admin_restapi_etudiant_modifyetd;
-                }
-
-                return $ret;
-            }
-            not__admin_restapi_etudiant_modifyetd:
-
-            if (0 === strpos($pathinfo, '/api/matiere')) {
-                if (0 === strpos($pathinfo, '/api/matiere/edit')) {
-                    // matiere_new
-                    if ('/api/matiere/edit' === $pathinfo) {
-                        $ret = array (  'matiere' => NULL,  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::editMatiere',  '_route' => 'matiere_new',);
-                        if (!in_array($requestMethod, array('POST'))) {
-                            $allow = array_merge($allow, array('POST'));
-                            goto not_matiere_new;
-                        }
-
-                        return $ret;
-                    }
-                    not_matiere_new:
-
-                    // matiere_modify
-                    if (preg_match('#^/api/matiere/edit/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
-                        $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'matiere_modify')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::editMatiere',));
-                        if (!in_array($requestMethod, array('POST'))) {
-                            $allow = array_merge($allow, array('POST'));
-                            goto not_matiere_modify;
-                        }
-
-                        return $ret;
-                    }
-                    not_matiere_modify:
-
-                }
-
-                // matiere_delete
-                if (0 === strpos($pathinfo, '/api/matiere/delete') && preg_match('#^/api/matiere/delete/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
-                    $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'matiere_delete')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::deleteMatiere',));
+            elseif (0 === strpos($pathinfo, '/api/m')) {
+                // _admin_restapi_etudiant_modifyetd
+                if ('/api/modifyEtd' === $pathinfo) {
+                    $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\EtudiantController::modifyEtd',  '_route' => '_admin_restapi_etudiant_modifyetd',);
                     if (!in_array($requestMethod, array('POST'))) {
                         $allow = array_merge($allow, array('POST'));
-                        goto not_matiere_delete;
+                        goto not__admin_restapi_etudiant_modifyetd;
                     }
 
                     return $ret;
                 }
-                not_matiere_delete:
+                not__admin_restapi_etudiant_modifyetd:
 
-                if (0 === strpos($pathinfo, '/api/matiere/find')) {
-                    // recherche_matiere
-                    if ('/api/matiere/find' === $pathinfo) {
-                        $ret = array (  'matiere' => NULL,  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::rechercheMatiere',  '_route' => 'recherche_matiere',);
+                // _admin_restapi_inscription_modifyins
+                if ('/api/modifyins' === $pathinfo) {
+                    $ret = array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\InscriptionController::modifyIns',  '_route' => '_admin_restapi_inscription_modifyins',);
+                    if (!in_array($requestMethod, array('POST'))) {
+                        $allow = array_merge($allow, array('POST'));
+                        goto not__admin_restapi_inscription_modifyins;
+                    }
+
+                    return $ret;
+                }
+                not__admin_restapi_inscription_modifyins:
+
+                if (0 === strpos($pathinfo, '/api/matiere')) {
+                    if (0 === strpos($pathinfo, '/api/matiere/edit')) {
+                        // matiere_new
+                        if ('/api/matiere/edit' === $pathinfo) {
+                            $ret = array (  'matiere' => NULL,  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::editMatiere',  '_route' => 'matiere_new',);
+                            if (!in_array($requestMethod, array('POST'))) {
+                                $allow = array_merge($allow, array('POST'));
+                                goto not_matiere_new;
+                            }
+
+                            return $ret;
+                        }
+                        not_matiere_new:
+
+                        // matiere_modify
+                        if (preg_match('#^/api/matiere/edit/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
+                            $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'matiere_modify')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::editMatiere',));
+                            if (!in_array($requestMethod, array('POST'))) {
+                                $allow = array_merge($allow, array('POST'));
+                                goto not_matiere_modify;
+                            }
+
+                            return $ret;
+                        }
+                        not_matiere_modify:
+
+                    }
+
+                    // matiere_delete
+                    if (0 === strpos($pathinfo, '/api/matiere/delete') && preg_match('#^/api/matiere/delete/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
+                        $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'matiere_delete')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::deleteMatiere',));
                         if (!in_array($requestMethod, array('POST'))) {
                             $allow = array_merge($allow, array('POST'));
-                            goto not_recherche_matiere;
+                            goto not_matiere_delete;
                         }
 
                         return $ret;
                     }
-                    not_recherche_matiere:
+                    not_matiere_delete:
 
-                    // recherche_matiere_by_id
-                    if (preg_match('#^/api/matiere/find/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
-                        $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'recherche_matiere_by_id')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::rechercheMatiere',));
-                        if (!in_array($canonicalMethod, array('GET'))) {
-                            $allow = array_merge($allow, array('GET'));
-                            goto not_recherche_matiere_by_id;
+                    if (0 === strpos($pathinfo, '/api/matiere/find')) {
+                        // recherche_matiere
+                        if ('/api/matiere/find' === $pathinfo) {
+                            $ret = array (  'matiere' => NULL,  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::rechercheMatiere',  '_route' => 'recherche_matiere',);
+                            if (!in_array($requestMethod, array('POST'))) {
+                                $allow = array_merge($allow, array('POST'));
+                                goto not_recherche_matiere;
+                            }
+
+                            return $ret;
                         }
+                        not_recherche_matiere:
 
-                        return $ret;
+                        // recherche_matiere_by_id
+                        if (preg_match('#^/api/matiere/find/(?P<matiere>\\d+)$#sD', $pathinfo, $matches)) {
+                            $ret = $this->mergeDefaults(array_replace($matches, array('_route' => 'recherche_matiere_by_id')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\MatiereController::rechercheMatiere',));
+                            if (!in_array($canonicalMethod, array('GET'))) {
+                                $allow = array_merge($allow, array('GET'));
+                                goto not_recherche_matiere_by_id;
+                            }
+
+                            return $ret;
+                        }
+                        not_recherche_matiere_by_id:
+
                     }
-                    not_recherche_matiere_by_id:
 
                 }
 
@@ -325,6 +355,18 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $ret;
             }
             not__admin_restapi_etudiant_listetd:
+
+            // _admin_restapi_inscription_listins
+            if (0 === strpos($pathinfo, '/api/listins/as') && preg_match('#^/api/listins/as/(?P<as>[^/]++)$#sD', $pathinfo, $matches)) {
+                $ret = $this->mergeDefaults(array_replace($matches, array('_route' => '_admin_restapi_inscription_listins')), array (  '_controller' => 'Bundle\\AdminBundle\\Controller\\RestApi\\InscriptionController::listIns',));
+                if (!in_array($canonicalMethod, array('GET'))) {
+                    $allow = array_merge($allow, array('GET'));
+                    goto not__admin_restapi_inscription_listins;
+                }
+
+                return $ret;
+            }
+            not__admin_restapi_inscription_listins:
 
             if (0 === strpos($pathinfo, '/api/prof')) {
                 // prof_delete

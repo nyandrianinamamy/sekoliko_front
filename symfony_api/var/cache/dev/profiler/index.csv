@@ -10,3 +10,5 @@ edf103,127.0.0.1,POST,http://127.0.0.1:8000/api/users/login,1544335551,,500
 828821,127.0.0.1,POST,http://127.0.0.1:8000/api/users/login,1544335618,,500
 230a3f,127.0.0.1,POST,http://127.0.0.1:8000/api/users/login,1544336478,,200
 321c90,127.0.0.1,POST,http://127.0.0.1:8000/api/users/login,1544337699,,200
+5e8e4b,127.0.0.1,GET,http://localhost:8000/api/,1544470429,,404
+850e2b,127.0.0.1,GET,http://localhost:8000/api/class,1544470436,,200
