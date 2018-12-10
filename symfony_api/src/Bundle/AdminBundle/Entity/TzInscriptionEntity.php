@@ -9,6 +9,7 @@
 namespace Bundle\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * TzEtablissement
@@ -25,32 +26,56 @@ class TzInscriptionEntity
      *
      * @ORM\Id
      * @ORM\Column(name="num_inscription", type="integer", nullable=false)
-     *
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"inscrit"})
+     * @JMS\SerializedName("NumInscription")
      */
     private $num_inscription;
 
     /**
      * @var integer
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     * @JMS\Groups({"inscrit"})
+     * @JMS\SerializedName("UserID")
      */
-    private $id;
+    private $user_id;
 
     /**
      * @var string
-     * @ORM\Column(name="niveau", type="string", length=12, nullable=false)
+     * @ORM\Column(name="id_classe", type="integer", nullable=false)
+     * @JMS\Groups({"inscrit"})
      */
-    private $niveau;
+    private $id_classe;
 
     /**
-     * @ORM\Column(name="annee_scolaire", type="date", nullable=false)
+     * @var integer
+     * @ORM\Column(name="id_annee_scolaire", type="integer", nullable=false)
+     * @JMS\Groups({"inscrit"})
      */
-    private $anne_scolaire;
+    private $id_annee_scolaire;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="date_inscription", type="datetime", nullable=false)
+     * @JMS\Groups({"inscrit"})
+     */
+    private $date_inscription;
+
+    /**
+     * @var string
+     * @ORM\Column(name="statut", type="string", length=25, nullable=true)
+     * @JMS\Groups({"inscrit"})
+     */
+    private $statut;
+
+    public function __construct()
+    {
+        $this->setDateInscription(new \DateTime('now'));
+    }
 
     /**
      * @return integer
      */
-
     public function getNumInscription()
     {
         return $this->num_inscription;
@@ -59,48 +84,75 @@ class TzInscriptionEntity
     /**
      * @return integer
      */
-    public function getId()
+    public function getUserId()
     {
-        return $this->id;
+        return $this->user_id;
     }
 
     /**
-     * @param integer $id
+     * @param integer $user_id
      */
-    public function setId($id)
+    public function setUserId($user_id)
     {
-        $this->id = $id;
+        $this->user_id = $user_id;
     }
 
     /**
      * @return string
      */
-    public function getNiveau()
+    public function getClasseId()
     {
-        return $this->niveau;
+        return $this->id_classe;
     }
 
     /**
-     * @param string $niveau
+     * @param string $id_classe
      */
-    public function setNiveau($niveau)
+    public function setClasseId($id_classe)
     {
-        $this->niveau = $niveau;
+        $this->id_classe = $id_classe;
     }
 
     /**
-     * @return date
+     * @return integer
      */
-    public function getAS()
+    public function getIdAnneeScolaire()
     {
-        return $this->anne_scolaire;
+        return $this->id_annee_scolaire;
     }
 
     /**
-     * @param date $date
+     * @param integer $date
      */
-    public function setAS($date)
+    public function setIdAnneeScolaire($date)
     {
-        $this->anne_scolaire = $date;
+        $this->id_annee_scolaire = $date;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateInscription(){
+        return $this->date_inscription;
+    }
+    /**
+     * @param \DateTime $date
+     */
+    public function setDateInscription($date){
+        $this->date_inscription = $date;
+
+    }
+    /**
+     * @return string
+     */
+    public function getStatut(){
+        return $this->statut;
+    }
+
+    /**
+     * @param string $statut
+     */
+    public function setStatut($statut){
+        $this->statut = $statut;
     }
 }
