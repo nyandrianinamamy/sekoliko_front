@@ -20,6 +20,7 @@ import {ProjectInterceptor} from './http-interceptors/project-interceptor';
 registerLocaleData(localeFr);
 
 import {MaterialModule} from './Utils/modules/Material.module';
+import {UserService} from './shared/service/user.service';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MaterialModule} from './Utils/modules/Material.module';
     FormsModule,
     JwtModule.forRoot({
       config: {
+        tokenGetter: UserService.getAuthorizationToken,
         whitelistedDomains: ['localhost:4200', 'prfnapp01:8080'],
         blacklistedRoutes: ['localhost:4200/login', 'prfnapp01:8080/login']
       }
@@ -56,7 +58,6 @@ import {MaterialModule} from './Utils/modules/Material.module';
       multi: true
     },
     WSMain,
-    JwtHelperService,
     {provide: LOCALE_ID, useValue: 'fr-FR'},
     PercentPipe],
   bootstrap: [AppComponent],

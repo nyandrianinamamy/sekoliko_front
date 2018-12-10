@@ -25,6 +25,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HeaderComponent } from './header/header.component';
+import {
+  FulfillingBouncingCircleSpinnerModule,
+  FulfillingSquareSpinnerModule,
+  IntersectingCirclesSpinnerModule, RadarSpinnerModule
+} from 'angular-epic-spinners';
 
 @NgModule({
   imports: [CommonModule,
@@ -48,6 +53,7 @@ import { HeaderComponent } from './header/header.component';
     MatPaginatorModule,
     MatRadioModule,
     MatDatepickerModule,
+    RadarSpinnerModule,
     MatTableModule,
     LoginRoutingModule],
   declarations: [LoginComponent, HeaderComponent]

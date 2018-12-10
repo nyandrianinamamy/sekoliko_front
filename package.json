@@ -31,6 +31,7 @@
     "@ngrx/store": "^6.0.1",
     "@types/chart.js": "^2.7.40",
     "angular-bootstrap-md": "^7.0.0",
+    "angular-epic-spinners": "^2.0.0",
     "angular5-csv": "^0.2.10",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.1.1",
