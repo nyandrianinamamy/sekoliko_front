@@ -52,6 +52,5 @@ export class LoginComponent implements OnInit {
   updateLocalStorage(log: any) {
     this.localStorageService.setLocalstorage('access_token', log.data.token);
     this.localStorageService.setLocalstorage('info_user', {userId: log.data.user_id, username: log.data.username, session: log.data.jwt_token_ttl});
-
   }
 }
