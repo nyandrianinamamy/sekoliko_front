@@ -16,25 +16,18 @@ export class TzClasseListComponent implements OnInit {
 
   ngOnInit() {
     this.getListClasse().subscribe((response: any) => {
-
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         response.data.forEach(element => {
-
           this.listClasse.push({
             id: element.id,
-            classe: element.classedesc
-
+            classe: element.nomClasse
           });
           console.log(response.data);
         });
-
       }
     });
   }
 
-  getListClasse() {
-
-    return this.dataService.get(urlList.path_list_class);
-  }
+  getListClasse() {return this.dataService.get(urlList.path_list_class)}
 
 }
