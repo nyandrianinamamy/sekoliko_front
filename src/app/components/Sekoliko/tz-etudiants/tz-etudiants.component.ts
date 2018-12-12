@@ -1,5 +1,8 @@
 import {Component, OnInit, ViewChildren, QueryList, ElementRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {urlList} from "../../../Utils/api/urlList";
+import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
+import {DataService} from "../../../shared/service/data.service";
 
 @Component({
     selector: 'app-tz-etudiants',
@@ -7,32 +10,26 @@ import {HttpClient} from '@angular/common/http';
     styleUrls: ['./tz-etudiants.component.scss']
 })
 export class TzEtudiantsComponent implements OnInit {
-
-    @ViewChildren('list') list: QueryList<ElementRef>;
-    url: any = 'https://reqres.in/api/products?per_page=12';
     niveau = [];
-
     details = 'Cliquer pour voir details';
 
-    constructor(private http: HttpClient) {
+    constructor(private dataService:DataService) {
     }
 
     getNiveau() {
-        return this.http.get(this.url);
+        return this.dataService.get(urlList.path_list_class);
     }
 
     ngOnInit() {
-        this.getNiveau().subscribe((data: any) => {
-            data.data.forEach((element: any) => {
-                this.niveau.push({
-                    id: (element.id).toString(),
-                    name: element.name,
-                    color: element.color
+        this.getNiveau().subscribe((response: any) => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+                response.data.forEach(element => {
+                    this.niveau.push({
+                        id: element.id,
+                        nom:element.nomClasse
+                    });
                 });
-                console.log(this.niveau);
-            });
-            // this.userList = data;
-            // console.log(data);
+            }
         });
     }
 
