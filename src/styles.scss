@@ -367,8 +367,7 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 2%;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
-.tz-btn-circle{padding: 3%; border-radius: 50%;}
-.tz-btn-circle i{padding: 20% 22%;}
+
 .cascading-admin-card {
   margin-top: 20px; }
 .cascading-admin-card .admin-up {
@@ -412,4 +411,29 @@ a.text-dark:hover, a.text-dark:focus {
 .cascading-admin-card .admin-up .fa {
   -webkit-box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.2), 0 2px 13px 0 rgba(0, 0, 0, 0.19);
   box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.2), 0 2px 13px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tz-btn-circle {
+  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+  width: 47px;
+  height: 47px;
+  position: relative;
+  z-index: 1;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  margin: 10px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tz-btn-circle i {
+  font-size: 1.25rem;
+  line-height: 47px;
 }
