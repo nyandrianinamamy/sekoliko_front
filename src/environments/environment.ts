@@ -5,7 +5,8 @@ export const environment = {
   production: false,
   baseHref: '/',
   wsBasePath: './assets/api',
-  base_url_api: 'https://www.techzara.org/sekoliko-api/api'
+ // base_url_api: 'https://www.techzara.org/sekoliko-api/api'
+  base_url_api: 'http://127.0.0.1:8000/api'
 };
 
 /*
