@@ -3,6 +3,7 @@ import {DataService} from '../../../shared/service/data.service';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
 import {Subject} from "rxjs";
+import {Validators ,FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-tz-salle',
@@ -15,13 +16,11 @@ export class TzSalleComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
+
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 10
-    // };
 
     this.getListSalle().subscribe((data: any) => {
       this.dtTrigger.next();
@@ -32,7 +31,6 @@ export class TzSalleComponent implements OnInit {
             nom: element.nom,
           });
           console.log(this.listSalle);
-
         });
       }else {
         console.log("verifieo le function aloha papie a :D ")
@@ -44,8 +42,10 @@ export class TzSalleComponent implements OnInit {
   }
 
   /**
-   * Touche pas
+   * Touche Pas
    */
+  signupFormModalName = new FormControl('', Validators.required);
+
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
   }

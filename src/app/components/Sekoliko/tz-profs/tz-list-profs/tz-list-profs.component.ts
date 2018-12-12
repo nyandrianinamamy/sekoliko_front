@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { DataService } from '../../../../shared/service/data.service';
 import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
 import { urlList } from 'src/app/Utils/api/urlList';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-tz-list-profs',
@@ -11,12 +12,16 @@ import { urlList } from 'src/app/Utils/api/urlList';
 })
 export class TzListProfsComponent implements OnInit {
 
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   listProff = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.getListProffesseurs().subscribe((response: any) => {
+      this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         response.data.forEach(element => {
           this.listProff.push({

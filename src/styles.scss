@@ -437,3 +437,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: 1.25rem;
   line-height: 47px;
 }
+.md-form label {
+  position: absolute!important;
+  top: auto!important;
+}
