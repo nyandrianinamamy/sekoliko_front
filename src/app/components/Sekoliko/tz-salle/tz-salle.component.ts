@@ -22,6 +22,7 @@ export class TzSalleComponent implements OnInit {
     this.dataService.post(urlList.path_list_salle).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.listSalle = response.data;
+        console.log(this.listSalle);
       }
     })
   }
