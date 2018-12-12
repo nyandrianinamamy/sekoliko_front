@@ -134,7 +134,10 @@ class ClasseController extends AbstractClassRestController
         $rep = [];
         foreach ($repClasses as $repClasse)
         {
-            $rep[] = ['id' => $repClasse->getId(),'nomClasse' => $repClasse->getDescription()];
+            $rep[] = [
+                'id' => $repClasse->getId(),
+                'nomClasse' => $repClasse->getDescription()
+            ];
         }
         $posResponse = $this->get("tz.responses");
         $resData     = $posResponse->setSuccessResponse($rep, "json",array("classe_list"));
