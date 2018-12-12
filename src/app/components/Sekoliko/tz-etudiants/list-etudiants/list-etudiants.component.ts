@@ -27,13 +27,12 @@ export class ListEtudiantsComponent implements OnInit {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           response.data.forEach(element => {
              this.listEtudiants.push({
-              id: (element.id).toString(),
+              id: element.id,
               nom: element.non,
               age: element.age,
               sexe: element.sexe,
               adresse: element.adr
              });
-             console.log(response.data);
           });
         }else {
             console.log("verifieo le function aloha papie a :D ")
