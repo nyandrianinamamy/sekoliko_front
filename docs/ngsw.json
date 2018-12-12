@@ -7,15 +7,15 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/sekoliko/0.eda9d4c27e46f3c07fd0.js",
-        "/sekoliko/1.7a926c9e2ccfdbd4afda.js",
-        "/sekoliko/2.03cf819ddc4aa4b4c054.js",
+        "/sekoliko/1.7cedf00cf625a343f5f0.js",
+        "/sekoliko/5.5aa8d0f658078745f298.js",
+        "/sekoliko/6.3442df281e07fcfdc2ed.js",
         "/sekoliko/index.html",
-        "/sekoliko/main.dc08ce63100734bb48d1.js",
-        "/sekoliko/polyfills.74d6d5146da3b05395fa.js",
-        "/sekoliko/runtime.3c7de2e1de1c8bcb4517.js",
+        "/sekoliko/main.f113d6cc26d0edc5ca25.js",
+        "/sekoliko/polyfills.5aec796d9416706f37e7.js",
+        "/sekoliko/runtime.592c3cd677a8d4ad1580.js",
         "/sekoliko/scripts.968f55bfb751cd0febb2.js",
-        "/sekoliko/styles.37e4b87b3e09cc6430a5.css"
+        "/sekoliko/styles.bc84ed673a64703b5274.css"
       ],
       "patterns": []
     },
@@ -39,16 +39,17 @@
         "/sekoliko/assets/images/man.jpeg",
         "/sekoliko/assets/images/profile.jpg",
         "/sekoliko/assets/images/shibainu.jpg",
-        "/sekoliko/assets/jq/jq.js"
+        "/sekoliko/assets/jq/jq.js",
+        "/sekoliko/assets/style/common.scss"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/sekoliko/0.eda9d4c27e46f3c07fd0.js": "6be42f5b1868ff1b090f740524bbbe6f726ca2ad",
-    "/sekoliko/1.7a926c9e2ccfdbd4afda.js": "7647455bb5654c9b37ad2a08d50b4b05242ef704",
-    "/sekoliko/2.03cf819ddc4aa4b4c054.js": "8d6a65da8cd53ee5a3697a73886ce24e6c95e4d5",
+    "/sekoliko/1.7cedf00cf625a343f5f0.js": "86104ec5d5ad833cbb81033724bcfede06badcf1",
+    "/sekoliko/5.5aa8d0f658078745f298.js": "e292932bdf6cfc6781dab2045b30959307882c83",
+    "/sekoliko/6.3442df281e07fcfdc2ed.js": "5f9c9bf5979850f443d7bd93b83fa590a1e81c7e",
     "/sekoliko/assets/api/login.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/sekoliko/assets/api/logout.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/sekoliko/assets/api/shop.json": "088e1bfd59ecc07a76c10b41fb604f84b0fab34d",
@@ -65,12 +66,13 @@
     "/sekoliko/assets/images/profile.jpg": "7ac5443e66163a34db930b5b69364ad909f2563a",
     "/sekoliko/assets/images/shibainu.jpg": "7d122672686ff781ca336a79043c3fae645a2636",
     "/sekoliko/assets/jq/jq.js": "cce64088d6814dea43faedf0b14a913134b60e05",
-    "/sekoliko/index.html": "e4f53d824e85e0f7e27a295bd51546af31557270",
-    "/sekoliko/main.dc08ce63100734bb48d1.js": "69d50f2c5aeeaaf119c2a02ee43346b83f6a781f",
-    "/sekoliko/polyfills.74d6d5146da3b05395fa.js": "ac4018fccafc7da01af3eab6a316d3371e1f7779",
-    "/sekoliko/runtime.3c7de2e1de1c8bcb4517.js": "00987d1f6ceb8958ca6d057456ae14afc6e91419",
-    "/sekoliko/scripts.968f55bfb751cd0febb2.js": "ac2dda83c40427eb9e9f2ad3e701187b8667c31a",
-    "/sekoliko/styles.37e4b87b3e09cc6430a5.css": "1c4c7e60964afe47547ded499881e26b95b4fb10"
+    "/sekoliko/assets/style/common.scss": "423d36728ceb14615dcd8a68886c5a58807e58c5",
+    "/sekoliko/index.html": "f385762494aff2177bd8edb414cb9a774c1f0e3c",
+    "/sekoliko/main.f113d6cc26d0edc5ca25.js": "4ded2fddd6baedf2857047c8740d82a59013208a",
+    "/sekoliko/polyfills.5aec796d9416706f37e7.js": "98a695089a41f11922999419fa0d40d410bcbae8",
+    "/sekoliko/runtime.592c3cd677a8d4ad1580.js": "69180e76835ecd73387bc8bcba075424c6e859b3",
+    "/sekoliko/scripts.968f55bfb751cd0febb2.js": "8cff919624f4590879d1564653ac7c73c135e960",
+    "/sekoliko/styles.bc84ed673a64703b5274.css": "854f6789b64de00701ae3b59b05a8a536e5289ba"
   },
   "navigationUrls": [
     {

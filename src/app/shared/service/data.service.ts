@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DataResponse} from '../model/DataResponse';
 import {Observable, of} from 'rxjs/index';
-import {catchError, tap} from 'rxjs/internal/operators';
+import {catchError, map, tap} from 'rxjs/internal/operators';
 import {isNullOrUndefined} from 'util';
 
 @Injectable({
@@ -46,7 +46,9 @@ export class DataService {
     console.log('we are adding shared service');
     return this.http.get<DataResponse>(fromUrl).pipe(
       tap((response: DataResponse) => {
-        console.log('Get service');
+        console.log(response);
+        // return response.data.
+
       }),
       catchError(this.handleError<DataResponse>('Get service'))
     );

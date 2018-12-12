@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.login = new Login();
     this.loading = false;
     this.authData.setLoggedIn(false);
+    localStorage.clear();
   }
   onclick() {
   }
