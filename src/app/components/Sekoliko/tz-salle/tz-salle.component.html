@@ -1,16 +1,23 @@
 <div class="view gradient-card-header blue darken-2">
   <h4 class="h4-responsive text-white">Liste salle disponible </h4>
 </div>
-<section class="mt-lg-5">
-  <div class="tz-btn-content text-right mb-2">
-    <a routerLink="/menu/add-salle" type="button" mdbBtn color="secondary" mdbWavesEffect>
-      <i class="fa fa-plus-circle m-2"></i>
-      Ajout un salle libre
-    </a>
-  </div>
-  <ul class="list-group">
-    <li class="list-group-item"  *ngFor="let a of listSalle">
-      <a href="">{{a.nom}}</a>
-    </li>
-  </ul>
+<section class="mt-5">
+    <table datatable class="row-border hover" >
+      <thead>
+      <tr>
+        <th>Salle ID</th>
+        <th>Salle Nom</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="strong" style="font-weight: bold">Salle ID</td>
+        <td class="strong" style="font-weight: bold">Salle Nom</td>
+      </tr>
+      <tr *ngFor="let salleList of listSalle">
+        <td>{{salleList.id}}</td>
+        <td>{{salleList.nom}}</td>
+      </tr>
+      </tbody>
+    </table>
 </section>

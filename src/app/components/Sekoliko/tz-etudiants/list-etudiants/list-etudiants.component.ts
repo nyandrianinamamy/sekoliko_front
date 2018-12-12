@@ -26,7 +26,6 @@ export class ListEtudiantsComponent implements OnInit {
     }
 
     getData() {
-        console.log(this.url);
         return this.http.get(this.url);
     }
 

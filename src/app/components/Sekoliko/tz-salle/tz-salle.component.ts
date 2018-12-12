@@ -13,10 +13,12 @@ import {error} from "selenium-webdriver";
 export class TzSalleComponent implements OnInit {
 
   listSalle = [];
+  dtOptions: DataTables.Settings = {};
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
     this.getListSalle().subscribe((data: any) => {
       if (data.code === ConstantHTTP.CODE_SUCCESS){
         data.data.forEach((element: any) => {
@@ -32,12 +34,12 @@ export class TzSalleComponent implements OnInit {
     });
   }
   getListSalle() {
-   return this.dataService.post(urlList.path_list_salle)
-    //     .subscribe(response => {
-    //   if (response.code === ConstantHTTP.CODE_SUCCESS) {
-    //     this.listSalle = response.data;
-    //     console.log(this.listSalle);
-    //   }
-    // })
+   return this.dataService.post(urlList.path_list_salle);
   }
+
+  /**
+   * Touche pas
+   */
+
+
 }
