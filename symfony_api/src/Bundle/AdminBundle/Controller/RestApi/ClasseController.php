@@ -117,4 +117,31 @@ class ClasseController extends AbstractClassRestController
         $resData = $posResponse->setSuccessResponse($data, "json", array("classe_etd"));
         return $response->setData($resData);
     }
+     
+    /*** Affiche la liste des classes
+     *
+     * @Rest\GET("/api/classe/list_classe", name="list_classe")
+     * @return JsonResponse
+     */
+    public function findAllClasse() {
+        
+        $response = new JsonResponse();
+        $em = $this->getDoctrine()->getRepository(TzClassEntity::class);
+        $repClasses = $em->findAll();
+        if (!$repClasses){
+            throw $this->createNotFoundException();
+        }
+        $rep = [];
+        foreach ($repClasses as $repClasse)
+        {
+            $rep[] = [
+                'id' => $repClasse->getId(),
+                'nomClasse' => $repClasse->getDescription()
+            ];
+        }
+        $posResponse = $this->get("tz.responses");
+        $resData     = $posResponse->setSuccessResponse($rep, "json",array("classe_list"));
+        return $response->setData($resData);
+    }
+    
 }
