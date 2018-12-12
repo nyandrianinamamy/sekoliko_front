@@ -12,6 +12,7 @@ export class TzDashboardComponent implements OnInit {
 
   compteEtudiants = '';
   compteSalles = '';
+  comptesProff = '';
 
   public chartType: string = 'line';
 
@@ -154,6 +155,12 @@ export class TzDashboardComponent implements OnInit {
         this.compteSalles = response.data.length;
       }
     });
+
+    this.getNbproff().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.comptesProff = response.data.length;
+      }
+    });
   }
 
   getNbEtudiants() {
@@ -164,4 +171,7 @@ export class TzDashboardComponent implements OnInit {
     return this.dataService.post(urlList.path_list_salle);
   }
 
+  getNbproff() {
+    return this.dataService.post(urlList.path_list_proffesseurs);
+  }
 }

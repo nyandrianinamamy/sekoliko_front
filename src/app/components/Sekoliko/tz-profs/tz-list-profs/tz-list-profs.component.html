@@ -1,11 +1,11 @@
 
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste Profs Terminal : {{search().length}} </h4>
+  <h4 class="h4-responsive text-white">Liste Profs Terminal : </h4>
 </div>
 <div class="row  d-flex align-items-center justify-content-center">
   <div class="col-md-6 mx-auto">
     <div class="md-form">
-      <input type="search" [(ngModel)]="searchText" id="search" class="form-control" mdbInputDirective [mdbValidate]="false">
+      <!-- <input type="search" [(ngModel)]="searchText" id="search" class="form-control" mdbInputDirective [mdbValidate]="false"> -->
       <label for="search">Search data</label>
     </div>
   </div>
@@ -17,113 +17,20 @@
       <th style="width: 50px">id
         <mdb-icon icon="sort" (click)="sortBy('id')"></mdb-icon>
       </th>
-      <th class="th-lg">Name
+      <th class="th-lg">Nom
         <mdb-icon icon="sort" (click)="sortBy('name')"></mdb-icon>
       </th>
-      <th class="th-lg">Email
+      <th class="th-lg">Matiere
         <mdb-icon icon="sort" (click)="sortBy('email')"></mdb-icon>
       </th>
       <th class="th-lg">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr #list *ngFor="let data of search(); let i = index">
-      <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex" scope="row">{{data.id}}</td>
-      <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.name}}</td>
-      <td *ngIf="i+1 >= firstVisibleIndex && i+1 <= lastVisibleIndex">{{data.email}}</td>
-      <td class="text-center">
-        <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="details.show()"
-           mdbWavesEffect class="m-1 tz-btn-circle relative waves-light" color="success">
-          <i class="fa fa-eye"></i>
-        </a>
+    <tr *ngFor="let proff of listProff">
+    <td>{{proff.id}}</td>
+    <td>{{proff.nom}}</td>
 
-        <!-- Modal details-->
-        <div mdbModal #details="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
-             aria-hidden="true"  [config]="{backdrop: false, ignoreBackdropClick: false}">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="details.hide()">
-                  <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title w-100">{{data.name}}</h4>
-              </div>
-              <div class="modal-body">
-                <div>A propos de {{data.name}}</div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="details.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
-
-        <a mdbBtn color="default" mdbWavesEffect data-target="#detailsModal" (click)="edit.show()"
-           class="m-1 tz-btn-circle relative waves-light">
-          <i class="fa fa-edit"></i>
-        </a>
-        <!-- Modal edit-->
-        <div mdbModal #edit="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
-             aria-hidden="true"  [config]="{backdrop: false, ignoreBackdropClick: false}">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="edit.hide()">
-                  <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title w-100">{{data.name}}</h4>
-              </div>
-              <div class="modal-body">
-                <div class="md-form mb-5">
-                  <i class="fa fa-user tz-prefix prefix grey-text"></i>
-                  <input type="text" id="orangeForm-name{{data.id}}"  value="{{data.name}}" name="username"
-                         class="form-control validate" mdbInputDirective>
-                  <label data-error="wrong" data-success="right" for="orangeForm-name{{data.id}}">Your name</label>
-                </div>
-                <div class="md-form mb-5">
-                  <i class="fa fa-envelope tz-prefix prefix grey-text"></i>
-                  <input type="email" id="orangeForm-email{{data.id}}" name="email" value="{{data.email}}"
-                         class="form-control validate"  mdbInputDirective>
-                  <label data-error="wrong" data-success="right" for="orangeForm-email{{data.id}}">Your email</label>
-                </div>
-              </div>
-              <div class="modal-footer d-flex justify-content-center">
-                <button mdbBtn color="deep-orange" class="waves-light w-100" (click)="edit.hide()" mdbWavesEffect>Modifier</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
-
-        <a mdbBtn color="danger" mdbWavesEffect data-target="#deleteModal" (click)="deleteModal.show()"
-           class="m-1 tz-btn-circle relative waves-light">
-          <i class="fa fa-trash"></i>
-        </a>
-        <!-- Delete modal-->
-        <div mdbModal #deleteModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myDetailsModalLabel"
-             aria-hidden="true"  [config]="{backdrop: false, ignoreBackdropClick: false}">
-          <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
-                  <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title w-100">{{data.name}}</h4>
-              </div>
-              <div class="modal-body">
-                <h6 class="modal-title w-100">Etes vous sur de supprimer {{data.name}}</h6>
-              </div>
-              <div class="modal-footer d-block text-center">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Oui</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Non</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
-      </td>
     </tr>
     </tbody>
   </table>

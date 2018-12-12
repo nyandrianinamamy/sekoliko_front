@@ -14,16 +14,14 @@ export class ListEtudiantsComponent implements OnInit {
 
     listEtudiants = [];
 
-    constructor(private dataService: DataService) {
-    }
-
+    constructor(private dataService: DataService) { }
 
     ngOnInit() {
       this.getListEtudiants().subscribe((response: any) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           response.data.forEach(element => {
              this.listEtudiants.push({
-              id: (element.id).toString(),
+              id: element.id,
               nom: element.non,
               age: element.age,
               sexe: element.sexe,
