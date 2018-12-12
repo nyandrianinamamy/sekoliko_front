@@ -44,6 +44,11 @@ const MENUITEMS = [
       type: 'link',
       icon: 'settings'
     }, {
+        state: ['/', 'menu', 'list-classe'],
+        name: 'Classe',
+        type: 'link',
+        icon: 'school'
+      }, {
       state: ['/', 'menu', 'payement'],
       name: 'Payement',
       type: 'link',
