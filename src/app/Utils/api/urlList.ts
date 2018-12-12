@@ -8,5 +8,6 @@ export const urlList = {
   path_edit_class: _api + 'class/edit',
   path_list_salle: _api + 'salle/find',
   path_edit_salle: _api + 'salle/edit',
-  path_teste_user: _api + 'users'
+  path_teste_user: _api + 'users',
+  path_list_etudiants: _api + 'listEtd '
 };

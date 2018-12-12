@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SekolikoRoutingModule} from './sekoliko-routing.module';
 import {SekolikoComponent} from './sekoliko.component';
 import {MaterialModule} from '../../Utils/modules/Material.module';
+import {DataTablesModule} from 'angular-datatables';
 import {
     MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule,
@@ -34,6 +35,8 @@ import {TzAjoutProfsComponent} from './tz-profs/tz-ajout-profs/tz-ajout-profs.co
 import {TzAdmDetailsComponent} from './tz-administration/tz-adm-details/tz-adm-details.component';
 import { TzAjoutSalleComponent } from './tz-salle/tz-ajout-salle/tz-ajout-salle.component';
 import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajout-admin.component';
+import { TzClasseListComponent} from './tz-classe-list/tz-classe-list.component';
+import { TzAjoutClasseComponent } from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
 
 @NgModule({
     imports: [
@@ -62,6 +65,7 @@ import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajo
         MatDatepickerModule,
         MatTableModule,
         MaterialModule,
+        DataTablesModule,
         MDBBootstrapModule.forRoot(),
     ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
@@ -82,7 +86,9 @@ import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajo
         TzListProfsComponent,
         TzAjoutSalleComponent,
         TzAdmDetailsComponent,
-        TzAjoutAdminComponent
+        TzAjoutAdminComponent,
+        TzClasseListComponent,
+        TzAjoutClasseComponent
     ]
 })
 export class SekolikoModule {
