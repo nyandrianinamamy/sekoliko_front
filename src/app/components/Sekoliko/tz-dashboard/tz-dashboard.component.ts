@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
+import { DataService } from 'src/app/shared/service/data.service';
+import { urlList } from 'src/app/Utils/api/urlList';
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -6,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tz-dashboard.component.scss']
 })
 export class TzDashboardComponent implements OnInit {
+
+  compteEtudiants = '';
+  compteSalles = '';
 
   public chartType: string = 'line';
 
@@ -132,10 +138,30 @@ export class TzDashboardComponent implements OnInit {
     ];
   }
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.getNbEtudiants().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.compteEtudiants = response.data.length;
+      } else {
+        console.log('Pas d\'étudiants');
+      }
+    });
+
+    this.getNbSalles().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.compteSalles = response.data.length;
+      }
+    });
   }
 
+  getNbEtudiants() {
+    return this.dataService.get(urlList.path_list_etudiants);
+  }
+
+  getNbSalles() {
+    return this.dataService.post(urlList.path_list_salle);
+  }
 
 }

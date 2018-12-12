@@ -29,7 +29,6 @@ export class ListEtudiantsComponent implements OnInit {
               sexe: element.sexe,
               adresse: element.adr
              });
-             console.log(response.data);
           });
         } else {
           console.log('Pas de donnée');
