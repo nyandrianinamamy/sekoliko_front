@@ -1,12 +1,12 @@
 <section class="mt-lg-5">
   <div class="row">
-    <a routerLink="/menu/dashboard" class="col-xl-3 col-md-6 mb-r">
+    <a routerLink="/menu/etudiant" class="col-xl-3 col-md-6 mb-r">
       <div class="card card-cascade cascading-admin-card">
         <div class="admin-up">
           <i class="fa fa-group primary-color"></i>
           <div class="data">
             <p>ÉTUDIANTS</p>
-            <h4><strong>2000</strong></h4>
+            <h4><strong>{{compteEtudiants}}</strong></h4>
           </div>
         </div>
         <div class="card-body">
@@ -24,7 +24,7 @@
           <i class="fa fa-user-secret warning-color"></i>
           <div class="data">
             <p>PROFS</p>
-            <h4><strong>200</strong></h4>
+            <h4><strong>{{comptesProff}}</strong></h4>
           </div>
         </div>
         <div class="card-body">
@@ -36,13 +36,13 @@
         </div>
       </div>
     </a>
-    <a routerLink="/menu/dashboard" class="col-xl-3 col-md-6 mb-r">
+    <a routerLink="/menu/salle" class="col-xl-3 col-md-6 mb-r">
       <div class="card card-cascade cascading-admin-card">
         <div class="admin-up">
           <i class="fa fa-home light-blue lighten-1"></i>
           <div class="data">
             <p>SALLES</p>
-            <h4><strong>20</strong></h4>
+            <h4><strong>{{compteSalles}}</strong></h4>
           </div>
         </div>
         <div class="card-body">
