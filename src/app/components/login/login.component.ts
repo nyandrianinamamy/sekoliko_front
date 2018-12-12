@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     this.login = new Login();
     this.loading = false;
     this.authData.setLoggedIn(false);
-    localStorage.clear();
   }
   onclick() {
   }
@@ -50,8 +49,8 @@ export class LoginComponent implements OnInit {
     });
   }
   updateLocalStorage(log: any) {
-    this.localStorageService.setLocalstorage('access_token', log.data.token);
-    this.localStorageService.setLocalstorage('info_user', {userId: log.data.user_id, username: log.data.username, session: log.data.jwt_token_ttl});
-
+    localStorage.setItem('token', log.data.token);
+    localStorage.setItem('user_id', log.data.user_id);
+    localStorage.setItem('jwt_token_ttl', log.data.jwt_token_ttl);
   }
 }
