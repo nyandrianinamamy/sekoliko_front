@@ -25,7 +25,7 @@ import {UserService} from './shared/service/user.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
