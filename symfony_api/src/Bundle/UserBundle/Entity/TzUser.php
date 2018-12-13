@@ -3,6 +3,8 @@
 namespace Bundle\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation as JMS;
+use Bundle\AdminBundle\Entity\TzRoleTypeEntity;
 /**
  * Created by PhpStorm.
  * User: Tahiana_Rakotonirina
@@ -46,6 +48,16 @@ class TzUser extends BaseUser
      */
     private $matricule;
 
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="Bundle\AdminBundle\Entity\TzRoleTypeEntity")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="role_type", referencedColumnName="id")
+     * })
+     *
+     * @JMS\Accessor(getter="getRoleType")
+     */
+    private $roleType;
 
     public function __construct()
     {
@@ -108,6 +120,22 @@ class TzUser extends BaseUser
     public function setMatricule($matricule)
     {
         $this->matricule = $matricule;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoleType()
+    {
+        return $this->roleType;
+    }
+
+    /**
+     * @param string $roleType
+     */
+    public function setRoleType($roleType)
+    {
+        $this->roleType = $roleType;
     }
 
 }

@@ -10,6 +10,7 @@ namespace Bundle\AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Bundle\AdminBundle\Entity\TzClassEntity;
+use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
 /**
  * TzEtablissement
  *
@@ -46,7 +47,7 @@ class TzMatiereEntity
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="TzClassEntity")
+     * @ORM\ManyToOne(targetEntity="TzClasseEnfantEntity")
      * @ORM\JoinColumns({
      *  @ORM\JoinColumn(name="id_class", referencedColumnName="id")
      * })

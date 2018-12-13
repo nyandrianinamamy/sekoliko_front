@@ -8,6 +8,7 @@
 
 namespace Bundle\AdminBundle\Controller\RestApi;
 
+use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Bundle\AdminBundle\Entity\TzClassEntity;
 use Bundle\AdminBundle\Entity\TzMatiereEntity;
@@ -49,9 +50,9 @@ class MatiereController extends AbstractClassRestController
         try {
             $matiere->setDescription($paramNom);
             $matiere->setCoefficient($paramCoeff);
-            $repClasse = $em->getRepository(TzClassEntity::class);
+            $repClasse = $em->getRepository(TzClasseEnfantEntity::class);
             $classe = $repClasse->find($paramClass);
-            if (!$classe instanceof TzClassEntity) {
+            if (!$classe instanceof TzClasseEnfantEntity) {
                 throw new \Exception("Classe not found");
             }
             $matiere->setClasse($classe);
