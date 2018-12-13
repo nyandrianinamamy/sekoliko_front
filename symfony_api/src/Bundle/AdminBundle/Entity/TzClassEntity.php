@@ -7,6 +7,7 @@
  */
 
 namespace Bundle\AdminBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
