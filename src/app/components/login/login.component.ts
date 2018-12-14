@@ -23,7 +23,10 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private authData: AuthentificationService,
               private dataService: DataService,
-              private localStorageService: LocalStorageService) { }
+              private localStorageService: LocalStorageService) {
+              document.body.style.background = "#2d6bb0";
+              document.body.style.overflow = "hidden";
+  }
 
   ngOnInit() {
     this.login = new Login();

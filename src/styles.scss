@@ -3,9 +3,7 @@
 @include mat-core();
 
 *{font-family: 'Montserrat', sans-serif;font-weight: 500}
-html, body{ background-color: #0c3750!important; }
-body{margin: 0;width: 100%;height: 100vh;overflow: hidden}
-
+html , body{overflow: visible}
 .full {
   width: 100%;
 }
