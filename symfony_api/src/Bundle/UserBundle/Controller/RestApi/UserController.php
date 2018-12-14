@@ -70,6 +70,8 @@ class UserController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         if (!$user instanceof TzUser) {
             $user = new TzUser();
+            // mot de passe temporaire
+            $user->setPlainPassword(sha1('123456789'));
             $new = true;
         }
         try {
@@ -78,8 +80,7 @@ class UserController extends FOSRestController
             if (!$role instanceof TzRoleTypeEntity) {
                 throw new \Exception("Role not found");
             }
-            // mot de passe temporaire
-            $user->setPlainPassword(sha1('123456789'));
+
             $user->setUsername($paramUsername);
             $user->setEmail($paramEmail);
             $user->setEnabled($paramEnabled);
