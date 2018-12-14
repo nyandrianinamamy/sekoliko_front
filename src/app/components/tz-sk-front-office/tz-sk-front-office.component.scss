@@ -1,3 +1,9 @@
 html, body {
   background-color: white !important;
 }
+@media screen and (max-width: 450px){
+  .display-1{font-size: 3rem!important;}
+  .tz-d-flex{height: 66vh!important;}
+  .tz-view-intro{height: 66vh!important;}
+  .tz-landing-button{display: block;margin: 10px}
+}
