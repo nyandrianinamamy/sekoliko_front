@@ -58,6 +58,11 @@ const MENUITEMS = [
         name: 'Gestion Salle',
         type: 'link',
         icon: 'home'
+      } ,{
+        state: ['/', 'menu', 'matiere-list'],
+        name: 'Matieres',
+        type: 'link',
+        icon: 'book'
       }],
   },
 ];

@@ -45,7 +45,7 @@ export class TzSalleComponent implements OnInit {
   }
 
   /**
-   * Function list , delete
+   * Function list , edit , delete
    */
   getListSalle() {
    return this.dataService.post(urlList.path_list_salle);
@@ -53,7 +53,7 @@ export class TzSalleComponent implements OnInit {
 
   deleteSalle(){
     return this.dataService.post(urlList.path_delete_salle + this.id).subscribe(()=>{
-          this.router.navigate(['salle']);
+          // this.router.navigate(['/menu/salle']);
     });
   }
 
@@ -63,7 +63,6 @@ export class TzSalleComponent implements OnInit {
       description : event.target.description.value
     };
      return this.dataService.post(urlList.path_edit_salle+event.target.id.value).subscribe(()=>{
-
        this.id = data.id;
        this.description = data.description;
        console.log("Eto ilay tsyb mahazo?");
