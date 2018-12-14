@@ -67,17 +67,22 @@
                               </button>
                               <h4 class="modal-title w-100" >{{salleList.nom}}  <i class="fa fa-home"></i></h4>
                           </div>
-                          <div class="modal-body">
-                              <div class="md-form mb-5">
-                                  <input type="text" id="orangeForm-name" value="{{salleList.nom}}" class="form-control validate" [formControl]="signupFormModalName"
-                                         mdbInputDirective>
-                                  <label data-error="wrong" data-success="right" for="orangeForm-name">Salle Nom</label>
+                          <form class="text-center border border-light p-5" (ngSubmit)="editSalle($event)">
+                              <div class="modal-body">
+                                  <div class="md-form mb-5">
+                                      <input type="text" name="id"
+                                             value="{{salleList.id}}" class="form-control d-none validate">
+                                      <label data-error="wrong" data-success="right"  for="orangeForm-name">Salle Nom</label>
+                                      <input type="text" id="orangeForm-name" name="salle_nom"
+                                             value="{{salleList.nom}}" class="form-control validate"
+                                             [formControl]="signupFormModalName" mdbInputDirective>
+                                  </div>
                               </div>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
-                              <button type="button" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect>Save changes</button>
-                          </div>
+                              <div class="modal-footer">
+                                  <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
+                                  <button type="submit" value="submit" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect>Save changes</button>
+                              </div>
+                          </form>
                       </div>
                   </div>
               </div>
@@ -100,7 +105,7 @@
                           </div>
                           <div class="modal-body d-flex">
                               <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>
-                              <button type="button" mdbBtn color="primary" class="relative waves-light w-50" mdbWavesEffect>Confirm</button>
+                              <button type="button" mdbBtn color="primary" class="relative waves-light w-50" mdbWavesEffect (click)="deleteSalle(id = salleList.id)">Confirm</button>
                           </div>
                       </div>
                   </div>
