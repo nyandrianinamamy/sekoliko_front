@@ -55,6 +55,17 @@ class TzMatiereEntity
      */
     private $classe;
 
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="Bundle\UserBundle\Entity\TzUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_matiere", referencedColumnName="user_id")
+     * })
+     * @JMS\Groups({"matiere_list"})
+     * @JMS\Accessor(getter="getProfId")
+     */
+    private $ProfId;
+
 
     /**
      * @return int
@@ -126,6 +137,22 @@ class TzMatiereEntity
     public function setProf($prof)
     {
         $this->prof = $prof;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfId()
+    {
+        return $this->ProfId;
+    }
+
+    /**
+     * @param string $ProfId
+     */
+    public function setProfId($ProfId)
+    {
+        $this->ProfId = $ProfId;
     }
 
 }

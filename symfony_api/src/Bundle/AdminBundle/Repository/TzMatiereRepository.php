@@ -23,7 +23,7 @@ class TzMatiereRepository extends \Doctrine\ORM\EntityRepository
         $paramNom = $paramFetcher->get('nom');
         $paramCoeff = $paramFetcher->get('coeff');
         $paramClass = $paramFetcher->get('class');
-
+        $paramProf = $paramFetcher->get('prof');
         $queryBuilder = $this->getEntityManager()
             ->getRepository(TzMatiereEntity::class)
             ->createQueryBuilder('m');
@@ -43,7 +43,12 @@ class TzMatiereRepository extends \Doctrine\ORM\EntityRepository
                 $queryBuilder->expr()->eq('m.classe', $paramClass)
             );
         }
-        $etat = $queryBuilder->getQuery()->getResult();
+        if (!is_null($paramProf) && !empty($paramProf)) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->eq('m.ProfId', $paramProf)
+            );
+        }
+            $etat = $queryBuilder->getQuery()->getResult();
         return $etat;
     }
 }

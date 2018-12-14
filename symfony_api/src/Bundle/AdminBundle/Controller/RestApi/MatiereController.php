@@ -9,6 +9,7 @@
 namespace Bundle\AdminBundle\Controller\RestApi;
 
 use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
+use Bundle\UserBundle\Entity\TzUser;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Bundle\AdminBundle\Entity\TzClassEntity;
 use Bundle\AdminBundle\Entity\TzMatiereEntity;
@@ -31,6 +32,7 @@ class MatiereController extends AbstractClassRestController
      * @Rest\RequestParam(name="nom", nullable=false)
      * @Rest\RequestParam(name="coeff", nullable=false)
      * @Rest\RequestParam(name="class", nullable=false)
+     * @Rest\RequestParam(name="prof", nullable=false)
      * @ParamConverter("matiere",class="AdminBundle:TzMatiereEntity")
      * @throws
      * @return JsonResponse
@@ -41,6 +43,7 @@ class MatiereController extends AbstractClassRestController
         $paramNom = $paramFetcher->get('nom');
         $paramCoeff = $paramFetcher->get('coeff');
         $paramClass = $paramFetcher->get('class');
+        $paramProf = $paramFetcher->get('prof');
         $tzServiceMsg = $this->get('ws.tz_msg');
         $em = $this->getDoctrine()->getManager();
         if (!$matiere instanceof TzMatiereEntity) {
@@ -52,9 +55,16 @@ class MatiereController extends AbstractClassRestController
             $matiere->setCoefficient($paramCoeff);
             $repClasse = $em->getRepository(TzClasseEnfantEntity::class);
             $classe = $repClasse->find($paramClass);
+            $repProf = $em->getRepository(TzUser::class);
+            $prof = $repProf->find($paramProf);
+
+            if (!$prof instanceof TzUser) {
+                throw new \Exception("Prof not found");
+            }
             if (!$classe instanceof TzClasseEnfantEntity) {
                 throw new \Exception("Classe not found");
             }
+            $matiere->setProf($prof);
             $matiere->setClasse($classe);
             $em->persist($matiere);
             $em->flush();
@@ -105,6 +115,7 @@ class MatiereController extends AbstractClassRestController
      * @Rest\RequestParam(name="nom", nullable=true)
      * @Rest\RequestParam(name="coeff", nullable=true)
      * @Rest\RequestParam(name="class", nullable=true)
+     * @Rest\RequestParam(name="prof", nullable=true)
      * @Rest\GET("/api/matiere/find/{matiere}", name="recherche_matiere_by_id", requirements={"matiere":"\d+"})
      * @ParamConverter("matiere",class="AdminBundle:TzMatiereEntity")
      * @return JsonResponse
