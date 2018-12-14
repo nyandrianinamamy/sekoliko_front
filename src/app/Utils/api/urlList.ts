@@ -11,5 +11,7 @@ export const urlList = {
   path_teste_user: _api + 'users',
   path_list_etudiants: _api + 'listEtd ',
   path_list_proffesseurs: _api + 'prof/find',
-  path_delete_salle: _api + 'salle/delete/'
+  path_delete_salle: _api + 'salle/delete/',
+  path_list_matiere: _api + 'matiere/find',
+  path_delete_matiere: _api + 'matiere/delete/',
 };

@@ -19,6 +19,7 @@ import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajo
 import {TzClasseListComponent} from './tz-classe-list/tz-classe-list.component';
 import { TzAjoutClasseComponent} from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
 import {TzMatiereComponent} from "./tz-matiere/tz-matiere.component";
+import {TzAjoutMatiereComponent} from "./tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component";
 
 const routes: Routes = [
     {
@@ -44,6 +45,7 @@ const routes: Routes = [
             {path: 'list-classe', component: TzClasseListComponent},
             {path: 'add-classe', component: TzAjoutClasseComponent},
             {path: 'matiere-list', component: TzMatiereComponent},
+            {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: '**', redirectTo: 'not-found'}
         ]
     }
