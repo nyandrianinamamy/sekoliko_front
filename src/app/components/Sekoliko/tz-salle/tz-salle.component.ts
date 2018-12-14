@@ -58,11 +58,16 @@ export class TzSalleComponent implements OnInit {
   }
 
   editSalle(event:any){
-     this.dataService.post(urlList.path_edit_salle+event.target.id.value).subscribe(()=>{
-       this.id = event.target.salle_nom.value;
-       this.description = event.target.id.value;
-    })
-    return this;
+    const data = {
+      id : event.target.id.value,
+      description : event.target.description.value
+    };
+     return this.dataService.post(urlList.path_edit_salle+event.target.id.value).subscribe(()=>{
+
+       this.id = data.id;
+       this.description = data.description;
+       console.log("Eto ilay tsyb mahazo?");
+    });
   }
 
 
