@@ -24,8 +24,13 @@ export class LoginComponent implements OnInit {
               private authData: AuthentificationService,
               private dataService: DataService,
               private localStorageService: LocalStorageService) {
+              if (window.matchMedia("(max-width: 600px)").matches) {
+                document.body.style.overflow = "block";
+              } else {
+                document.body.style.overflow = "hidden";
+              }
               document.body.style.background = "#2d6bb0";
-              document.body.style.overflow = "hidden";
+
   }
 
   ngOnInit() {
