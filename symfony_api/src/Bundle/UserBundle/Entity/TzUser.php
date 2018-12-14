@@ -15,6 +15,7 @@ use Bundle\AdminBundle\Entity\TzRoleTypeEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="tz_user")
+ * @ORM\Entity(repositoryClass="Bundle\UserBundle\Repository\PosUserRepository")
  */
 class TzUser extends BaseUser
 {
@@ -29,24 +30,53 @@ class TzUser extends BaseUser
 
     /**
      * @var string
-     *
+     * @JMS\Groups({"user_list"})
      * @ORM\Column(name="lastname", type="string", length=80, nullable=true)
      */
     private $lastname;
 
     /**
      * @var string
-     *
+     * @JMS\Groups({"user_list"})
      * @ORM\Column(name="firstname", type="string", length=80, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
-     *
+     * @JMS\Groups({"user_list"})
+     * @ORM\Column(name="adresse", type="string", length=80, nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @var string
+     * @JMS\Groups({"user_list"})
+     * @ORM\Column(name="contact", type="string", length=80, nullable=true)
+     */
+    private $contact;
+
+    /**
+     * @var string
+     * @JMS\Groups({"user_list"})
+     * @ORM\Column(name="age", type="integer", length=3, nullable=true)
+     */
+    private $age;
+
+    /**
+     * @var string
+     * @JMS\Groups({"user_list"})
      * @ORM\Column(name="matricule", type="string", length=25, nullable=true, unique=true)
      */
     private $matricule;
+
+
+    /**
+     * @var string
+     * @JMS\Groups({"user_list"})
+     * @ORM\Column(name="sexe", type="string", length=25, nullable=true)
+     */
+    private $sexe;
 
     /**
      * @var string
@@ -54,7 +84,7 @@ class TzUser extends BaseUser
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="role_type", referencedColumnName="id")
      * })
-     *
+     * @JMS\Groups({"user_list"})
      * @JMS\Accessor(getter="getRoleType")
      */
     private $roleType;
@@ -138,4 +168,67 @@ class TzUser extends BaseUser
         $this->roleType = $roleType;
     }
 
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param string $contact
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param string $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * @param string $sexe
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+    }
 }
