@@ -1,0 +1,21 @@
+
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white"> Ajout nouveau matiere </h4>
+</div>
+<!-- First Step -->
+<form role="form" action=""  #form method="post">
+  <div class="row setup-content-2" #step1 id="step-1">
+    <div class="col-md-12">
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Ajouter nouveau matiere</strong></h3>
+      <div class="md-form">
+        <label for="nom">Nom du matiere</label>
+        <input type="text" id="nom" name="description" #nom class="form-control" formControlName="required" mdbInputDirective>
+      </div>
+      <div class="md-form">
+        <label for="nom">Coefficient</label>
+        <input type="text" id="coeff" name="coefficient" #coeff class="form-control" formControlName="required" mdbInputDirective>
+      </div>
+      <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Enregistrer</button>
+    </div>
+  </div>
+</form>

@@ -37,6 +37,8 @@ import { TzAjoutSalleComponent } from './tz-salle/tz-ajout-salle/tz-ajout-salle.
 import { TzAjoutAdminComponent } from './tz-administration/tz-ajout-admin/tz-ajout-admin.component';
 import { TzClasseListComponent} from './tz-classe-list/tz-classe-list.component';
 import { TzAjoutClasseComponent } from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
+import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
+import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
 
 @NgModule({
     imports: [
@@ -88,7 +90,9 @@ import { TzAjoutClasseComponent } from './tz-classe-list/tz-ajout-classe/tz-ajou
         TzAdmDetailsComponent,
         TzAjoutAdminComponent,
         TzClasseListComponent,
-        TzAjoutClasseComponent
+        TzAjoutClasseComponent,
+        TzMatiereComponent,
+        TzAjoutMatiereComponent
     ]
 })
 export class SekolikoModule {
