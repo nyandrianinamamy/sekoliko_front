@@ -472,3 +472,14 @@ Responsive touche pas
 @media screen and (max-width: 600px){
   .tz-md{margin: 15px}
 }
+
+/*
+  Touche pas
+ */
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  height: 350px;
+  overflow-y: auto;
+}

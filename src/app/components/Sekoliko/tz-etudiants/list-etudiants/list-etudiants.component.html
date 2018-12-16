@@ -2,33 +2,33 @@
   <h4 class="h4-responsive text-white">Liste des Etudiants en TA1 : {{listEtudiants.length}} </h4>
 </div>
 <section class="mt-5">
-        <div class="px-2">
-          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-striped table-bordered" style="width:100%">
+        <div class="px-2 table-responsive">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table" style="width:100%">
             <thead>
               <tr>
-                <th  class="text-center">id</th>
+                <!--<th  class="text-center">id</th>-->
+                <th  class="text-center">matricule</th>
                 <th  class="text-center">Nom</th>
                 <th  class="text-center">Prenom</th>
-                <th  class="text-center">email</th>
+                <!--<th  class="text-center">email</th>-->
                 <th  class="text-center">Age</th>
                 <th  class="text-center">Sexe</th>
-                <th  class="text-center">matricule</th>
                 <th  class="text-center">contact</th>
-                <th  class="text-center">Adresse</th>
+                <!--<th  class="text-center">Adresse</th>-->
                 <th  class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr #list *ngFor="let etudiants of etudiant">
-                <td  class="text-center">{{etudiants.user_id.user_id}}</td>
+                <!--<td  class="text-center">{{etudiants.user_id.user_id}}</td>-->
+                <td  class="text-center">{{etudiants.user_id.matricule}}</td>
                 <td  class="text-center">{{etudiants.user_id.lastname}}</td>
                 <td  class="text-center">{{etudiants.user_id.firstname}}</td>
-                <td  class="text-center">{{etudiants.user_id.email}}</td>
+                <!--<td  class="text-center">{{etudiants.user_id.email}}</td>-->
                 <td  class="text-center">{{etudiants.user_id.age}}</td>
                 <td  class="text-center">{{etudiants.user_id.sexe}}</td>
-                <td  class="text-center">{{etudiants.user_id.matricule}}</td>
                 <td  class="text-center">{{etudiants.user_id.contact}}</td>
-                <td  class="text-center">{{etudiants.user_id.adresse}}</td>
+                <!--<td  class="text-center">{{etudiants.user_id.adresse}}</td>-->
                 <td class="text-center">
                   <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
                      class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
@@ -49,36 +49,78 @@
                         <div class="modal-body">
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                              <div class="text-left w-30">ID</div>
-                              <div class="text-right">{{etudiants.user_id.user_id}}</div>
+                               <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left w-30">ID</span></td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.user_id}}</span></td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Nom</div>
-                              <div class="text-right">{{etudiants.user_id.lastname}}</div>
+                               <table class="w-100 border-top-0">
+                                <td class="border-top-0 text-left"><span class="text-left">Nom</span></td>
+                                <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.lastname}}</span></td>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Prenom</div>
-                              <div class="text-right">{{etudiants.user_id.firstname}}</div>
+                               <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Prenom</span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.firstname}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Matricule</div>
-                              <div class="text-right">{{etudiants.user_id.matricule}}</div>
+                                <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Matricule</span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.matricule}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Age</div>
-                              <div class="text-right">{{etudiants.user_id.age}}</div>
+                                <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Age</span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.age}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Contact</div>
-                              <div class="text-right">{{etudiants.user_id.contact}}</div>
+                                <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Contact</span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.contact}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Sexe</div>
-                              <div class="text-right">{{etudiants.user_id.sexe}}</div>
+                                <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Sexe</span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.sexe}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                             <li class="list-group-item">
-                              <div class="text-left">Adresse</div>
-                              <div class="text-right">{{etudiants.user_id.adresse}}</div>
+                                <table class="w-100 border-top-0">
+                                <tr>
+                                  <td class="border-top-0 text-left"><span class="text-left">Adresse : </span>
+                                  </td>
+                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.adresse}}</span>
+                                  </td>
+                                </tr>
+                              </table>
                             </li>
                           </ul>
                         </div>
@@ -106,28 +148,40 @@
                           <h4 class="modal-title w-100" >Modifier {{etudiants.user_id.lastname}}  <i class="fa fa-user-circle"></i></h4>
                         </div>
                         <div class="modal-body">
-                          <div class="md-form mb-5">
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Nom</label>
                             <input type="text" id="orangeForm-name" value="{{etudiants.user_id.lastname}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Nom</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Prenom</label>
                             <input type="text" id="orangeForm-prenom" value="{{etudiants.user_id.firstname}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Prenom</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-age">Age</label>
                             <input type="text" id="orangeForm-age" value="{{etudiants.user_id.age}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-age">Age</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-age">Matricule</label>
                             <input type="text" id="orangeForm-matricule" value="{{etudiants.user_id.matricule}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-age">Matricule</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-adresse">Adresse</label>
                             <input type="text" id="orangeForm-adresse" value="{{etudiants.user_id.adresse}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-adresse">Adresse</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Sexe</label>
                             <input type="text" id="orangeForm-sexe" value="{{etudiants.user_id.sexe}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Sexe</label>
+                          </div>
+                          <div class="md-form">
+                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Contact</label>
                             <input type="text" id="orangeForm-contact" value="{{etudiants.user_id.contact}}" class="form-control validate"
                                    mdbInputDirective>
-                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Contact</label>
                           </div>
                         </div>
                         <div class="modal-footer">
