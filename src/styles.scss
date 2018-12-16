@@ -439,3 +439,12 @@ a.text-dark:hover, a.text-dark:focus {
   position: absolute!important;
   top: auto!important;
 }
+/*
+Responsive touche pas
+ */
+@media screen and (max-width: 1200px){
+  .tz-md{margin-top: 15px}
+}
+@media screen and (max-width: 600px){
+  .tz-md{margin: 15px}
+}
