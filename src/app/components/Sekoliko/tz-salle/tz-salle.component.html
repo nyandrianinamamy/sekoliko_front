@@ -26,8 +26,6 @@
                    class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
                   <i class="fa fa-eye"></i>
                   </a>
-
-                  <!--modal details-->
                   <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                        [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -93,7 +91,6 @@
                       </div>
                   </div>
                   <!--fin modal edit-->
-
                   <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
                       class=" tz-btn-circle  m-1 relative waves-light" color="danger">
                       <i class="fa fa-trash"></i>
