@@ -1,6 +1,7 @@
 
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Ajout nouvelle étudiant </h4>
+  <h4 class="h4-responsive text-white" *ngIf="typeEtudiant"> Ajout un nouveau utilisateur </h4>
+  <h4 class="h4-responsive text-white" *ngIf="typeProf"> Ajout un nouveau prof </h4>
 </div>
 <!-- First Step -->
 <form #form="ngForm">
@@ -72,14 +73,6 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select [(ngModel)]="classe.id" name="classe" #classe="ngModel" required placeholder="Classe">
-          <mat-option value="">Choisissez une Classe</mat-option>
-          <mat-option *ngFor="let listClass of listClasse" [value]="listClass.id"> {{listClass.parent.description}} : {{listClass.description}}</mat-option>
-        </mat-select>
-        <mat-error [hidden]="classe.valid || classe.untouched">Choisir une classe</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
         <mat-select [(ngModel)]="etudiant.role" name="role" #role="ngModel" required placeholder="Role">
           <mat-option value="">Choisissez le role</mat-option>
           <mat-option *ngFor="let listRole of roles" [value]="listRole.id"> {{listRole.description}}</mat-option>
@@ -129,11 +122,11 @@
       <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button"
               (click)="step2.style.display='block';step3.style.display='none'">Previous</button>
       <button class="btn btn-success btn-rounded float-right" type="submit" (click)="push(etudiant)">Submit</button>
-      <a routerLink="menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
+      <a routerLink="/menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
     </div>
   </div>
 </form>
-<div class="mask" *ngIf="loading">
+<div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"
     [size]="200"

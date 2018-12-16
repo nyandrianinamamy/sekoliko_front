@@ -19,7 +19,7 @@
   <mat-checkbox name="activity" [(ngModel)]="inscription.status">Passant</mat-checkbox>
   <button class="btn btn-success btn-rounded float-right" type="submit" (click)="addInscription(inscription)">Ajouter</button>
 </form>
-<div class="mask" *ngIf="loading">
+<div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"
     [size]="200"

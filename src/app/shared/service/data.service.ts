@@ -4,6 +4,8 @@ import {DataResponse} from '../model/DataResponse';
 import {Observable, of} from 'rxjs/index';
 import {catchError, map, tap} from 'rxjs/internal/operators';
 import {isNullOrUndefined} from 'util';
+import {ConstantHTTP} from '../../Utils/ConstantHTTP';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +37,8 @@ export class DataService {
     };
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   /**
    * Get data from server
@@ -46,6 +49,9 @@ export class DataService {
     console.log('we are adding shared service');
     return this.http.get<DataResponse>(fromUrl).pipe(
       tap((response: DataResponse) => {
+        if (response.code === ConstantHTTP.CODE_MISSING_INVALID_TOKEN) {
+          this.router.navigate(['/login']);
+        }
         console.log(response);
         // return response.data.
 
@@ -65,6 +71,9 @@ export class DataService {
     options = (isNullOrUndefined(options)) ? { headers : new HttpHeaders()} : options;
     return this.http.post<DataResponse>(fromUrl, body, options).pipe(
       tap((response: DataResponse) => {
+        if (response.code === ConstantHTTP.CODE_MISSING_INVALID_TOKEN) {
+          this.router.navigate(['/login']);
+        }
         console.log('Post Service');
       }),
       catchError(this.handleError<DataResponse>('Post service'))
