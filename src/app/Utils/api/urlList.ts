@@ -8,6 +8,7 @@ export const urlList = {
   path_list_class_enfant: _api + 'classe-enfant/find',
   path_edit_class: _api + 'class/edit/',
   path_list_salle: _api + 'salle/find',
+  path_list_classe: _api + 'classe-enfant/find',
   path_edit_salle: _api + 'salle/edit/',
   path_teste_user: _api + 'users',
   path_list_etudiants: _api + 'ins/find',
@@ -15,4 +16,10 @@ export const urlList = {
   path_delete_salle: _api + 'salle/delete/',
   path_list_matiere: _api + 'matiere/find',
   path_delete_matiere: _api + 'matiere/delete/',
+  path_user_find: _api + 'user/edit',
+  path_type_role: _api + 'user/role',
+  path_find_role: _api + 'role/find',
+  path_find_user: _api + 'user/find',
+  path_find_annee_scolaire: _api + 'listans',
+  path_add_inscription: _api + 'addins'
 };

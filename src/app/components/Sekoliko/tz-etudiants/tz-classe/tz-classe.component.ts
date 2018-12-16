@@ -29,7 +29,7 @@ export class TzClasseComponent implements OnInit {
 
     checkEnfantClasse(parentId: number) {
       this.loading = true;
-      this.dataService.post(urlList.path_list_class_enfant, {parentId: parentId}).subscribe(response => {
+      this.dataService.post(urlList.path_list_class_enfant, {parent: parentId}).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.classe = response.data;
           this.loading = false;

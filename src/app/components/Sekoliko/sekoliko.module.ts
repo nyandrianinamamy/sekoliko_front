@@ -16,6 +16,7 @@ import {
     MatSidenavModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
+import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -42,7 +43,8 @@ import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
 import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
 import {RadarSpinnerModule} from 'angular-epic-spinners';
 import { TzProfileComponent } from './tz-profile/tz-profile.component';
-import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-payements-ajout.component';
+import { TzUserComponent } from './tz-user/tz-user.component';
+import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
 
 @NgModule({
     imports: [
@@ -73,6 +75,7 @@ import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-
         MatTableModule,
         MaterialModule,
         DataTablesModule,
+        MatKeyboardModule,
         MDBBootstrapModule.forRoot(),
     ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
@@ -98,8 +101,9 @@ import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-
         TzAjoutClasseComponent,
         TzMatiereComponent,
         TzAjoutMatiereComponent,
-        TzPayementsAjoutComponent,
-        TzProfileComponent
+        TzProfileComponent,
+        TzUserComponent,
+        TzInscriptionComponent
     ]
 })
 export class SekolikoModule {
