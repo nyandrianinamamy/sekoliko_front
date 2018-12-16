@@ -4,6 +4,7 @@ import {DataService} from '../../../../shared/service/data.service';
 import {urlList} from '../../../../Utils/api/urlList';
 import {Classe} from '../../../../shared/model/Classe';
 import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'app-tz-classe',

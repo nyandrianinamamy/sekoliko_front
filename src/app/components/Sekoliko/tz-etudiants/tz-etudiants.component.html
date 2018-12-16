@@ -17,7 +17,7 @@
                             <i class="fa fa-arrow-circle-o-right primary-color"></i>
                             <div class="data">
                                 <!--<h6><strong>{{niveau.id}}</strong></h6>-->
-                                <h2 style="font-weight: bold;color: #aa66cc;">{{niveau.nom}}</h2>
+                                <h2 style="font-weight: bold;color: #aa66cc;">{{ (niveau.nom.length>5)? (niveau.nom | slice:0:5)+'...':(niveau.nom) }}</h2>
                             </div>
                         </div>
                         <div class="card-body text-center">

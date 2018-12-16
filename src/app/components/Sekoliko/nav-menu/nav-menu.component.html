@@ -3,10 +3,10 @@
     class="mat-sidenav"
     #drawer
     class="sidenav"
-    fixedInViewport="true"
+    fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="!(isHandset$ | async)" style="overflow-y: scroll!important;margin-bottom: 55px!important;">
 
     <mat-toolbar color="primary" class="header-box-shadow">
         <span>Techzara - Sekoliko</span>

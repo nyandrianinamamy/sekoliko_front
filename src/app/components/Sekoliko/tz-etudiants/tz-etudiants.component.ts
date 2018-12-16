@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
   templateUrl: './tz-etudiants.component.html',
   styleUrls: ['./tz-etudiants.component.scss']
 })
+
 export class TzEtudiantsComponent implements OnInit {
   niveau = [];
   // lentgh = this.niveau.length;

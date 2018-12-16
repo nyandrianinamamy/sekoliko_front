@@ -9,7 +9,7 @@
           <i class="fa fa-group primary-color"></i>
           <div class="data">
             <!--<h6><strong>{{niveau.id}}</strong></h6>-->
-            <h2 style="font-weight: bold;color: #aa66cc;">{{class.description}}</h2>
+            <h2 style="font-weight: bold;color: #aa66cc;">{{ (class.description.length>5)? (class.description | slice:0:5)+'...':(class.description)}}</h2>
           </div>
         </div>
         <div class="card-body text-center">

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/service/data.service';
 import { urlList } from 'src/app/Utils/api/urlList';
 import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Classe} from '../../../shared/model/Classe';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-tz-classe-list',
@@ -12,21 +13,34 @@ import {Classe} from '../../../shared/model/Classe';
 })
 export class TzClasseListComponent implements OnInit {
 
-  listClasse = [];
-  idClasse: number;
-  classe: Classe[];
-  constructor(private dataService: DataService,
-              private currentRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.idClasse = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
-    this.checkEnfantClasse(this.idClasse);
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  niveau = [];
+  // lentgh = this.niveau.length;
+  details = 'Cliquer pour voir details';
+  loading: boolean;
+
+  constructor(private dataService: DataService,
+              private router: Router) {
   }
 
-  checkEnfantClasse(parentId: number) {
-    this.dataService.post(urlList.path_list_class_enfant, {parentId: parent}).subscribe(response => {
+  getNiveau() {
+    return this.dataService.post(urlList.path_list_class_parent);
+  }
+
+  ngOnInit() {
+    this.loading = true;
+    this.getNiveau().subscribe(response => {
+      this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.classe = response.data;
+        console.log('responece of response: ', response);
+        response.data.forEach(element => {
+          this.niveau.push({
+            description: element.description
+          });
+        });
+        this.loading = false;
       }
     });
   }

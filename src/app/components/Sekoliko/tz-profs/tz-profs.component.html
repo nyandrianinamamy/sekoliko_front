@@ -9,13 +9,12 @@
     </a>
   </div>
   <div class="row">
-    <a routerLink="//menu/list-prof" class="col-xl-3 col-md-6 mb-r tz-md">
-      <a #list *ngFor="let class of classe" routerLink="/menu/list-etudiant" class="col-xl-3 col-md-6 mb-r tz-md">
+      <a #list *ngFor="let class of classe" routerLink="/menu/list-prof" class="col-xl-3 col-md-6 mb-r tz-md mt-3">
         <div class="card card-cascade cascading-admin-card">
           <div class="admin-up">
-            <i class="fa fa-group primary-color"></i>
+            <i class="fa fa-user-circle primary-color"></i>
             <div class="data">
-              <p>{{class.description}}</p>
+              <!--<p>{{class.description}}</p>-->
               <h4><strong>{{class.parent.description}}</strong></h4>
             </div>
           </div>
@@ -27,7 +26,6 @@
           </div>
         </div>
       </a>
-    </a>
   </div>
 </section>
 <div class="maskSpinner" *ngIf="loading">

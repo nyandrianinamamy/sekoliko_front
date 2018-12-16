@@ -8,13 +8,12 @@ import {LocalStorageService} from "../../../shared/service/local-storage.service
 })
 export class TzProfileComponent implements OnInit {
 
-  userProfile = '';
+  userProfile : any[];
 
   constructor(private Localstorage : LocalStorageService) { }
 
   ngOnInit() {
     this.userProfile = this.getProfileUser();
-    console.log(this.userProfile)
   }
 
   getProfileUser(){
