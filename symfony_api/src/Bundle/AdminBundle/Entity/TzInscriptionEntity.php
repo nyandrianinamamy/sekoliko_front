@@ -10,6 +10,8 @@ namespace Bundle\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Bundle\AdminBundle\Entity\TzAnneeScolaireEntity;
+
 
 /**
  * TzEtablissement
@@ -17,8 +19,6 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="tz_inscription")
  * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzInscriptionRepository")
  */
-
-
 class TzInscriptionEntity
 {
     /**
@@ -34,23 +34,32 @@ class TzInscriptionEntity
 
     /**
      * @var integer
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
-     * @JMS\Groups({"inscrit"})
-     * @JMS\SerializedName("UserID")
+     * @JMS\Groups({"inscrit","notes"})
+     * @ORM\ManyToOne(targetEntity="Bundle\UserBundle\Entity\TzUser")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     * })
      */
     private $user_id;
 
     /**
-     * @var string
-     * @ORM\Column(name="id_classe", type="integer", nullable=false)
+     * @var integer
      * @JMS\Groups({"inscrit"})
+     * @ORM\ManyToOne(targetEntity="TzClasseEnfantEntity")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_classe", referencedColumnName="id")
+     * })
      */
     private $id_classe;
 
     /**
      * @var integer
-     * @ORM\Column(name="id_annee_scolaire", type="integer", nullable=false)
-     * @JMS\Groups({"inscrit"})
+     * @ORM\ManyToOne(targetEntity="TzAnneeScolaireEntity")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_annee_scolaire", referencedColumnName="id")
+     * })
+     * @JMS\Accessor(getter="getIdAnneeScolaire")
+     * @JMS\Groups({"inscrit","notes"})
      */
     private $id_annee_scolaire;
 

@@ -14,17 +14,17 @@ use JMS\Serializer\Annotation as JMS;
  * TzEtablissement
  *
  * @ORM\Table(name="tz_annee_scolaire")
- * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzAnneeScloaireRepository")
+ * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzAnneeScloaireRepository") 
  */
 class TzAnneeScolaireEntity
 {
     /**
      * @var integer
-     *
+     * 
      * @ORM\Id
-     * @ORM\Column(name="num_inscription", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit"})
      * @JMS\SerializedName("AnneeScolaireID")
      */
     private $id;
@@ -32,14 +32,14 @@ class TzAnneeScolaireEntity
     /**
      * @var \DateTime
      * @ORM\Column(name="date_debut", type="datetime", nullable=false)
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit"})
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="date_fin", type="datetime", nullable=false)
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit"})
      */
     private $dateFin;
 
