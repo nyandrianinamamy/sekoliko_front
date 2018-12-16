@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../shared/service/data.service';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
-import {Subject} from "rxjs";
-import {Validators ,FormControl} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Subject} from 'rxjs';
+import {Validators , FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import { Salle } from '../../../shared/model/Salle';
 
 @Component({
   selector: 'app-tz-salle',
@@ -13,34 +14,36 @@ import {Router} from "@angular/router";
 })
 export class TzSalleComponent implements OnInit {
 
+  salle: Salle;
   listSalle = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  loading: boolean;
   id: '';
-  public description:string;
+  public description: string;
 
   constructor(private dataService: DataService,
-              private router:Router,
-              )
-  {
+              private router: Router,
+              ) {
 
   }
 
   ngOnInit() {
-
-    /*this.getListSalle().subscribe((data: any) => {
+    this.loading = true;
+    this.getListSalle().subscribe((data: any) => {
       this.dtTrigger.next();
-      if (data.code === ConstantHTTP.CODE_SUCCESS){
+      this.loading = false;
+      if (data.code === ConstantHTTP.CODE_SUCCESS) {
         data.data.forEach((element: any) => {
           this.listSalle.push({
             id: (element.id).toString(),
             nom: element.nom,
           });
         });
-      }else {
-        console.log("verifieo le function aloha papie a :D ")
+      } else {
+        console.log('tsy mandeha nin aa');
       }
-    });*/
+    });
 
   }
 
@@ -48,16 +51,16 @@ export class TzSalleComponent implements OnInit {
    * Function list , edit , delete
    */
   getListSalle() {
-   return this.dataService.post(urlList.path_list_salle);
+  return this.dataService.post(urlList.path_list_salle);
   }
 
-  deleteSalle(){
+  deleteSalle() {
     return this.dataService.post(urlList.path_delete_salle + this.id).subscribe(()=>{
           // this.router.navigate(['/menu/salle']);
     });
   }
 
-  editSalle(event:any){
+  editSalle(event: any ) {
     const data = {
       id : event.target.id.value,
       description : event.target.description.value
@@ -65,7 +68,7 @@ export class TzSalleComponent implements OnInit {
      return this.dataService.post(urlList.path_edit_salle+event.target.id.value).subscribe(()=>{
        this.id = data.id;
        this.description = data.description;
-       console.log("Eto ilay tsyb mahazo?");
+       console.log('Eto ilay tsyb mahazo?');
     });
   }
 
