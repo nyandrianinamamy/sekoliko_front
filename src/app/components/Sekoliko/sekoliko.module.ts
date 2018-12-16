@@ -16,7 +16,6 @@ import {
     MatSidenavModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
-import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -41,8 +40,8 @@ import { TzClasseListComponent} from './tz-classe-list/tz-classe-list.component'
 import { TzAjoutClasseComponent } from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
 import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
 import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
-import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import {RadarSpinnerModule} from 'angular-epic-spinners';
+import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-payements-ajout.component';
 
 @NgModule({
     imports: [
@@ -73,7 +72,6 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
         MatTableModule,
         MaterialModule,
         DataTablesModule,
-        MatKeyboardModule,
         MDBBootstrapModule.forRoot(),
     ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
