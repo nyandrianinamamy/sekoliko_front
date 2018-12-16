@@ -43,6 +43,7 @@ import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
 import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import {RadarSpinnerModule} from 'angular-epic-spinners';
+import { TzProfileComponent } from './tz-profile/tz-profile.component';
 import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-payements-ajout.component';
 import { TzUserComponent } from './tz-user/tz-user.component';
 import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
@@ -103,8 +104,12 @@ import { TzInscriptionComponent } from './tz-inscription/tz-inscription.componen
         TzMatiereComponent,
         TzAjoutMatiereComponent,
         TzPayementsAjoutComponent,
+<<<<<<< HEAD
         TzUserComponent,
         TzInscriptionComponent
+=======
+        TzProfileComponent
+>>>>>>> trunk
     ]
 })
 export class SekolikoModule {

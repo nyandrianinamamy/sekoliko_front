@@ -1,4 +1,4 @@
-import { TzSkFrontOfficeModule } from './tz-sk-front-officemodule';
+import { TzSkFrontOfficeModule } from './tz-sk-front-office.module';
 
 describe('SekolikoModule', () => {
   let sekolikoModule: TzSkFrontOfficeModule;

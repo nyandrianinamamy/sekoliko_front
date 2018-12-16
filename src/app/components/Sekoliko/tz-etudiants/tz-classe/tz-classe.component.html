@@ -3,21 +3,17 @@
 </div>
 <section class="mt-lg-5">
   <div class="row">
-    <a *ngFor="let class of classe" class="col-xl-3 col-md-6 mb-r tz-md">
+    <a class="col-xl-3 col-md-6 mb-3 m-0" *ngFor="let class of classe">
       <div class="card card-cascade cascading-admin-card" (click)="checkListEtudiant(class.id)">
         <div class="admin-up">
           <i class="fa fa-group primary-color"></i>
           <div class="data">
-            <p>{{class.id}}</p>
-            <h4><strong>{{class.description}}</strong></h4>
+            <!--<h6><strong>{{niveau.id}}</strong></h6>-->
+            <h2 style="font-weight: bold;color: #aa66cc;">{{class.description}}</h2>
           </div>
         </div>
-        <div class="card-body">
-          <div class="progress">
-            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
-                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <p class="card-text">{{details}}</p>
+        <div class="card-body text-center">
+          <p>Listes des étudiants en {{class.description}}</p>
         </div>
       </div>
     </a>

@@ -16,6 +16,10 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ListEtudiantsComponent implements OnInit {
   etudiant: Etudiants;
+  mobile = false
+  mobileClass = '';
+
+
   inscription: Inscription;
   listEtudiants = [];
   idClasseEnfant: number;
@@ -24,10 +28,17 @@ export class ListEtudiantsComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
               private currentRoute: ActivatedRoute) {
+
   }
 
 
   ngOnInit() {
+    if (window.screen.width >= 600) {
+      this.mobileClass = "text-center";
+    }else {
+      this.mobileClass = "d-none";
+    }
+
     this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
     this.dtTrigger.next();
     this.loading = true;

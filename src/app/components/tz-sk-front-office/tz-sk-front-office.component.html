@@ -7,7 +7,7 @@
                 <div class="row mt-5">
                     <div class="col-md-12 wow fadeIn mb-3">
                         <div class="intro-info-content text-center">
-                            <h2 class="h1 display-1 mb-2 wow fadeInDown" data-wow-delay="0.3s">TECHZARA <a class="indigo-text font-bold">SEKOLIKO</a></h2>
+                            <h2 class="h1 display-1 mb-2 wow fadeInDown" data-wow-delay="0.3s">TECHZARA<a class="indigo-text font-bold">SEKOLIKO</a></h2>
                             <h5 class="font-up mb-3 mt-1 font-bold wow fadeIn" data-wow-delay="0.4s">OpenSoure Project </h5>
                             <a mdbBtn color="light-blue" routerLink="/login" routerLinkActive="active" size="lg"
                                class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i class="fa fa-arrow-circle-o-right"></i> &nbsp;Login</a>
@@ -27,22 +27,22 @@
             <!--Grid column-->
             <div class="col-md-6 text-center mb-5">
                 <h2 class="h1 font-bold light-blue-text my-5">SEKOLIKO?</h2>
-                    Ity projet ity dia omena ireo sekoly rehetra eto Madagasikara , Natao hahamora ny fiandraiketana ny sekoly,toy ny :
+                        {{but}} :
                         <ol class="text-left">
-                            <li>Lisitry ny mpianatra</li>
-                            <li>Lisitry ny mpampianatra</li>
-                            <li>Emploie du temps</li>
-                            <li>Salle de classe</li>
+                            <li>{{but1}}</li>
+                            <li>{{but4}}</li>
+                            <li>{{but2}}</li>
+                            <li>{{but3}}</li>
                             <li>...</li>
                         </ol>
 
-                <h1><strong>Te Hanohana anay ianao?</strong></h1>
+                <h1><strong>{{soutient}}</strong></h1>
                 <ul class="list-group list-group-flush text-left">
-                    <li class="list-group-item">Mila sekoly ho atao pilote afaka sady hanaovana teste izahay.</li>
-                    <li class="list-group-item">Mila serveur hi-hebergena ity application ity izahay.</li>
-                    <li class="list-group-item">Mila connexion izahay amin'ny traitement retour sy fanatsarana rehetra.</li>
-                    <li class="list-group-item">Mila antsika rehetra hanao teste sy handefa retour izahay</li>
-                    <li class="list-group-item">Raha misy remarque dia afaka manao pull request <a href="https://github.com/Techzara/sekoly-numerika" target="_blank">Ato</a> ianao</li>
+                    <li class="list-group-item">{{soutient1}}</li>
+                    <li class="list-group-item">{{soutient2}}.</li>
+                    <li class="list-group-item">{{soutient3}}</li>
+                    <li class="list-group-item">{{soutient4}}</li>
+                    <li class="list-group-item">{{soutient5}} <a href="https://github.com/Techzara/sekoly-numerika" target="_blank">{{sout1}}</a> {{sout2}}</li>
                 </ul>
 
 
@@ -66,9 +66,9 @@
             <!-- Section: Team v.1 -->
             <section class="team-section text-center my-5">
                 <!-- Section heading -->
-                <h2 class="h1-responsive font-weight-bold indigo-text my-5">NY EKIPA <i class="fa fa-group"></i></h2>
+                <h2 class="h1-responsive font-weight-bold indigo-text my-5">{{equipe}} <i class="fa fa-group"></i></h2>
                 <!-- Section description -->
-                <p class="grey-text w-responsive mx-auto mb-5">Ireo ekipa nanatontosa sy miandraikitra ity application ity.</p>
+                <p class="grey-text w-responsive mx-auto mb-5">{{pre_equipe}}</p>
                 <div class="row">
                     <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
                         <div class="avatar mx-auto">
@@ -77,10 +77,9 @@
                         </div>
                         <h5 class="font-weight-bold mt-4 mb-3">Tahiana</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Developpement api</strong>
+                            <strong>{{Tahiana_dev}}</strong>
                         </p>
-                        <p class="grey-text">Tahiana no miandraikitra ny API rehetra ampiasaina ato amin'ity
-                            application ity.</p>
+                        <p class="grey-text">{{Tahiana_tache}}</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/kala.Nance" target="_blank" class="p-2 fa-lg fb-ic">
@@ -99,9 +98,9 @@
                         </div>
                         <h5 class="font-weight-bold mt-4 mb-3">Ny Antso</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Developpement frontend</strong>
+                            <strong>{{Antso_dev}}</strong>
                         </p>
-                        <p class="grey-text">Ny Antso dia miandraikitra ny integration sy ny developpement frontend.</p>
+                        <p class="grey-text">{{Antso_tache}}</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/nyantso.rak" target="_blank" class="p-2 fa-lg fb-ic">
@@ -120,9 +119,9 @@
                         </div>
                         <h5 class="font-weight-bold mt-4 mb-3">Daulis</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Developpement frontend</strong>
+                            <strong>{{Daulis_dev}}</strong>
                         </p>
-                        <p class="grey-text">Daulis sy Ny Antso dia iray ekipa amin'ny developpement sy dynamisation frontend .</p>
+                        <p class="grey-text">{{Daulis_tache}}</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/odonfidaulis.andrianjakatiana" target="_blank" class="p-2 fa-lg fb-ic">
@@ -139,11 +138,11 @@
                             <img width="70%" src="https://avatars1.githubusercontent.com/u/44327690?s=460&v=4" class="rounded-circle z-depth-1"
                                  alt="Sample avatar">
                         </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Jeany</h5>
+                        <h5 class="font-weight-bold mt-4 mb-3">Janny</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Intégrateur</strong>
+                            <strong>{{Janny_dev}}</strong>
                         </p>
-                        <p class="grey-text">Jeany, miandraikitra ny intégration frontend rehetra miaraka amin'ny Ny Antso sy Daulis. </p>
+                        <p class="grey-text">{{Janny_tache}}</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://github.com/jmRakoto" target="_blank" class="p-2 fa-lg fb-ic">
@@ -162,10 +161,9 @@
                         </div>
                         <h5 class="font-weight-bold mt-4 mb-3">Andry</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Developpement api</strong>
+                            <strong>{{Andry_dev}}</strong>
                         </p>
-                        <p class="grey-text">Andry no miaraka amin'ny Tahiana amin'ny developpement ny api rehetra
-                            ampiasaina ato.</p>
+                        <p class="grey-text">{{Andry_tache}}</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/andry.an.37604" target="_blank" class="p-2 fa-lg fb-ic">
@@ -184,9 +182,9 @@
                         </div>
                         <h5 class="font-weight-bold mt-4 mb-3">Julien</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>Responsable projet</strong>
+                            <strong>{{Jul_resp}}</strong>
                         </p>
-                        <p class="grey-text">Julien no miandraikitra ity projet ity miaraka amin'ny ekipa developpeur sy deployement.</p>
+                        <p class="grey-text">{{Jul_tache}}.</p>
                         <ul class="list-unstyled mb-0">
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/julkwel" target="_blank" class="p-2 fa-lg fb-ic">
@@ -207,7 +205,7 @@
 
 <div class="container-fluid">
     <h2 class="text-center indigo-text h1 py-5">
-        <strong>Ny hitanao ato amin'ity application ity 🏫 </strong>
+        <strong>{{sekoliko_vue}} 🏫 </strong>
     </h2>
 
     <!--Section description-->
@@ -228,10 +226,10 @@
             </div>
             <mdb-card-body class="mt-3">
                 <h4>
-                    <strong>Dashboard</strong>
+                    <strong>{{sekoliko_vue1}}</strong>
                 </h4>
                 <p class="grey-text">
-                    Ahafahanao mijery ny statistique mahakasika ny établissement anao
+                    {{dashboard}}
                 </p>
             </mdb-card-body>
 
@@ -252,9 +250,9 @@
             <!--Excerpt-->
             <mdb-card-body class="mt-3">
                 <h4>
-                    <strong>Lisitry ny mpianatra</strong>
+                    <strong>{{sekoliko_vue2}}</strong>
                 </h4>
-                <p class="grey-text">Ahafahanao mijery ny lisitry ny mpianatra rehetra ao amin'ny etablissement misy anao.
+                <p class="grey-text">{{liste_etudiant}}
                 </p>
             </mdb-card-body>
 
@@ -268,10 +266,10 @@
             </div>
             <mdb-card-body class="mt-3">
                 <h4>
-                    <strong>Lisitry ny salle de classe</strong>
+                    <strong>{{sekoliko_vue3}}</strong>
                 </h4>
                 <p class="grey-text">
-                    Ahafahanao mijery ny salle libre sy izay efa misy réservation.
+                    {{liste_salle}}
                 </p>
             </mdb-card-body>
         </div>
@@ -283,7 +281,7 @@
     <div class="row">
         <!--Grid column-->
         <div class="col-md-12 text-center my-5">
-            <h2 class="h1 font-bold indigo-text mb-5">Ireo mpiara-miasa aminay.</h2>
+            <h2 class="h1 font-bold indigo-text mb-5">{{contributeur}}</h2>
             <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
                 <mdb-carousel-item>
                     <div class="view w-100">
@@ -292,7 +290,7 @@
                     </div>
                     <div class="carousel-caption black-text">
                         <h3 class="h3-responsive">Google</h3>
-                        <p>Ato izahay no mianatra sy mijery ny documentation rehetra</p>
+                        <p>{{google}}</p>
                     </div>
                 </mdb-carousel-item>
                 <mdb-carousel-item>
@@ -302,7 +300,7 @@
                     </div>
                     <div class="carousel-caption black-text">
                         <h3 class="h3-responsive">Stackoverflow</h3>
-                        <p>Ato izahay no mitady vahaolana rehefa mirefotra</p>
+                        <p>{{stackoverflow}}</p>
                     </div>
                 </mdb-carousel-item>
                 <mdb-carousel-item>
@@ -312,7 +310,7 @@
                     </div>
                     <div class="carousel-caption black-text">
                         <h3 class="h3-responsive">Github</h3>
-                        <p>Ao amin'ny github no misy ny dépot an'ny projet sekoliko</p>
+                        <p>{{github}}</p>
                     </div>
                 </mdb-carousel-item>
             </mdb-carousel>

@@ -21,8 +21,12 @@ import { TzAjoutClasseComponent} from './tz-classe-list/tz-ajout-classe/tz-ajout
 import {TzMatiereComponent} from "./tz-matiere/tz-matiere.component";
 import {TzAjoutMatiereComponent} from "./tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component";
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+<<<<<<< HEAD
 import {TzUserComponent} from './tz-user/tz-user.component';
 import {TzInscriptionComponent} from './tz-inscription/tz-inscription.component';
+=======
+import {TzProfileComponent} from "./tz-profile/tz-profile.component";
+>>>>>>> trunk
 
 const routes: Routes = [
     {
@@ -52,6 +56,7 @@ const routes: Routes = [
             {path: 'matiere-list', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-payement', component: TzPayementsAjoutComponent},
+            {path: 'profile', component: TzProfileComponent},
             {path: '**', redirectTo: 'not-found'}
         ]
     }

@@ -19,7 +19,7 @@ export class TzMatiereComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    /*this.getMatiere().subscribe((response:any)=>{
+    this.getMatiere().subscribe((response:any)=>{
             if (response.code == ConstantHTTP.CODE_SUCCESS){
               console.log(response.data);
               response.data.forEach((element:any)=>{
@@ -29,7 +29,7 @@ export class TzMatiereComponent implements OnInit {
                 });
               })
             }
-        });*/
+        });
   }
 
   getMatiere(){
@@ -37,8 +37,8 @@ export class TzMatiereComponent implements OnInit {
   }
 
   deleteMatiere(){
-    // return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(()=>{
-    //   console.log(urlList.path_delete_matiere + this.id)
-    // });
+     return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(()=>{
+       console.log(urlList.path_delete_matiere + this.id)
+     });
   }
 }
