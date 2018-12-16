@@ -159,7 +159,7 @@ class InscriptionController extends FOSRestController
      * @Rest\RequestParam(name="idas", nullable=true)
      * @Rest\RequestParam(name="dateins", nullable=true)
      * @Rest\RequestParam(name="status", nullable=true)
-     *
+     * @Rest\RequestParam(name="list", nullable=true)
      * @ParamConverter("ins",class="AdminBundle:TzInscriptionEntity")
      * @return JsonResponse
      * 
@@ -167,16 +167,21 @@ class InscriptionController extends FOSRestController
     public function listIns($ins, ParamFetcher $paramFetcher){
         $response = new JsonResponse();
         $tzServiceMsg = $this->get('ws.tz_msg');
-
+        $paramList = $paramFetcher->get('list');
         try {
             if ($ins instanceof TzInscriptionEntity) {
                 $data = $ins;
             } else {
                 $em = $this->getDoctrine()
-                ->getRepository(TzInscriptionEntity::class);
+                    ->getRepository(TzInscriptionEntity::class);
                 $data = $em->findIns($paramFetcher);
                 $posResponse = $this->get("tz.responses");
             }
+            if ($paramList === 'liste') {
+                    $resData = $posResponse->setSuccessResponse($data, "json", array("liste_etudiant"));
+                } else {
+                    $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
+                }
             $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
             return $response->setData($resData);
         } catch (DBALException $e) {

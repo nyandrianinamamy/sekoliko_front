@@ -38,16 +38,16 @@ class UserController extends FOSRestController
      * @Rest\Post("/api/user/edit", name="user_new", defaults={"user": null})
      * @Rest\Post("/api/user/edit/{user}", name="user_modify", requirements={"user":"\d+"})
      * @Rest\RequestParam(name="username", nullable=false)
-     * @Rest\RequestParam(name="email", nullable=false, requirements="[a-zA-Z][a-zA-Z0-9\._-]+@[a-z0-9][a-z0-9\._-]+\.[a-z0-9]+")
+     * @Rest\RequestParam(name="email", nullable=false)
      * @Rest\RequestParam(name="enabled", nullable=false)
      * @Rest\RequestParam(name="lastname", nullable=false)
      * @Rest\RequestParam(name="firstname", nullable=true)
-     * @Rest\RequestParam(name="matricule", nullable=false)
      * @Rest\RequestParam(name="role", nullable=false)
      * @Rest\RequestParam(name="sexe", nullable=false)
      * @Rest\RequestParam(name="age", nullable=true)
      * @Rest\RequestParam(name="adresse", nullable=true)
      * @Rest\RequestParam(name="contact", nullable=true)
+     * @Rest\RequestParam(name="password", nullable=true)
      * @ParamConverter("user",class="UserBundle:TzUser")
      * @throws
      * @return JsonResponse
@@ -60,12 +60,12 @@ class UserController extends FOSRestController
         $paramEnabled = $paramFetcher->get('enabled');
         $paramFirstName = $paramFetcher->get('firstname');
         $paramLastName = $paramFetcher->get('lastname');
-        $paramMatricule = $paramFetcher->get('matricule');
         $paramRole = $paramFetcher->get('role');
         $paramsexe = $paramFetcher->get('sexe');
         $paramAge = $paramFetcher->get('age');
         $paramAdresse = $paramFetcher->get('adresse');
         $paramcontact = $paramFetcher->get('contact');
+        $paramPassword = $paramFetcher->get('password');
         $tzServiceMsg = $this->get('ws.tz_msg');
         $em = $this->getDoctrine()->getManager();
         if (!$user instanceof TzUser) {
@@ -80,13 +80,12 @@ class UserController extends FOSRestController
             if (!$role instanceof TzRoleTypeEntity) {
                 throw new \Exception("Role not found");
             }
-
+            $user->setPlainPassword($paramPassword);
             $user->setUsername($paramUsername);
             $user->setEmail($paramEmail);
             $user->setEnabled($paramEnabled);
             $user->setFirstname($paramFirstName);
             $user->setLastname($paramLastName);
-            $user->setMatricule($paramMatricule);
             $user->setRoleType($role);
             $user->setSexe($paramsexe);
             $user->setAge($paramAge);
@@ -128,7 +127,7 @@ class UserController extends FOSRestController
      * @ParamConverter("user",class="UserBundle:TzUser")
      * @return JsonResponse
      */
-    public function rechercheSalle($user, ParamFetcher $paramFetcher) {
+    public function rechercheUser($user, ParamFetcher $paramFetcher) {
         $response = new JsonResponse();
         if ($user instanceof TzUser) {
             $data = $user;
@@ -138,6 +137,29 @@ class UserController extends FOSRestController
         }
         $posResponse = $this->get("tz.responses");
         $resData = $posResponse->setSuccessResponse($data, "json", array("user_list"));
+        return $response->setData($resData);
+    }
+
+
+    /**
+     * @param integer $role
+     * @param ParamFetcher $paramFetcher
+     * @Rest\Post("/api/role/find", name="recherche_role_enfant",defaults={"role": null})
+     * @Rest\GET("/api/role/find/{role}", name="recherche_rolee_enfant_by_id", requirements={"role":"\d+"})
+     * @ParamConverter("role", class="AdminBundle:TzRoleTypeEntity")
+     * @return JsonResponse
+     */
+    public function rechercherolee($role, ParamFetcher $paramFetcher) {
+
+        $response = new JsonResponse();
+        if ($role instanceof TzRoleTypeEntity) {
+            $data = $role;
+        } else {
+            $reprolee = $this->getDoctrine()->getRepository(TzRoleTypeEntity::class);
+            $data = $reprolee->findBy(array(), array('description' => 'ASC'));
+        }
+        $posResponse = $this->get("tz.responses");
+        $resData = $posResponse->setSuccessResponse($data, "json", array("role_list"));
         return $response->setData($resData);
     }
 }

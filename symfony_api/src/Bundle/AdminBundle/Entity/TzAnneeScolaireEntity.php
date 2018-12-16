@@ -14,13 +14,12 @@ use JMS\Serializer\Annotation as JMS;
  * TzEtablissement
  *
  * @ORM\Table(name="tz_annee_scolaire")
- * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzAnneeScloaireRepository") 
+ * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzAnneeScloaireRepository")
  */
 class TzAnneeScolaireEntity
 {
     /**
      * @var integer
-     * 
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
