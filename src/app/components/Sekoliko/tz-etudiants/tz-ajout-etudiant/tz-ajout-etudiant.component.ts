@@ -25,9 +25,7 @@ export class TzAjoutEtudiantComponent implements OnInit {
   listEtudiant: any[];
   roles: Role[];
   role: Role;
-  classe: Classe;
   inscription: Inscription;
-  listClasse: Classe[];
   displayedColumns: string[] = ['login', 'prenom', 'nom', 'role'];
   dataSource: MatTableDataSource<any>;
   constructor(private fb: FormBuilder,
@@ -38,7 +36,6 @@ export class TzAjoutEtudiantComponent implements OnInit {
 
   ngOnInit() {
    this.reinit();
-    this.classe = new Classe();
   }
 
   reinit() {
@@ -67,6 +64,6 @@ export class TzAjoutEtudiantComponent implements OnInit {
     });
   }
   goToAdd() {
-    this.router.navigate(['/menu/ajout-utilisateur']);
+    this.router.navigate(['/menu/ajout-utilisateur/' + Constants.TYPE_ETUDIANT]);
   }
 }
