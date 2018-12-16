@@ -7,6 +7,7 @@
  */
 
 namespace Bundle\AdminBundle\Repository;
+use FOS\RestBundle\Request\ParamFetcher;
 
 /**
  * Class TzNotesRepository

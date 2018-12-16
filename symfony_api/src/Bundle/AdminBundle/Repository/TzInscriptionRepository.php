@@ -15,6 +15,7 @@ namespace Bundle\AdminBundle\Repository;
 use Bundle\AdminBundle\Entity\TzEtudiantEntity;
 use Bundle\AdminBundle\Entity\TzAnneeScolaireEntity;
 use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
+use Bundle\AdminBundle\Entity\TzNotesEntity;
 use FOS\RestBundle\Request\ParamFetcher;
 
 class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
@@ -74,6 +75,52 @@ class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('status', $paramStatus);
         }
 
+        return $querybuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param ParamFetcher $paramFetcher
+     * @return array
+     */
+
+    public function showNote(ParamFetcher $paramFetcher){
+        $paramNumins = $paramFetcher->get('numins');
+        $paramAs = $paramFetcher->get('as');
+        $paramMat = $paramFetcher->get('mat');
+        $paramNote = $paramFetcher->get('note');
+
+        $querybuilder = $this->createQueryBuilder('i');
+
+        if (isset($paramNumins)) {
+            $querybuilder->select('i')
+                ->innerJoin('AdminBundle:TzNotesEntity', 'n', 'WITH', 'i.num_inscription = n.id_ins')
+                ->andWhere('i.num_inscription = :numins')
+                ->setParameter('numins', $paramNumins)
+                ->addSelect('n');
+        }
+        if (isset($paramAs)) {
+            $querybuilder->select('i')
+                ->andWhere('i.id_annee_scolaire = :as')
+                ->setParameter('as', $paramAs)
+                ->innerJoin('AdminBundle:TzNotesEntity', 'e',  'WITH', 'i.num_inscription = e.id_ins')
+                ->addSelect('e');
+        }
+        if (isset($paramMat)) {
+            $querybuilder->select('i')
+                ->innerJoin('AdminBundle:TzNotesEntity', 'z', 'WITH', 'i.num_inscription = z.id_ins')
+                ->innerJoin('AdminBundle:TzMatiereEntity', 'm', 'WITH', 'z.id_mat = m.id')
+                ->andWhere('z.id_mat = :mat')
+                ->setParameter('mat', $paramMat)
+                ->addSelect('z')
+                ->addSelect('m');
+        }
+        if (isset($paramNote)) {
+            $querybuilder->select('i')
+                ->innerJoin('AdminBundle:TzNotesEntity', 'a', 'WITH', 'i.num_inscription = a.id_ins')
+                ->andWhere('a.note = :note')
+                ->setParameter('note', $paramNote)
+                ->addSelect('a');
+        }
         return $querybuilder->getQuery()->getResult();
     }
 }
