@@ -61,7 +61,7 @@ class InscriptionController extends FOSRestController
             if ($userid instanceof TzUser && $classid instanceof TzClasseEnfantEntity && $asid instanceof TzAnneeScolaireEntity) {
                 $ins = new TzInscriptionEntity();
 
-                $ins->setUserId($parameterId);
+                $ins->setUserId($userid);
                 $ins->setClasseId($classid);
                 $ins->setIdAnneeScolaire($asid);
                 $ins->setStatut($parameterStatus);
