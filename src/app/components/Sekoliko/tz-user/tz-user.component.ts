@@ -58,7 +58,6 @@ export class TzUserComponent implements OnInit {
   push(etudiant: User) {
     this.loading = true;
     etudiant.enabled = true;
-    console.log('l etudiant est :', etudiant);
     this.dataService.post(urlList.path_user_find, etudiant).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.loading = false;

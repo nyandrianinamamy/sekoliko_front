@@ -37,9 +37,9 @@ export class TzMatiereComponent implements OnInit {
     return this.dataService.post(urlList.path_list_matiere);
   }
 
-  deleteMatiere(){
-     return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(()=>{
-       console.log(urlList.path_delete_matiere + this.id)
-     });
-  }
+  // deleteMatiere(){
+  //    return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(()=>{
+  //      console.log(urlList.path_delete_matiere + this.id)
+  //    });
+  // }
 }
