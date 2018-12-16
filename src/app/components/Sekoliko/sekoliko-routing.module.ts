@@ -21,6 +21,8 @@ import { TzAjoutClasseComponent} from './tz-classe-list/tz-ajout-classe/tz-ajout
 import {TzMatiereComponent} from "./tz-matiere/tz-matiere.component";
 import {TzAjoutMatiereComponent} from "./tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component";
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+import {TzUserComponent} from './tz-user/tz-user.component';
+import {TzInscriptionComponent} from './tz-inscription/tz-inscription.component';
 
 const routes: Routes = [
     {
@@ -38,8 +40,10 @@ const routes: Routes = [
             {path: 'payement', component: TzPayementsComponent},
             {path: 'administratif', component: TzAdministrationComponent},
             {path: 'add-admin', component: TzAjoutAdminComponent},
+            {path: 'ajout-utilisateur', component: TzUserComponent},
             {path: 'classe/:id', component: TzClasseComponent},
             {path: 'profs', component: TzProfsComponent},
+            {path: 'inscription/:id', component: TzInscriptionComponent},
             {path: 'list-prof', component: TzListProfsComponent},
             {path: 'add-prof', component: TzAjoutProfsComponent},
             {path: 'details-prof', component: TzAdmDetailsComponent},

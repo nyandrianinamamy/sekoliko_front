@@ -43,6 +43,8 @@ import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
 import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import {RadarSpinnerModule} from 'angular-epic-spinners';
+import { TzUserComponent } from './tz-user/tz-user.component';
+import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
 
 @NgModule({
     imports: [
@@ -99,7 +101,9 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
         TzAjoutClasseComponent,
         TzMatiereComponent,
         TzAjoutMatiereComponent,
-        TzPayementsAjoutComponent
+        TzPayementsAjoutComponent,
+        TzUserComponent,
+        TzInscriptionComponent
     ]
 })
 export class SekolikoModule {
