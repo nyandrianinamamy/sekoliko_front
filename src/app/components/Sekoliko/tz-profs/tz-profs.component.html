@@ -14,7 +14,7 @@
           <div class="admin-up">
             <i class="fa fa-user-circle primary-color"></i>
             <div class="data">
-              <h4><strong>{{class.parent.description}}</strong></h4>
+              <h4><strong>{{(class.parent.description.length>4)? (class.parent.description | slice:0:4)+'...':(class.parent.description)}}</strong></h4>
             </div>
           </div>
           <div class="card-body">
