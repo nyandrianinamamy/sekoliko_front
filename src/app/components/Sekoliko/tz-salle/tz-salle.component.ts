@@ -28,7 +28,7 @@ export class TzSalleComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getListSalle().subscribe((data: any) => {
+    /*this.getListSalle().subscribe((data: any) => {
       this.dtTrigger.next();
       if (data.code === ConstantHTTP.CODE_SUCCESS){
         data.data.forEach((element: any) => {
@@ -40,7 +40,7 @@ export class TzSalleComponent implements OnInit {
       }else {
         console.log("verifieo le function aloha papie a :D ")
       }
-    });
+    });*/
 
   }
 

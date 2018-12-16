@@ -142,7 +142,7 @@ export class TzDashboardComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.getNbEtudiants().subscribe((response: any) => {
+    /*this.getNbEtudiants().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.compteEtudiants = response.data.length;
       } else {
@@ -160,7 +160,7 @@ export class TzDashboardComponent implements OnInit {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.comptesProff = response.data.length;
       }
-    });
+    });*/
   }
 
   getNbEtudiants() {
