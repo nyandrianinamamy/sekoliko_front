@@ -4,3 +4,30 @@
 //.tz-btn-circle i{padding: 20% 22%;}
 //.tz-prefix{right: 0px}
 //.modal-body{ position: relative;flex: 1 1 auto;padding: 1rem 5% 0px 0%;}
+/**
+Touche pas
+ */
+.mask {
+  position: fixed;
+  z-index: 999;
+  height: 200px;
+  width: 100px;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* Absolute Center Spinner */
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #166B37;
+    opacity: 0.4;
+  }
+}
