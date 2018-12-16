@@ -25,19 +25,20 @@ class TzUser extends BaseUser
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"inscrit"})
      */
     protected $userId;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list","inscrit"})
      * @ORM\Column(name="lastname", type="string", length=80, nullable=true)
      */
     private $lastname;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list","inscrit"})
      * @ORM\Column(name="firstname", type="string", length=80, nullable=true)
      */
     private $firstname;

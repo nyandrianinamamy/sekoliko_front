@@ -25,7 +25,7 @@ class TzClasseEnfantEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"classe_enfant_etd"})
+     * @JMS\Groups({"classe_enfant_etd","inscrit"})
      * @JMS\SerializedName("id")
      */
     private $id;
@@ -34,7 +34,7 @@ class TzClasseEnfantEntity
      * @var string
      *
      * @ORM\Column(name="classe_enfant_desc", type="string", length=80, nullable=false)
-     * @JMS\Groups({"classe_enfant_etd"})
+     * @JMS\Groups({"classe_enfant_etd","inscrit"})
      *
      */
     private $description;
@@ -46,7 +46,7 @@ class TzClasseEnfantEntity
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="classe_parent", referencedColumnName="id")
      * })
-     * @JMS\Groups({"classe_enfant_etd"})
+     * @JMS\Groups({"classe_enfant_etd","inscrit"})
      * @JMS\Accessor(getter="getParent")
      */
     private $parent;
