@@ -103,24 +103,24 @@ class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
             $querybuilder->select('i')
                 ->andWhere('i.id_annee_scolaire = :as')
                 ->setParameter('as', $paramAs)
-                ->innerJoin('AdminBundle:TzNotesEntity', 'n',  'WITH', 'i.num_inscription = n.id_ins')
-                ->addSelect('n');
+                ->innerJoin('AdminBundle:TzNotesEntity', 'e',  'WITH', 'i.num_inscription = e.id_ins')
+                ->addSelect('e');
         }
         if (isset($paramMat)) {
             $querybuilder->select('i')
-                ->innerJoin('AdminBundle:TzNotesEntity', 'n', 'WITH', 'i.num_inscription = n.id_ins')
-                ->innerJoin('AdminBundle:TzMatiereEntity', 'm', 'WITH', 'n.id_mat = m.id')
-                ->andWhere('n.id_mat = :mat')
+                ->innerJoin('AdminBundle:TzNotesEntity', 'z', 'WITH', 'i.num_inscription = z.id_ins')
+                ->innerJoin('AdminBundle:TzMatiereEntity', 'm', 'WITH', 'z.id_mat = m.id')
+                ->andWhere('z.id_mat = :mat')
                 ->setParameter('mat', $paramMat)
-                ->addSelect('n')
+                ->addSelect('z')
                 ->addSelect('m');
         }
         if (isset($paramNote)) {
             $querybuilder->select('i')
-                ->innerJoin('AdminBundle:TzNotesEntity', 'n', 'WITH', 'i.num_inscription = n.id_ins')
-                ->andWhere('n.note = :note')
+                ->innerJoin('AdminBundle:TzNotesEntity', 'a', 'WITH', 'i.num_inscription = a.id_ins')
+                ->andWhere('a.note = :note')
                 ->setParameter('note', $paramNote)
-                ->addSelect('n');
+                ->addSelect('a');
         }
         return $querybuilder->getQuery()->getResult();
     }
