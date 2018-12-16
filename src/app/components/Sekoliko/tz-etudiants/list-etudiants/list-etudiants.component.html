@@ -1,5 +1,5 @@
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des Etudiants en TA1 : {{listEtudiants.length}} </h4>
+  <h4 class="h4-responsive text-white">Liste des Etudiants en TA1 : {{etudiant.length}} </h4>
 </div>
 <section class="mt-5">
         <div class="px-2 table-responsive">
@@ -7,12 +7,12 @@
             <thead>
               <tr>
                 <!--<th  class="text-center">id</th>-->
-                <th  class="text-center">matricule</th>
+                <th  class="{{mobileClass}}">matricule</th>
                 <th  class="text-center">Nom</th>
-                <th  class="text-center">Prenom</th>
+                <th  class="{{mobileClass}}">Prenom</th>
                 <!--<th  class="text-center">email</th>-->
-                <th  class="text-center">Age</th>
-                <th  class="text-center">Sexe</th>
+                <th  class="{{mobileClass}}" >Age</th>
+                <th  class="{{mobileClass}}">Sexe</th>
                 <th  class="text-center">contact</th>
                 <!--<th  class="text-center">Adresse</th>-->
                 <th  class="text-center">Action</th>
@@ -21,12 +21,12 @@
             <tbody>
               <tr #list *ngFor="let etudiants of etudiant">
                 <!--<td  class="text-center">{{etudiants.user_id.user_id}}</td>-->
-                <td  class="text-center">{{etudiants.user_id.matricule}}</td>
+                <td  class="{{mobileClass}}">{{etudiants.user_id.matricule}}</td>
                 <td  class="text-center">{{etudiants.user_id.lastname}}</td>
-                <td  class="text-center">{{etudiants.user_id.firstname}}</td>
+                <td  class="{{mobileClass}}">{{etudiants.user_id.firstname}}</td>
                 <!--<td  class="text-center">{{etudiants.user_id.email}}</td>-->
-                <td  class="text-center">{{etudiants.user_id.age}}</td>
-                <td  class="text-center">{{etudiants.user_id.sexe}}</td>
+                <td  class="{{mobileClass}}">{{etudiants.user_id.age}}</td>
+                <td  class="{{mobileClass}}">{{etudiants.user_id.sexe}}</td>
                 <td  class="text-center">{{etudiants.user_id.contact}}</td>
                 <!--<td  class="text-center">{{etudiants.user_id.adresse}}</td>-->
                 <td class="text-center">

@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class TzEtudiantsComponent implements OnInit {
   niveau = [];
+  // lentgh = this.niveau.length;
   details = 'Cliquer pour voir details';
   loading: boolean;
 
