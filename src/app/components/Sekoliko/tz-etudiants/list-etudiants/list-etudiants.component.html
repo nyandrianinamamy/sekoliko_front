@@ -8,19 +8,27 @@
               <tr>
                 <th  class="text-center">id</th>
                 <th  class="text-center">Nom</th>
+                <th  class="text-center">Prenom</th>
+                <th  class="text-center">email</th>
                 <th  class="text-center">Age</th>
                 <th  class="text-center">Sexe</th>
+                <th  class="text-center">matricule</th>
+                <th  class="text-center">contact</th>
                 <th  class="text-center">Adresse</th>
                 <th  class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr #list *ngFor="let etudiants of listEtudiants">
-                <td  class="text-center">{{etudiants.id}}</td>
-                <td  class="text-center">{{etudiants.nom}}</td>
-                <td  class="text-center">{{etudiants.age}}</td>
-                <td  class="text-center">{{etudiants.sexe}}</td>
-                <td  class="text-center">{{etudiants.adresse}}</td>
+              <tr #list *ngFor="let etudiants of etudiant">
+                <td  class="text-center">{{etudiants.user_id.user_id}}</td>
+                <td  class="text-center">{{etudiants.user_id.lastname}}</td>
+                <td  class="text-center">{{etudiants.user_id.firstname}}</td>
+                <td  class="text-center">{{etudiants.user_id.email}}</td>
+                <td  class="text-center">{{etudiants.user_id.age}}</td>
+                <td  class="text-center">{{etudiants.user_id.sexe}}</td>
+                <td  class="text-center">{{etudiants.user_id.matricule}}</td>
+                <td  class="text-center">{{etudiants.user_id.contact}}</td>
+                <td  class="text-center">{{etudiants.user_id.adresse}}</td>
                 <td class="text-center">
                   <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
                      class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
@@ -36,29 +44,41 @@
                           <button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">
                             <span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title w-100">{{etudiants.nom}}  <i class="fa fa-user-circle"></i></h4>
+                          <h4 class="modal-title w-100">{{etudiants.user_id.lastname}}  <i class="fa fa-user-circle"></i></h4>
                         </div>
                         <div class="modal-body">
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                               <div class="text-left w-30">ID</div>
-                              <div class="text-right">{{etudiants.id}}</div>
+                              <div class="text-right">{{etudiants.user_id.user_id}}</div>
                             </li>
                             <li class="list-group-item">
                               <div class="text-left">Nom</div>
-                              <div class="text-right">{{etudiants.nom}}</div>
+                              <div class="text-right">{{etudiants.user_id.lastname}}</div>
+                            </li>
+                            <li class="list-group-item">
+                              <div class="text-left">Prenom</div>
+                              <div class="text-right">{{etudiants.user_id.firstname}}</div>
+                            </li>
+                            <li class="list-group-item">
+                              <div class="text-left">Matricule</div>
+                              <div class="text-right">{{etudiants.user_id.matricule}}</div>
                             </li>
                             <li class="list-group-item">
                               <div class="text-left">Age</div>
-                              <div class="text-right">{{etudiants.age}}</div>
+                              <div class="text-right">{{etudiants.user_id.age}}</div>
+                            </li>
+                            <li class="list-group-item">
+                              <div class="text-left">Contact</div>
+                              <div class="text-right">{{etudiants.user_id.contact}}</div>
                             </li>
                             <li class="list-group-item">
                               <div class="text-left">Sexe</div>
-                              <div class="text-right">{{etudiants.sexe}}</div>
+                              <div class="text-right">{{etudiants.user_id.sexe}}</div>
                             </li>
                             <li class="list-group-item">
                               <div class="text-left">Adresse</div>
-                              <div class="text-right">{{etudiants.adresse}}</div>
+                              <div class="text-right">{{etudiants.user_id.adresse}}</div>
                             </li>
                           </ul>
                         </div>
@@ -83,22 +103,31 @@
                           <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
                             <span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title w-100" >Modifier {{etudiants.nom}}  <i class="fa fa-user-circle"></i></h4>
+                          <h4 class="modal-title w-100" >Modifier {{etudiants.user_id.lastname}}  <i class="fa fa-user-circle"></i></h4>
                         </div>
                         <div class="modal-body">
                           <div class="md-form mb-5">
-                            <input type="text" id="orangeForm-name" value="{{etudiants.nom}}" class="form-control validate"
+                            <input type="text" id="orangeForm-name" value="{{etudiants.user_id.lastname}}" class="form-control validate"
                                    mdbInputDirective>
                             <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Nom</label>
-                            <input type="text" id="orangeForm-age" value="{{etudiants.age}}" class="form-control validate"
+                            <input type="text" id="orangeForm-prenom" value="{{etudiants.user_id.firstname}}" class="form-control validate"
+                                   mdbInputDirective>
+                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Prenom</label>
+                            <input type="text" id="orangeForm-age" value="{{etudiants.user_id.age}}" class="form-control validate"
                                    mdbInputDirective>
                             <label data-error="wrong" data-success="right" for="orangeForm-age">Age</label>
-                            <input type="text" id="orangeForm-adresse" value="{{etudiants.adresse}}" class="form-control validate"
+                            <input type="text" id="orangeForm-matricule" value="{{etudiants.user_id.matricule}}" class="form-control validate"
+                                   mdbInputDirective>
+                            <label data-error="wrong" data-success="right" for="orangeForm-age">Matricule</label>
+                            <input type="text" id="orangeForm-adresse" value="{{etudiants.user_id.adresse}}" class="form-control validate"
                                    mdbInputDirective>
                             <label data-error="wrong" data-success="right" for="orangeForm-adresse">Adresse</label>
-                            <input type="text" id="orangeForm-sexe" value="{{etudiants.sexe}}" class="form-control validate"
+                            <input type="text" id="orangeForm-sexe" value="{{etudiants.user_id.sexe}}" class="form-control validate"
                                    mdbInputDirective>
                             <label data-error="wrong" data-success="right" for="orangeForm-sexe">Sexe</label>
+                            <input type="text" id="orangeForm-contact" value="{{etudiants.user_id.contact}}" class="form-control validate"
+                                   mdbInputDirective>
+                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Contact</label>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -139,3 +168,10 @@
           </table>
         </div>
 </section>
+<div class="mask" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

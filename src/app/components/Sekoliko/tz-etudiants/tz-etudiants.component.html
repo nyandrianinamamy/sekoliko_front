@@ -11,8 +11,8 @@
     <div class="row setup-content-2">
         <div class="col-md-12">
             <div class="row">
-                <a routerLink="/menu/classe" routerLinkActive="active-link" class="col-xl-3 col-md-6 mb-3 m-0" *ngFor="let niveau of niveau">
-                    <div class="card card-cascade cascading-admin-card">
+                <a class="col-xl-3 col-md-6 mb-3 m-0" *ngFor="let niveau of niveau">
+                    <div class="card card-cascade cascading-admin-card" (click)="checkEnfant(niveau.id)">
                         <div class="admin-up">
                             <i class="fa fa-group primary-color"></i>
                             <div class="data">
@@ -33,4 +33,11 @@
         </div>
     </div>
 </section>
+<div class="mask" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>
 

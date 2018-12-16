@@ -1,8 +1,6 @@
-export class Etudiants {
-  id: number;
-  nom: string;
-  age: number;
-  sexe: string;
-  adresse: string;
+import {User} from './User';
 
+export class Etudiants {
+  NumInscription: number;
+  user_id: User;
 }
