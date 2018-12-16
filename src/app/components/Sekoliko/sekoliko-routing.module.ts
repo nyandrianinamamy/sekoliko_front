@@ -20,7 +20,6 @@ import {TzClasseListComponent} from './tz-classe-list/tz-classe-list.component';
 import { TzAjoutClasseComponent} from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
 import {TzMatiereComponent} from "./tz-matiere/tz-matiere.component";
 import {TzAjoutMatiereComponent} from "./tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component";
-import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import {TzProfileComponent} from "./tz-profile/tz-profile.component";
 import {TzUserComponent} from './tz-user/tz-user.component';
 import {TzInscriptionComponent} from './tz-inscription/tz-inscription.component';
@@ -52,7 +51,6 @@ const routes: Routes = [
             {path: 'add-classe', component: TzAjoutClasseComponent},
             {path: 'matiere-list', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
-            {path: 'add-payement', component: TzPayementsAjoutComponent},
             {path: 'profile', component: TzProfileComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

@@ -15,7 +15,7 @@ import {LocalStorageService} from '../../shared/service/local-storage.service';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  title = 'Techzara Ny Sekoliko';
+  title = 'Sekoliko';
   login: Login;
   submitted: boolean;
   user_info : '';

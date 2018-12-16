@@ -31,14 +31,14 @@ mat-form-field {
 }
 .login-content {
   height: 45vh;
-  margin: 16% 72px;
+  margin: 10% 72px;
 }
 .img-center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 50px;
-  width: 80%;
+  padding-bottom: 20px;
+  width: 39%;
 }
 .loginImg {
   width: 40%;
@@ -46,8 +46,8 @@ mat-form-field {
 }
 .tz-button{display: block;width: 100%;background-color:#2e6bb1!important; padding: 2%}
 .tz-header-login{ text-align: center;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0
-  rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); padding: 4%; background: #2e6bb1; color: white;}
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  padding: 4%; background: #2e6bb1; color: white;}
 
 .mask {
   position: fixed;
@@ -79,6 +79,9 @@ responsive touche pas
  */
 @media screen and (max-width: 600px){
   .login-content{ margin: 16% 7px!important;}
+}
+@media screen and (max-width: 900px){
+  .login-content{ margin: 25% 7px!important;}
 }
 
 

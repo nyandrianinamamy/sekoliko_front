@@ -16,7 +16,6 @@ import {
     MatSidenavModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
-import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -75,7 +74,6 @@ import { TzInscriptionComponent } from './tz-inscription/tz-inscription.componen
         MatTableModule,
         MaterialModule,
         DataTablesModule,
-        MatKeyboardModule,
         MDBBootstrapModule.forRoot(),
     ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [

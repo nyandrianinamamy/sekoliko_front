@@ -20,6 +20,7 @@ export class TzMatiereComponent implements OnInit {
 
   ngOnInit() {
     this.getMatiere().subscribe((response:any)=>{
+      this.dtTrigger.next();
             if (response.code == ConstantHTTP.CODE_SUCCESS){
               console.log(response.data);
               response.data.forEach((element:any)=>{
