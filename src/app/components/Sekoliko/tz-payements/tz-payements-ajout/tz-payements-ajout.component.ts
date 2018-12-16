@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatKeyboardRef} from '@ngx-material-keyboard/core/classes/keyboard-ref.class';
 // import {LiveAnnouncer} from "@angular/cdk/a11y";
 // import {Overlay} from "@angular/cdk/overlay";
 // import {IKeyboardLayouts, MatKeyboardService} from '@ngx-material-keyboard/core';
