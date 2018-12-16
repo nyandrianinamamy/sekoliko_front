@@ -20,11 +20,10 @@ class TzAnneeScolaireEntity
 {
     /**
      * @var integer
-     *
      * @ORM\Id
-     * @ORM\Column(name="num_inscription", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit","notes","as"})
      * @JMS\SerializedName("AnneeScolaireID")
      */
     private $id;
@@ -32,14 +31,14 @@ class TzAnneeScolaireEntity
     /**
      * @var \DateTime
      * @ORM\Column(name="date_debut", type="datetime", nullable=false)
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit","as"})
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="date_fin", type="datetime", nullable=false)
-     * @JMS\Groups({"asco"})
+     * @JMS\Groups({"inscrit","as"})
      */
     private $dateFin;
 

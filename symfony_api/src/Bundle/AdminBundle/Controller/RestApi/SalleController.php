@@ -7,6 +7,7 @@
  */
 namespace Bundle\AdminBundle\Controller\RestApi;
 
+use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
 use Bundle\AdminBundle\Entity\TzClassEntity;
 use Bundle\CommunBundle\Utils\ConstantSrv;
 use FOS\RestBundle\Controller\Annotations as Rest,
@@ -161,7 +162,7 @@ class SalleController extends AbstractClassRestController
             $dateOccupation = $salle->getDateFinOccupation();
             $date = new \DateTime($paramDate);
             $dateFin =  new \DateTime($paramDateFin);
-            $repClasse = $em->getRepository(TzClassEntity::class);
+            $repClasse = $em->getRepository(TzClasseEnfantEntity::class);
             if ($dateOccupation <= $date) {
                 $repClasse = $repClasse->find($paramClasse);
                 if($repClasse instanceof TzClassEntity) {

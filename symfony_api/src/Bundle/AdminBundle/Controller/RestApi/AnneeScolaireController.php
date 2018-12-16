@@ -65,4 +65,26 @@ class AnneeScolaireController extends FOSRestController
             return $response;
         }
     }
+
+    /**
+     * @Rest\Get("api/listans")
+     */
+
+    public function listas(ParamFetcher $paramFetcher)
+    {
+        $response = new JsonResponse();
+
+        try {
+            $posResponse = $this->get("tz.responses");
+            $em = $this->getDoctrine()->getManager();
+            $data= $em->getRepository(TzAnneeScolaireEntity::class)->findAll();
+            $resData = $posResponse->setSuccessResponse($data, "json", array("as"));
+            return $response->setData($resData);
+        } catch (DBALException $e) {
+            $tzServiceMsg = $this->get('ws.tz_msg');
+            $text = sprintf("%s", $e->getMessage());
+            $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);
+            return $response->setData($msgReturn);
+        }
+    }
 }

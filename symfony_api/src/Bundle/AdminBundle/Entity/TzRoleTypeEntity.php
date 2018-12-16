@@ -1,23 +1,21 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Tahiana_Rakotonirina
- * Date: 17/11/2018
- * Time: 19:59
+ * User: Predator
+ * Date: 13/12/2018
+ * Time: 21:20
  */
 
 namespace Bundle\AdminBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-
 /**
  * TzEtablissement
  *
- * @ORM\Table(name="tz_classe")
- * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzClasseRepository")
+ * @ORM\Table(name="tz_role_type")
+ * @ORM\Entity(repositoryClass="Bundle\AdminBundle\Repository\TzRoleTypeRepository")
  */
-class TzClassEntity
+class TzRoleTypeEntity
 {
     /**
      * @var integer
@@ -25,17 +23,15 @@ class TzClassEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"classe_etd", "matiere_list", "classe_enfant_etd","inscrit"})
+     * @JMS\Groups({"user_list", "liste_etudiant", "role_list"})
      * @JMS\SerializedName("id")
-     * @JMS\Groups({"notes"})
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="classe_description", type="string", length=80, nullable=false)
-     * @JMS\Groups({"classe_etd", "prof_list", "matiere_list", "classe_enfant_etd","inscrit","notes"})
+     * @JMS\Groups({"user_list", "liste_etudiant", "role_list"})
+     * @ORM\Column(name="description", type="string", length=80, nullable=false)
      *
      */
     private $description;
@@ -63,6 +59,7 @@ class TzClassEntity
     {
         $this->description = $description;
     }
+
 
 
 }
