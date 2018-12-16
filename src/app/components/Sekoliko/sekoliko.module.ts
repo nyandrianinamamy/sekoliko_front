@@ -16,7 +16,6 @@ import {
     MatSidenavModule, MatTableModule,
     MatToolbarModule
 } from '@angular/material';
-import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -73,7 +72,6 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
         MatTableModule,
         MaterialModule,
         DataTablesModule,
-        MatKeyboardModule,
         MDBBootstrapModule.forRoot(),
     ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     declarations: [

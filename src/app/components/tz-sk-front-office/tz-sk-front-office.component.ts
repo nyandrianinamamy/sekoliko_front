@@ -47,6 +47,7 @@ export class TzSkFrontOfficeComponent implements OnInit {
     stackoverflow = ConstantFront.stackoverflow;
     github        = ConstantFront.github;
 
+
   constructor() {
     document.body.style.background = "white!important";
   }
