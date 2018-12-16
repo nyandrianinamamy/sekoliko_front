@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LocalStorageService} from "../../../shared/service/local-storage.service";
 
 @Component({
   selector: 'app-tz-profile',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TzProfileComponent implements OnInit {
 
-  constructor() { }
+  userProfile = '';
+
+  constructor(private Localstorage : LocalStorageService) { }
 
   ngOnInit() {
+    this.userProfile = this.getProfileUser();
+    console.log(this.userProfile)
+  }
+
+  getProfileUser(){
+     return this.Localstorage.getLocalstorage('user_info');
   }
 
 }

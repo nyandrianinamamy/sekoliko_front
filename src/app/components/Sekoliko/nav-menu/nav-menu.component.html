@@ -44,21 +44,20 @@
           </button>
         </div>
         <div class="grid example">
-          <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-right: 5px">
-            <mat-icon>account_circle</mat-icon>
-          </button>
+          <label>
+            <span>Bienvenue {{userProfile.username}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-right: 5px">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </label>
           <mat-menu #menu="matMenu" overlapTrigger="false">
             <button mat-menu-item>
               <mat-icon>account_circle</mat-icon>
               <a routerLink="/menu/profile">My Account</a>
             </button>
-            <button mat-menu-item>
-              <mat-icon>settings</mat-icon>
-              <span>Settings</span>
-            </button>
             <button mat-menu-item (click)="logOut()">
-              <mat-icon>money</mat-icon>
-              <span>logout</span>
+              <mat-icon>navigate_next</mat-icon>
+              <span>Logout</span>
             </button>
           </mat-menu>
         </div>
