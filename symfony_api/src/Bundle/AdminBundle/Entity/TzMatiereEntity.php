@@ -25,6 +25,7 @@ class TzMatiereEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMS\Groups({"prof_list", "matiere_list","notes"})
      */
     private $id;
 
