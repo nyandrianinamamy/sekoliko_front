@@ -24,7 +24,7 @@ class TzAnneeScolaireEntity
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"inscrit"})
+     * @JMS\Groups({"inscrit","notes"})
      * @JMS\SerializedName("AnneeScolaireID")
      */
     private $id;

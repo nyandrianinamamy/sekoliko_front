@@ -173,22 +173,4 @@ class NotesController extends AbstractClassRestController
             return $response;
         }
      }
-
-    /**
-     * @Rest\Get("/api/shownote/{id}", requirements={"id"="\d+"})
-     * @return JsonResponse
-     */
-
-//    public function showNote($id){
-//        $response = new JsonResponse();
-//        $tzServiceMsg = $this->get('ws.tz_msg');
-//
-//        try {
-//            $result = $this->getDoctrine()->getRepository(TzInscriptionEntity::class)->find($id);
-//            $
-//
-//        } catch () {
-//
-//        }
-//    }
 }

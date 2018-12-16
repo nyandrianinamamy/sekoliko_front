@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="60ac3b07-597a-4fea-a582-b46bc93fe358" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/composer.json" afterPath="$PROJECT_DIR$/symfony_api/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/NotesController.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/NotesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzInscriptionRepository.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzInscriptionRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Controller/RestApi/UserController.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Controller/RestApi/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzNotesRepository.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzNotesRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php" afterPath="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,110 +21,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8520833">
-      <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.7288787">
-          <split-first>
-            <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-              <file leaf-file-name="TzInscriptionRepository.php" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzInscriptionRepository.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="37">
-                      <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="InscriptionController.php" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-139">
-                      <caret line="157" column="37" lean-forward="false" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
-                      <folding>
-                        <element signature="e#137#161#0#PHP" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="TzNotesEntity.php" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="239">
-                      <caret line="101" column="15" lean-forward="false" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="15" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="NotesController.php" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/NotesController.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="701">
-                      <caret line="192" column="7" lean-forward="false" selection-start-line="181" selection-start-column="2" selection-end-line="192" selection-end-column="7" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="TzMatiereEntity.php" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="480">
-                      <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="ClasseController.php" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/ClasseController.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="245">
-                      <caret line="102" column="13" lean-forward="false" selection-start-line="102" selection-start-column="13" selection-end-line="102" selection-end-column="13" />
-                      <folding>
-                        <element signature="e#56#100#0#PHP" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file leaf-file-name="InscriptionController.php" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-809">
-                      <caret line="119" column="17" lean-forward="false" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-                      <folding>
-                        <element signature="e#137#161#0#PHP" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="TzNotesEntity.php" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="239">
-                  <caret line="101" column="15" lean-forward="false" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="15" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -140,11 +36,18 @@
       <find>$user</find>
       <find>$msgReturn</find>
       <find>idclasse</find>
+      <find>WHIT</find>
+      <find>TzNotesEntity</find>
+      <find>n</find>
+      <find>no</find>
+      <find>notes</find>
+      <find>posResponse</find>
     </findStrings>
     <replaceStrings>
       <replace>$ins</replace>
       <replace>$user</replace>
       <replace>$userid</replace>
+      <replace>WITH</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -161,20 +64,22 @@
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzEtudiantEntity.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/EtudiantController.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzMatiereRepository.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php" />
         <option value="$PROJECT_DIR$/symfony_api/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzAnneeScloaireRepository.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClasses.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/SalleController.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/AnneeScolaireController.php" />
         <option value="$PROJECT_DIR$/symfony_api/vendor/doctrine/persistence/lib/Doctrine/Common/Persistence/ObjectManager.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php" />
-        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzNotesRepository.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/NotesController.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php" />
         <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzInscriptionRepository.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php" />
+        <option value="$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php" />
       </list>
     </option>
   </component>
@@ -248,6 +153,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sekoly-numerika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sekoly-numerika" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="symfony_api" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sekoly-numerika" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sekoly-numerika" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="symfony_api" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -541,22 +502,22 @@
       <workItem from="1544027275166" duration="1076000" />
       <workItem from="1544340862207" duration="628000" />
       <workItem from="1544461106484" duration="239000" />
-      <workItem from="1544936352673" duration="8701000" />
+      <workItem from="1544936352673" duration="19140000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73747000" />
+    <option name="totallyTimeSpent" value="84186000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.044791665" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27135417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -568,7 +529,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -583,13 +543,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzSalleRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/EtudiantController.php" />
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/SalleController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -711,13 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="18" column="7" lean-forward="false" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClasses.php" />
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/CommunBundle/Utils/ConstantSrv.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -745,24 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
-          <folding>
-            <element signature="e#124#156#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="39" column="25" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -833,22 +761,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-961">
-          <caret line="42" column="20" lean-forward="false" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
-          <folding>
-            <element signature="e#125#157#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/SalleController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
           <caret line="61" column="60" lean-forward="false" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
           <folding>
-            <element signature="e#153#197#0#PHP" expanded="true" />
+            <element signature="e#153#197#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -861,54 +779,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php">
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzNotesRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+        <state relative-caret-position="288">
+          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/ClasseController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="263">
           <caret line="102" column="13" lean-forward="false" selection-start-line="102" selection-start-column="13" selection-end-line="102" selection-end-column="13" />
           <folding>
-            <element signature="e#56#100#0#PHP" expanded="true" />
+            <element signature="e#56#100#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="101" column="15" lean-forward="false" selection-start-line="101" selection-start-column="15" selection-end-line="101" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/NotesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="192" column="7" lean-forward="false" selection-start-line="181" selection-start-column="2" selection-end-line="192" selection-end-column="7" />
+        <state relative-caret-position="3120">
+          <caret line="130" column="17" lean-forward="false" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzAnneeScolaireEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzMatiereEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="52" column="55" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzClassEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Controller/RestApi/InscriptionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-139">
-          <caret line="157" column="37" lean-forward="false" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
-          <folding>
-            <element signature="e#137#161#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="455">
+          <caret line="213" column="13" lean-forward="true" selection-start-line="213" selection-start-column="13" selection-end-line="213" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Repository/TzInscriptionRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+        <state relative-caret-position="95">
+          <caret line="96" column="101" lean-forward="false" selection-start-line="96" selection-start-column="101" selection-end-line="96" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzInscriptionEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+          <folding>
+            <element signature="e#125#157#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/AdminBundle/Entity/TzNotesEntity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="39" column="9" lean-forward="false" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/symfony_api/src/Bundle/UserBundle/Entity/TzUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="33" column="49" lean-forward="false" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
           <folding />
         </state>
       </provider>

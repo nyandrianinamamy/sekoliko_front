@@ -12,7 +12,6 @@ use AppBundle\AppBundle;
 use Bundle\AdminBundle\Entity\TzAnneeScolaireEntity;
 use Bundle\AdminBundle\Entity\TzClasseEnfantEntity;
 use Bundle\AdminBundle\Entity\TzInscriptionEntity;
-use Bundle\AdminBundle\Repository\TzInscriptionRepository;
 use Bundle\CommunBundle\Utils\ConstantSrv;
 use Bundle\UserBundle\Entity\TzUser;
 use Doctrine\DBAL\DBALException;
@@ -89,7 +88,7 @@ class InscriptionController extends FOSRestController
 
     /**
      * @param ParamFetcher $paramFetcher
-     * @Rest\Post("/api/editins")
+         * @Rest\Post("/api/editins")
      * @Rest\RequestParam(name="numins", nullable=false)
      * @Rest\RequestParam(name="userid", nullable=true)
      * @Rest\RequestParam(name="idclasse", nullable=true)
@@ -165,7 +164,6 @@ class InscriptionController extends FOSRestController
      * @return JsonResponse
      * 
      */
-
     public function listIns($ins, ParamFetcher $paramFetcher){
         $response = new JsonResponse();
         $tzServiceMsg = $this->get('ws.tz_msg');
@@ -178,10 +176,44 @@ class InscriptionController extends FOSRestController
                 ->getRepository(TzInscriptionEntity::class);
                 $data = $em->findIns($paramFetcher);
                 $posResponse = $this->get("tz.responses");
-                $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
-                
-                return $response->setData($resData);
             }
+            $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
+            return $response->setData($resData);
+        } catch (DBALException $e) {
+            $text = sprintf("%s", $e->getMessage());
+            $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);
+            return $response->setData($msgReturn);
+        }
+    }
+
+    /**
+     * @param integer $ins
+     * @param ParamFetcher $paramFetcher
+     * @Rest\Post("/api/notes/find", name="find_note",defaults={"ins": null})
+     * @Rest\GET("/api/notes/find/{ins}", name="find_note_by_id", requirements={"ins":"\d+"})
+     * @Rest\RequestParam(name="numins", nullable=true)
+     * @Rest\RequestParam(name="as", nullable=true)
+     * @Rest\RequestParam(name="mat", nullable=true)
+     * @Rest\RequestParam(name="note", nullable=true)
+     * @ParamConverter("ins",class="AdminBundle:TzInscriptionEntity")
+     * @return JsonResponse
+     *
+     */
+
+    public function notes($ins, ParamFetcher $paramFetcher){
+        $response = new JsonResponse();
+        $tzServiceMsg = $this->get('ws.tz_msg');
+        $posResponse = $this->get("tz.responses");
+        try{
+            if ($ins instanceof TzInscriptionEntity) {
+                $data = $ins;
+            } else {
+                $em = $this->getDoctrine()
+                    ->getRepository(TzInscriptionEntity::class);
+                $data = $em->showNote($paramFetcher);
+            }
+            $resData = $posResponse->setSuccessResponse($data, "json", array("notes"));
+            return $response->setData($resData);
         } catch (DBALException $e) {
             $text = sprintf("%s", $e->getMessage());
             $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);

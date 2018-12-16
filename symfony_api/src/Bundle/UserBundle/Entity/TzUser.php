@@ -31,14 +31,14 @@ class TzUser extends BaseUser
 
     /**
      * @var string
-     * @JMS\Groups({"user_list","inscrit"})
+     * @JMS\Groups({"user_list","inscrit","notes"})
      * @ORM\Column(name="lastname", type="string", length=80, nullable=true)
      */
     private $lastname;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list","inscrit"})
+     * @JMS\Groups({"user_list","inscrit","notes"})
      * @ORM\Column(name="firstname", type="string", length=80, nullable=true)
      */
     private $firstname;
