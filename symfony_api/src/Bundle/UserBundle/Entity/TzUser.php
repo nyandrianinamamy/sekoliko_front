@@ -64,12 +64,6 @@ class TzUser extends BaseUser
      */
     private $age;
 
-    /**
-     * @var string
-     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
-     * @ORM\Column(name="matricule", type="string", length=25, nullable=true, unique=true)
-     */
-    private $matricule;
 
 
     /**

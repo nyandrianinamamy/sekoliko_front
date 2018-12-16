@@ -23,14 +23,14 @@ class TzRoleTypeEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"user_list", "liste_etudiant"})
+     * @JMS\Groups({"user_list", "liste_etudiant", "role_list"})
      * @JMS\SerializedName("id")
      */
     private $id;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list", "liste_etudiant"})
+     * @JMS\Groups({"user_list", "liste_etudiant", "role_list"})
      * @ORM\Column(name="description", type="string", length=80, nullable=false)
      *
      */
