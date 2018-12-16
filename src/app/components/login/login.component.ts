@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   title = 'Techzara Ny Sekoliko';
   login: Login;
   submitted: boolean;
-  user_info : [];
+  user_info : '';
   error: string;
   loading: boolean;
   constructor(private router: Router,
