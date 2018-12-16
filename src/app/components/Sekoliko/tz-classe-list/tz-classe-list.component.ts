@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/service/data.service';
 import { urlList } from 'src/app/Utils/api/urlList';
 import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
+import {ActivatedRoute} from '@angular/router';
+import {Classe} from '../../../shared/model/Classe';
 
 @Component({
   selector: 'app-tz-classe-list',
@@ -11,23 +13,21 @@ import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
 export class TzClasseListComponent implements OnInit {
 
   listClasse = [];
-
-  constructor(private dataService: DataService) { }
+  idClasse: number;
+  classe: Classe[];
+  constructor(private dataService: DataService,
+              private currentRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getListClasse().subscribe((response: any) => {
+    this.idClasse = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
+    this.checkEnfantClasse(this.idClasse);
+  }
+
+  checkEnfantClasse(parentId: number) {
+    this.dataService.post(urlList.path_list_class_enfant, {parentId: parent}).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        response.data.forEach(element => {
-          this.listClasse.push({
-            id: element.id,
-            classe: element.nomClasse
-          });
-          console.log(response.data);
-        });
+        this.classe = response.data;
       }
     });
   }
-
-  getListClasse() {return this.dataService.get(urlList.path_list_class)}
-
 }
