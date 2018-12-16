@@ -26,15 +26,14 @@ class TzInscriptionEntity
      * @ORM\Id
      * @ORM\Column(name="num_inscription", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"inscrit"})
+     * @JMS\Groups({"inscrit", "liste_etudiant"})
      * @JMS\SerializedName("NumInscription")
      */
     private $num_inscription;
 
     /**
      * @var integer
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
-     * @JMS\Groups({"inscrit","notes"})
+     * @JMS\Groups({"inscrit","notes", "liste_etudiant"})
      * @ORM\ManyToOne(targetEntity="Bundle\UserBundle\Entity\TzUser")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")

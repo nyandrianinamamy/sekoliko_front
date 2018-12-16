@@ -32,7 +32,6 @@ class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
         $paramIdas = $paramFetcher->get('idas');
         $paramDateins = $paramFetcher->get('dateins');
         $paramStatus = $paramFetcher->get('status');
-
         $querybuilder = $this->createQueryBuilder('p');
 
         if (isset($paramNumins)) {

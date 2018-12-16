@@ -25,48 +25,48 @@ class TzUser extends BaseUser
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"inscrit"})
+     * @JMS\Groups({"inscrit", "liste_etudiant"})
      */
     protected $userId;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list","inscrit"})
+     * @JMS\Groups({"user_list","inscrit" , "liste_etudiant"})
      * @ORM\Column(name="lastname", type="string", length=80, nullable=true)
      */
     private $lastname;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list","inscrit"})
+     * @JMS\Groups({"user_list","inscrit", "liste_etudiant"})
      * @ORM\Column(name="firstname", type="string", length=80, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
      * @ORM\Column(name="adresse", type="string", length=80, nullable=true)
      */
     private $adresse;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
      * @ORM\Column(name="contact", type="string", length=80, nullable=true)
      */
     private $contact;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
      * @ORM\Column(name="age", type="integer", length=3, nullable=true)
      */
     private $age;
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
      * @ORM\Column(name="matricule", type="string", length=25, nullable=true, unique=true)
      */
     private $matricule;
@@ -74,7 +74,7 @@ class TzUser extends BaseUser
 
     /**
      * @var string
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "inscrit", "liste_etudiant"})
      * @ORM\Column(name="sexe", type="string", length=25, nullable=true)
      */
     private $sexe;
@@ -85,7 +85,7 @@ class TzUser extends BaseUser
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="role_type", referencedColumnName="id")
      * })
-     * @JMS\Groups({"user_list"})
+     * @JMS\Groups({"user_list", "liste_etudiant"})
      * @JMS\Accessor(getter="getRoleType")
      */
     private $roleType;
