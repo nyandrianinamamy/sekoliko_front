@@ -44,7 +44,8 @@ class InscriptionController extends FOSRestController
      * @return JsonResponse
      */
 
-    public function addIns(ParamFetcher $paramFetcher){
+    public function addIns(ParamFetcher $paramFetcher)
+    {
         $response = new JsonResponse();
         $tzServiceMsg = $this->get('ws.tz_msg');
 
@@ -61,7 +62,7 @@ class InscriptionController extends FOSRestController
             if ($userid instanceof TzUser && $classid instanceof TzClasseEnfantEntity && $asid instanceof TzAnneeScolaireEntity) {
                 $ins = new TzInscriptionEntity();
 
-                $ins->setUserId($parameterId);
+                $ins->setUserId($userid);
                 $ins->setClasseId($classid);
                 $ins->setIdAnneeScolaire($asid);
                 $ins->setStatut($parameterStatus);
@@ -80,15 +81,14 @@ class InscriptionController extends FOSRestController
         } catch (DBALException $e) {
             $text = sprintf("%s", $e->getMessage());
             $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_INTERNAL_ERROR, $text, $text, null);
-        } finally {
-            $response->setData($msgReturn);
-            return $response;
         }
+        $response->setData($msgReturn);
+        return $response;
     }
 
     /**
      * @param ParamFetcher $paramFetcher
-         * @Rest\Post("/api/editins")
+     * @Rest\Post("/api/editins")
      * @Rest\RequestParam(name="numins", nullable=false)
      * @Rest\RequestParam(name="userid", nullable=true)
      * @Rest\RequestParam(name="idclasse", nullable=true)
@@ -162,9 +162,10 @@ class InscriptionController extends FOSRestController
      * @Rest\RequestParam(name="list", nullable=true)
      * @ParamConverter("ins",class="AdminBundle:TzInscriptionEntity")
      * @return JsonResponse
-     * 
+     *
      */
-    public function listIns($ins, ParamFetcher $paramFetcher){
+    public function listIns($ins, ParamFetcher $paramFetcher)
+    {
         $response = new JsonResponse();
         $tzServiceMsg = $this->get('ws.tz_msg');
         $paramList = $paramFetcher->get('list');
@@ -178,10 +179,10 @@ class InscriptionController extends FOSRestController
                 $posResponse = $this->get("tz.responses");
             }
             if ($paramList === 'liste') {
-                    $resData = $posResponse->setSuccessResponse($data, "json", array("liste_etudiant"));
-                } else {
-                    $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
-                }
+                $resData = $posResponse->setSuccessResponse($data, "json", array("liste_etudiant"));
+            } else {
+                $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
+            }
             $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
             return $response->setData($resData);
         } catch (DBALException $e) {
@@ -205,11 +206,12 @@ class InscriptionController extends FOSRestController
      *
      */
 
-    public function notes($ins, ParamFetcher $paramFetcher){
+    public function notes($ins, ParamFetcher $paramFetcher)
+    {
         $response = new JsonResponse();
         $tzServiceMsg = $this->get('ws.tz_msg');
         $posResponse = $this->get("tz.responses");
-        try{
+        try {
             if ($ins instanceof TzInscriptionEntity) {
                 $data = $ins;
             } else {
