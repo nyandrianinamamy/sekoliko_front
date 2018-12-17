@@ -5,5 +5,4 @@ export class Profs {
   adresse: string;
   contact: string;
   matiere: string;
-
 }

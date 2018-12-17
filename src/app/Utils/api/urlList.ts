@@ -18,6 +18,7 @@ export const urlList = {
   path_delete_salle: _api + 'salle/delete/',
   path_list_matiere: _api + 'matiere/find',
   path_delete_matiere: _api + 'matiere/delete/',
+  path_add_matiere: _api + 'matiere/edit',
   path_user_find: _api + 'user/edit',
   path_type_role: _api + 'user/role',
   path_find_role: _api + 'role/find',

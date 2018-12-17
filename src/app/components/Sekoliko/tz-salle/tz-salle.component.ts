@@ -28,7 +28,8 @@ export class TzSalleComponent implements OnInit {
     this.getListSalle().subscribe((data: any) => {
       if (data.code === ConstantHTTP.CODE_SUCCESS) {
         this.loading = false;
-        this.salle = data.data
+        this.salle = data.data;
+        this.dtTrigger.next();
       }
     });
   }

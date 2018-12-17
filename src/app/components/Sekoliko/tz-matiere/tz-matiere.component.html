@@ -19,8 +19,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let matiere of listMatiere">
-          <td class="text-center">{{matiere.desc}}</td>
-          <td class="text-center">{{matiere.coeff}}</td>
+          <td class="text-center">{{matiere.description}}</td>
+          <td class="text-center">{{matiere.coefficient}}</td>
           <td class="text-center">
             <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
                class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
@@ -36,17 +36,17 @@
                     <button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">
                       <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title w-100">{{matiere.desc}}  <i class="fa fa-home"></i></h4>
+                    <h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-home"></i></h4>
                   </div>
                   <div class="modal-body">
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">
                         <div class="text-left">Nom matiere</div>
-                        <div class="text-right">{{matiere.desc}}</div>
+                        <div class="text-right">{{matiere.description}}</div>
                       </li>
                       <li class="list-group-item">
                         <div class="text-left">Coefficient</div>
-                        <div class="text-right">{{matiere.coeff}}</div>
+                        <div class="text-right">{{matiere.coefficient}}</div>
                       </li>
                     </ul>
                   </div>
@@ -71,7 +71,7 @@
                     <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
                       <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title w-100" >{{matiere.desc}}  <i class="fa fa-book"></i></h4>
+                    <h4 class="modal-title w-100" >{{matiere.description}}  <i class="fa fa-book"></i></h4>
                   </div>
                   <form class="text-center border border-light p-5">
                     <div class="modal-body">
@@ -80,17 +80,17 @@
                                value="{{matiere.id}}" class="form-control d-none validate">
                         <label data-error="wrong" data-success="right"  for="orangeForm-name">Nom Matiere</label>
                         <input type="text" id="orangeForm-name" name="description"
-                               value="{{matiere.desc}}" class="form-control validate" mdbInputDirective>
+                               value="{{matiere.description}}"  class="form-control validate" mdbInputDirective>
                       </div>
                       <div class="md-form mb-5">
                         <label data-error="wrong" data-success="right"  for="orangeForm-coeff">Coefficient</label>
                         <input type="text" id="orangeForm-coeff" name="coefficient"
-                               value="{{matiere.coeff}}" class="form-control validate" mdbInputDirective>
+                               value="{{matiere.coefficient}}" [(ngModel)]="matiere.nom" class="form-control validate" mdbInputDirective>
                       </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
-                      <button type="submit" value="submit" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect>Save changes</button>
+                      <button type="submit" value="submit" mdbBtn color="primary" class="relative waves-light  w-50" (click)="editMatiere()" mdbWavesEffect>Save changes</button>
                     </div>
                   </form>
                 </div>

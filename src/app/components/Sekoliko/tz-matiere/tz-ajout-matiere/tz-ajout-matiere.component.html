@@ -2,20 +2,24 @@
 <div class="view gradient-card-header blue darken-2">
   <h4 class="h4-responsive text-white"> Ajout nouveau matiere </h4>
 </div>
-<!-- First Step -->
-<form role="form" action=""  #form method="post">
-  <div class="row setup-content-2" #step1 id="step-1">
-    <div class="col-md-12">
-      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Ajouter nouveau matiere</strong></h3>
-      <div class="md-form">
-        <label for="nom">Nom du matiere</label>
-        <input type="text" id="nom" name="description" #nom class="form-control" formControlName="required" mdbInputDirective>
-      </div>
-      <div class="md-form">
-        <label for="nom">Coefficient</label>
-        <input type="text" id="coeff" name="coefficient" #coeff class="form-control" formControlName="required" mdbInputDirective>
-      </div>
-      <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Enregistrer</button>
-    </div>
-  </div>
+<form #salleform="ngForm" class="col-md-12 mt-5">
+  <mat-form-field class="col-md-12">
+    <input matInput placeholder="Nom matiere" id="nom" type="text" name="description" [(ngModel)]="matiere.nom"
+           #description="ngModel">
+  </mat-form-field>
+  <mat-form-field class="col-md-12">
+  <input matInput placeholder="Coefficient" id="coeff" type="text" name="coefficient" [(ngModel)]="matiere.coeff"
+         #coeff="ngModel">
+  </mat-form-field>
+  <mat-form-field class="col-md-12">
+    <mat-select placeholder="Select" name="class" [(ngModel)]="matiere.class">
+      <mat-option *ngFor="let classe of classe"  value="{{classe.id}}">{{classe.description}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="col-md-12">
+    <mat-select placeholder="Select" name="class" [(ngModel)]="matiere.prof">
+      <mat-option *ngFor="let profs of listProff"  value="{{profs.id}}">{{profs.nom}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(matiere)">Ajouter</button>
 </form>

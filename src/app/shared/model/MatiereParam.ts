@@ -1,7 +1,7 @@
 export class MatiereParam {
   id: number;
-  mat_nom: string;
-  mat_coeff: number;
-  id_class: number;
-  id_matiere: number;
+  nom: string;
+  coeff: number;
+  class: number;
+  matiere: number;
 }

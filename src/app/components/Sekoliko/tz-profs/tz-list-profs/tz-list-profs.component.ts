@@ -20,7 +20,7 @@ export class TzListProfsComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-   /* this.getListProffesseurs().subscribe((response: any) => {
+    this.getListProffesseurs().subscribe((response: any) => {
       this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         response.data.forEach(element => {
@@ -35,7 +35,7 @@ export class TzListProfsComponent implements OnInit {
       } else {
         console.log('Pas de proff');
       }
-    });*/
+    });
   }
 
   getListProffesseurs() {

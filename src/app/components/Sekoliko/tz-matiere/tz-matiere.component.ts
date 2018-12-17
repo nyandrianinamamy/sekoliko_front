@@ -4,6 +4,7 @@ import {DataService} from "../../../shared/service/data.service";
 import {urlList} from "../../../Utils/api/urlList";
 import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {Router} from "@angular/router";
+import {MatiereParam} from "../../../shared/model/MatiereParam";
 
 @Component({
   selector: 'app-tz-matiere',
@@ -11,29 +12,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./tz-matiere.component.scss']
 })
 export class TzMatiereComponent implements OnInit {
-  listMatiere = [];
+
+  listMatiere : MatiereParam;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-  id:'';
+  loading: boolean;
 
+  id:'';
 
   constructor(private dataService:DataService,
   private router : Router) { }
 
   ngOnInit() {
-    this.getMatiere().subscribe((response:any)=>{
-      this.dtTrigger.next();
-            if (response.code == ConstantHTTP.CODE_SUCCESS){
-              console.log(response.data);
-              response.data.forEach((element:any)=>{
-                this.listMatiere.push({
-                  id:element.id,
-                  desc:element.description,
-                  coeff:element.coefficient
-                });
-              })
-            }
-        });
+    this.loading = true;
+    this.getMatiere().subscribe((response:any) => {
+        if (response.code == ConstantHTTP.CODE_SUCCESS){
+          console.log(response.data);
+          this.listMatiere = response.data;
+          this.loading = false;
+          this.dtTrigger.next();
+        }
+    });
   }
 
   getMatiere(){
