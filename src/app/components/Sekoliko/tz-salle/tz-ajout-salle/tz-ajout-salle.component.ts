@@ -31,14 +31,4 @@ export class TzAjoutSalleComponent implements OnInit {
       }
     })
   }
-
-  editSalle(salle:Salle){
-    this.loading = true;
-    this.dataservice.post(urlList.path_mod_salle+this.id).subscribe(response=>{
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.loading = false;
-        this.router.navigate(['/menu/salle']);
-      }
-    })
-  }
 }

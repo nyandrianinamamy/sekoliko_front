@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {DataService} from "../../../shared/service/data.service";
 import {urlList} from "../../../Utils/api/urlList";
 import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tz-matiere',
@@ -13,10 +14,11 @@ export class TzMatiereComponent implements OnInit {
   listMatiere = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-  id: '';
+  id:'';
 
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService,
+  private router : Router) { }
 
   ngOnInit() {
     this.getMatiere().subscribe((response:any)=>{
@@ -25,6 +27,7 @@ export class TzMatiereComponent implements OnInit {
               console.log(response.data);
               response.data.forEach((element:any)=>{
                 this.listMatiere.push({
+                  id:element.id,
                   desc:element.description,
                   coeff:element.coefficient
                 });
@@ -37,9 +40,16 @@ export class TzMatiereComponent implements OnInit {
     return this.dataService.post(urlList.path_list_matiere);
   }
 
-  // deleteMatiere(){
-  //    return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(()=>{
-  //      console.log(urlList.path_delete_matiere + this.id)
-  //    });
-  // }
+  deleteMatiere(){
+     return this.dataService.post(urlList.path_delete_matiere + this.id).subscribe(response=>{
+       console.log(urlList.path_delete_matiere + this.id);
+       if (response.code == ConstantHTTP.CODE_SUCCESS){
+         this.router.navigate(['/menu/matiere-list'])
+       }else {
+         alert("en cours de traitement");
+         this.router.navigate(['/menu/matiere-list'])
+       }
+
+     });
+  }
 }

@@ -14,10 +14,9 @@ import {Subject} from "rxjs";
 export class TzClasseListComponent implements OnInit {
 
 
+  classe : Classe;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-  niveau = [];
-  // lentgh = this.niveau.length;
   details = 'Cliquer pour voir details';
   loading: boolean;
 
@@ -34,14 +33,25 @@ export class TzClasseListComponent implements OnInit {
     this.getNiveau().subscribe(response => {
       this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        console.log('responece of response: ', response);
-        response.data.forEach(element => {
-          this.niveau.push({
-            description: element.description
-          });
-        });
+        console.log(response.data)
+        this.classe = response.data;
         this.loading = false;
       }
     });
+  }
+
+  deleteClasse(id:number){
+    console.log(id);
+    this.loading = true;
+    return this.dataService.post(urlList.path_delete_class+id).subscribe(response=>{
+      if (response.code == ConstantHTTP.CODE_SUCCESS){
+        this.router.navigate(['/menu/list-classe']);
+        this.loading = false;
+      }
+    })
+  }
+
+  editClasse(id:number){
+    this.loading = true;
   }
 }

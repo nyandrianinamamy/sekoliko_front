@@ -43,6 +43,7 @@ export class ListEtudiantsComponent implements OnInit {
     this.dtTrigger.next();
     this.loading = true;
     this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
+      console.log(response.data)
       this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.loading = false;

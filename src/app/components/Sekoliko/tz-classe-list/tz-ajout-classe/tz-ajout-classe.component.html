@@ -1,16 +1,12 @@
 
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Ajout nouvelle classe </h4>
+    <h4 class="h4-responsive text-white"> Ajout nouvelle Classe </h4>
 </div>
-
-<form role="form" action=""  #form method="post">
-
-    <div class="col-md-12">
-      <div class="md-form">
-        <input type="text" id="nom" name="nom" #nom class="form-control" mdbInputDirective>
-        <label for="nom">Nom du classe</label>
-      </div>
-      <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right">Enregistrer</button>
-    </div>
-
+<form #salleform="ngForm" class="col-md-12 mt-5">
+    <mat-form-field class="col-md-12">
+        <input matInput placeholder="Nom classe" id="nom" type="text" name="description" [(ngModel)]="classe.description"
+               #login="ngModel">
+    </mat-form-field>
+    <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(classe)">Ajouter</button>
 </form>
+

@@ -18,10 +18,7 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="progress">
-              <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
-                   aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <p class="text-center">listes des profs en {{(class.parent.description.length>4)? (class.parent.description | slice:0:4)+'...':(class.parent.description)}}</p>
           </div>
         </div>
       </a>

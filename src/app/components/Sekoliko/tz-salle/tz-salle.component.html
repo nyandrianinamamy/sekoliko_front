@@ -1,5 +1,5 @@
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des salles {{listSalle.length}} </h4>
+  <h4 class="h4-responsive text-white">Liste des salles</h4>
 </div>
 <section class="mt-5">
     <div class="tz-btn-content text-right mb-2">
@@ -18,7 +18,7 @@
               </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let salleList of listSalle">
+          <tr *ngFor="let salleList of salle">
             <td class="text-center">{{salleList.id}}</td>
             <td class="text-center">{{salleList.nom}}</td>
               <td class="text-center">
@@ -71,22 +71,20 @@
                                   </button>
                                   <h4 class="modal-title w-100" >{{salleList.nom}}  <i class="fa fa-home"></i></h4>
                               </div>
-                              <form class="text-center border border-light p-5" (ngSubmit)="editSalle($event)">
-                                  <div class="modal-body">
-                                      <div class="md-form mb-5">
-                                          <input type="text" name="id"
-                                                 value="{{salleList.id}}" class="form-control d-none validate">
-                                          <label data-error="wrong" data-success="right"  for="orangeForm-name">Salle Nom</label>
-                                          <input type="text" id="orangeForm-name" name="description"
-                                                 value="{{salleList.nom}}" class="form-control validate"
-                                                 [formControl]="signupFormModalName" mdbInputDirective>
+                              <div class="modal-body">
+                                  <form action="">
+                                      <div class="md-form m-2">
+                                          <label data-error="wrong" data-success="right"  for="orangeForm-coeff">Coefficient</label>
+                                          <input type="text" id="orangeForm-coeff" name="description"
+                                                 value="{{salleList.nom}}" [(ngModel)]="salleList.nom" class="form-control validate" mdbInputDirective>
                                       </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
-                                      <button type="submit" value="submit" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect (click)="editSalle(id = salleList.id)">Save changes</button>
-                                  </div>
-                              </form>
+                                      <div class="tz-btn-conten text-center">
+                                          <a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right w-50" type="submit"
+                                             (click)="editModal.hide() ; editSalle(salleList.id, description = salleList.nom)">Modifier</a>
+                                          <a routerLink="/menu/salle" (click)="editModal.hide()" class="btn btn-warning btn-rounded float-right w-50" type="submit">Cancel</a>
+                                      </div>
+                                  </form>
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -108,7 +106,8 @@
                               </div>
                               <div class="modal-body d-flex">
                                   <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>
-                                  <a href="/menu/salle"  type="button" mdbBtn color="primary" class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect (click)="deleteSalle(id = salleList.id)">Confirm</a>
+                                  <a routerLink="/menu/salle"  type="button" mdbBtn color="primary" class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
+                                     (click)="deleteModal.hide(); deleteSalle(salleList.id)">Confirm</a>
                               </div>
                           </div>
                       </div>
