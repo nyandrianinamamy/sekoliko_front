@@ -13,5 +13,6 @@ export class User {
   contact: string;
   token: string;
   password: string;
+  type: boolean;
   constructor() {  }
 }

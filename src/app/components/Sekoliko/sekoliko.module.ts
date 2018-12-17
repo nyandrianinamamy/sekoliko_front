@@ -47,6 +47,7 @@ import { TzPayementsAjoutComponent } from './tz-payements/tz-payements-ajout/tz-
 import { TzUserComponent } from './tz-user/tz-user.component';
 import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
 import { TzFonctionProfComponent } from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
+import { EtudiantUpdateComponent } from './tz-etudiants/etudiant-update/etudiant-update.component';
 
 @NgModule({
     imports: [
@@ -107,8 +108,12 @@ import { TzFonctionProfComponent } from './tz-profs/tz-fonction-prof/tz-fonction
         TzUserComponent,
         TzInscriptionComponent,
         TzProfileComponent,
-        TzFonctionProfComponent
-    ]
+        TzFonctionProfComponent,
+        EtudiantUpdateComponent
+    ],
+  entryComponents: [
+    EtudiantUpdateComponent
+  ],
 })
 export class SekolikoModule {
 }

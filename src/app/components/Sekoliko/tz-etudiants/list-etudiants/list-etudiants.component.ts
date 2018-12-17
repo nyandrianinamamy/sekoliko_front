@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {Component, OnInit, HostListener, ViewChildren, QueryList, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../../../../shared/service/data.service';
 import {Etudiants} from '../../../../shared/model/Etudiants';
@@ -8,6 +8,8 @@ import {Subject} from 'rxjs';
 import {User} from '../../../../shared/model/User';
 import {Inscription} from '../../../../shared/model/Inscription';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {EtudiantUpdateComponent} from '../etudiant-update/etudiant-update.component';
 
 @Component({
   selector: 'app-list-etudiants',
@@ -15,11 +17,13 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./list-etudiants.component.scss']
 })
 export class ListEtudiantsComponent implements OnInit {
-  etudiant: Etudiants;
-  mobile = false
+  etudiant: any[];
+  mobile = false;
   mobileClass = '';
-
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe', 'email', 'action'];
   inscription: Inscription;
   listEtudiants = [];
   idClasseEnfant: number;
@@ -27,26 +31,23 @@ export class ListEtudiantsComponent implements OnInit {
   loading: boolean;
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
-              private currentRoute: ActivatedRoute) {
+              private currentRoute: ActivatedRoute,
+              private dialog: MatDialog) {
 
   }
-
-
   ngOnInit() {
     if (window.screen.width >= 600) {
       this.mobileClass = "text-center";
     }else {
       this.mobileClass = "d-none";
     }
-
     this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
-    this.dtTrigger.next();
     this.loading = true;
     this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
-      this.dtTrigger.next();
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.loading = false;
         this.etudiant = response.data;
+        this.dataSource = new MatTableDataSource<any>(this.etudiant);
       } else {
         console.log('verifieo le function aloha papie a :D ');
       }
@@ -56,7 +57,16 @@ export class ListEtudiantsComponent implements OnInit {
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }
-
+  openPopUpd(etudiant: User) {
+    const openPopUp = this.dialog.open(EtudiantUpdateComponent, {
+      data: etudiant
+    });
+    openPopUp.afterClosed().subscribe(response => {
+      if (response === 1) {
+        this.ngOnInit();
+      }
+    });
+  }
   /**
    * Touche pas
    */

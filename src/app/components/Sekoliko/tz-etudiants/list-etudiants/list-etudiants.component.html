@@ -1,41 +1,98 @@
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des Etudiants en TA1 : {{etudiant.length}} </h4>
+  <h4 class="h4-responsive text-white">Liste des Etudiants</h4>
 </div>
-<section class="mt-5">
+<table mat-table [dataSource]="dataSource" matSort class="full">
+  <ng-container matColumnDef="matricule">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </th>
+    <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.user_id }} </td>
+  </ng-container>
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+    <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.lastname }} </td>
+  </ng-container>
+  <ng-container matColumnDef="prenom">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+    <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.firstname}} </td>
+  </ng-container>
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Age </th>
+    <td mat-cell *matCellDef="let _etudiant" class="prix"> {{_etudiant.user_id.age}} </td>
+  </ng-container>
+  <ng-container matColumnDef="adresse">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </th>
+    <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.adresse}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="contact">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+    <td mat-cell *matCellDef="let _etudiant">  {{_etudiant.user_id.contact}}  </td>
+  </ng-container>
+  <ng-container matColumnDef="sexe">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> sexe </th>
+    <td mat-cell *matCellDef="let _etudiant">  {{_etudiant.user_id.sexe}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+    <td mat-cell *matCellDef="let _etudiant">  {{_etudiant.user_id.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+    <td mat-cell *matCellDef="let _etudiant">
+<!--      <a mdbBtn data-toggle="modal"  data-target="#detailsModal"
+         class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
+        <i class="fa fa-eye"></i>
+      </a>-->
+      <a mdbBtn (click)="openPopUpd(_etudiant.user_id);"
+         class=" tz-btn-circle  m-1 relative waves-light" color="success" >
+        <i class="fa fa-edit"></i>
+      </a>
+ <!--     <a mdbBtn data-toggle="modal" data-target="#detailsModal"
+         class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+        <i class="fa fa-trash"></i>
+      </a>-->
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!--<section class="mt-5">
         <div class="px-2 table-responsive">
           <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table" style="width:100%">
             <thead>
               <tr>
-                <!--<th  class="text-center">id</th>-->
+                &lt;!&ndash;<th  class="text-center">id</th>&ndash;&gt;
                 <th  class="{{mobileClass}}">matricule</th>
                 <th  class="text-center">Nom</th>
                 <th  class="{{mobileClass}}">Prenom</th>
-                <!--<th  class="text-center">email</th>-->
+                &lt;!&ndash;<th  class="text-center">email</th>&ndash;&gt;
                 <th  class="{{mobileClass}}" >Age</th>
                 <th  class="{{mobileClass}}">Sexe</th>
                 <th  class="text-center">contact</th>
-                <!--<th  class="text-center">Adresse</th>-->
+                &lt;!&ndash;<th  class="text-center">Adresse</th>&ndash;&gt;
                 <th  class="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr #list *ngFor="let etudiants of etudiant">
-                <!--<td  class="text-center">{{etudiants.user_id.user_id}}</td>-->
-                <td  class="{{mobileClass}}">{{etudiants.user_id.matricule}}</td>
+                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.user_id}}</td>&ndash;&gt;
+                <td  class="{{mobileClass}}">{{etudiants.user_id.user_id}}</td>
                 <td  class="text-center">{{etudiants.user_id.lastname}}</td>
                 <td  class="{{mobileClass}}">{{etudiants.user_id.firstname}}</td>
-                <!--<td  class="text-center">{{etudiants.user_id.email}}</td>-->
+                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.email}}</td>&ndash;&gt;
                 <td  class="{{mobileClass}}">{{etudiants.user_id.age}}</td>
                 <td  class="{{mobileClass}}">{{etudiants.user_id.sexe}}</td>
                 <td  class="text-center">{{etudiants.user_id.contact}}</td>
-                <!--<td  class="text-center">{{etudiants.user_id.adresse}}</td>-->
+                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.adresse}}</td>&ndash;&gt;
                 <td class="text-center">
                   <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
                      class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
                     <i class="fa fa-eye"></i>
                   </a>
 
-                  <!--modal details-->
+                  &lt;!&ndash;modal details&ndash;&gt;
                   <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                        [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -51,7 +108,7 @@
                             <li class="list-group-item">
                                <table class="w-100 border-top-0">
                                 <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left w-30">ID</span></td>
+                                  <td class="border-top-0 text-left"><span class="text-left w-30">Matricule</span></td>
                                   <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.user_id}}</span></td>
                                 </tr>
                               </table>
@@ -68,16 +125,6 @@
                                   <td class="border-top-0 text-left"><span class="text-left">Prenom</span>
                                   </td>
                                   <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.firstname}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                                <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Matricule</span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.matricule}}</span>
                                   </td>
                                 </tr>
                               </table>
@@ -131,12 +178,12 @@
                       </div>
                     </div>
                   </div>
-                  <!--fin modal details-->
+                  &lt;!&ndash;fin modal details&ndash;&gt;
                   <a mdbBtn data-toggle="modal" data-target="#editModal"
                      class=" tz-btn-circle  m-1 relative waves-light" color="success"  (click)="editModal.show()">
                     <i class="fa fa-edit"></i>
                   </a>
-                  <!--edit modals-->
+                  &lt;!&ndash;edit modals&ndash;&gt;
                   <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                        [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -164,8 +211,8 @@
                                    mdbInputDirective>
                           </div>
                           <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-age">Matricule</label>
-                            <input type="text" id="orangeForm-matricule" value="{{etudiants.user_id.matricule}}" class="form-control validate"
+                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Age</label>
+                            <input type="text" id="orangeForm-sexe" value="{{etudiants.user_id.sexe}}" class="form-control validate"
                                    mdbInputDirective>
                           </div>
                           <div class="md-form">
@@ -174,30 +221,30 @@
                                    mdbInputDirective>
                           </div>
                           <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Sexe</label>
-                            <input type="text" id="orangeForm-sexe" value="{{etudiants.user_id.sexe}}" class="form-control validate"
+                            <label data-error="wrong" data-success="right" for="orangeForm-contact">Contact</label>
+                            <input type="text" id="orangeForm-contact" value="{{etudiants.user_id.contact}}" class="form-control validate"
                                    mdbInputDirective>
                           </div>
                           <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Contact</label>
-                            <input type="text" id="orangeForm-contact" value="{{etudiants.user_id.contact}}" class="form-control validate"
+                            <label data-error="wrong" data-success="right" for="orangeForm-email">Contact</label>
+                            <input type="text" id="orangeForm-email" value="{{etudiants.user_id.email}}" class="form-control validate"
                                    mdbInputDirective>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
-                          <button type="button" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect>Save changes</button>
+                          <button type="button" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect (click)="saveChange(etudiants)">Save changes</button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!--fin modal edit-->
+                  &lt;!&ndash;fin modal edit&ndash;&gt;
 
                   <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
                      class=" tz-btn-circle  m-1 relative waves-light" color="danger">
                     <i class="fa fa-trash"></i>
                   </a>
-                  <!--modal delete-->
+                  &lt;!&ndash;modal delete&ndash;&gt;
                   <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                        [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true" aria-labelledby="myBasicModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
@@ -215,13 +262,13 @@
                       </div>
                     </div>
                   </div>
-                  <!--fin modal delete-->
+                  &lt;!&ndash;fin modal delete&ndash;&gt;
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-</section>
+</section>-->
 <div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"

@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Modification Etudiant</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #myForm="ngForm">
+      <mat-radio-group name="radioControl" [(ngModel)] = "etudiant.sexe">
+        <mat-radio-button value="Femme" #Femme name="Femme">Femme</mat-radio-button>
+        &nbsp;
+        <mat-radio-button value="Homme" #Homme name="Homme">Homme</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="full">
+        <input matInput name="lastName" type="text" [(ngModel)]="etudiant.lastname"
+               placeholder="Nom" required #lastName = "ngModel">
+        <mat-error [hidden]="lastName.valid">Nom non valide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput name="firstname" type="text" [(ngModel)]="etudiant.firstname"
+               placeholder="Prénom" required #firstname = "ngModel">
+        <mat-error [hidden]="firstname.valid">firstname non valide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput name="Age" type="number" [(ngModel)]="etudiant.age"
+               placeholder="age" required #age = "ngModel">
+        <mat-error [hidden]="age.valid">Age non valide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput name="adresse" type="text" [(ngModel)]="etudiant.adresse"
+               placeholder="Adresse" required #adresse = "ngModel">
+        <mat-error [hidden]="adresse.valid">firstname non valide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput name="email" type="text" [(ngModel)]="etudiant.email"
+               placeholder="Email" email #email = "ngModel">
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput name="contact" type="text" [(ngModel)]="etudiant.contact"
+               placeholder="Contact" #contact = "ngModel">
+        <mat-error [hidden]="contact.valid">Contact non valide</mat-error>
+      </mat-form-field>
+
+
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button [disabled]="!myForm.form.valid" (click)="saveChange(etudiant)">Ajouter</button>
+    </form>
+  </mat-card-content>
+</mat-card>
