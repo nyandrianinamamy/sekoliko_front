@@ -37,17 +37,18 @@ class UserController extends FOSRestController
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/user/edit", name="user_new", defaults={"user": null})
      * @Rest\Post("/api/user/edit/{user}", name="user_modify", requirements={"user":"\d+"})
-     * @Rest\RequestParam(name="username", nullable=false)
-     * @Rest\RequestParam(name="email", nullable=false)
-     * @Rest\RequestParam(name="enabled", nullable=false)
-     * @Rest\RequestParam(name="lastname", nullable=false)
+     * @Rest\RequestParam(name="username", nullable=true)
+     * @Rest\RequestParam(name="email", nullable=true)
+     * @Rest\RequestParam(name="enabled", nullable=true)
+     * @Rest\RequestParam(name="lastname", nullable=true)
      * @Rest\RequestParam(name="firstname", nullable=true)
-     * @Rest\RequestParam(name="role", nullable=false)
-     * @Rest\RequestParam(name="sexe", nullable=false)
+     * @Rest\RequestParam(name="role", nullable=true)
+     * @Rest\RequestParam(name="sexe", nullable=true)
      * @Rest\RequestParam(name="age", nullable=true)
      * @Rest\RequestParam(name="adresse", nullable=true)
      * @Rest\RequestParam(name="contact", nullable=true)
      * @Rest\RequestParam(name="password", nullable=true)
+     * @Rest\RequestParam(name="type", nullable=true)
      * @ParamConverter("user",class="UserBundle:TzUser")
      * @throws
      * @return JsonResponse
@@ -66,6 +67,7 @@ class UserController extends FOSRestController
         $paramAdresse = $paramFetcher->get('adresse');
         $paramcontact = $paramFetcher->get('contact');
         $paramPassword = $paramFetcher->get('password');
+        $paramType = $paramFetcher->get('type');
         $tzServiceMsg = $this->get('ws.tz_msg');
         $em = $this->getDoctrine()->getManager();
         if (!$user instanceof TzUser) {
@@ -75,19 +77,23 @@ class UserController extends FOSRestController
             $new = true;
         }
         try {
-            $repRole = $em->getRepository(TzRoleTypeEntity::class);
-            $role = $repRole->find($paramRole);
-            if (!$role instanceof TzRoleTypeEntity) {
-                throw new \Exception("Role not found");
+
+            if (is_null($paramType)) {
+                $repRole = $em->getRepository(TzRoleTypeEntity::class);
+                $role = $repRole->find($paramRole);
+                if (!$role instanceof TzRoleTypeEntity) {
+                    throw new \Exception("Role not found");
+                }
+                $user->setPlainPassword($paramPassword);
+                $user->setUsername($paramUsername);
+                $user->setEnabled($paramEnabled);
+                $user->setRoleType($role);
+
             }
-            $user->setPlainPassword($paramPassword);
-            $user->setUsername($paramUsername);
+            $user->setSexe($paramsexe);
             $user->setEmail($paramEmail);
-            $user->setEnabled($paramEnabled);
             $user->setFirstname($paramFirstName);
             $user->setLastname($paramLastName);
-            $user->setRoleType($role);
-            $user->setSexe($paramsexe);
             $user->setAge($paramAge);
             $user->setAdresse($paramAdresse);
             $user->setContact($paramcontact);
