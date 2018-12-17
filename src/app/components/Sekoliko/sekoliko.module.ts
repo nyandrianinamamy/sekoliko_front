@@ -40,12 +40,12 @@ import { TzClasseListComponent} from './tz-classe-list/tz-classe-list.component'
 import { TzAjoutClasseComponent } from './tz-classe-list/tz-ajout-classe/tz-ajout-classe.component';
 import { TzMatiereComponent } from './tz-matiere/tz-matiere.component';
 import { TzAjoutMatiereComponent } from './tz-matiere/tz-ajout-matiere/tz-ajout-matiere.component';
-import {RadarSpinnerModule} from 'angular-epic-spinners';
+import { RadarSpinnerModule} from 'angular-epic-spinners';
 import { TzProfileComponent } from './tz-profile/tz-profile.component';
 import { TzUserComponent } from './tz-user/tz-user.component';
 import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
 import { TzFonctionProfComponent } from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
-import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+import { EtudiantUpdateComponent } from './tz-etudiants/etudiant-update/etudiant-update.component';
 
 @NgModule({
     imports: [
@@ -105,7 +105,10 @@ import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-pa
         TzInscriptionComponent,
         TzProfileComponent,
         TzFonctionProfComponent,
-        TzPayementsAjoutComponent,
-    ]
+        EtudiantUpdateComponent
+    ],
+  entryComponents: [
+    EtudiantUpdateComponent
+  ],
 })
 export class SekolikoModule {}
