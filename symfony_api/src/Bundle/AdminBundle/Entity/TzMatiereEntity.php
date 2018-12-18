@@ -53,6 +53,7 @@ class TzMatiereEntity
      *  @ORM\JoinColumn(name="id_class", referencedColumnName="id")
      * })
      * @JMS\Groups({"prof_list", "matiere_list","notes"})
+     * @JMS\Groups({"matiere_list","notes"})
      */
     private $classe;
 

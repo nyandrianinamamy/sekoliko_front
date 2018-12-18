@@ -131,5 +131,7 @@ class MatiereController extends AbstractClassRestController
         $posResponse = $this->get("tz.responses");
         $resData = $posResponse->setSuccessResponse($data, "json", array("matiere_list"));
         return $response->setData($resData);
+
+
     }
 }
