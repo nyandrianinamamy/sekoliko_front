@@ -25,9 +25,8 @@ class TzClassEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @JMS\Groups({"classe_etd", "matiere_list", "classe_enfant_etd","inscrit"})
+     * @JMS\Groups({"classe_etd", "matiere_list", "classe_enfant_etd","inscrit","notes"})
      * @JMS\SerializedName("id")
-     * @JMS\Groups({"notes"})
      */
     private $id;
 

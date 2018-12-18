@@ -25,7 +25,7 @@ class TzInscriptionEntity
      *
      * @ORM\Id
      * @ORM\Column(name="num_inscription", type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @JMS\Groups({"inscrit", "liste_etudiant","notes"})
      * @JMS\SerializedName("NumInscription")
      */
@@ -76,9 +76,16 @@ class TzInscriptionEntity
      */
     private $statut;
 
+    /**
+     * @var string
+     * @ORM\Column(name="able", type="boolean", nullable=false)
+     */
+    private $able;
+
     public function __construct()
     {
         $this->setDateInscription(new \DateTime('now'));
+        $this->able = true;
     }
 
     /**
@@ -151,16 +158,30 @@ class TzInscriptionEntity
 
     }
     /**
-     * @return string
+     * @return boolean
      */
     public function getStatut(){
         return $this->statut;
     }
 
     /**
-     * @param string $statut
+     * @param boolean $statut
      */
     public function setStatut($statut){
         $this->statut = $statut;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAble(){
+        return $this->able;
+    }
+
+    /**
+     * @param boolean $able
+     */
+    public function setAble($able){
+        $this->able = $able;
     }
 }

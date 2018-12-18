@@ -59,7 +59,7 @@ class TzMatiereEntity
      * @var string
      * @ORM\ManyToOne(targetEntity="Bundle\UserBundle\Entity\TzUser")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_matiere", referencedColumnName="user_id")
+     *   @ORM\JoinColumn(name="id_matiere", referencedColumnName="user_id", onDelete="CASCADE")
      * })
      * @JMS\Groups({"matiere_list"})
      * @JMS\Accessor(getter="getProfId")
