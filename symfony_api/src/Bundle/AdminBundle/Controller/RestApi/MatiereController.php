@@ -104,7 +104,7 @@ class MatiereController extends AbstractClassRestController
             $em->flush();
             return $response;
         } else {
-            throw new \Exception("Prof not found");
+            throw new \Exception("Matière not found");
         }
     }
 
@@ -112,6 +112,7 @@ class MatiereController extends AbstractClassRestController
      * @param integer $matiere
      * @param ParamFetcher $paramFetcher
      * @Rest\Post("/api/matiere/find", name="recherche_matiere",defaults={"matiere": null})
+     * @Rest\RequestParam(name="id", nullable=true)
      * @Rest\RequestParam(name="nom", nullable=true)
      * @Rest\RequestParam(name="coeff", nullable=true)
      * @Rest\RequestParam(name="class", nullable=true)

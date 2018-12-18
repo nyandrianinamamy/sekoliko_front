@@ -20,35 +20,40 @@ class TzMatiereRepository extends \Doctrine\ORM\EntityRepository
      * @return array
      */
     public function search(ParamFetcher $paramFetcher) {
+        $paramId = $paramFetcher->get('id');
         $paramNom = $paramFetcher->get('nom');
         $paramCoeff = $paramFetcher->get('coeff');
         $paramClass = $paramFetcher->get('class');
         $paramProf = $paramFetcher->get('prof');
-        $queryBuilder = $this->getEntityManager()
-            ->getRepository(TzMatiereEntity::class)
-            ->createQueryBuilder('m');
-        if (!is_null($paramNom) && !empty($paramNom)) {
-            $queryBuilder->andWhere(
-                $queryBuilder->expr()->like('m.description',
-                    $queryBuilder->expr()->literal('%' . $paramNom . '%'))
-            );
+
+        $querybuilder = $this->createQueryBuilder('m');
+
+        if (isset($paramNom)) {
+            $querybuilder->select('m')
+                ->andwhere('m.description = :nom')
+                ->setParameter('nom', $paramNom);
         }
-        if (!is_null($paramCoeff) && !empty($paramCoeff)) {
-            $queryBuilder->andWhere(
-                $queryBuilder->expr()->eq('m.coefficient', $paramCoeff)
-            );
+        if (isset($paramId)) {
+            $querybuilder->select('m')
+                ->andWhere('m.id = :id')
+                ->setParameter('id', $paramId);
         }
-        if (!is_null($paramClass) && !empty($paramClass)) {
-            $queryBuilder->andWhere(
-                $queryBuilder->expr()->eq('m.classe', $paramClass)
-            );
+        if (isset($paramCoeff)) {
+            $querybuilder->select('m')
+                ->andWhere('m.coefficient = :coeff')
+                ->setParameter('coeff', $paramCoeff);
         }
-        if (!is_null($paramProf) && !empty($paramProf)) {
-            $queryBuilder->andWhere(
-                $queryBuilder->expr()->eq('m.ProfId', $paramProf)
-            );
+        if (isset($paramClass)) {
+            $querybuilder->select('m')
+                ->andWhere('m.classe = :classe')
+                ->setParameter('classe', $paramClass);
         }
-            $etat = $queryBuilder->getQuery()->getResult();
-        return $etat;
+        if (isset($paramProf)) {
+            $querybuilder->select('m')
+                ->innerJoin('UserBundle:TzUser', 'u', 'WITH', 'm.ProfId = u.userId')
+                ->andWhere('m.ProfId = :prof')
+                ->setParameter('prof', $paramProf);
+        }
+        return $querybuilder->getQuery()->getResult();
     }
 }

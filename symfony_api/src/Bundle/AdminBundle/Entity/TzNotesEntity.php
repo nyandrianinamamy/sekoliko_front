@@ -46,7 +46,7 @@ class TzNotesEntity
      * @var integer
      * @ORM\ManyToOne(targetEntity="TzMatiereEntity")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_mat", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_mat", referencedColumnName="id", onDelete="CASCADE")
      * })
      * @JMS\Groups({"notes"})
      * @JMS\Accessor(getter="getIdmat")

@@ -123,4 +123,27 @@ class TzInscriptionRepository extends \Doctrine\ORM\EntityRepository
         }
         return $querybuilder->getQuery()->getResult();
     }
+
+    /**
+     * @param ParamFetcher $paramFetcher
+     * @return array
+     */
+
+    public function isDuplicated(ParamFetcher $paramFetcher){
+        $paramUserId = $paramFetcher->get('userid');
+        $paramClasse = $paramFetcher->get('idclasse');
+        $paramAs = $paramFetcher->get('idas');
+
+        $querybuilder = $this->createQueryBuilder('i');
+
+        $querybuilder
+            ->where('i.user_id = :userid')
+            ->andWhere('i.id_classe = :classe')
+            ->andWhere('i.id_annee_scolaire = :as')
+            ->setParameter('userid', $paramUserId)
+            ->setParameter('classe', $paramClasse)
+            ->setParameter('as', $paramAs);
+
+        return $querybuilder->getQuery()->getResult();
+    }
 }

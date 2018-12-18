@@ -54,29 +54,42 @@ class InscriptionController extends FOSRestController
         $parameterIdAS = $paramFetcher->get('idas');
         $parameterStatus = $paramFetcher->get('status');
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine();
         try {
-            $userid = $em->getRepository(TzUser::class)->find($parameterId);
-            $classid = $em->getRepository(TzClasseEnfantEntity::class)->find($parameterNiveau);
-            $asid = $em->getRepository(TzAnneeScolaireEntity::class)->find($parameterIdAS);
-            if ($userid instanceof TzUser && $classid instanceof TzClasseEnfantEntity && $asid instanceof TzAnneeScolaireEntity) {
-                $ins = new TzInscriptionEntity();
-
-                $ins->setUserId($userid);
-                $ins->setClasseId($classid);
-                $ins->setIdAnneeScolaire($asid);
-                $ins->setStatut($parameterStatus);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($ins);
-                $em->flush();
-
-                $text = sprintf("Add successfully");
-                $data = array('id' => $ins->getNumInscription());
-                $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
-            } else {
-                $text = sprintf("Violation constraint foreign key");
+            $result = $em
+                ->getRepository(TzInscriptionEntity::class)
+                ->isDuplicated($paramFetcher);
+            if (count($result) >= 1) {
+                $text = sprintf("Duplicated record");
                 $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);
+            } else {
+                $userid = $em
+                    ->getRepository(TzUser::class)
+                    ->find($parameterId);
+                $classid = $em
+                    ->getRepository(TzClasseEnfantEntity::class)
+                    ->find($parameterNiveau);
+                $asid = $em
+                    ->getRepository(TzAnneeScolaireEntity::class)
+                    ->find($parameterIdAS);
+
+                if ($userid instanceof TzUser && $classid instanceof TzClasseEnfantEntity && $asid instanceof TzAnneeScolaireEntity) {
+                    $ins = new TzInscriptionEntity();
+                    $ins->setUserId($userid);
+                    $ins->setClasseId($classid);
+                    $ins->setIdAnneeScolaire($asid);
+                    $ins->setStatut($parameterStatus);
+
+                    $em->getManager()->persist($ins);
+                    $em->getManager()->flush();
+
+                    $text = sprintf("Add successfully");
+                    $data = array('id' => $ins->getNumInscription());
+                    $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
+                } else {
+                    $text = sprintf("Violation constraint foreign key");
+                    $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);
+                }
             }
         } catch (DBALException $e) {
             $text = sprintf("%s", $e->getMessage());
@@ -141,10 +154,9 @@ class InscriptionController extends FOSRestController
         } catch (DBALException $e) {
             $text = sprintf("%s", $e->getMessage());
             $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $text, $text, null);
-        } finally {
-            $response->setData($msgReturn);
-            return $response;
         }
+        $response->setData($msgReturn);
+        return $response;
     }
 
     /**
@@ -179,11 +191,10 @@ class InscriptionController extends FOSRestController
                 $posResponse = $this->get("tz.responses");
             }
             if ($paramList === 'liste') {
-                $resData = $posResponse->setSuccessResponse($data, "json", array("liste_etudiant"));
+                    $resData = $posResponse->setSuccessResponse($data, "json", array("liste_etudiant"));
             } else {
-                $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
+                    $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
             }
-            $resData = $posResponse->setSuccessResponse($data, "json", array("inscrit"));
             return $response->setData($resData);
         } catch (DBALException $e) {
             $text = sprintf("%s", $e->getMessage());
