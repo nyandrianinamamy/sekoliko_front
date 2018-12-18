@@ -48,8 +48,6 @@ export class ListEtudiantsComponent implements OnInit {
         this.loading = false;
         this.etudiant = response.data;
         this.dataSource = new MatTableDataSource<any>(this.etudiant);
-      } else {
-        console.log('verifieo le function aloha papie a :D ');
       }
     });
   }
