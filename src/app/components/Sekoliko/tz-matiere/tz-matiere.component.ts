@@ -47,12 +47,14 @@ export class TzMatiereComponent implements OnInit {
     editMatiere(id: number) {
         this.loading = true;
         const matiere = {
+            "id":id,
             "nom": this.nom,
             "coeff": this.coeff,
             "class": 7,
             "prof": 6
         };
         this.dataService.post(urlList.path_edit_matiere + id, matiere).subscribe((data:any) => {
+            console.log(matiere)
             if (data.code === ConstantHTTP.CODE_SUCCESS) {
                 console.log(data.data)
                 this.loading = false;
