@@ -4,22 +4,22 @@
 </div>
 <form #salleform="ngForm" class="col-md-12 mt-5">
   <mat-form-field class="col-md-12">
-    <input matInput placeholder="Nom matiere" id="nom" type="text" name="description" [(ngModel)]="matiere.nom"
+    <input matInput placeholder="Nom matiere" id="nom" type="text" name="description" [(ngModel)]="_matiere.nom"
            #description="ngModel">
   </mat-form-field>
   <mat-form-field class="col-md-12">
-  <input matInput placeholder="Coefficient" id="coeff" type="text" name="coefficient" [(ngModel)]="matiere.coeff"
+  <input matInput placeholder="Coefficient" id="coeff" type="text" name="coefficient" [(ngModel)]="_matiere.coeff"
          #coeff="ngModel">
   </mat-form-field>
   <mat-form-field class="col-md-12">
-    <mat-select placeholder="Select" name="class" [(ngModel)]="matiere.class">
+    <mat-select placeholder="Select" name="class" [(ngModel)]="_matiere.class">
       <mat-option *ngFor="let classe of classe"  value="{{classe.id}}">{{classe.description}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-12">
-    <mat-select placeholder="Select" name="class" [(ngModel)]="matiere.prof">
+    <mat-select placeholder="Select" name="class" [(ngModel)]="_matiere.prof">
       <mat-option *ngFor="let profs of listProff"  value="{{profs.id}}">{{profs.nom}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(matiere)">Ajouter</button>
+  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(_matiere)">Ajouter</button>
 </form>

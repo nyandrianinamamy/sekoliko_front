@@ -3,5 +3,5 @@ export class MatiereParam {
   nom: string;
   coeff: number;
   class: number;
-  matiere: number;
+  prof: number;
 }

@@ -14,7 +14,8 @@ import {Router} from "@angular/router";
 })
 export class TzAjoutMatiereComponent implements OnInit {
 
-  matiere:MatiereParam;
+  matiere:MatiereParam[];
+  _matiere:MatiereParam;
   classe : Classe;
   listProff : Profs;
   loading:boolean;
@@ -23,10 +24,9 @@ export class TzAjoutMatiereComponent implements OnInit {
   constructor(private dataService:DataService,private router:Router) {}
 
   ngOnInit() {
-    this.matiere = new MatiereParam();
+    this._matiere = new MatiereParam();
     this.getNiveau().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        console.log(response.data)
         this.classe = response.data;
       }
     });
@@ -39,18 +39,17 @@ export class TzAjoutMatiereComponent implements OnInit {
   }
 
   getNiveau() {
-    return this.dataService.post(urlList.path_list_class_parent);
+    return this.dataService.post(urlList.path_list_classe);
   }
 
   getListProffesseurs() {
     return this.dataService.post(urlList.path_list_proffesseurs);
   }
 
-  save(matiere:MatiereParam){
-    console.log("eto");
-    return this.dataService.post(urlList.path_add_matiere,matiere).subscribe(response => {
-      if (response.code == ConstantHTTP.CODE_SUCCESS) {
-        console.log("poinsa");
+  save(_matiere:MatiereParam){
+    return this.dataService.post(urlList.path_add_matiere,_matiere).subscribe((response) => {
+      console.log(_matiere)
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
         this.router.navigate(['/menu/matiere-list']);
       }
     })

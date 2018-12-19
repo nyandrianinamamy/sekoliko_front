@@ -32,9 +32,10 @@ export class TzMatiereComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
         this.getMatiere().subscribe((response: any) => {
-            if (response.code == ConstantHTTP.CODE_SUCCESS) {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
                 this.loading = false;
                 this.listMatiere = response.data;
+                console.log(this.listMatiere)
                 this.dtTrigger.next();
             }
         });
@@ -50,7 +51,7 @@ export class TzMatiereComponent implements OnInit {
             "nom": this.nom,
             "coeff": this.coeff,
             "class": 7,
-            "prof": 6
+            "prof": 6,
         };
         this.dataService.post(urlList.path_edit_matiere + id, matiere).subscribe((data:any) => {
             if (data.code === ConstantHTTP.CODE_SUCCESS) {
@@ -58,16 +59,16 @@ export class TzMatiereComponent implements OnInit {
                 this.ngOnInit();
                 this.dtTrigger.next();
             }
-        })
+        });
     }
 
     deleteMatiere(id: number) {
         this.loading = true;
          return this.dataService.post(urlList.path_delete_matiere + id).subscribe(response => {
-            if (response.code == ConstantHTTP.CODE_SUCCESS) {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
                 this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(()=>
                 this.router.navigate(['/menu/matiere-list']));
-                this.loading = false
+                this.loading = false;
             }
         });
     }
