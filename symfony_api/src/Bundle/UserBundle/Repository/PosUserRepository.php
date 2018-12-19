@@ -3,6 +3,7 @@
 namespace Bundle\UserBundle\Repository;
 use Bundle\UserBundle\Entity\TzUser;
 use FOS\RestBundle\Request\ParamFetcher;
+use JMS\Serializer\SerializerBuilder;
 
 /**
  * Created by PhpStorm.
@@ -10,14 +11,14 @@ use FOS\RestBundle\Request\ParamFetcher;
  * Date: 11/11/2018
  * Time: 17:12
  */
-class PosUserRepository extends \Doctrine\ORM\EntityRepository
+class PosUserRepository extends CoreRepository
 {
     /**
      * function de recherche de user
      * @param ParamFetcher $paramFetcher
      * @return array
      */
-    public function searchUser(ParamFetcher $paramFetcher) {
+    public function searchUser(ParamFetcher $paramFetcher, $page = 1, $limit = 50) {
         $paramUsername = $paramFetcher->get('username');
         $paramEmail = $paramFetcher->get('email');
         $paramEnabled = $paramFetcher->get('enabled');
@@ -94,7 +95,21 @@ class PosUserRepository extends \Doctrine\ORM\EntityRepository
                 $querybuilder->expr()->eq('p.age', $paramAge)
             );
         }
+        $qbTotal = clone $querybuilder;
+        $qbTotal->select('COUNT(p) total');
+        $total = $qbTotal->getQuery()->getOneOrNullResult();
+        $offset = $this->getOffset($page, $limit);
+        $querybuilder->setFirstResult($offset);
+        $querybuilder->setMaxResults($limit);
+
         $etat = $querybuilder->getQuery()->getResult();
-        return $etat;
+        $serializer = SerializerBuilder::create()->build();
+        $data = json_decode($serializer->serialize($etat, 'json'), true);
+        $response = array(
+            'count' => count($data),
+            'total' => (int) $total['total'],
+            'list'  => $data,
+        );
+        return $response;
     }
 }

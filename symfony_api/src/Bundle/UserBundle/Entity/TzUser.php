@@ -31,7 +31,7 @@ class TzUser extends BaseUser
 
     /**
      * @var string
-     * @JMS\Groups({"user_list","inscrit" , "liste_etudiant","notes"})
+     * @JMS\Groups({"user_list", "inscrit" , "liste_etudiant", "notes"})
      * @ORM\Column(name="lastname", type="string", length=80, nullable=true)
      */
     private $lastname;

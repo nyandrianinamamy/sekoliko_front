@@ -1,6 +1,7 @@
 <?php
 
 namespace Bundle\UserBundle\Controller\RestApi;
+
 use Bundle\AdminBundle\Entity\TzRoleTypeEntity;
 use Bundle\CommunBundle\Utils\ConstantSrv;
 use Bundle\UserBundle\Entity\TzUser;
@@ -11,6 +12,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Created by PhpStorm.
  * User: Tahiana_Rakotonirina
@@ -24,7 +26,8 @@ class UserController extends FOSRestController
      * @Rest\Get("/api/user")
      * @return JsonResponse
      */
-    public function getFonction() {
+    public function getFonction()
+    {
         $respone = new JsonResponse();
         $respone->setData('test user');
         return $respone;
@@ -53,7 +56,8 @@ class UserController extends FOSRestController
      * @throws
      * @return JsonResponse
      */
-    public function editUser($user, ParamFetcher $paramFetcher) {
+    public function editUser($user, ParamFetcher $paramFetcher)
+    {
         $response = new JsonResponse();
         $new = false;
         $paramUsername = $paramFetcher->get('username');
@@ -75,6 +79,8 @@ class UserController extends FOSRestController
             // mot de passe temporaire
             $user->setPlainPassword(sha1('123456789'));
             $new = true;
+        } else {
+            // $user->setPlainPassword($paramPassword);
         }
         try {
 
@@ -91,6 +97,7 @@ class UserController extends FOSRestController
 
             }
             $user->setSexe($paramsexe);
+            $user->setUsername($paramUsername);
             $user->setEmail($paramEmail);
             $user->setFirstname($paramFirstName);
             $user->setLastname($paramLastName);
@@ -106,7 +113,7 @@ class UserController extends FOSRestController
             }
             $data = array('id' => $user->getUserId());
             $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $msgReturn = $tzServiceMsg->getMsg(ConstantSrv::CODE_BAD_REQUEST, $e->getMessage(), "Data not saved");
         }
         $response->setData($msgReturn);
@@ -124,25 +131,47 @@ class UserController extends FOSRestController
      * @Rest\RequestParam(name="lastname", nullable=true)
      * @Rest\RequestParam(name="firstname", nullable=true)
      * @Rest\RequestParam(name="matricule", nullable=true)
-     * @Rest\RequestParam(name="role", nullable=false)
+     * @Rest\RequestParam(name="role", nullable=true)
      * @Rest\RequestParam(name="sexe", nullable=true)
      * @Rest\RequestParam(name="age", nullable=true)
      * @Rest\RequestParam(name="adresse", nullable=true)
      * @Rest\RequestParam(name="contact", nullable=true)
-     *
+     * @Rest\RequestParam(name="page", nullable=true, requirements ="\d+")
+     * @Rest\RequestParam(name="limit", nullable=true, requirements ="\d+")
      * @ParamConverter("user",class="UserBundle:TzUser")
      * @return JsonResponse
      */
-    public function rechercheUser($user, ParamFetcher $paramFetcher) {
+    public function rechercheUser($user, ParamFetcher $paramFetcher)
+    {
         $response = new JsonResponse();
+        $iPage = $paramFetcher->get('page');
+        $iLimit = $paramFetcher->get('limit');
+        $tzServiceMsg = $this->get('ws.tz_msg');
         if ($user instanceof TzUser) {
-            $data = $user;
+
+            $data = array(
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'enabled' => $user->isEnabled(),
+                'password' => $user->getPlainPassword(),
+                'user_id' => $user->getUserId(),
+                'lastname' => $user->getLastname(),
+                'firstname' => $user->getFirstname(),
+                'adresse' => $user->getAdresse(),
+                'contact' => $user->getContact(),
+                'sexe' => $user->getSexe(),
+                'age' => $user->getAge(),
+                'role_type' => [
+                    'id' => $user->getRoleType()->getId(),
+                    'description' => $user->getRoleType()->getDescription()
+                ]
+            );
         } else {
             $repuser = $this->getDoctrine()->getRepository(TzUser::class);
-            $data = $repuser->searchUser($paramFetcher);
+            $data = $repuser->searchUser($paramFetcher, $iPage, $iLimit);
         }
-        $posResponse = $this->get("tz.responses");
-        $resData = $posResponse->setSuccessResponse($data, "json", array("user_list"));
+        $text = "Get list succès";
+        $resData = $tzServiceMsg->getMsg(ConstantSrv::CODE_SUCCESS, $text, $text, $data);
         return $response->setData($resData);
     }
 
@@ -155,7 +184,8 @@ class UserController extends FOSRestController
      * @ParamConverter("role", class="AdminBundle:TzRoleTypeEntity")
      * @return JsonResponse
      */
-    public function rechercherolee($role, ParamFetcher $paramFetcher) {
+    public function rechercherolee($role, ParamFetcher $paramFetcher)
+    {
 
         $response = new JsonResponse();
         if ($role instanceof TzRoleTypeEntity) {
