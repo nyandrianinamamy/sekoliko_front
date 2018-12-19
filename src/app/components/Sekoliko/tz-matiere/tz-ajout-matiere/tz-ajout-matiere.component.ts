@@ -47,8 +47,10 @@ export class TzAjoutMatiereComponent implements OnInit {
   }
 
   save(matiere:MatiereParam){
-    this.dataService.post(urlList.path_add_matiere,matiere).subscribe(response=>{
+    console.log("eto");
+    return this.dataService.post(urlList.path_add_matiere,matiere).subscribe(response => {
       if (response.code == ConstantHTTP.CODE_SUCCESS) {
+        console.log("poinsa");
         this.router.navigate(['/menu/matiere-list']);
       }
     })

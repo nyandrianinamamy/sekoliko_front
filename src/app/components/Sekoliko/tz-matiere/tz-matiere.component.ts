@@ -11,6 +11,7 @@ import {MatiereParam} from "../../../shared/model/MatiereParam";
     templateUrl: './tz-matiere.component.html',
     styleUrls: ['./tz-matiere.component.scss']
 })
+
 export class TzMatiereComponent implements OnInit {
 
     listMatiere: MatiereParam[];
@@ -32,9 +33,8 @@ export class TzMatiereComponent implements OnInit {
         this.loading = true;
         this.getMatiere().subscribe((response: any) => {
             if (response.code == ConstantHTTP.CODE_SUCCESS) {
-                console.log(response.data);
-                this.listMatiere = response.data;
                 this.loading = false;
+                this.listMatiere = response.data;
                 this.dtTrigger.next();
             }
         });
@@ -47,16 +47,13 @@ export class TzMatiereComponent implements OnInit {
     editMatiere(id: number) {
         this.loading = true;
         const matiere = {
-            "id":id,
             "nom": this.nom,
             "coeff": this.coeff,
             "class": 7,
             "prof": 6
         };
         this.dataService.post(urlList.path_edit_matiere + id, matiere).subscribe((data:any) => {
-            console.log(matiere)
             if (data.code === ConstantHTTP.CODE_SUCCESS) {
-                console.log(data.data)
                 this.loading = false;
                 this.ngOnInit();
                 this.dtTrigger.next();
@@ -65,16 +62,13 @@ export class TzMatiereComponent implements OnInit {
     }
 
     deleteMatiere(id: number) {
-        return this.dataService.post(urlList.path_delete_matiere + id).subscribe(response => {
+        this.loading = true;
+         return this.dataService.post(urlList.path_delete_matiere + id).subscribe(response => {
             if (response.code == ConstantHTTP.CODE_SUCCESS) {
-                this.router.navigate(['/menu/matiere-list'])
-            } else {
-                alert("en cours de traitement");
-                this.router.navigate(['/menu/matiere-list'])
+                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(()=>
+                this.router.navigate(['/menu/matiere-list']));
+                this.loading = false
             }
-
         });
     }
-
-
 }

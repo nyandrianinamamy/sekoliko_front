@@ -46,6 +46,7 @@ import { TzUserComponent } from './tz-user/tz-user.component';
 import { TzInscriptionComponent } from './tz-inscription/tz-inscription.component';
 import { TzFonctionProfComponent } from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
 import { EtudiantUpdateComponent } from './tz-etudiants/etudiant-update/etudiant-update.component';
+import {DialogContentExampleDialog} from "./tz-salle/tz-salle.component";
 
 @NgModule({
     imports: [
@@ -105,10 +106,13 @@ import { EtudiantUpdateComponent } from './tz-etudiants/etudiant-update/etudiant
         TzInscriptionComponent,
         TzProfileComponent,
         TzFonctionProfComponent,
-        EtudiantUpdateComponent
+        EtudiantUpdateComponent,
+        DialogContentExampleDialog
+
     ],
   entryComponents: [
-    EtudiantUpdateComponent
+    EtudiantUpdateComponent,
+      DialogContentExampleDialog
   ],
 })
 export class SekolikoModule {}
