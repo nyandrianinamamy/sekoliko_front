@@ -1,0 +1,95 @@
+{
+  "configVersion": 1,
+  "index": "/sekoliko/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/sekoliko/1.7cedf00cf625a343f5f0.js",
+        "/sekoliko/5.5aa8d0f658078745f298.js",
+        "/sekoliko/6.3442df281e07fcfdc2ed.js",
+        "/sekoliko/index.html",
+        "/sekoliko/main.f113d6cc26d0edc5ca25.js",
+        "/sekoliko/polyfills.5aec796d9416706f37e7.js",
+        "/sekoliko/runtime.592c3cd677a8d4ad1580.js",
+        "/sekoliko/scripts.968f55bfb751cd0febb2.js",
+        "/sekoliko/styles.bc84ed673a64703b5274.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/sekoliko/assets/api/login.json",
+        "/sekoliko/assets/api/logout.json",
+        "/sekoliko/assets/api/shop.json",
+        "/sekoliko/assets/icons/bankaccount.jpg",
+        "/sekoliko/assets/icons/domotica.jpg",
+        "/sekoliko/assets/icons/ecole.jpg",
+        "/sekoliko/assets/icons/icon-512x512.png",
+        "/sekoliko/assets/icons/index.jpg",
+        "/sekoliko/assets/icons/office.jpg",
+        "/sekoliko/assets/icons/sidebar-4.jpg",
+        "/sekoliko/assets/icons/techzara.jpg",
+        "/sekoliko/assets/images/220px-Taka_Shiba.jpg",
+        "/sekoliko/assets/images/man.jpeg",
+        "/sekoliko/assets/images/profile.jpg",
+        "/sekoliko/assets/images/shibainu.jpg",
+        "/sekoliko/assets/jq/jq.js",
+        "/sekoliko/assets/style/common.scss"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/sekoliko/1.7cedf00cf625a343f5f0.js": "86104ec5d5ad833cbb81033724bcfede06badcf1",
+    "/sekoliko/5.5aa8d0f658078745f298.js": "e292932bdf6cfc6781dab2045b30959307882c83",
+    "/sekoliko/6.3442df281e07fcfdc2ed.js": "5f9c9bf5979850f443d7bd93b83fa590a1e81c7e",
+    "/sekoliko/assets/api/login.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "/sekoliko/assets/api/logout.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "/sekoliko/assets/api/shop.json": "088e1bfd59ecc07a76c10b41fb604f84b0fab34d",
+    "/sekoliko/assets/icons/bankaccount.jpg": "446e9b861b720c6bf3d68b34423d12b92cf8f96a",
+    "/sekoliko/assets/icons/domotica.jpg": "763a4da306987b5b5ad417cb5625bbc356cbf9e7",
+    "/sekoliko/assets/icons/ecole.jpg": "0b1ee87f2214f65c903965b8c5ba72a96dcb7ca6",
+    "/sekoliko/assets/icons/icon-512x512.png": "e9b23ca79a2f8e31e791c84c2113771ee2b9317c",
+    "/sekoliko/assets/icons/index.jpg": "cfe1074d04bb349d4cd8721e92be6a74b0a1144f",
+    "/sekoliko/assets/icons/office.jpg": "048dd4ae0755d6b56758e48ef94b97b0f4908333",
+    "/sekoliko/assets/icons/sidebar-4.jpg": "0a1b00c842c66c0694c769ca2aea92f66649b2e3",
+    "/sekoliko/assets/icons/techzara.jpg": "5fbdaa370c047cf3cba2cdc07cab980422af13ec",
+    "/sekoliko/assets/images/220px-Taka_Shiba.jpg": "1d09eed01869b2a58ab650e3a63d217964ec3a7c",
+    "/sekoliko/assets/images/man.jpeg": "fee89093a086f5390a0fed4604e13069ce28c7cd",
+    "/sekoliko/assets/images/profile.jpg": "7ac5443e66163a34db930b5b69364ad909f2563a",
+    "/sekoliko/assets/images/shibainu.jpg": "7d122672686ff781ca336a79043c3fae645a2636",
+    "/sekoliko/assets/jq/jq.js": "cce64088d6814dea43faedf0b14a913134b60e05",
+    "/sekoliko/assets/style/common.scss": "423d36728ceb14615dcd8a68886c5a58807e58c5",
+    "/sekoliko/index.html": "f385762494aff2177bd8edb414cb9a774c1f0e3c",
+    "/sekoliko/main.f113d6cc26d0edc5ca25.js": "4ded2fddd6baedf2857047c8740d82a59013208a",
+    "/sekoliko/polyfills.5aec796d9416706f37e7.js": "98a695089a41f11922999419fa0d40d410bcbae8",
+    "/sekoliko/runtime.592c3cd677a8d4ad1580.js": "69180e76835ecd73387bc8bcba075424c6e859b3",
+    "/sekoliko/scripts.968f55bfb751cd0febb2.js": "8cff919624f4590879d1564653ac7c73c135e960",
+    "/sekoliko/styles.bc84ed673a64703b5274.css": "854f6789b64de00701ae3b59b05a8a536e5289ba"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*\\.[^\\/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*\\/.*$"
+    }
+  ]
+}
