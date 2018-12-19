@@ -63,7 +63,7 @@ export class ListEtudiantsComponent implements OnInit {
     });
     openPopUp.afterClosed().subscribe(response => {
       if (response === 1) {
-        this.ngOnInit();
+        // this.ngOnInit();
       }
     });
   }

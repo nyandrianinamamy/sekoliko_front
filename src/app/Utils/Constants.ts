@@ -3,5 +3,7 @@ export const Constants = Object.freeze({
   APP_VERSION: '0.1.0',
   TITLE: 'Techzara sekoliko App',
   TYPE_ETUDIANT: 2,
-  TYPE_PROF: 1
+  TYPE_PROF: 1,
+  PROF: 1,
+  ETUDIANT: 2
 });

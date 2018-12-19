@@ -63,6 +63,12 @@ const MENUITEMS = [
         name: 'Matieres',
         type: 'link',
         icon: 'book'
+      },
+      {
+        state: ['/', 'menu', 'user'],
+        name: 'Gestion des profiles',
+        type: 'link',
+        icon: 'account_circle'
       }],
   },
 ];

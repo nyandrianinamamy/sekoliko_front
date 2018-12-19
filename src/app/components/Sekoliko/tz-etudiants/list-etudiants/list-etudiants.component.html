@@ -1,6 +1,8 @@
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des Etudiants</h4>
-</div>
+<mat-toolbar color="primary">
+  <span>
+    Listes des étudiants
+  </span>
+</mat-toolbar>
 <table mat-table [dataSource]="dataSource" matSort class="full">
   <ng-container matColumnDef="matricule">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </th>
@@ -40,235 +42,20 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
     <td mat-cell *matCellDef="let _etudiant">
-<!--      <a mdbBtn data-toggle="modal"  data-target="#detailsModal"
+      <a mdbBtn (click)="openPopUpd(_etudiant.user_id);"
          class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
         <i class="fa fa-eye"></i>
-      </a>-->
-      <a mdbBtn (click)="openPopUpd(_etudiant.user_id);"
+      </a>
+      <a mdbBtn routerLink="/menu/user/edit/{{_etudiant.user_id.user_id}}"
          class=" tz-btn-circle  m-1 relative waves-light" color="success" >
         <i class="fa fa-edit"></i>
       </a>
- <!--     <a mdbBtn data-toggle="modal" data-target="#detailsModal"
-         class=" tz-btn-circle  m-1 relative waves-light" color="danger">
-        <i class="fa fa-trash"></i>
-      </a>-->
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<!--<section class="mt-5">
-        <div class="px-2 table-responsive">
-          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table" style="width:100%">
-            <thead>
-              <tr>
-                &lt;!&ndash;<th  class="text-center">id</th>&ndash;&gt;
-                <th  class="{{mobileClass}}">matricule</th>
-                <th  class="text-center">Nom</th>
-                <th  class="{{mobileClass}}">Prenom</th>
-                &lt;!&ndash;<th  class="text-center">email</th>&ndash;&gt;
-                <th  class="{{mobileClass}}" >Age</th>
-                <th  class="{{mobileClass}}">Sexe</th>
-                <th  class="text-center">contact</th>
-                &lt;!&ndash;<th  class="text-center">Adresse</th>&ndash;&gt;
-                <th  class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr #list *ngFor="let etudiants of etudiant">
-                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.user_id}}</td>&ndash;&gt;
-                <td  class="{{mobileClass}}">{{etudiants.user_id.user_id}}</td>
-                <td  class="text-center">{{etudiants.user_id.lastname}}</td>
-                <td  class="{{mobileClass}}">{{etudiants.user_id.firstname}}</td>
-                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.email}}</td>&ndash;&gt;
-                <td  class="{{mobileClass}}">{{etudiants.user_id.age}}</td>
-                <td  class="{{mobileClass}}">{{etudiants.user_id.sexe}}</td>
-                <td  class="text-center">{{etudiants.user_id.contact}}</td>
-                &lt;!&ndash;<td  class="text-center">{{etudiants.user_id.adresse}}</td>&ndash;&gt;
-                <td class="text-center">
-                  <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
-                     class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
-                    <i class="fa fa-eye"></i>
-                  </a>
-
-                  &lt;!&ndash;modal details&ndash;&gt;
-                  <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                       [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title w-100">{{etudiants.user_id.lastname}}  <i class="fa fa-user-circle"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                          <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                               <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left w-30">Matricule</span></td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.user_id}}</span></td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                               <table class="w-100 border-top-0">
-                                <td class="border-top-0 text-left"><span class="text-left">Nom</span></td>
-                                <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.lastname}}</span></td>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                               <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Prenom</span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.firstname}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                                <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Age</span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.age}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                                <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Contact</span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.contact}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                                <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Sexe</span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.sexe}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                            <li class="list-group-item">
-                                <table class="w-100 border-top-0">
-                                <tr>
-                                  <td class="border-top-0 text-left"><span class="text-left">Adresse : </span>
-                                  </td>
-                                  <td class="border-top-0 text-right"><span class="text-right">{{etudiants.user_id.adresse}}</span>
-                                  </td>
-                                </tr>
-                              </table>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" mdbBtn color="secondary"
-                                  class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()" mdbWavesEffect>Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  &lt;!&ndash;fin modal details&ndash;&gt;
-                  <a mdbBtn data-toggle="modal" data-target="#editModal"
-                     class=" tz-btn-circle  m-1 relative waves-light" color="success"  (click)="editModal.show()">
-                    <i class="fa fa-edit"></i>
-                  </a>
-                  &lt;!&ndash;edit modals&ndash;&gt;
-                  <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                       [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title w-100" >Modifier {{etudiants.user_id.lastname}}  <i class="fa fa-user-circle"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Nom</label>
-                            <input type="text" id="orangeForm-name" value="{{etudiants.user_id.lastname}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-name">Etudiants Prenom</label>
-                            <input type="text" id="orangeForm-prenom" value="{{etudiants.user_id.firstname}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-age">Age</label>
-                            <input type="text" id="orangeForm-age" value="{{etudiants.user_id.age}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-sexe">Age</label>
-                            <input type="text" id="orangeForm-sexe" value="{{etudiants.user_id.sexe}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-adresse">Adresse</label>
-                            <input type="text" id="orangeForm-adresse" value="{{etudiants.user_id.adresse}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-contact">Contact</label>
-                            <input type="text" id="orangeForm-contact" value="{{etudiants.user_id.contact}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                          <div class="md-form">
-                            <label data-error="wrong" data-success="right" for="orangeForm-email">Contact</label>
-                            <input type="text" id="orangeForm-email" value="{{etudiants.user_id.email}}" class="form-control validate"
-                                   mdbInputDirective>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel</button>
-                          <button type="button" mdbBtn color="primary" class="relative waves-light  w-50" mdbWavesEffect (click)="saveChange(etudiants)">Save changes</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  &lt;!&ndash;fin modal edit&ndash;&gt;
-
-                  <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
-                     class=" tz-btn-circle  m-1 relative waves-light" color="danger">
-                    <i class="fa fa-trash"></i>
-                  </a>
-                  &lt;!&ndash;modal delete&ndash;&gt;
-                  <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-                       [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true" aria-labelledby="myBasicModalLabel">
-                    <div class="modal-dialog modal-sm" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-user-circle"></i></h4>
-                        </div>
-                        <div class="modal-body d-flex">
-                          <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>
-                          <button type="button" mdbBtn color="primary" class="relative waves-light w-50" mdbWavesEffect>Confirm</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  &lt;!&ndash;fin modal delete&ndash;&gt;
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-</section>-->
 <div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"

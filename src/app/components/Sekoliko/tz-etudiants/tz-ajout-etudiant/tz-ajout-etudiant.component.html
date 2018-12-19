@@ -63,6 +63,8 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator class="mat-paginator" (page)="findUser()" [pageSizeOptions]="[5, 10, 20, 100]"
+                       showFirstLastButtons></mat-paginator>
       </form>
     </mat-card-content>
   </mat-card>

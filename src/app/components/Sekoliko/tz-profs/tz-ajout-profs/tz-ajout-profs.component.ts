@@ -53,7 +53,7 @@ export class TzAjoutProfsComponent implements OnInit {
     this.getConstant(prof);
     this.dataService.post(urlList.path_find_user, prof).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.listProf = response.data;
+        this.listProf = response.data.list;
         this.dataSource = new MatTableDataSource<any>(this.listProf);
       } else {
         this.listProf = [];
@@ -62,6 +62,6 @@ export class TzAjoutProfsComponent implements OnInit {
     });
   }
   goToAdd() {
-    this.router.navigate(['/menu/ajout-prof/' + Constants.TYPE_PROF]);
+    this.router.navigate(['/menu/user/edit/0/' + Constants.PROF]);
   }
 }
