@@ -2,27 +2,21 @@
     <h4 class="h4-responsive text-white">Liste des Matieres </h4>
 </div>
 <section class="mt-5">
-    <div class="tz-btn-content text-right mb-2">
-        <a routerLink="/menu/add-matiere" routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-           mdbWavesEffect>
-            <i class="fa fa-plus-circle m-2"></i>
-            Ajout matiere
-        </a>
-    </div>
-    <div class="px-2 table-responsive">
-        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table" style="width:100%">
-            <thead>
-            <tr>
-                <th class="text-center">Nom matiere</th>
-                <th class="text-center">Coefficient</th>
-                <th class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let matiere of listMatiere">
-                <td class="text-center">{{matiere.description}}</td>
-                <td class="text-center">{{matiere.coefficient}}</td>
-                <td class="text-center">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="nom">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Nom matiere </th>
+                <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="coefficient">
+                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Coefficient </th>
+                <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.coefficient}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Action </th>
+                <td mat-cell *matCellDef="let _matiere" class="text-center">
                     <a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"
                        class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
                         <i class="fa fa-eye"></i>
@@ -39,18 +33,18 @@
                                             (click)="detailsModal.hide()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-home"></i>
+                                    <h4 class="modal-title w-100">{{_matiere.description}}  <i class="fa fa-home"></i>
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
                                             <div class="text-left">Nom matiere</div>
-                                            <div class="text-right">{{matiere.description}}</div>
+                                            <div class="text-right">{{_matiere.description}}</div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="text-left">Coefficient</div>
-                                            <div class="text-right">{{matiere.coefficient}}</div>
+                                            <div class="text-right">{{_matiere.coefficient}}</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -79,24 +73,24 @@
                                             (click)="editModal.hide()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-book"></i>
+                                    <h4 class="modal-title w-100">{{_matiere.description}}  <i class="fa fa-book"></i>
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="">
                                         <div class="md-form mb-5">
                                             <input type="text" name="id"
-                                                   value="{{matiere.id}}" class="form-control d-none validate">
+                                                   value="{{_matiere.id}}" class="form-control d-none validate">
                                             <label data-error="wrong" data-success="right" for="orangeForm-name">Nom
                                                 Matiere</label>
-                                            <input type="text" id="orangeForm-name" name="description"
-                                                   value="{{matiere.description}}" [(ngModel)]="matiere.description"
+                                            <input type="text" name="description"
+                                                   value="{{_matiere.description}}" [(ngModel)]="_matiere.description"
                                                    class="form-control validate" mdbInputDirective>
                                         </div>
                                         <div class="md-form mb-5">
                                             <label data-error="wrong" data-success="right" for="orangeForm-coeff">Coefficient</label>
-                                            <input type="text" id="orangeForm-coeff" name="coefficient"
-                                                   value="{{matiere.coefficient}}" [(ngModel)]="matiere.coefficient"
+                                            <input type="text" name="coefficient"
+                                                   value="{{_matiere.coefficient}}" [(ngModel)]="_matiere.coefficient"
                                                    class="form-control validate" mdbInputDirective>
                                         </div>
                                         <div class="modal-footer">
@@ -106,9 +100,9 @@
                                             <button type="submit" value="submit" mdbBtn color="primary"
                                                     class="relative waves-light  w-50"
                                                     (click)="editModal.hide() ; editMatiere(
-                                                                                            matiere.id,
-                                                                                            nom = matiere.description,
-                                                                                            coeff = matiere.coefficient
+                                                                                            _matiere.id,
+                                                                                            nom = _matiere.description,
+                                                                                            coeff = _matiere.coefficient
                                                                                             )"
                                                     mdbWavesEffect>Save changes
                                             </button>
@@ -135,7 +129,7 @@
                                             (click)="deleteModal.hide()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i>
+                                    <h4 class="modal-title w-100" >Supprimer <i class="fa fa-home"></i>
                                     </h4>
                                 </div>
                                 <div class="modal-body d-flex">
@@ -144,7 +138,7 @@
                                     </button>
                                     <button type="button" mdbBtn color="primary"
                                             class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
-                                            (click)="deleteMatiere(id = matiere.id)">Confirm
+                                            (click)="deleteMatiere(id = _matiere.id)">Confirm
                                     </button>
                                 </div>
                             </div>
@@ -152,9 +146,13 @@
                     </div>
                     <!--fin modal delete-->
                 </td>
-            </tr>
-            </tbody>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
 </section>
 <div class="maskSpinner" *ngIf="loading">
@@ -164,3 +162,160 @@
             [color]="'#2e6bb1'"
     ></app-radar-spinner>
 </div>
+<!--<section class="mt-5">-->
+    <!--<div class="tz-btn-content text-right mb-2">-->
+        <!--<a routerLink="/menu/add-matiere" routerLinkActive="active-link" type="button" mdbBtn color="secondary"-->
+           <!--mdbWavesEffect>-->
+            <!--<i class="fa fa-plus-circle m-2"></i>-->
+            <!--Ajout matiere-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div class="px-2 table-responsive">-->
+        <!--<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table" style="width:100%">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th class="text-center">Nom matiere</th>-->
+                <!--<th class="text-center">Coefficient</th>-->
+                <!--<th class="text-center">Action</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr *ngFor="let matiere of listMatiere">-->
+                <!--<td class="text-center">{{matiere.description}}</td>-->
+                <!--<td class="text-center">{{matiere.coefficient}}</td>-->
+                <!--<td class="text-center">-->
+                    <!--<a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"-->
+                       <!--class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">-->
+                        <!--<i class="fa fa-eye"></i>-->
+                    <!--</a>-->
+
+                    <!--&lt;!&ndash;modal details&ndash;&gt;-->
+                    <!--<div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
+                         <!--aria-labelledby="myBasicModalLabel"-->
+                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
+                                            <!--(click)="detailsModal.hide()">-->
+                                        <!--<span aria-hidden="true">×</span>-->
+                                    <!--</button>-->
+                                    <!--<h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-home"></i>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<ul class="list-group list-group-flush">-->
+                                        <!--<li class="list-group-item">-->
+                                            <!--<div class="text-left">Nom matiere</div>-->
+                                            <!--<div class="text-right">{{matiere.description}}</div>-->
+                                        <!--</li>-->
+                                        <!--<li class="list-group-item">-->
+                                            <!--<div class="text-left">Coefficient</div>-->
+                                            <!--<div class="text-right">{{matiere.coefficient}}</div>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" mdbBtn color="secondary"-->
+                                            <!--class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()"-->
+                                            <!--mdbWavesEffect>Close-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;fin modal details&ndash;&gt;-->
+                    <!--<a mdbBtn data-toggle="modal" data-target="#editModal"-->
+                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">-->
+                        <!--<i class="fa fa-edit"></i>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;edit modals&ndash;&gt;-->
+                    <!--<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
+                         <!--aria-labelledby="myBasicModalLabel"-->
+                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
+                                            <!--(click)="editModal.hide()">-->
+                                        <!--<span aria-hidden="true">×</span>-->
+                                    <!--</button>-->
+                                    <!--<h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-book"></i>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<form action="">-->
+                                        <!--<div class="md-form mb-5">-->
+                                            <!--<input type="text" name="id"-->
+                                                   <!--value="{{matiere.id}}" class="form-control d-none validate">-->
+                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Nom-->
+                                                <!--Matiere</label>-->
+                                            <!--<input type="text" id="orangeForm-name" name="description"-->
+                                                   <!--value="{{matiere.description}}" [(ngModel)]="matiere.description"-->
+                                                   <!--class="form-control validate" mdbInputDirective>-->
+                                        <!--</div>-->
+                                        <!--<div class="md-form mb-5">-->
+                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-coeff">Coefficient</label>-->
+                                            <!--<input type="text" id="orangeForm-coeff" name="coefficient"-->
+                                                   <!--value="{{matiere.coefficient}}" [(ngModel)]="matiere.coefficient"-->
+                                                   <!--class="form-control validate" mdbInputDirective>-->
+                                        <!--</div>-->
+                                        <!--<div class="modal-footer">-->
+                                            <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
+                                                    <!--aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel-->
+                                            <!--</button>-->
+                                            <!--<button type="submit" value="submit" mdbBtn color="primary"-->
+                                                    <!--class="relative waves-light  w-50"-->
+                                                    <!--(click)="editModal.hide() ; editMatiere(-->
+                                                                                            <!--matiere.id,-->
+                                                                                            <!--nom = matiere.description,-->
+                                                                                            <!--coeff = matiere.coefficient-->
+                                                                                            <!--)"-->
+                                                    <!--mdbWavesEffect>Save changes-->
+                                            <!--</button>-->
+                                        <!--</div>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;fin modal edit&ndash;&gt;-->
+
+                    <!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
+                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
+                        <!--<i class="fa fa-trash"></i>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;modal delete&ndash;&gt;-->
+                    <!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
+                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"-->
+                         <!--aria-labelledby="myBasicModalLabel">-->
+                        <!--<div class="modal-dialog modal-sm" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
+                                            <!--(click)="deleteModal.hide()">-->
+                                        <!--<span aria-hidden="true">×</span>-->
+                                    <!--</button>-->
+                                    <!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body d-flex">-->
+                                    <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
+                                            <!--aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel-->
+                                    <!--</button>-->
+                                    <!--<button type="button" mdbBtn color="primary"-->
+                                            <!--class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect-->
+                                            <!--(click)="deleteMatiere(id = matiere.id)">Confirm-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;fin modal delete&ndash;&gt;-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+<!--</section>-->
+

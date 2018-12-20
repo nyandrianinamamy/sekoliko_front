@@ -7,6 +7,8 @@ import {Salle} from '../../../shared/model/Salle';
 import {Router} from "@angular/router";
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
+import {ClasseEnfant} from "../../../shared/model/ClasseEnfant";
+import {Classe} from "../../../shared/model/Classe";
 
 @Component({
     selector: 'app-tz-salle',
@@ -23,8 +25,12 @@ export class TzSalleComponent implements OnInit {
     dtTrigger: Subject<any> = new Subject();
     loading: boolean;
     salle: Salle;
+    niveau : Classe;
+    classe_enfant: ClasseEnfant;
     public description: string;
-    classe: 'text-center';
+    public dateDebut:Date;
+    public dateFin: Date;
+    public classe: string;
 
     /**
      * Table
@@ -47,15 +53,26 @@ export class TzSalleComponent implements OnInit {
          */
         this.salle = new Salle();
         this.loading = true;
+        this.getClasseEnfant().subscribe(response=> {
+            if (response.code === ConstantHTTP.CODE_SUCCESS){
+                this.classe_enfant = response.data
+            }
+        });
+        this.getNiveau().subscribe(response => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS){
+                this.niveau = response.data
+            }
+        });
         this.getListSalle().subscribe((data: any) => {
             if (data.code === ConstantHTTP.CODE_SUCCESS) {
                 this.loading = false;
+                this.salle = data.data;
                 this._salle = data.data;
                 this.dataSource = new MatTableDataSource<any>(this._salle);
                 this.dataSource.paginator = this.paginator;
-                this.dtTrigger.next();
             }
-        })
+        });
+
 
     }
 
@@ -77,7 +94,9 @@ export class TzSalleComponent implements OnInit {
         });
     }
 
-    editSalle(id: number) {
+    editSalle(
+        id: number,
+    ) {
         this.loading = true;
         this.dataService.post(urlList.path_mod_salle + id, {
             "description": this.description
@@ -88,6 +107,34 @@ export class TzSalleComponent implements OnInit {
                 this.loading = false
             }
         })
+    }
+
+    reservation(id:number)
+    {
+        const data = {
+            "description":this.description,
+            "dateDebut":this.dateDebut.getDate(),
+            "dateFin":this.dateFin.getDate(),
+            "classe":this.classe
+        }
+        console.log(data);
+        this.dataService.post(urlList.path_reservation_salle+id,data).subscribe(response => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS){
+                console.log('eto')
+                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+                    this.router.navigate(['/menu/salle']));
+                this.loading = false
+            }
+        });
+    }
+
+    getClasseEnfant(){
+        return this.dataService.post(urlList.path_list_class_enfant);
+    }
+
+
+    getNiveau() {
+        return this.dataService.post(urlList.path_list_class_parent);
     }
 
     save(salle: Salle) {

@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Subject} from "rxjs";
 import {DataService} from "../../../shared/service/data.service";
 import {urlList} from "../../../Utils/api/urlList";
 import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {Router} from "@angular/router";
 import {MatiereParam} from "../../../shared/model/MatiereParam";
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 @Component({
     selector: 'app-tz-matiere',
@@ -17,6 +18,14 @@ export class TzMatiereComponent implements OnInit {
     listMatiere: MatiereParam[];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
+
+    /**
+     * Table
+     */
+    displayedColumns: string[] = ['nom', 'coefficient', 'action'];
+    dataSource: MatTableDataSource<any>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     loading: boolean;
     id: number;
     nom: string;
@@ -35,7 +44,9 @@ export class TzMatiereComponent implements OnInit {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
                 this.loading = false;
                 this.listMatiere = response.data;
-                console.log(this.listMatiere)
+                this.dataSource = new MatTableDataSource<any>(this.listMatiere);
+                this.dataSource.paginator = this.paginator;
+                console.log(this.listMatiere);
                 this.dtTrigger.next();
             }
         });

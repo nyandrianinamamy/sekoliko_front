@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {User} from '../../../../shared/model/User';
 import {Inscription} from '../../../../shared/model/Inscription';
@@ -8,7 +8,7 @@ import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
 import {Classe} from '../../../../shared/model/Classe';
 import {Role} from '../../../../shared/model/Role';
 import {Constants} from '../../../../Utils/Constants';
-import {MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 
 @Component({
@@ -25,6 +25,8 @@ export class TzAjoutEtudiantComponent implements OnInit {
   listEtudiant: any[];
   roles: Role[];
   role: Role;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   inscription: Inscription;
   displayedColumns: string[] = ['login', 'prenom', 'nom', 'role'];
   dataSource: MatTableDataSource<any>;
@@ -48,14 +50,20 @@ export class TzAjoutEtudiantComponent implements OnInit {
     etudiant.enabled = true;
     etudiant.role = Constants.TYPE_ETUDIANT;
   }
-
+  findUser() {
+    this.etudiant.page = this.paginator.pageIndex + 1;
+    this.etudiant.limit = this.paginator.pageSize;
+    this.search(this.etudiant);
+  }
   search(etudiant: User) {
     this.loading = true;
     console.log('mihiditra ato');
     this.getConstant(etudiant);
     this.dataService.post(urlList.path_find_user, etudiant).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.listEtudiant = response.data;
+        this.listEtudiant = response.data.list;
+        this.paginator.length = +response.data.total;
+        this.paginator.pageSize = +this.etudiant.limit;
         this.dataSource = new MatTableDataSource<any>(this.listEtudiant);
       } else {
         this.listEtudiant = [];
@@ -64,6 +72,6 @@ export class TzAjoutEtudiantComponent implements OnInit {
     });
   }
   goToAdd() {
-    this.router.navigate(['/menu/ajout-utilisateur/' + Constants.TYPE_ETUDIANT]);
+    this.router.navigate(['/menu/user/edit/0/' + Constants.ETUDIANT]);
   }
 }

@@ -47,6 +47,7 @@ import { TzInscriptionComponent } from './tz-inscription/tz-inscription.componen
 import { TzFonctionProfComponent } from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
 import { EtudiantUpdateComponent } from './tz-etudiants/etudiant-update/etudiant-update.component';
 import {DialogContentExampleDialog} from "./tz-salle/tz-salle.component";
+import { UserManageComponent } from './user-manage/user-manage.component';
 
 @NgModule({
     imports: [

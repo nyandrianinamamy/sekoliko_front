@@ -31,6 +31,7 @@ const routes: Routes = [
         component: SekolikoComponent,
         children: [
             {path: '', redirectTo: 'dashboard'},
+            {path: 'user', loadChildren: 'src/app/components/Sekoliko/user-manage/user-manage.module#UserManageModule'},
             {path: 'not-found', component: NotFoundComponent},
             {path: 'dashboard', component: TzDashboardComponent},
             {path: 'etudiant', component: TzEtudiantsComponent},

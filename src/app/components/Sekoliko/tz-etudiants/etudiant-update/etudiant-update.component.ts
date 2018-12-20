@@ -21,6 +21,7 @@ export class EtudiantUpdateComponent implements OnInit {
     Object.assign(this.etudiant, this.data)
   }
 
+/*
   saveChange(etudiant: any) {
     etudiant.type = true;
     this.dataService.post(urlList.path_user_find + '/' +  this.etudiant.user_id, etudiant).subscribe(response => {
@@ -29,6 +30,7 @@ export class EtudiantUpdateComponent implements OnInit {
       }
     })
   }
+*/
 
   cancel() {
     this.dialogRef.close('Retour');

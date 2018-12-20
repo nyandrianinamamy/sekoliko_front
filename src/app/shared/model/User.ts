@@ -14,5 +14,11 @@ export class User {
   token: string;
   password: string;
   type: boolean;
-  constructor() {  }
+  limit: number;
+  page: number;
+  constructor() {
+    this.limit = 10;
+    this.page = 1;
+    this.enabled = true;
+  }
 }
