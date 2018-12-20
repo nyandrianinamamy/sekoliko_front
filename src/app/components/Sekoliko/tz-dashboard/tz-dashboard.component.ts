@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
 import { DataService } from 'src/app/shared/service/data.service';
 import { urlList } from 'src/app/Utils/api/urlList';
+import {Salle} from "../../../shared/model/Salle";
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -11,7 +12,7 @@ import { urlList } from 'src/app/Utils/api/urlList';
 export class TzDashboardComponent implements OnInit {
 
   compteEtudiants = '';
-  compteSalles = '';
+  compteSalles : Salle;
   comptesProff = '';
 
   public chartType: string = 'line';
@@ -142,6 +143,12 @@ export class TzDashboardComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.getNbSalles().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.compteSalles = response.data.length;
+        console.log(this.compteSalles);
+      }
+    });
     /*this.getNbEtudiants().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.compteEtudiants = response.data.length;

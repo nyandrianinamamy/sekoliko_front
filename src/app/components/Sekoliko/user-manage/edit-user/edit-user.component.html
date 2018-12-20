@@ -1,8 +1,16 @@
-<mat-toolbar color="primary">
-  <span *ngIf="updateAction">
+<!--<mat-toolbar color="primary">-->
+  <!--<span *ngIf="updateAction">-->
+    <!--Edition d'un utilisateur-->
+  <!--</span>-->
+  <!--<span *ngIf="!updateAction">-->
+    <!--Création d'un utilisateur-->
+  <!--</span>-->
+<!--</mat-toolbar>-->
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important;text-align:center" color="primary">
+  <span *ngIf="updateAction" class="text-center w-100">
     Edition d'un utilisateur
   </span>
-  <span *ngIf="!updateAction">
+  <span *ngIf="!updateAction" class="text-center  w-100">
     Création d'un utilisateur
   </span>
 </mat-toolbar>
