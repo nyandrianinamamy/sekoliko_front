@@ -1,72 +1,94 @@
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Gestion Prof </h4>
-  <button mat-button class="btn" (click) = "goToAdd()">
-    <mat-icon>add</mat-icon>
-    Ajouter nouveau Prof
-  </button>
-</div>
+<!--<div class="view gradient-card-header blue darken-2">-->
+  <!--<h4 class="h4-responsive text-white"> Gestion Prof </h4>-->
+  <!--<button mat-button class="btn" (click) = "goToAdd()">-->
+    <!--<mat-icon>add</mat-icon>-->
+    <!--Ajouter nouveau Prof-->
+  <!--</button>-->
+<!--</div>-->
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span>
+    Gestion Prof
+  </span>
+  <span fxFlex></span>
+  <!--<a [routerLink]="['/menu/user/edit']">-->
+  <!--<button mat-button>-->
+  <!--<mat-icon>add</mat-icon>-->
+  <!--Ajouter une utilisateur-->
+  <!--</button>-->
+  <!--</a>-->
+  <!--<a  [routerLink]="['/menu/user/edit']" mdbBtn floating="true" size="sm" gradient="blue" mdbWavesEffect>-->
+  <!--<i class="fa fa-plus-circle"></i>-->
+  <!--</a>-->
+  <a mdbBtn  (click) = "goToAdd()"
+     class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
+    <i class="fa fa-plus-circle"></i>
+  </a>
+</mat-toolbar>
 <!-- First Step -->
-<form #form="ngForm">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Bloc de recherche</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form #etudiantForm="ngForm" class="col-md-12">
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="login" type="text" name="login" [(ngModel)]="etudiant.username"
-                 #login="ngModel">
-        </mat-form-field>
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Nom" type="text" name="nom" [(ngModel)]="etudiant.lastname"
-                 #nom="ngModel">
-        </mat-form-field>
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Prénom" type="text" name="prenom" [(ngModel)]="etudiant.firstname"
-                 #prenom="ngModel">
-        </mat-form-field>
-        <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" (click)="reinit()">Reinitialisation</button>
-        <button class="btn btn-success btn-rounded float-right" type="submit" (click)="search(etudiant)">Rechercher</button>
-      </form>
-      <form class="full">
-        <mat-form-field class="full">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer" size="3">
-        </mat-form-field>
+<section class="mt-2">
+  <form #form="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Bloc de recherche</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #etudiantForm="ngForm" class="col-md-12">
+          <mat-form-field class="col-md-12">
+            <input matInput placeholder="login" type="text" name="login" [(ngModel)]="etudiant.username"
+                   #login="ngModel">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+            <input matInput placeholder="Nom" type="text" name="nom" [(ngModel)]="etudiant.lastname"
+                   #nom="ngModel">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+            <input matInput placeholder="Prénom" type="text" name="prenom" [(ngModel)]="etudiant.firstname"
+                   #prenom="ngModel">
+          </mat-form-field>
+          <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button" (click)="reinit()">Reinitialisation</button>
+          <button class="btn btn-success btn-rounded float-right" type="submit" (click)="search(etudiant)">Rechercher</button>
+        </form>
+        <form class="full">
+          <mat-form-field class="full">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer" size="3">
+          </mat-form-field>
 
-        <table mat-table [dataSource]="dataSource" matSort class="full">
-          <ng-container matColumnDef="login">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Matricule </th>
-            <td mat-cell *matCellDef="let element">
-              <a routerLink="/menu/fonction/{{element.user_id}}">
-                {{element.user_id}}
-              </a>
-            </td>
-          </ng-container>
+          <table mat-table [dataSource]="dataSource" matSort class="full">
+            <ng-container matColumnDef="login">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Matricule </th>
+              <td mat-cell *matCellDef="let element">
+                <a routerLink="/menu/fonction/{{element.user_id}}">
+                  {{element.user_id}}
+                </a>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="prenom">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Prénom</th>
-            <td mat-cell *matCellDef="let element">  <a routerLink="/menu/fonction/{{element.user_id}}">{{element.firstname}}  </a></td>
+            <ng-container matColumnDef="prenom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Prénom</th>
+              <td mat-cell *matCellDef="let element">  <a routerLink="/menu/fonction/{{element.user_id}}">{{element.firstname}}  </a></td>
 
-          </ng-container>
+            </ng-container>
 
-          <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Nom</th>
-            <td mat-cell *matCellDef="let element">{{element.lastname}}</td>
-          </ng-container>
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Nom</th>
+              <td mat-cell *matCellDef="let element">{{element.lastname}}</td>
+            </ng-container>
 
-          <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Role</th>
-            <td mat-cell *matCellDef="let element"> {{ element.role_type.description}}
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header"> Role</th>
+              <td mat-cell *matCellDef="let element"> {{ element.role_type.description}}
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</form>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</section>
+
 <div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"
