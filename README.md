@@ -41,3 +41,12 @@ ex: this.dataService.post(url).subscribe()
 ## Menu de navigation
 
 ajouter dans MenuItem.ts
+
+## Color chart graphique 
+
+indigo => #aa66cc
+
+Bleu => #1976d2
+
+Grey => #e9ebee
+
