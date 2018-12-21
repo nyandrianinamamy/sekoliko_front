@@ -68,7 +68,7 @@ export class TzSalleComponent implements OnInit {
             if (data.code === ConstantHTTP.CODE_SUCCESS) {
                 this.loading = false;
                 this.salle = data.data;
-                this._salle = data.data;
+                this._salle = data.data ;
                 this.dataSource = new MatTableDataSource<any>(this._salle);
                 this.dataSource.paginator = this.paginator;
             }
@@ -85,18 +85,8 @@ export class TzSalleComponent implements OnInit {
     }
 
     exportCsv(){
-        new Angular5Csv(this._salle,'csv');
+        new Angular5Csv(this._salle,'liste_salle');
     }
-
-    // exportPdf = () => {
-    //     let doc = new jsPDF();
-    //     doc.autoTable({
-    //         head: [['id', 'nom']],
-    //         body: this._salle //returning [["log1", "$100"], ["log2", "$200"]]
-    //     });
-    //     // doc.autoTable();
-    //     doc.save('table.pdf')
-    // }
 
     deleteSalle(id: number) {
         this.loading = true;
@@ -132,10 +122,8 @@ export class TzSalleComponent implements OnInit {
             "dateFin":this.dateFin.getDate(),
             "classe":this.classe
         }
-        console.log(data);
         this.dataService.post(urlList.path_reservation_salle+id,data).subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS){
-                console.log('eto')
                 this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
                     this.router.navigate(['/menu/salle']));
                 this.loading = false
@@ -177,6 +165,12 @@ export class TzSalleComponent implements OnInit {
      */
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+        console.log(this.dataSource);
+        // @ts-ignore
+        if(this.dataSource.filteredData == 0){
+            // @ts-ignore
+            console.log('null')
+        }
     }
 }
 

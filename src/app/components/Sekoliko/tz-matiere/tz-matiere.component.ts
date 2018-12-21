@@ -6,6 +6,7 @@ import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {Router} from "@angular/router";
 import {MatiereParam} from "../../../shared/model/MatiereParam";
 import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {Angular5Csv} from "angular5-csv/Angular5-csv";
 
 @Component({
     selector: 'app-tz-matiere',
@@ -82,5 +83,22 @@ export class TzMatiereComponent implements OnInit {
                 this.loading = false;
             }
         });
+    }
+
+    /**
+     * Table filter
+     */
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        console.log(this.dataSource);
+        // @ts-ignore
+        if(this.dataSource.filteredData == 0){
+            // @ts-ignore
+            console.log('null')
+        }
+    }
+
+    exportCsv(){
+        new Angular5Csv(this.listMatiere,'liste_matiere');
     }
 }

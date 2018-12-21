@@ -7,6 +7,7 @@ import {Classe} from '../../../shared/model/Classe';
 import {Subject} from "rxjs";
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
+import {Angular5Csv} from "angular5-csv/Angular5-csv";
 
 @Component({
   selector: 'app-tz-classe-list',
@@ -82,5 +83,23 @@ export class TzClasseListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+
+  /**
+   * Table filter
+   */
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource);
+    // @ts-ignore
+    if(this.dataSource.filteredData == 0){
+      // @ts-ignore
+      console.log('null')
+    }
+  }
+
+  exportCsv(){
+    new Angular5Csv(this._classe,'liste_classe');
   }
 }
