@@ -222,8 +222,18 @@
         </div>
     </div>
     <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
+        <div class="row p-2">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+            </div>
+        </div>
 
+        <table mat-table [dataSource]="dataSource">
             <!-- Position Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef class="text-center"> ID </th>

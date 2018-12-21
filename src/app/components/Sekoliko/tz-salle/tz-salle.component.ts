@@ -3,6 +3,7 @@ import {DataService} from '../../../shared/service/data.service';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
 import {Subject} from 'rxjs';
+import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import {Salle} from '../../../shared/model/Salle';
 import {Router} from "@angular/router";
 import {MatPaginator, MatTableDataSource} from '@angular/material';
@@ -83,6 +84,20 @@ export class TzSalleComponent implements OnInit {
         return this.dataService.post(urlList.path_list_salle);
     }
 
+    exportCsv(){
+        new Angular5Csv(this._salle,'csv');
+    }
+
+    // exportPdf = () => {
+    //     let doc = new jsPDF();
+    //     doc.autoTable({
+    //         head: [['id', 'nom']],
+    //         body: this._salle //returning [["log1", "$100"], ["log2", "$200"]]
+    //     });
+    //     // doc.autoTable();
+    //     doc.save('table.pdf')
+    // }
+
     deleteSalle(id: number) {
         this.loading = true;
         return this.dataService.post(urlList.path_delete_salle + id).subscribe(response => {
@@ -157,6 +172,12 @@ export class TzSalleComponent implements OnInit {
         dialogRef.afterClosed().subscribe(() => { });
     }
 
+    /**
+     * Table filter
+     */
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 }
 
 @Component({
