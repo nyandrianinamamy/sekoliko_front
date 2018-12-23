@@ -1,25 +1,38 @@
-
 <div class="view gradient-card-header blue darken-2">
   <h4 class="h4-responsive text-white"> Ajout nouveau matiere </h4>
 </div>
 <form #salleform="ngForm" class="col-md-12 mt-5">
   <mat-form-field class="col-md-12">
-    <input matInput placeholder="Nom matiere" id="nom" type="text" name="description" [(ngModel)]="_matiere.nom"
+    <input matInput placeholder="Nom matiere" id="nom" type="text" name="description" required
+           [(ngModel)]="_matiere.nom"
            #description="ngModel">
   </mat-form-field>
   <mat-form-field class="col-md-12">
-  <input matInput placeholder="Coefficient" id="coeff" type="text" name="coefficient" [(ngModel)]="_matiere.coeff"
-         #coeff="ngModel">
+    <input matInput placeholder="Coefficient" id="coeff" type="text" name="coefficient" required
+           [(ngModel)]="_matiere.coeff"
+           #coeff="ngModel">
   </mat-form-field>
   <mat-form-field class="col-md-12">
-    <mat-select placeholder="Select" name="class" [(ngModel)]="_matiere.class">
-      <mat-option *ngFor="let classe of classe"  value="{{classe.id}}">{{classe.description}}</mat-option>
+    <mat-select placeholder="Classe" name="class" required [(ngModel)]="_matiere.class" #class="ngModel">
+      <mat-option *ngFor="let classes of classe" [value]="classes.id">{{classes.parent.description}} :
+        {{classes.description}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-12">
-    <mat-select placeholder="Select" name="class" [(ngModel)]="_matiere.prof">
-      <mat-option *ngFor="let profs of listProff"  value="{{profs.id}}">{{profs.nom}}</mat-option>
+    <mat-select placeholder="Prof" name="prof" [(ngModel)]="_matiere.prof" #prof="ngModel">
+      <mat-option *ngFor="let profs of listProff" [value]="profs.user_id">{{profs.lastname}} {{profs.firstname}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
-  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(_matiere)">Ajouter</button>
+  <button class="btn btn-success btn-rounded float-right" [disabled]="!salleform.form.valid" type="submit"
+          (click)="save(_matiere)">Ajouter
+  </button>
 </form>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

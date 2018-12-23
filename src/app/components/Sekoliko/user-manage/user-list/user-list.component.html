@@ -84,9 +84,11 @@
           </mat-form-field>
         </div>
         <div class="right text-center">
-          <button mat-fab>
-            <mat-icon aria-label="sercher un utilisateur" (click)="getListEtudiants(utilisateur)">search</mat-icon>
-          </button>
+          <a (click)="getListEtudiants(utilisateur)">
+            <button mat-fab>
+              <mat-icon aria-label="chercher un utilisateur">search</mat-icon>
+            </button>
+          </a>
         </div>
       </form>
       <br/>

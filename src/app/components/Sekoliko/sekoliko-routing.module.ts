@@ -55,6 +55,7 @@ const routes: Routes = [
             {path: 'add-classe', component: TzAjoutClasseComponent},
             {path: 'matiere-list', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
+            {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
             {path: 'profile', component: TzProfileComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

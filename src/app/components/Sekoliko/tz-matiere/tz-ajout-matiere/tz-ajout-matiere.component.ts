@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {MatiereParam} from "../../../../shared/model/MatiereParam";
-import {DataService} from "../../../../shared/service/data.service";
-import {urlList} from "../../../../Utils/api/urlList";
-import {ConstantHTTP} from "../../../../Utils/ConstantHTTP";
-import {Classe} from "../../../../shared/model/Classe";
-import {Profs} from "../../../../shared/model/Profs";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {MatiereParam} from '../../../../shared/model/MatiereParam';
+import {DataService} from '../../../../shared/service/data.service';
+import {urlList} from '../../../../Utils/api/urlList';
+import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
+import {Classe} from '../../../../shared/model/Classe';
+import {Profs} from '../../../../shared/model/Profs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {isNull} from 'util';
+import {User} from '../../../../shared/model/User';
 
 @Component({
   selector: 'app-tz-ajout-matiere',
@@ -14,26 +16,61 @@ import {Router} from "@angular/router";
 })
 export class TzAjoutMatiereComponent implements OnInit {
 
-  matiere:MatiereParam[];
-  _matiere:MatiereParam;
-  classe : Classe;
-  listProff : Profs;
-  loading:boolean;
-  class:'';
+  matiere: MatiereParam[];
+  _matiere: MatiereParam;
+  classe: Classe[];
+  idMatiere: number;
+  listProff: User[];
+  loading: boolean;
+  class: '';
+  update: boolean;
 
-  constructor(private dataService:DataService,private router:Router) {}
+  constructor(private dataService: DataService, private router: Router,
+              private currentRoute: ActivatedRoute) {
+  }
 
-  ngOnInit() {
-    this._matiere = new MatiereParam();
+  getListClasse() {
+    this.loading = true;
     this.getNiveau().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.classe = response.data;
+        this.loading = false;
       }
     });
+  }
 
+  getListProf() {
+    this.loading = true;
     this.getListProffesseurs().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.listProff = response.data;
+        this.listProff = response.data.list;
+        this.loading = false;
+      }
+    });
+  }
+
+  ngOnInit() {
+    this._matiere = new MatiereParam();
+    this.idMatiere = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
+    if (!isNull(this.idMatiere) && typeof this.idMatiere === 'number') {
+      this.getMatiereById(this.idMatiere);
+      this.update = true;
+    } else {
+      this.update = false;
+    }
+    this.getListClasse();
+    this.getListProf();
+  }
+
+  getMatiereById(id: number) {
+    this.dataService.get(urlList.path_list_matiere + '/' + id).subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this._matiere.nom = response.data.description;
+        this._matiere.coeff = response.data.coefficient;
+        this._matiere.class = response.data.classe.id;
+        this._matiere.prof = response.data.profId.user_id;
+      } else {
+        this._matiere = new MatiereParam();
       }
     });
   }
@@ -43,16 +80,27 @@ export class TzAjoutMatiereComponent implements OnInit {
   }
 
   getListProffesseurs() {
-    return this.dataService.post(urlList.path_list_proffesseurs);
+    return this.dataService.post(urlList.path_find_user, {role: 1});
   }
 
-  save(_matiere:MatiereParam){
-    return this.dataService.post(urlList.path_add_matiere,_matiere).subscribe((response) => {
-      console.log(_matiere)
-      if (response.code === ConstantHTTP.CODE_SUCCESS){
-        this.router.navigate(['/menu/matiere-list']);
-      }
-    })
+  save(_matiere: MatiereParam) {
+    this.loading = true;
+    console.log('la list des matières est: ', _matiere);
+    /*if (this.update) {
+      this.dataService.post(urlList.path_add_matiere + '/' + this.idMatiere, _matiere).subscribe((response) => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.router.navigate(['/menu/matiere-list']);
+        }
+      });
+    } else {
+      this.dataService.post(urlList.path_add_matiere, _matiere).subscribe((response) => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false
+          this.router.navigate(['/menu/matiere-list']);
+        }
+      });
+    }*/
   }
 
 

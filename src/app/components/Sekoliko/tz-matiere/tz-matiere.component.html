@@ -1,332 +1,147 @@
 <div class="view gradient-card-header blue darken-2">
-    <h4 class="h4-responsive text-white">Liste des Matieres </h4>
+  <h4 class="h4-responsive text-white">Liste des Matieres </h4>
 </div>
 <section class="mt-5">
-    <div class="mat-elevation-z8">
-        <div class="row p-2">
-            <div class="col-md-6">
-                <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                </mat-form-field>
-            </div>
-            <div class="col-md-6 text-right">
-                <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
-            </div>
-        </div>
-
-        <table mat-table [dataSource]="dataSource">
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="nom">
-                <th mat-header-cell *matHeaderCellDef class="text-center"> Nom matiere </th>
-                <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.description}} </td>
-            </ng-container>
-            <ng-container matColumnDef="coefficient">
-                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Coefficient </th>
-                <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.coefficient}} </td>
-            </ng-container>
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Action </th>
-                <td mat-cell *matCellDef="let _matiere" class="text-center">
-                    <a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"
-                       class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
-                        <i class="fa fa-eye"></i>
-                    </a>
-
-                    <!--modal details-->
-                    <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-                         aria-labelledby="myBasicModalLabel"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close"
-                                            (click)="detailsModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100">{{_matiere.description}}  <i class="fa fa-home"></i>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="text-left">Nom matiere</div>
-                                            <div class="text-right">{{_matiere.description}}</div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="text-left">Coefficient</div>
-                                            <div class="text-right">{{_matiere.coefficient}}</div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" mdbBtn color="secondary"
-                                            class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()"
-                                            mdbWavesEffect>Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--fin modal details-->
-                    <a mdbBtn data-toggle="modal" data-target="#editModal"
-                       class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <!--edit modals-->
-                    <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-                         aria-labelledby="myBasicModalLabel"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close"
-                                            (click)="editModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100">{{_matiere.description}}  <i class="fa fa-book"></i>
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="">
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="id"
-                                                   value="{{_matiere.id}}" class="form-control d-none validate">
-                                            <label data-error="wrong" data-success="right" for="orangeForm-name">Nom
-                                                Matiere</label>
-                                            <input type="text" name="description"
-                                                   value="{{_matiere.description}}" [(ngModel)]="_matiere.description"
-                                                   class="form-control validate" mdbInputDirective>
-                                        </div>
-                                        <div class="md-form mb-5">
-                                            <label data-error="wrong" data-success="right" for="orangeForm-coeff">Coefficient</label>
-                                            <input type="text" name="coefficient"
-                                                   value="{{_matiere.coefficient}}" [(ngModel)]="_matiere.coefficient"
-                                                   class="form-control validate" mdbInputDirective>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" mdbBtn color="secondary" class="waves-light w-50"
-                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel
-                                            </button>
-                                            <button type="submit" value="submit" mdbBtn color="primary"
-                                                    class="relative waves-light  w-50"
-                                                    (click)="editModal.hide() ; editMatiere(
-                                                                                            _matiere.id,
-                                                                                            nom = _matiere.description,
-                                                                                            coeff = _matiere.coefficient
-                                                                                            )"
-                                                    mdbWavesEffect>Save changes
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--fin modal edit-->
-
-                    <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
-                       class=" tz-btn-circle  m-1 relative waves-light" color="danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <!--modal delete-->
-                    <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"
-                         aria-labelledby="myBasicModalLabel">
-                        <div class="modal-dialog modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close"
-                                            (click)="deleteModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100" >Supprimer <i class="fa fa-home"></i>
-                                    </h4>
-                                </div>
-                                <div class="modal-body d-flex">
-                                    <button type="button" mdbBtn color="secondary" class="waves-light w-50"
-                                            aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel
-                                    </button>
-                                    <button type="button" mdbBtn color="primary"
-                                            class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
-                                            (click)="deleteMatiere(id = _matiere.id)">Confirm
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--fin modal delete-->
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <div class="mat-elevation-z8">
+    <div class="row p-2">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+      </div>
+      <div class="col-md-6 text-right">
+        <a routerLink="/menu/add-matiere">
+          <button class="btn btn-primary">Ajouter matière</button>
+        </a>
+      </div>
     </div>
+
+    <table mat-table [dataSource]="dataSource" class="w-100">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Nom matiere</th>
+        <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.description}}</td>
+      </ng-container>
+      <ng-container matColumnDef="coefficient">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Coefficient</th>
+        <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.coefficient}}</td>
+      </ng-container>
+      <ng-container matColumnDef="class">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Classe</th>
+        <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.classe.description}}</td>
+      </ng-container>
+      <ng-container matColumnDef="prof">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Prof</th>
+        <td mat-cell *matCellDef="let _matiere" class="text-center"> {{_matiere.profId ? _matiere.profId.lastname :
+          ''}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Action</th>
+        <td mat-cell *matCellDef="let _matiere" class="text-center">
+          <a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"
+             class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
+            <i class="fa fa-eye"></i>
+          </a>
+
+          <!--modal details-->
+          <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close"
+                          (click)="detailsModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">{{_matiere.description}} <i class="fa fa-home"></i>
+                  </h4>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="text-left">Nom matiere</div>
+                      <div class="text-right">{{_matiere.description}}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Coefficient</div>
+                      <div class="text-right">{{_matiere.coefficient}}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Classe</div>
+                      <div class="text-right">{{_matiere.classe.description}}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Prof</div>
+                      <div class="text-right">{{_matiere.profId ? _matiere.profId.lastname : ''}}</div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" mdbBtn color="secondary"
+                          class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()"
+                          mdbWavesEffect>Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal details-->
+          <a mdbBtn
+             class=" tz-btn-circle  m-1 relative waves-light" color="success" routerLinkActive="active-link"
+             routerLink="/menu/add-matiere/{{_matiere.id}}">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+            <i class="fa fa-trash"></i>
+          </a>
+          <!--modal delete-->
+          <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"
+               aria-labelledby="myBasicModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close"
+                          (click)="deleteModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">Supprimer <i class="fa fa-home"></i>
+                  </h4>
+                </div>
+                <div class="modal-body d-flex">
+                  <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                          aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel
+                  </button>
+                  <button type="button" mdbBtn color="primary"
+                          class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
+                          (click)="deleteMatiere(_matiere.id)">Confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal delete-->
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 </section>
 <div class="maskSpinner" *ngIf="loading">
-    <app-radar-spinner
-            [animationDuration]="4000"
-            [size]="200"
-            [color]="'#2e6bb1'"
-    ></app-radar-spinner>
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
 </div>
-<!--<section class="mt-5">-->
-    <!--<div class="tz-btn-content text-right mb-2">-->
-        <!--<a routerLink="/menu/add-matiere" routerLinkActive="active-link" type="button" mdbBtn color="secondary"-->
-           <!--mdbWavesEffect>-->
-            <!--<i class="fa fa-plus-circle m-2"></i>-->
-            <!--Ajout matiere-->
-        <!--</a>-->
-    <!--</div>-->
-    <!--<div class="px-2 table-responsive">-->
-        <!--<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table" style="width:100%">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th class="text-center">Nom matiere</th>-->
-                <!--<th class="text-center">Coefficient</th>-->
-                <!--<th class="text-center">Action</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr *ngFor="let matiere of listMatiere">-->
-                <!--<td class="text-center">{{matiere.description}}</td>-->
-                <!--<td class="text-center">{{matiere.coefficient}}</td>-->
-                <!--<td class="text-center">-->
-                    <!--<a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"-->
-                       <!--class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">-->
-                        <!--<i class="fa fa-eye"></i>-->
-                    <!--</a>-->
-
-                    <!--&lt;!&ndash;modal details&ndash;&gt;-->
-                    <!--<div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
-                         <!--aria-labelledby="myBasicModalLabel"-->
-                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
-                        <!--<div class="modal-dialog" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
-                                            <!--(click)="detailsModal.hide()">-->
-                                        <!--<span aria-hidden="true">×</span>-->
-                                    <!--</button>-->
-                                    <!--<h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-home"></i>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body">-->
-                                    <!--<ul class="list-group list-group-flush">-->
-                                        <!--<li class="list-group-item">-->
-                                            <!--<div class="text-left">Nom matiere</div>-->
-                                            <!--<div class="text-right">{{matiere.description}}</div>-->
-                                        <!--</li>-->
-                                        <!--<li class="list-group-item">-->
-                                            <!--<div class="text-left">Coefficient</div>-->
-                                            <!--<div class="text-right">{{matiere.coefficient}}</div>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                                <!--<div class="modal-footer">-->
-                                    <!--<button type="button" mdbBtn color="secondary"-->
-                                            <!--class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()"-->
-                                            <!--mdbWavesEffect>Close-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;fin modal details&ndash;&gt;-->
-                    <!--<a mdbBtn data-toggle="modal" data-target="#editModal"-->
-                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">-->
-                        <!--<i class="fa fa-edit"></i>-->
-                    <!--</a>-->
-                    <!--&lt;!&ndash;edit modals&ndash;&gt;-->
-                    <!--<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
-                         <!--aria-labelledby="myBasicModalLabel"-->
-                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
-                        <!--<div class="modal-dialog" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
-                                            <!--(click)="editModal.hide()">-->
-                                        <!--<span aria-hidden="true">×</span>-->
-                                    <!--</button>-->
-                                    <!--<h4 class="modal-title w-100">{{matiere.description}}  <i class="fa fa-book"></i>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body">-->
-                                    <!--<form action="">-->
-                                        <!--<div class="md-form mb-5">-->
-                                            <!--<input type="text" name="id"-->
-                                                   <!--value="{{matiere.id}}" class="form-control d-none validate">-->
-                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Nom-->
-                                                <!--Matiere</label>-->
-                                            <!--<input type="text" id="orangeForm-name" name="description"-->
-                                                   <!--value="{{matiere.description}}" [(ngModel)]="matiere.description"-->
-                                                   <!--class="form-control validate" mdbInputDirective>-->
-                                        <!--</div>-->
-                                        <!--<div class="md-form mb-5">-->
-                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-coeff">Coefficient</label>-->
-                                            <!--<input type="text" id="orangeForm-coeff" name="coefficient"-->
-                                                   <!--value="{{matiere.coefficient}}" [(ngModel)]="matiere.coefficient"-->
-                                                   <!--class="form-control validate" mdbInputDirective>-->
-                                        <!--</div>-->
-                                        <!--<div class="modal-footer">-->
-                                            <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
-                                                    <!--aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel-->
-                                            <!--</button>-->
-                                            <!--<button type="submit" value="submit" mdbBtn color="primary"-->
-                                                    <!--class="relative waves-light  w-50"-->
-                                                    <!--(click)="editModal.hide() ; editMatiere(-->
-                                                                                            <!--matiere.id,-->
-                                                                                            <!--nom = matiere.description,-->
-                                                                                            <!--coeff = matiere.coefficient-->
-                                                                                            <!--)"-->
-                                                    <!--mdbWavesEffect>Save changes-->
-                                            <!--</button>-->
-                                        <!--</div>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;fin modal edit&ndash;&gt;-->
-
-                    <!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
-                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
-                        <!--<i class="fa fa-trash"></i>-->
-                    <!--</a>-->
-                    <!--&lt;!&ndash;modal delete&ndash;&gt;-->
-                    <!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
-                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"-->
-                         <!--aria-labelledby="myBasicModalLabel">-->
-                        <!--<div class="modal-dialog modal-sm" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
-                                            <!--(click)="deleteModal.hide()">-->
-                                        <!--<span aria-hidden="true">×</span>-->
-                                    <!--</button>-->
-                                    <!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body d-flex">-->
-                                    <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
-                                            <!--aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel-->
-                                    <!--</button>-->
-                                    <!--<button type="button" mdbBtn color="primary"-->
-                                            <!--class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect-->
-                                            <!--(click)="deleteMatiere(id = matiere.id)">Confirm-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;fin modal delete&ndash;&gt;-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
-<!--</section>-->
-
