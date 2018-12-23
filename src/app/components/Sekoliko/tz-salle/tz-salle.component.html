@@ -149,9 +149,9 @@
               <h4 class="modal-title w-100 text-center">Réservation salle <i class="fa fa-home"></i></h4>
             </div>
             <div class="modal-body">
-              <form #salleform="ngForm" class="col-md-12 mt-5">
+              <form #salleformReserv="ngForm" class="col-md-12 mt-5">
                 <mat-form-field class="col-md-12">
-                  <mat-select placeholder="Selectioner un salle" name="description" [(ngModel)]="salle.description">
+                  <mat-select placeholder="Selectioner un salle" name="description" [(ngModel)]="reservation.id" required>
                     <mat-option *ngFor="let list of _salle" value="{{list.id}}">{{list.nom}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -160,7 +160,7 @@
                                         bigBanner: true,
                                         timePicker: true,
                                         format: 'dd-MMM-yyyy hh:mm a'
-                                    }" name="dateDebut" [(ngModel)]="salle.dateDebut" placeholder="Date début">
+                                    }" name="dateDebut" [(ngModel)]="reservation.dateDebut" placeholder="Date début" required>
                   <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
                   <mat-datepicker #datedebut></mat-datepicker>
                 </mat-form-field>
@@ -169,24 +169,18 @@
                                             bigBanner: true,
                                             timePicker: true,
                                             format: 'dd-MMM-yyyy hh:mm a'
-                                        }" name="datefin" [(ngModel)]="salle.dateFin" placeholder="Date fin">
+                                        }" name="datefin" [(ngModel)]="reservation.dateFin" placeholder="Date fin" required>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
-                  <mat-select placeholder="Classe" name="class" [(ngModel)]="salle.classe">
-                    <mat-option *ngFor="let classe of niveau" value="{{classe.id}}">{{classe.description}}</mat-option>
+                  <mat-select placeholder="Classe" name="class" [(ngModel)]="reservation.classe" required>''
+                    <mat-option *ngFor="let classe of classe_enfant" value="{{classe.id}}"> {{classe.parent.description}} {{classe.description}} </mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <button class="btn btn-success btn-rounded float-right d-block w-100" color="secondary" type="submit"
-                        (click)="reservation(
-                                id = salle.description,
-                                description = salle.description,
-                                dateDebut = salle.dateDebut,
-                                dateFin = salle.dateFin,
-                                classe = salle.classe
-                                )">Ajouter
+                        (click)="reservations()" [disabled]="!salleformReserv.form.valid">Ajouter
                 </button>
               </form>
             </div>
@@ -196,37 +190,10 @@
     </div>
     <div class="col-md-6 text-right mb-2">
       <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-              mdbWavesEffect (click)="addModal.show()">
+              mdbWavesEffect (click)="openDialog()">
         <i class="fa fa-plus-circle m-2"></i>
         Ajout un salle
       </button>
-
-      <div mdbModal #addModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-           aria-labelledby="myBasicModalLabel"
-           [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close pull-right" aria-label="Close" (click)="addModal.hide()">
-                <span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title w-100 text-center">Nouveau Salle <i class="fa fa-home"></i></h4>
-            </div>
-            <div class="modal-body">
-              <form #salleform="ngForm" class="col-md-12 mt-5">
-                <mat-form-field class="col-md-12">
-                  <input matInput placeholder="Nom salle" id="nom" type="text" name="description"
-                         [(ngModel)]="salle.description"
-                         #login="ngModel">
-                </mat-form-field>
-                <button class="btn btn-success btn-rounded float-right d-block w-100" color="secondary" type="submit"
-                        (click)="save(salle)">Ajouter
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <div class="mat-elevation-z8">

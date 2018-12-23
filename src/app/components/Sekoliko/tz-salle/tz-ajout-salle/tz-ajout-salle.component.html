@@ -4,8 +4,15 @@
 </div>
 <form #salleform="ngForm" class="col-md-12 mt-5">
     <mat-form-field class="col-md-12">
-      <input matInput placeholder="Nom salle" id="nom" type="text" name="description" [(ngModel)]="salle.description"
+      <input matInput placeholder="Nom salle" id="nom" type="text" name="description" required [(ngModel)]="salle.description"
              #login="ngModel">
     </mat-form-field>
-  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(salle)">Ajouter</button>
+  <button class="btn btn-success btn-rounded float-right" type="submit" [disabled]="!salleform.form.valid" (click)="save(salle)">Ajouter</button>
 </form>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>
