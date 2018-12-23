@@ -1,6 +1,13 @@
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des classes </h4>
-</div>
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span>
+    Liste des classes
+  </span>
+  <span fxFlex></span>
+  <a mdbBtn  [routerLink]="['/menu/add-classe']"
+     class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
+    <i class="fa fa-plus-circle"></i>
+  </a>
+</mat-toolbar>
 <section class="mt-5">
   <div class="tz-btn-content text-right mb-2">
     <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
