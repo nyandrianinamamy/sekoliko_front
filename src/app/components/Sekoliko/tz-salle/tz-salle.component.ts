@@ -21,12 +21,12 @@ import {Classe} from "../../../shared/model/Classe";
 
 export class TzSalleComponent implements OnInit {
 
-    _salle: Salle[];
+    _salle: any[];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     loading: boolean;
     salle: Salle;
-    niveau : Classe;
+    niveau: Classe[];
     classe_enfant: ClasseEnfant;
     public description: string;
     public dateDebut:Date;
@@ -36,7 +36,7 @@ export class TzSalleComponent implements OnInit {
     /**
      * Table
      */
-    displayedColumns: string[] = ['id', 'nom', 'action'];
+    displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action'];
     dataSource: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -54,14 +54,14 @@ export class TzSalleComponent implements OnInit {
          */
         this.salle = new Salle();
         this.loading = true;
-        this.getClasseEnfant().subscribe(response=> {
-            if (response.code === ConstantHTTP.CODE_SUCCESS){
-                this.classe_enfant = response.data
+        this.getClasseEnfant().subscribe(response => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+                this.classe_enfant = response.data;
             }
         });
         this.getNiveau().subscribe(response => {
-            if (response.code === ConstantHTTP.CODE_SUCCESS){
-                this.niveau = response.data
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+                this.niveau = response.data;
             }
         });
         this.getListSalle().subscribe((data: any) => {
@@ -84,7 +84,7 @@ export class TzSalleComponent implements OnInit {
         return this.dataService.post(urlList.path_list_salle);
     }
 
-    exportCsv(){
+    exportCsv() {
         new Angular5Csv(this._salle,'liste_salle');
     }
 
