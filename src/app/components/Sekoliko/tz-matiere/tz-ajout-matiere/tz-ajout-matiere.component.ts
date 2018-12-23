@@ -86,7 +86,7 @@ export class TzAjoutMatiereComponent implements OnInit {
   save(_matiere: MatiereParam) {
     this.loading = true;
     console.log('la list des matières est: ', _matiere);
-    /*if (this.update) {
+    if (this.update) {
       this.dataService.post(urlList.path_add_matiere + '/' + this.idMatiere, _matiere).subscribe((response) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.loading = false;
@@ -100,7 +100,7 @@ export class TzAjoutMatiereComponent implements OnInit {
           this.router.navigate(['/menu/matiere-list']);
         }
       });
-    }*/
+    }
   }
 
 
