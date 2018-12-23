@@ -2,367 +2,461 @@
   <h4 class="h4-responsive text-white">Liste des salles</h4>
 </div>
 <!--<section class="mt-5">-->
-    <!--<div class="tz-btn-content text-right mb-2">-->
-        <!--<a routerLink="/menu/add-salle" routerLinkActive="active-link" type="button" mdbBtn color="secondary" mdbWavesEffect>-->
-            <!--<i class="fa fa-plus-circle m-2"></i>-->
-            <!--Ajout un salle-->
-        <!--</a>-->
-    <!--</div>-->
-    <!--<div class="px-2 table-responsive">-->
-        <!--<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-striped table-bordered" style="width:100%">-->
-          <!--<thead>-->
-              <!--<tr>-->
-                <!--<th class="text-center">Salle ID</th>-->
-                <!--<th class="text-center">Salle Nom</th>-->
-                <!--<th class="text-center">Action</th>-->
-              <!--</tr>-->
-          <!--</thead>-->
-          <!--<tbody>-->
-          <!--<tr *ngFor="let salleList of salle">-->
-            <!--<td class="text-center">{{salleList.id}}</td>-->
-            <!--<td class="text-center">{{salleList.nom}}</td>-->
-              <!--<td class="text-center">-->
-                  <!--<a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"-->
-                   <!--class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">-->
-                  <!--<i class="fa fa-eye"></i>-->
-                  <!--</a>-->
-                  <!--<div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
-                       <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
-                      <!--<div class="modal-dialog" role="document">-->
-                          <!--<div class="modal-content">-->
-                              <!--<div class="modal-header">-->
-                                  <!--<button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">-->
-                                      <!--<span aria-hidden="true">×</span>-->
-                                  <!--</button>-->
-                                  <!--<h4 class="modal-title w-100">{{salleList.nom}}  <i class="fa fa-home"></i></h4>-->
-                              <!--</div>-->
-                              <!--<div class="modal-body">-->
-                                  <!--<ul class="list-group list-group-flush">-->
-                                      <!--<li class="list-group-item">-->
-                                            <!--<div class="text-left">Numéro salle</div>-->
-                                            <!--<div class="text-right">{{salleList.id}}</div>-->
-                                      <!--</li>-->
-                                      <!--<li class="list-group-item">-->
-                                          <!--<div class="text-left">Nom salle</div>-->
-                                          <!--<div class="text-right">{{salleList.nom}}</div>-->
-                                      <!--</li>-->
-                                  <!--</ul>-->
-                              <!--</div>-->
-                              <!--<div class="modal-footer">-->
-                                  <!--<button type="button" mdbBtn color="secondary"-->
-                                          <!--class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()" mdbWavesEffect>Close</button>-->
-                              <!--</div>-->
-                          <!--</div>-->
-                      <!--</div>-->
-                  <!--</div>-->
-                    <!--&lt;!&ndash;fin modal details&ndash;&gt;-->
-                  <!--<a mdbBtn data-toggle="modal" data-target="#editModal"-->
-                      <!--class=" tz-btn-circle  m-1 relative waves-light" color="success"  (click)="editModal.show()">-->
-                      <!--<i class="fa fa-edit"></i>-->
-                  <!--</a>-->
-                  <!--&lt;!&ndash;edit modals&ndash;&gt;-->
-                  <!--<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
-                       <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
-                      <!--<div class="modal-dialog" role="document">-->
-                          <!--<div class="modal-content">-->
-                              <!--<div class="modal-header">-->
-                                  <!--<button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">-->
-                                      <!--<span aria-hidden="true">×</span>-->
-                                  <!--</button>-->
-                                  <!--<h4 class="modal-title w-100" >{{salleList.nom}}  <i class="fa fa-home"></i></h4>-->
-                              <!--</div>-->
-                              <!--<div class="modal-body">-->
-                                  <!--<form action="">-->
-                                      <!--<div class="md-form m-2">-->
-                                          <!--<label data-error="wrong" data-success="right"  for="orangeForm-coeff">Coefficient</label>-->
-                                          <!--<input type="text" id="orangeForm-coeff" name="description"-->
-                                                 <!--value="{{salleList.nom}}" [(ngModel)]="salleList.nom" class="form-control validate" mdbInputDirective>-->
-                                      <!--</div>-->
-                                      <!--<div class="tz-btn-conten text-center">-->
-                                          <!--<a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right w-50" type="submit"-->
-                                             <!--(click)="editModal.hide() ; editSalle(salleList.id, description = salleList.nom)">Modifier</a>-->
-                                          <!--<a routerLink="/menu/salle" (click)="editModal.hide()" class="btn btn-warning btn-rounded float-right w-50" type="submit">Cancel</a>-->
-                                      <!--</div>-->
-                                  <!--</form>-->
-                              <!--</div>-->
-                          <!--</div>-->
-                      <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;fin modal edit&ndash;&gt;-->
-                  <!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
-                      <!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
-                      <!--<i class="fa fa-trash"></i>-->
-                  <!--</a>-->
-                  <!--&lt;!&ndash;modal delete&ndash;&gt;-->
-                  <!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
-                       <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true" aria-labelledby="myBasicModalLabel">-->
-                      <!--<div class="modal-dialog modal-sm" role="document">-->
-                          <!--<div class="modal-content">-->
-                              <!--<div class="modal-header">-->
-                                  <!--<button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">-->
-                                      <!--<span aria-hidden="true">×</span>-->
-                                  <!--</button>-->
-                                  <!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i></h4>-->
-                              <!--</div>-->
-                              <!--<div class="modal-body d-flex">-->
-                                  <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>-->
-                                  <!--<a routerLink="/menu/salle"  type="button" mdbBtn color="primary" class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect-->
-                                     <!--(click)="deleteModal.hide(); deleteSalle(salleList.id)">Confirm</a>-->
-                              <!--</div>-->
-                          <!--</div>-->
-                      <!--</div>-->
-                  <!--</div>-->
-                  <!--&lt;!&ndash;fin modal delete&ndash;&gt;-->
-              <!--</td>-->
-          <!--</tr>-->
-          <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
+<!--<div class="tz-btn-content text-right mb-2">-->
+<!--<a routerLink="/menu/add-salle" routerLinkActive="active-link" type="button" mdbBtn color="secondary" mdbWavesEffect>-->
+<!--<i class="fa fa-plus-circle m-2"></i>-->
+<!--Ajout un salle-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="px-2 table-responsive">-->
+<!--<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-striped table-bordered" style="width:100%">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th class="text-center">Salle ID</th>-->
+<!--<th class="text-center">Salle Nom</th>-->
+<!--<th class="text-center">Action</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr *ngFor="let salleList of salle">-->
+<!--<td class="text-center">{{salleList.id}}</td>-->
+<!--<td class="text-center">{{salleList.nom}}</td>-->
+<!--<td class="text-center">-->
+<!--<a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"-->
+<!--class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">-->
+<!--<i class="fa fa-eye"></i>-->
+<!--</a>-->
+<!--<div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
+<!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
+<!--<div class="modal-dialog" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">-->
+<!--<span aria-hidden="true">×</span>-->
+<!--</button>-->
+<!--<h4 class="modal-title w-100">{{salleList.nom}}  <i class="fa fa-home"></i></h4>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<ul class="list-group list-group-flush">-->
+<!--<li class="list-group-item">-->
+<!--<div class="text-left">Numéro salle</div>-->
+<!--<div class="text-right">{{salleList.id}}</div>-->
+<!--</li>-->
+<!--<li class="list-group-item">-->
+<!--<div class="text-left">Nom salle</div>-->
+<!--<div class="text-right">{{salleList.nom}}</div>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" mdbBtn color="secondary"-->
+<!--class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()" mdbWavesEffect>Close</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;fin modal details&ndash;&gt;-->
+<!--<a mdbBtn data-toggle="modal" data-target="#editModal"-->
+<!--class=" tz-btn-circle  m-1 relative waves-light" color="success"  (click)="editModal.show()">-->
+<!--<i class="fa fa-edit"></i>-->
+<!--</a>-->
+<!--&lt;!&ndash;edit modals&ndash;&gt;-->
+<!--<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
+<!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
+<!--<div class="modal-dialog" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">-->
+<!--<span aria-hidden="true">×</span>-->
+<!--</button>-->
+<!--<h4 class="modal-title w-100" >{{salleList.nom}}  <i class="fa fa-home"></i></h4>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<form action="">-->
+<!--<div class="md-form m-2">-->
+<!--<label data-error="wrong" data-success="right"  for="orangeForm-coeff">Coefficient</label>-->
+<!--<input type="text" id="orangeForm-coeff" name="description"-->
+<!--value="{{salleList.nom}}" [(ngModel)]="salleList.nom" class="form-control validate" mdbInputDirective>-->
+<!--</div>-->
+<!--<div class="tz-btn-conten text-center">-->
+<!--<a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right w-50" type="submit"-->
+<!--(click)="editModal.hide() ; editSalle(salleList.id, description = salleList.nom)">Modifier</a>-->
+<!--<a routerLink="/menu/salle" (click)="editModal.hide()" class="btn btn-warning btn-rounded float-right w-50" type="submit">Cancel</a>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;fin modal edit&ndash;&gt;-->
+<!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
+<!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
+<!--<i class="fa fa-trash"></i>-->
+<!--</a>-->
+<!--&lt;!&ndash;modal delete&ndash;&gt;-->
+<!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
+<!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true" aria-labelledby="myBasicModalLabel">-->
+<!--<div class="modal-dialog modal-sm" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">-->
+<!--<span aria-hidden="true">×</span>-->
+<!--</button>-->
+<!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i></h4>-->
+<!--</div>-->
+<!--<div class="modal-body d-flex">-->
+<!--<button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>-->
+<!--<a routerLink="/menu/salle"  type="button" mdbBtn color="primary" class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect-->
+<!--(click)="deleteModal.hide(); deleteSalle(salleList.id)">Confirm</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;fin modal delete&ndash;&gt;-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
 <!--</section>-->
 
 <div class="maskSpinner" *ngIf="loading">
-    <app-radar-spinner
-      [animationDuration]="4000"
-      [size]="200"
-      [color]="'#2e6bb1'"
-    ></app-radar-spinner>
-  </div>
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>
 
 <section class="mt-5">
-    <div class="row">
-        <div class="col-md-6 text-left">
-            <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-                    mdbWavesEffect (click)="reserveModal.show()">
-                <!--<i class="fa fa-plus-circle m-2"></i>-->
-                <i class="fa fa-calendar-check-o m-2"></i>
-                Reserver un Salle
-            </button>
-            <div mdbModal #reserveModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                 [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="reserveModal.hide()">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title w-100 text-center">Réservation salle  <i class="fa fa-home"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                            <form #salleform="ngForm" class="col-md-12 mt-5">
-                                <mat-form-field class="col-md-12">
-                                    <mat-select placeholder="Selectioner un salle" name="description" [(ngModel)]="salle.description">
-                                        <mat-option *ngFor="let list of salle"  value="{{list.id}}">{{list.nom}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <mat-form-field class="col-md-12">
-                                    <input matInput [matDatepicker]="datedebut" [settings]="{
+  <div class="row">
+    <div class="col-md-6 text-left">
+      <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
+              mdbWavesEffect (click)="reserveModal.show()">
+        <!--<i class="fa fa-plus-circle m-2"></i>-->
+        <i class="fa fa-calendar-check-o m-2"></i>
+        Reserver une Salle
+      </button>
+      <div mdbModal #reserveModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+           aria-labelledby="myBasicModalLabel"
+           [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" aria-label="Close" (click)="reserveModal.hide()">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title w-100 text-center">Réservation salle <i class="fa fa-home"></i></h4>
+            </div>
+            <div class="modal-body">
+              <form #salleformReserv="ngForm" class="col-md-12 mt-5">
+                <mat-form-field class="col-md-12">
+                  <mat-select placeholder="Selectioner une salle" name="description" [(ngModel)]="reservation.id" required>
+                    <mat-option *ngFor="let list of _salle" value="{{list.id}}">{{list.nom}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                  <input matInput [matDatepicker]="datedebut" [settings]="{
                                         bigBanner: true,
                                         timePicker: true,
                                         format: 'dd-MMM-yyyy hh:mm a'
-                                    }" name="dateDebut" [(ngModel)]="salle.dateDebut" placeholder="Date début">
-                                    <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
-                                    <mat-datepicker #datedebut></mat-datepicker>
-                                </mat-form-field>
-                                <mat-form-field class="col-md-12">
-                                    <input matInput [matDatepicker]="picker" [settings]="{
+                                    }" name="dateDebut" [(ngModel)]="reservation.dateDebut" placeholder="Date début" required>
+                  <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
+                  <mat-datepicker #datedebut></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                  <input matInput [matDatepicker]="picker" [settings]="{
                                             bigBanner: true,
                                             timePicker: true,
                                             format: 'dd-MMM-yyyy hh:mm a'
-                                        }" name="datefin" [(ngModel)]="salle.dateFin" placeholder="Date fin">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                                <mat-form-field class="col-md-12">
-                                    <mat-select placeholder="Classe" name="class" [(ngModel)]="salle.classe">
-                                        <mat-option *ngFor="let classe of niveau"  value="{{classe.id}}">{{classe.description}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
 
-                                <button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="reservation(
-                                id = salle.description,
-                                description = salle.description,
-                                dateDebut = salle.dateDebut,
-                                dateFin = salle.dateFin,
-                                classe = salle.classe
-                                )">Ajouter</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 text-right mb-2">
-            <a routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-                    mdbWavesEffect routerLink="/menu/add-salle">
-                <i class="fa fa-plus-circle m-2"></i>
-                Ajout un salle
-            </a>
-
-            <!--<div mdbModal #addModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
-                 <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
-                <!--<div class="modal-dialog" role="document">-->
-                    <!--<div class="modal-content">-->
-                        <!--<div class="modal-header">-->
-                            <!--<button type="button" class="close pull-right" aria-label="Close" (click)="addModal.hide()">-->
-                                <!--<span aria-hidden="true">×</span>-->
-                            <!--</button>-->
-                            <!--<h4 class="modal-title w-100 text-center">Nouveau Salle  <i class="fa fa-home"></i></h4>-->
-                        <!--</div>-->
-                        <!--<div class="modal-body">-->
-                            <!--<form #salleform="ngForm" class="col-md-12 mt-5">-->
-                                <!--<mat-form-field class="col-md-12">-->
-                                    <!--<input matInput placeholder="Nom salle" id="nom" type="text" name="description" [(ngModel)]="salle.description"-->
-                                           <!--#login="ngModel">-->
+                                        }" name="datefin" [(ngModel)]="reservation.dateFin" placeholder="Date fin" required>
+                                    <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+                                    <!--<mat-datepicker #picker></mat-datepicker>-->
                                 <!--</mat-form-field>-->
-                                <!--<button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="save(salle)">Ajouter</button>-->
+                                <!--<mat-form-field class="col-md-12">-->
+                                    <!--<mat-select placeholder="Classe" name="class" [(ngModel)]="salle.classe">-->
+                                        <!--<mat-option *ngFor="let classe of niveau"  value="{{classe.id}}">{{classe.description}}</mat-option>-->
+                                    <!--</mat-select>-->
+                                <!--</mat-form-field>-->
+
+                                <!--<button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="reservation(-->
+                                <!--id = salle.description,-->
+                                <!--description = salle.description,-->
+                                <!--dateDebut = salle.dateDebut,-->
+                                <!--dateFin = salle.dateFin,-->
+                                <!--classe = salle.classe-->
+                                <!--)">Ajouter</button>-->
                             <!--</form>-->
                         <!--</div>-->
                     <!--</div>-->
                 <!--</div>-->
             <!--</div>-->
-        </div>
-    </div>
-    <div class="mat-elevation-z8">
-        <div class="row p-2">
-            <div class="col-md-6">
-                <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                </mat-form-field>
-            </div>
-            <div class="col-md-6 text-right">
-                <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
-            </div>
-        </div>
+        <!--</div>-->
+        <!--<div class="col-md-6 text-right mb-2">-->
+            <!--<a routerLinkActive="active-link" type="button" mdbBtn color="secondary"-->
+                    <!--mdbWavesEffect routerLink="/menu/add-salle">-->
+                <!--<i class="fa fa-plus-circle m-2"></i>-->
+                <!--Ajout un salle-->
+            <!--</a>-->
 
-        <table mat-table [dataSource]="dataSource">
-            <!-- Position Column -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef class="text-center"> ID </th>
-                <td mat-cell *matCellDef="let _salle" class="text-center">
+            <!--&lt;!&ndash;<div mdbModal #addModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"&ndash;&gt;-->
+                 <!--&lt;!&ndash;[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="modal-dialog" role="document">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-content">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="modal-header">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button type="button" class="close pull-right" aria-label="Close" (click)="addModal.hide()">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span aria-hidden="true">×</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<h4 class="modal-title w-100 text-center">Nouveau Salle  <i class="fa fa-home"></i></h4>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="modal-body">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<form #salleform="ngForm" class="col-md-12 mt-5">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<mat-form-field class="col-md-12">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<input matInput placeholder="Nom salle" id="nom" type="text" name="description" [(ngModel)]="salle.description"&ndash;&gt;-->
+                                           <!--&lt;!&ndash;#login="ngModel">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="save(salle)">Ajouter</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--=======-->
+
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                  <mat-select placeholder="Classe" name="class" [(ngModel)]="reservation.classe" required>''
+                    <mat-option *ngFor="let classe of classe_enfant" value="{{classe.id}}"> {{classe.parent.description}} {{classe.description}} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button class="btn btn-success btn-rounded float-right d-block w-100" color="secondary" type="submit"
+                        (click)="reservations()" [disabled]="!salleformReserv.form.valid">Ajouter
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-right mb-2">
+      <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
+              mdbWavesEffect (click)="openDialog()">
+        <i class="fa fa-plus-circle m-2"></i>
+        Ajout une salle
+      </button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <div class="row p-2">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> ID</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
                     <span *ngIf="_salle">
                         {{ _salle.id}}
                     </span>
-                    <span *ngIf="!_salle">
+          <span *ngIf="!_salle">
                         0
                     </span>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="nom">
-                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Nom </th>
-                <td mat-cell *matCellDef="let _salle"  class="text-center">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Nom</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
                     <span *ngIf="_salle">
                         {{ _salle.nom}}
                     </span>
-                    <span *ngIf="!_salle">
+          <span *ngIf="!_salle">
                         0
                     </span>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef  class="text-center"> Action </th>
-                <td mat-cell *matCellDef="let _salle"  class="text-center">
-                    <a mdbBtn data-toggle="modal"  (click)="detailsModal.show()"  data-target="#detailsModal"
-                       class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100">{{_salle.nom}}  <i class="fa fa-home"></i></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="text-left">Numéro salle</div>
-                                            <div class="text-right">{{_salle.id}}</div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="text-left">Nom salle</div>
-                                            <div class="text-right">{{_salle.nom}}</div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" mdbBtn color="secondary"
-                                            class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()" mdbWavesEffect>Close</button>
-                                </div>
-                            </div>
-                        </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="debut">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Debut occupation</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
+            <span *ngIf="_salle">
+                {{ _salle.date_debut_occupation | date:'dd-MM-yyyy HH:mm'}}
+            </span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="fin">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Fin occupation</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
+          <span *ngIf="_salle">
+            {{ _salle.date_fin_occupation | date:'dd-MM-yyyy HH:mm'}}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="classe">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> classe</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
+            <span *ngIf="_salle.classe">
+               {{_salle.classe.parent.description}}  {{ _salle.classe.description}}
+            </span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Action</th>
+        <td mat-cell *matCellDef="let _salle" class="text-center">
+          <a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"
+             class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
+            <i class="fa fa-eye"></i>
+          </a>
+          <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="detailsModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">{{_salle.nom}} <i class="fa fa-home"></i></h4>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="text-left">Numéro salle</div>
+                      <div class="text-right">{{_salle.id}}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Nom salle</div>
+                      <div class="text-right">{{_salle.nom}}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Nom salle</div>
+                      <div class="text-right">
+                        <span *ngIf="_salle">
+                            {{ _salle.date_debut_occupation | date:'dd-MM-yyyy HH:mm'}}
+                        </span>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Nom salle</div>
+                      <div class="text-right">
+                         <span *ngIf="_salle">
+                             {{ _salle.date_fin_occupation | date:'dd-MM-yyyy HH:mm'}}
+                          </span>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="text-left">Nom salle</div>
+                      <div class="text-right">
+                        <span *ngIf="_salle.classe">
+                            {{_salle.classe.parent.description}}  {{ _salle.classe.description}}
+                        </span>
+                      </div>
+                    </li>
+
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" mdbBtn color="secondary"
+                          class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()" mdbWavesEffect>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--fin modal details-->
+          <a mdbBtn data-toggle="modal" data-target="#editModal"
+             class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
+            <i class="fa fa-edit"></i>
+          </a>
+          <!--edit modals-->
+          <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">{{_salle.nom}} <i class="fa fa-home"></i></h4>
+                </div>
+                <div class="modal-body">
+                  <form action="">
+                    <div class="md-form m-2">
+                      <label data-error="wrong" data-success="right">Coefficient</label>
+                      <input type="text" name="description"
+                             value="{{_salle.nom}}" [(ngModel)]="_salle.nom" class="form-control validate"
+                             mdbInputDirective>
                     </div>
-
-                    <!--fin modal details-->
-                    <a mdbBtn data-toggle="modal" data-target="#editModal"
-                       class=" tz-btn-circle  m-1 relative waves-light" color="success"  (click)="editModal.show()">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <!--edit modals-->
-                    <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100" >{{_salle.nom}}  <i class="fa fa-home"></i></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="">
-                                        <div class="md-form m-2">
-                                            <label data-error="wrong" data-success="right">Coefficient</label>
-                                            <input type="text"  name="description"
-                                                   value="{{_salle.nom}}" [(ngModel)]="_salle.nom" class="form-control validate" mdbInputDirective>
-                                        </div>
-                                        <div class="text-center w-100">
-                                            <a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right" type="submit"  style="width: 35%"
-                                               (click)="editModal.hide() ; editSalle(_salle.id, description = _salle.nom)">Modifier</a>
-                                            <a routerLink="/menu/salle" (click)="editModal.hide()" class="btn btn-warning btn-rounded float-left" style="width: 35%" type="submit">Cancel</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="text-center w-100">
+                      <a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right" type="submit"
+                         style="width: 35%"
+                         (click)="editModal.hide() ; editSalle(_salle.id, description = _salle.nom)">Modifier</a>
+                      <a routerLink="/menu/salle" (click)="editModal.hide()"
+                         class="btn btn-warning btn-rounded float-left" style="width: 35%" type="submit">Cancel</a>
                     </div>
-                    <!--fin modal edit-->
-                    <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
-                       class=" tz-btn-circle  m-1 relative waves-light" color="danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <!--modal delete-->
-                    <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true" aria-labelledby="myBasicModalLabel">
-                        <div class="modal-dialog modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <h4 class="modal-title w-100">Supprimer <i class="fa fa-home"></i></h4>
-                                </div>
-                                <div class="modal-body d-flex">
-                                    <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel</button>
-                                    <a routerLink="/menu/salle"  type="button" mdbBtn color="primary" class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
-                                       (click)="deleteModal.hide(); deleteSalle(_salle.id)">Confirm</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--fin modal delete-->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal edit-->
+          <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+            <i class="fa fa-trash"></i>
+          </a>
+          <!--modal delete-->
+          <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"
+               aria-labelledby="myBasicModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">Supprimer <i class="fa fa-home"></i></h4>
+                </div>
+                <div class="modal-body d-flex">
+                  <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close"
+                          (click)="deleteModal.hide()" mdbWavesEffect>Cancel
+                  </button>
+                  <a routerLink="/menu/salle" type="button" mdbBtn color="primary"
+                     class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
+                     (click)="deleteModal.hide(); deleteSalle(_salle.id)">Confirm</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fin modal delete-->
 
-                </td>
-            </ng-container>
+        </td>
+      </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 </section>
 
 

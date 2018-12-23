@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {Salle} from "../../../../shared/model/Salle";
-import {DataService} from "../../../../shared/service/data.service";
-import {urlList} from "../../../../Utils/api/urlList";
-import {ConstantHTTP} from "../../../../Utils/ConstantHTTP";
-import {Router} from "@angular/router";
+import {Component, Inject, OnInit} from '@angular/core';
+import {Salle} from '../../../../shared/model/Salle';
+import {DataService} from '../../../../shared/service/data.service';
+import {urlList} from '../../../../Utils/api/urlList';
+import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-tz-ajout-salle',
@@ -12,23 +13,25 @@ import {Router} from "@angular/router";
 })
 export class TzAjoutSalleComponent implements OnInit {
 
-  salle : Salle;
+  salle: Salle;
   loading: boolean;
   id = '';
 
-  constructor(private dataservice : DataService,private router : Router) { }
+  constructor(private dataservice: DataService, private router: Router,
+              public dialogRef: MatDialogRef<TzAjoutSalleComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.salle = new Salle();
   }
 
-  save(salle : Salle){
+  save(salle: Salle) {
     this.loading = true;
-    this.dataservice.post(urlList.path_edit_salle,salle).subscribe(response=>{
+    this.dataservice.post(urlList.path_edit_salle, salle).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.loading = false;
-        this.router.navigate(['/menu/salle']);
+        this.dialogRef.close(1);
       }
-    })
+    });
   }
 }

@@ -54,7 +54,7 @@ export class TzClasseListComponent implements OnInit {
     });
   }
 
-  deleteClasse(id:number){
+  deleteClasse(id: number) {
     this.loading = true;
     return this.dataService.post(urlList.path_delete_class+id).subscribe(response=>{
       if (response.code == ConstantHTTP.CODE_SUCCESS){
@@ -62,7 +62,7 @@ export class TzClasseListComponent implements OnInit {
         this.ngOnInit();
         this.loading = false;
       }
-    })
+    });
   }
 
   editClasse(id:number,
