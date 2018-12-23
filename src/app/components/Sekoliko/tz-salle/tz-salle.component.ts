@@ -140,7 +140,8 @@ export class TzSalleComponent implements OnInit {
         return this.dataService.post(urlList.path_list_class_parent);
     }
 
-    save(salle: Salle) {
+    save(salle:Salle) {
+        console.log("eto");
         this.loading = true;
         this.dataService.post(urlList.path_edit_salle, salle).subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {

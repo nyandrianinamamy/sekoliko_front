@@ -192,34 +192,34 @@
             </div>
         </div>
         <div class="col-md-6 text-right mb-2">
-            <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-                    mdbWavesEffect (click)="addModal.show()">
+            <a routerLinkActive="active-link" type="button" mdbBtn color="secondary"
+                    mdbWavesEffect routerLink="/menu/add-salle">
                 <i class="fa fa-plus-circle m-2"></i>
                 Ajout un salle
-            </button>
+            </a>
 
-            <div mdbModal #addModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                 [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="addModal.hide()">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title w-100 text-center">Nouveau Salle  <i class="fa fa-home"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                            <form #salleform="ngForm" class="col-md-12 mt-5">
-                                <mat-form-field class="col-md-12">
-                                    <input matInput placeholder="Nom salle" id="nom" type="text" name="description" [(ngModel)]="salle.description"
-                                           #login="ngModel">
-                                </mat-form-field>
-                                <button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="save(salle)">Ajouter</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div mdbModal #addModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"-->
+                 <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">-->
+                <!--<div class="modal-dialog" role="document">-->
+                    <!--<div class="modal-content">-->
+                        <!--<div class="modal-header">-->
+                            <!--<button type="button" class="close pull-right" aria-label="Close" (click)="addModal.hide()">-->
+                                <!--<span aria-hidden="true">×</span>-->
+                            <!--</button>-->
+                            <!--<h4 class="modal-title w-100 text-center">Nouveau Salle  <i class="fa fa-home"></i></h4>-->
+                        <!--</div>-->
+                        <!--<div class="modal-body">-->
+                            <!--<form #salleform="ngForm" class="col-md-12 mt-5">-->
+                                <!--<mat-form-field class="col-md-12">-->
+                                    <!--<input matInput placeholder="Nom salle" id="nom" type="text" name="description" [(ngModel)]="salle.description"-->
+                                           <!--#login="ngModel">-->
+                                <!--</mat-form-field>-->
+                                <!--<button class="btn btn-success btn-rounded float-right d-block w-100"  color="secondary" type="submit" (click)="save(salle)">Ajouter</button>-->
+                            <!--</form>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="mat-elevation-z8">
