@@ -49,6 +49,7 @@ import {EtudiantUpdateComponent} from './tz-etudiants/etudiant-update/etudiant-u
 import {UserManageComponent} from './user-manage/user-manage.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -64,6 +65,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatGridListModule,
     FlexLayoutModule,
     MatCardModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatExpansionModule,
     MatMenuModule,
     MatFormFieldModule,

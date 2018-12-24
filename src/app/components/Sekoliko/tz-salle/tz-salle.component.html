@@ -1,10 +1,12 @@
-<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+<mat-toolbar class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
   <span>
     Liste des salles
   </span>
   <span fxFlex></span>
-  <button class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary"  routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-     mdbWavesEffect (click)="openDialog()">
+  <button class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
+          style="background: #a6c!important;color: aliceblue;" color="secondary" routerLinkActive="active-link"
+          type="button" mdbBtn color="secondary"
+          mdbWavesEffect (click)="openDialog()">
     <i class="fa fa-plus-circle"></i>
     Ajout une salle
   </button>
@@ -21,8 +23,8 @@
 <section class="mt-5">
   <div class="row">
     <div class="col-md-6 text-left">
-        <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
-                mdbWavesEffect (click)="reserveModal.show()">
+      <button routerLinkActive="active-link" type="button" mdbBtn color="secondary"
+              mdbWavesEffect (click)="reserveModal.show()">
         <!--<i class="fa fa-plus-circle m-2"></i>-->
         <i class="fa fa-calendar-check-o m-2"></i>
         Reserver une Salle
@@ -41,32 +43,34 @@
             <div class="modal-body">
               <form #salleformReserv="ngForm" class="col-md-12 mt-5">
                 <mat-form-field class="col-md-12">
-                  <mat-select placeholder="Selectioner une salle" name="description" [(ngModel)]="reservation.id" required>
-                    <mat-option *ngFor="let list of _salle" value="{{list.id}}">{{list.nom}}</mat-option>
+                  <mat-select placeholder="Selectioner une salle" name="description" [(ngModel)]="reservation.id"
+                              required>
+                    <mat-option *ngFor="let list of listSalleLibre" value="{{list.id}}">{{list.nom}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
-                  <input matInput [matDatepicker]="datedebut" [settings]="{
-                                        bigBanner: true,
-                                        timePicker: true,
-                                        format: 'dd-MMM-yyyy hh:mm a'
-                                    }" name="dateDebut" [(ngModel)]="reservation.dateDebut" placeholder="Date début" required>
-                  <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
-                  <mat-datepicker #datedebut></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field class="col-md-12">
-                  <input matInput [matDatepicker]="picker" [settings]="{
+                  <input matInput [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12" name="dateDebut" [settings]="{
                                             bigBanner: true,
                                             timePicker: true,
                                             format: 'dd-MMM-yyyy hh:mm a'
-
-                                        }" name="datefin" [(ngModel)]="reservation.dateFin" placeholder="Date fin" required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                                        }"
+                         [(ngModel)]="reservation.dateDebut" required  #datedebut = "ngModel">
+                  <owl-date-time #dt12></owl-date-time>
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                  <input matInput [owlDateTimeTrigger]="dt13" name="dateFin" [owlDateTime]="dt13" [settings]="{
+                                            bigBanner: true,
+                                            timePicker: true,
+                                            format: 'dd-MMM-yyyy hh:mm a'
+                                        }"
+                         [(ngModel)]="reservation.dateFin" required #dateFin = "ngModel">
+                  <owl-date-time #dt13></owl-date-time>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
                   <mat-select placeholder="Classe" name="class" [(ngModel)]="reservation.classe" required>''
-                    <mat-option *ngFor="let classe of classe_enfant" value="{{classe.id}}"> {{classe.parent.description}} {{classe.description}} </mat-option>
+                    <mat-option *ngFor="let classe of classe_enfant" value="{{classe.id}}">
+                      {{classe.parent.description}} {{classe.description}}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
 

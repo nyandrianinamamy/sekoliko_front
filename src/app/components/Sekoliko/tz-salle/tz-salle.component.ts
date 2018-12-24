@@ -22,6 +22,7 @@ import {TzAjoutSalleComponent} from './tz-ajout-salle/tz-ajout-salle.component';
 export class TzSalleComponent implements OnInit {
 
   _salle: any[];
+  listSalleLibre: any[];
   reservation: Salle;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -53,8 +54,10 @@ export class TzSalleComponent implements OnInit {
     /**
      * Table
      */
+    this.listSalleLibre = [];
     this.reservation = new Salle();
     this.salle = new Salle();
+    this.getListSalleLibre();
     this.loading = true;
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
@@ -84,6 +87,12 @@ export class TzSalleComponent implements OnInit {
    */
   getListSalle() {
     return this.dataService.post(urlList.path_list_salle);
+  }
+
+  getListSalleLibre() {
+    this.dataService.post(urlList.path_list_salle, {occupation: false}).subscribe(response => {
+      this.listSalleLibre = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+    });
   }
 
   exportCsv() {
