@@ -6,7 +6,7 @@ import urlContains = until.urlContains;
 import {urlList} from '../../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
 import {Classe} from '../../../../shared/model/Classe';
-import {MatiereParam} from "../../../../../../../skbcf/src/app/shared/model/MatiereParam";
+import {MatiereParam} from '../../../../shared/model/MatiereParam';
 
 @Component({
   selector: 'app-tz-fonction-prof',

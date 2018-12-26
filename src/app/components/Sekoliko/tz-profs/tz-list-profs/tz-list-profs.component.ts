@@ -5,7 +5,7 @@ import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
 import { urlList } from 'src/app/Utils/api/urlList';
 import {Subject} from "rxjs";
 import {MatPaginator, MatTableDataSource} from "@angular/material";
-import {Profs} from "../../../../../../../skbcf/src/app/shared/model/Profs";
+import {Profs} from '../../../../shared/model/Profs';
 
 @Component({
   selector: 'app-tz-list-profs',

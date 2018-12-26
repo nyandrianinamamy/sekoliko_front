@@ -50,6 +50,7 @@ import {UserManageComponent} from './user-manage/user-manage.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -65,6 +66,8 @@ import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-pa
     MatGridListModule,
     FlexLayoutModule,
     MatCardModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatExpansionModule,
     MatMenuModule,
     MatFormFieldModule,

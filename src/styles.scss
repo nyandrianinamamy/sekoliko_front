@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @import "~material-design-icons/iconfont/material-icons.css";
 @include mat-core();
-
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 *{font-family: 'Montserrat', sans-serif;font-weight: 500}
 html , body{overflow: visible}
 .full {
