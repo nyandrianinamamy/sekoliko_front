@@ -1,3 +1,202 @@
-<p>
-  tz-edt works!
-</p>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+  </div>
+</ng-template>
+
+<div class="table-responsive">
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="activeDayIsOpen = false">
+        Previous
+      </div>
+      <div
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate">
+        Today
+      </div>
+      <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="activeDayIsOpen = false">
+        Next
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+              class="btn btn-primary"
+              (click)="view = CalendarView.Month"
+              [class.active]="view === CalendarView.Month">
+        Month
+      </div>
+      <div
+              class="btn btn-primary"
+              (click)="view = CalendarView.Week"
+              [class.active]="view === CalendarView.Week">
+        Week
+      </div>
+      <div
+              class="btn btn-primary"
+              (click)="view = CalendarView.Day"
+              [class.active]="view === CalendarView.Day">
+        Day
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
+          (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-day-view>
+</div>
+
+<br><br><br>
+
+<h3>
+  Edit events
+  <button
+          class="btn btn-primary pull-right"
+          (click)="addEvent()">
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>
+  <table class="table table-bordered">
+
+    <thead>
+    <tr>
+      <th>Classe</th>
+      <th>Matiere</th>
+      <th>Profs</th>
+      <th>Color</th>
+      <th>Début le</th>
+      <th>Terminer le </th>
+      <th>Remove</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let event of events; let index = index">
+      <td>
+        <mat-form-field class="col-md-12">
+          <mat-select placeholder="Classe" name="class" required [(ngModel)]="event.title" #classes="ngModel">
+            <mat-option *ngFor="let classes of classe" (keyup)="refresh.next()" [value]="classes.id">
+              {{classes.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="col-md-12">
+          <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="teste" required #matiere="ngModel">
+            <mat-option *ngFor="let matiere of listMatiere" (keyup)="refresh.next()" [value]="matiere.id">
+              {{matiere.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="col-md-12">
+          <mat-select placeholder="Profs" name="profs" [(ngModel)]="testa"  required #prof="ngModel">
+            <mat-option *ngFor="let prof of profs" (keyup)="refresh.next()" [value]="prof.user_id">
+              {{prof.username}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <input
+                type="color"
+                [(ngModel)]="event.color.secondary"
+                (change)="refresh.next()">
+      </td>
+      <td>
+        <mat-form-field class="col-md-12">
+          <input matInput
+                 [owlDateTimeTrigger]="dt12"
+                 [owlDateTime]="dt12" name="dateDebut"
+                 [(ngModel)]="event.start"
+                 (ngModelChange)="refresh.next()"
+                 placeholder="date début"
+                 required  #datedebut = "ngModel">
+          <owl-date-time #dt12></owl-date-time>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="col-md-12">
+          <input matInput
+                 [owlDateTimeTrigger]="dt14"
+                 [owlDateTime]="dt14" name="dateFin"
+                 [(ngModel)]="event.end"
+                 (ngModelChange)="refresh.next()"
+                 placeholder="date fin"
+                 required  #dateFin = "ngModel">
+          <owl-date-time #dt14></owl-date-time>
+        </mat-form-field>
+      </td>
+      <td>
+        <button
+                class="btn btn-danger"
+                (click)="events.splice(index, 1); refresh.next()">
+          Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>

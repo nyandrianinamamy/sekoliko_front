@@ -24,6 +24,7 @@ export class TzMatiereComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   matiereCreate: MatiereParam;
+
   /**
    * Table
    */

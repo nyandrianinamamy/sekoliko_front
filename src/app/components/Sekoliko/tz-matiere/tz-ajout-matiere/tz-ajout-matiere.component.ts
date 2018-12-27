@@ -44,7 +44,6 @@ export class TzAjoutMatiereComponent implements OnInit {
     this.getListProffesseurs().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.listProff = response.data.list;
-        console.log(this.listProff)
         this.loading = false;
       }
     });

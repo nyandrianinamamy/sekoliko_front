@@ -25,17 +25,17 @@ const MENUITEMS = [
     child: [
     {
       state: ['/', 'menu', 'dashboard'],
-      name: 'Dashboards',
+      name: 'Dashboard',
       type: 'link',
       icon: 'dns'
     }, {
       state: ['/', 'menu', 'etudiant'],
-      name: 'Les etudiants',
+      name: 'Etudiant',
       type: 'link',
       icon: 'account_circle'
     }, {
       state: ['/', 'menu', 'profs'],
-      name: 'Les professeurs',
+      name: 'Professeur',
       type: 'link',
       icon: 'perm_identity'
     }, {
@@ -55,7 +55,7 @@ const MENUITEMS = [
       icon: 'attach_money'
     }, {
         state: ['/', 'menu', 'salle'],
-        name: 'Gestion Salle',
+        name: 'Gestion salle',
         type: 'link',
         icon: 'home'
       } ,{
@@ -66,13 +66,13 @@ const MENUITEMS = [
       },
       {
         state: ['/', 'menu', 'user'],
-        name: 'Gestion des profiles',
+        name: 'Gestion utilisateurs',
         type: 'link',
         icon: 'account_circle'
       },
       {
         state: ['/', 'menu', 'edt'],
-        name: 'emploie du temps',
+        name: 'Emploie du temps',
         type: 'link',
         icon: 'date_range'
       }

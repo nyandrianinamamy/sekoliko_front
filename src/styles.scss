@@ -2,6 +2,7 @@
 @import "~material-design-icons/iconfont/material-icons.css";
 @include mat-core();
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 *{font-family: 'Montserrat', sans-serif;font-weight: 500}
 html , body{overflow: visible}
 .full {

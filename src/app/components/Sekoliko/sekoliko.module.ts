@@ -52,6 +52,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { TzEdtComponent } from './tz-edt/tz-edt.component';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   imports: [
@@ -87,6 +92,12 @@ import { TzEdtComponent } from './tz-edt/tz-edt.component';
     MaterialModule,
     DataTablesModule,
     MDBBootstrapModule.forRoot(),
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ], schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     SekolikoComponent,
