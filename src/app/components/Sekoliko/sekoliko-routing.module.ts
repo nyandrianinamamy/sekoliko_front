@@ -24,6 +24,7 @@ import {TzUserComponent} from './tz-user/tz-user.component';
 import {TzInscriptionComponent} from './tz-inscription/tz-inscription.component';
 import {TzProfileComponent} from "./tz-profile/tz-profile.component";
 import {TzFonctionProfComponent} from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
+import { TzEdtComponent } from './tz-edt/tz-edt.component';
 
 const routes: Routes = [
     {
@@ -56,6 +57,7 @@ const routes: Routes = [
             {path: 'matiere-list', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
+            {path: 'edt', component: TzEdtComponent},
             {path: 'profile', component: TzProfileComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

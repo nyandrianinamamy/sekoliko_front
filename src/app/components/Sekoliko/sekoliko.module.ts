@@ -51,6 +51,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 import { BrowserModule } from '@angular/platform-browser';
+import { TzEdtComponent } from './tz-edt/tz-edt.component';
 
 @NgModule({
   imports: [
@@ -115,7 +116,8 @@ import { BrowserModule } from '@angular/platform-browser';
     TzProfileComponent,
     TzFonctionProfComponent,
     EtudiantUpdateComponent,
-    TzPayementsAjoutComponent
+    TzPayementsAjoutComponent,
+    TzEdtComponent
 
   ],
   entryComponents: [

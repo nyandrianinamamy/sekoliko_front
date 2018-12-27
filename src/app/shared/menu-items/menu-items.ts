@@ -69,7 +69,14 @@ const MENUITEMS = [
         name: 'Gestion des profiles',
         type: 'link',
         icon: 'account_circle'
-      }],
+      },
+      {
+        state: ['/', 'menu', 'edt'],
+        name: 'emploie du temps',
+        type: 'link',
+        icon: 'date_range'
+      }
+      ],
   },
 ];
 
