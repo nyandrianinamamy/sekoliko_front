@@ -10,7 +10,7 @@
 </mat-toolbar>
 <section class="mt-5">
   <div class="mat-elevation-z8">
-    <div class="row p-2" >
+    <div class="row p-2">
       <div class="col-md-6">
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -18,13 +18,15 @@
       </div>
       <div class="col-md-6 text-right">
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+        <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
+        <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
       </div>
     </div>
 
 
-    <table mat-table [dataSource]="dataSource" style="width: 100%">
+    <table mat-table [dataSource]="dataSource" style="width: 100%" id="classListe">
       <ng-container matColumnDef="numero">
-        <th mat-header-cell *matHeaderCellDef class="text-center"> Numéro de salle </th>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Numéro de classe</th>
         <td mat-cell *matCellDef="let _classe" class="text-center"> {{_classe.id}} </td>
       </ng-container>
       <ng-container matColumnDef="nom">

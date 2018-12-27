@@ -3,6 +3,7 @@ import { ConstantHTTP } from 'src/app/Utils/ConstantHTTP';
 import { DataService } from 'src/app/shared/service/data.service';
 import { urlList } from 'src/app/Utils/api/urlList';
 import {Salle} from "../../../shared/model/Salle";
+import {User} from "../../../shared/model/User";
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -13,6 +14,8 @@ export class TzDashboardComponent implements OnInit {
 
   compteEtudiants = '';
   compteSalles : Salle;
+  listProfs : User;
+  listEtd : User;
   comptesProff = '';
 
   public chartType: string = 'line';
@@ -146,32 +149,23 @@ export class TzDashboardComponent implements OnInit {
     this.getNbSalles().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.compteSalles = response.data.length;
-        console.log(this.compteSalles);
       }
     });
-    /*this.getNbEtudiants().subscribe((response: any) => {
+    this.getNbEtudiants().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.compteEtudiants = response.data.length;
-      } else {
-        console.log('Pas d\'étudiants');
-      }
-    });
-
-    this.getNbSalles().subscribe((response: any) => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.compteSalles = response.data.length;
+        this.listEtd = response.data.list.length;
       }
     });
 
     this.getNbproff().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.comptesProff = response.data.length;
+        this.listProfs = response.data.list.length;
       }
-    });*/
+    });
   }
 
   getNbEtudiants() {
-    return this.dataService.get(urlList.path_list_etudiants);
+    return this.dataService.post(urlList.path_find_user, {role :2});
   }
 
   getNbSalles() {
@@ -179,6 +173,6 @@ export class TzDashboardComponent implements OnInit {
   }
 
   getNbproff() {
-    return this.dataService.post(urlList.path_list_proffesseurs);
+    return this.dataService.post(urlList.path_find_user, {role :1});
   }
 }

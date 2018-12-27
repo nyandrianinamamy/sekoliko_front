@@ -8,6 +8,9 @@ import {Subject} from "rxjs";
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import {Angular5Csv} from "angular5-csv/Angular5-csv";
+import * as jsPDF from "../../../../assets/jq/jspdf.min";
+import html2canvas from 'html2canvas';
+import {ExcelService} from "../../../shared/service/excel.service";
 
 @Component({
   selector: 'app-tz-classe-list',
@@ -33,7 +36,8 @@ export class TzClasseListComponent implements OnInit {
 
 
   constructor(private dataService: DataService,
-              private router: Router) {
+              private router: Router,
+              private excelService: ExcelService) {
   }
 
   getNiveau() {
@@ -99,7 +103,31 @@ export class TzClasseListComponent implements OnInit {
     }
   }
 
+  /**
+   * Export
+   */
   exportCsv(){
     new Angular5Csv(this._classe,'liste_classe');
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this._classe, 'classListe');
+  }
+
+  exportPdf()
+  {
+    var data = document.getElementById('classListe');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('classe-liste.pdf');
+    });
   }
 }

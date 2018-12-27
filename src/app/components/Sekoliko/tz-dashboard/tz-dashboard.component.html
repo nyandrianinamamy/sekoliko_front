@@ -1,113 +1,36 @@
-<!--<section class="mt-lg-5">-->
-  <!--<div class="row">-->
-    <!--<a routerLink="/menu/etudiant" class="col-xl-3 col-md-6 mb-r tz-md tz-md">-->
-      <!--<div class="card card-cascade cascading-admin-card">-->
-        <!--<div class="admin-up">-->
-          <!--<i class="fa fa-group primary-color"></i>-->
-          <!--<div class="data">-->
-            <!--<p>ÉTUDIANTS</p>-->
-            <!--<h4><strong>{{compteEtudiants}}</strong></h4>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-          <!--<div class="progress">-->
-            <!--<div class="progress-bar bg-primary" role="progressbar" style="width: 25%"-->
-                 <!--aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
-          <!--</div>-->
-          <!--<p class="card-text">Cliquer pour voir les details</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</a>-->
-    <!--<a routerLink="/menu/dashboard" class="col-xl-3 col-md-6 mb-r tz-md tz-md">-->
-      <!--<div class="card card-cascade cascading-admin-card">-->
-        <!--<div class="admin-up">-->
-          <!--<i class="fa fa-user-secret warning-color"></i>-->
-          <!--<div class="data">-->
-            <!--<p>PROFS</p>-->
-            <!--<h4><strong>{{comptesProff}}</strong></h4>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-          <!--<div class="progress">-->
-            <!--<div class="progress-bar bg grey darken-2" role="progressbar" style="width: 25%"-->
-                 <!--aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
-          <!--</div>-->
-          <!--<p class="card-text">Cliquer pour voir les details</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</a>-->
-    <!--<a routerLink="/menu/salle" class="col-xl-3 col-md-6 mb-r tz-md tz-md">-->
-      <!--<div class="card card-cascade cascading-admin-card">-->
-        <!--<div class="admin-up">-->
-          <!--<i class="fa fa-home light-blue lighten-1"></i>-->
-          <!--<div class="data">-->
-            <!--<p>SALLES</p>-->
-            <!--<h4><strong>{{compteSalles}}</strong></h4>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-          <!--<div class="progress">-->
-            <!--<div class="progress-bar grey darken-2" role="progressbar" style="width: 75%"-->
-                 <!--aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>-->
-          <!--</div>-->
-          <!--<p class="card-text">Cliquer pour voir les details</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</a>-->
-    <!--<a routerLink="/menu/dashboard" class="col-xl-3 col-md-6 mb-r tz-md tz-md">-->
-      <!--<div class="card card-cascade cascading-admin-card">-->
-        <!--<div class="admin-up">-->
-          <!--<i class="fa fa-money red accent-2"></i>-->
-          <!--<div class="data">-->
-            <!--<p>PAYEMENT</p>-->
-            <!--<h4><strong>5</strong></h4>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-          <!--<div class="progress">-->
-            <!--<div class="progress-bar bg-primary" role="progressbar" style="width: 25%"-->
-                 <!--aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
-          <!--</div>-->
-          <!--<p class="card-text">Cliquer pour voir les details</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</a>-->
-  <!--</div>-->
-<!--</section>-->
-
 <section class="mt-lg-5">
     <div class="row">
-      <div class="col-md-3">
+      <a class="col-md-3" routerLink="/menu/etudiant">
         <div class="card-counter primary">
           <i class="fa fa-group"></i>
-          <span class="count-numbers">5</span>
+          <span class="count-numbers">{{listEtd}}</span>
           <span class="count-name">Etudiants</span>
         </div>
-      </div>
+      </a>
 
-      <div class="col-md-3">
+      <a class="col-md-3" routerLink="/menu/profs">
         <div class="card-counter danger">
           <i class="fa  fa-user-secret"></i>
-          <span class="count-numbers">5</span>
+          <span class="count-numbers">{{listProfs}}</span>
           <span class="count-name">Profs</span>
         </div>
-      </div>
+      </a>
 
-      <div class="col-md-3">
+      <a class="col-md-3" routerLink="/menu/salle">
         <div class="card-counter success">
           <i class="fa fa-home"></i>
           <span class="count-numbers">{{compteSalles}}</span>
           <span class="count-name">Salle</span>
         </div>
-      </div>
+      </a>
 
-      <div class="col-md-3">
+      <a class="col-md-3" routerLink="/menu/payement">
         <div class="card-counter info">
           <i class="fa fa-money"></i>
           <span class="count-numbers">5</span>
           <span class="count-name">Payements</span>
         </div>
-      </div>
+      </a>
     </div>
 </section>
 

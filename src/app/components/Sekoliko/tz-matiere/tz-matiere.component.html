@@ -11,6 +11,7 @@
 
 <section class="mt-5">
   <div class="mat-elevation-z8">
+
     <div class="row p-2">
       <div class="col-md-6">
         <mat-form-field>
@@ -19,10 +20,12 @@
       </div>
       <div class="col-md-6 text-right">
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+        <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
+        <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
       </div>
     </div>
 
-    <table mat-table [dataSource]="dataSource" class="w-100">
+    <table mat-table [dataSource]="dataSource" class="w-100" id="matiereListe">
 
       <!-- Position Column -->
       <ng-container matColumnDef="nom">

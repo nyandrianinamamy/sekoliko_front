@@ -11,6 +11,9 @@ import {MatDialog} from '@angular/material';
 import {ClasseEnfant} from '../../../shared/model/ClasseEnfant';
 import {Classe} from '../../../shared/model/Classe';
 import {TzAjoutSalleComponent} from './tz-ajout-salle/tz-ajout-salle.component';
+import * as jsPDF from "../../../../assets/jq/jspdf.min";
+import {ExcelService} from "../../../shared/service/excel.service";
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-tz-salle',
@@ -45,7 +48,8 @@ export class TzSalleComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private router: Router,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private excelService: ExcelService
   ) {
   }
 
@@ -62,6 +66,7 @@ export class TzSalleComponent implements OnInit {
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.classe_enfant = response.data;
+        console.log(this.classe_enfant);
       }
     });
     this.getNiveau().subscribe(response => {
@@ -95,9 +100,7 @@ export class TzSalleComponent implements OnInit {
     });
   }
 
-  exportCsv() {
-    new Angular5Csv(this._salle, 'liste_salle');
-  }
+
 
   deleteSalle(id: number) {
     this.loading = true;
@@ -110,9 +113,7 @@ export class TzSalleComponent implements OnInit {
     });
   }
 
-  editSalle(
-    id: number,
-  ) {
+  editSalle( id: number) {
     this.loading = true;
     this.dataService.post(urlList.path_mod_salle + id, {
       'description': this.description
@@ -183,5 +184,33 @@ export class TzSalleComponent implements OnInit {
       // @ts-ignore
       console.log('null');
     }
+  }
+
+  /**
+   * All export
+   */
+  exportCsv() {
+    new Angular5Csv(this._salle, 'liste_salle');
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this._salle, 'salleliste');
+  }
+
+  exportPdf()
+  {
+    var data = document.getElementById('salleliste');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('salle-liste.pdf');
+    });
   }
 }

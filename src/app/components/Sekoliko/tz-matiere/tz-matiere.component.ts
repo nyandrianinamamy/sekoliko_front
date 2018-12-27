@@ -8,6 +8,9 @@ import {MatiereParam} from '../../../shared/model/MatiereParam';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {Angular5Csv} from 'angular5-csv/Angular5-csv';
 import {Classe} from '../../../shared/model/Classe';
+import * as jsPDF from "../../../../assets/jq/jspdf.min";
+import {ExcelService} from "../../../shared/service/excel.service";
+import html2canvas from 'html2canvas'
 
 @Component({
   selector: 'app-tz-matiere',
@@ -38,7 +41,8 @@ export class TzMatiereComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private router: Router) {
+    private router: Router,
+    private excelService: ExcelService) {
   }
 
   ngOnInit() {
@@ -86,7 +90,32 @@ export class TzMatiereComponent implements OnInit {
     }
   }
 
+  /**
+   * All export
+   * Touch it if you want to debug this one year
+   */
   exportCsv() {
     new Angular5Csv(this.listMatiere, 'liste_matiere');
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.listMatiere, 'matierelListe');
+  }
+
+  exportPdf()
+  {
+    var data = document.getElementById('matiereListe');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('matiere-liste.pdf');
+    });
   }
 }

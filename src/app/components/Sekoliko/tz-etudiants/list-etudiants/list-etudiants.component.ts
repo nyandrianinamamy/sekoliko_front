@@ -10,6 +10,10 @@ import {Inscription} from '../../../../shared/model/Inscription';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {EtudiantUpdateComponent} from '../etudiant-update/etudiant-update.component';
+import {Angular5Csv} from "angular5-csv/Angular5-csv";
+import {ExcelService} from "../../../../shared/service/excel.service";
+import * as jsPDF from '../../../../../assets/jq/jspdf.min.js';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-list-etudiants',
@@ -32,7 +36,8 @@ export class ListEtudiantsComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
               private currentRoute: ActivatedRoute,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private excelService: ExcelService) {
 
   }
   ngOnInit() {
@@ -61,7 +66,6 @@ export class ListEtudiantsComponent implements OnInit {
     });
     openPopUp.afterClosed().subscribe(response => {
       if (response === 1) {
-        // this.ngOnInit();
       }
     });
   }
@@ -70,6 +74,34 @@ export class ListEtudiantsComponent implements OnInit {
    */
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
+  }
+
+  /**
+   * Export
+   */
+  exportCsv(){
+    new Angular5Csv(this.etudiant,'liste_classe');
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.etudiant, 'etudiantListe');
+  }
+
+  exportPdf()
+  {
+    var data = document.getElementById('etudiantListe');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('etudiant-liste.pdf');
+    });
   }
 
 }
