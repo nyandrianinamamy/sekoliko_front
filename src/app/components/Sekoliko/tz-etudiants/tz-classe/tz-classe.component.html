@@ -3,7 +3,7 @@
     Liste des classes
   </span>
   <span fxFlex></span>
-  <a mdbBtn  [routerLink]="['/menu/list-classe-eft']"
+  <a mdbBtn  [routerLink]="['/menu/add-eft']"
      class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
     <i class="fa fa-plus-circle"></i>
   </a>
@@ -15,7 +15,6 @@
         <div class="admin-up">
           <i class="fa fa-group primary-color"></i>
           <div class="data">
-            <!--<h6><strong>{{niveau.id}}</strong></h6>-->
             <h4 style="font-weight: bold;color: #aa66cc;">{{ (class.description.length>4)? (class.description | slice:0:4)+'...':(class.description)}}</h4>
           </div>
         </div>
