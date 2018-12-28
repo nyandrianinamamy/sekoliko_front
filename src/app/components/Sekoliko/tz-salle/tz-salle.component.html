@@ -252,7 +252,8 @@
                     <div class="text-center w-100">
                       <a routerLink="/menu/salle" class="btn btn-success btn-rounded float-right" type="submit"
                          style="width: 35%"
-                         (click)="editModal.hide() ; editSalle(_salle.id, description = _salle.nom)">Modifier</a>
+                         (click)="editModal.hide() ;
+                         editSalle(_salle.id, description = _salle.nom)">Modifier</a>
                       <a routerLink="/menu/salle" (click)="editModal.hide()"
                          class="btn btn-warning btn-rounded float-left" style="width: 35%" type="submit">Cancel</a>
                     </div>

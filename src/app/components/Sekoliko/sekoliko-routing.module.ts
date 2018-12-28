@@ -25,6 +25,8 @@ import {TzInscriptionComponent} from './tz-inscription/tz-inscription.component'
 import {TzProfileComponent} from "./tz-profile/tz-profile.component";
 import {TzFonctionProfComponent} from './tz-profs/tz-fonction-prof/tz-fonction-prof.component';
 import { TzEdtComponent } from './tz-edt/tz-edt.component';
+import {TzClasseEnfantComponent} from "./tz-classe-enfant/tz-classe-enfant.component";
+import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfant.component";
 
 const routes: Routes = [
     {
@@ -58,6 +60,8 @@ const routes: Routes = [
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
             {path: 'edt', component: TzEdtComponent},
+            {path: 'list-classe-eft', component: TzClasseEnfantComponent},
+            {path: 'add-eft', component: TzAddEnfantComponent},
             {path: 'profile', component: TzProfileComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

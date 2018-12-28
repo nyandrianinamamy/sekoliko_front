@@ -56,7 +56,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { TzClasseEnfantComponent } from './tz-classe-enfant/tz-classe-enfant.component';
+import { TzAddEnfantComponent } from './tz-classe-enfant/tz-add-enfant/tz-add-enfant.component';
 
 @NgModule({
   imports: [
@@ -129,7 +130,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     EtudiantUpdateComponent,
     TzPayementsAjoutComponent,
     TzEdtComponent,
-
+    TzClasseEnfantComponent,
+    TzAddEnfantComponent
   ],
   entryComponents: [
     EtudiantUpdateComponent,

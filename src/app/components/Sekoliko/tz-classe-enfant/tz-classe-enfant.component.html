@@ -1,0 +1,228 @@
+<mat-toolbar class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span>
+    Liste des classes
+  </span>
+    <span fxFlex></span>
+    <a mdbBtn [routerLink]="['/menu/add-eft']"
+       class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
+       style="background: #a6c!important;color: aliceblue;" color="secondary" mdbWavesEffect>
+        <i class="fa fa-plus-circle"></i>
+    </a>
+</mat-toolbar>
+<section class="mt-5">
+    <div class="mat-elevation-z8">
+        <div class="row p-2">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+                <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
+                <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
+            </div>
+        </div>
+
+
+        <table mat-table [dataSource]="dataSource" style="width: 100%" id="classListe">
+            <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Numéro de classe</th>
+                <td mat-cell *matCellDef="let _classe" class="text-center"> {{_classe.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nom">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Nom</th>
+                <td mat-cell *matCellDef="let _classe" class="text-center"> {{_classe.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-center w-50"> Action</th>
+                <td mat-cell *matCellDef="let _classe" class="text-center">
+                    <a mdbBtn data-toggle="modal" (click)="detailsModal.show()" data-target="#detailsModal"
+                       class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+
+                    <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="myBasicModalLabel"
+                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <h2 class="tz-dialog-title" mat-dialog-title>
+                                    {{_classe.description}}
+                                    <i class="fa fa-home"></i>
+                                </h2>
+                                <mat-dialog-content>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <table>
+                                                <tr>
+                                                    <td>Numéro classe :</td>
+                                                    <td>{{_classe.id}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <table>
+                                                <tr>
+                                                    <td>Nom classe :</td>
+                                                    <td>{{_classe.description}}</td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                    <button type="button" mdbBtn class="d-block tz-modal-close-btn"
+                                            color="secondary" (click)="detailsModal.hide()" mdbWavesEffect>
+                                        Fermer
+                                    </button>
+                                </mat-dialog-content>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a mdbBtn data-toggle="modal" data-target="#editModal"
+                       class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="myBasicModalLabel"
+                         [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
+                                            <!--(click)="editModal.hide()">-->
+                                        <!--<span aria-hidden="true">×</span>-->
+                                    <!--</button>-->
+                                    <!--<h4 class="modal-title w-100">{{_classe.description}}  <i class="fa fa-home"></i>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<form class="text-center border border-light p-5">-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<div class="md-form mb-5">-->
+                                            <!--<input type="text" name="id"-->
+                                                   <!--value="{{_classe.id}}" class="form-control d-none validate">-->
+                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Classe-->
+                                                <!--nom</label>-->
+                                            <!--<input type="text" id="orangeForm-name" name="description"-->
+                                                   <!--value="{{_classe.description}}" [(ngModel)]="_classe.description"-->
+                                                   <!--class="form-control validate" mdbInputDirective>-->
+                                            <!--<mat-form-field class="col-md-12">-->
+                                                <!--<mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">-->
+                                                    <!--<mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">-->
+                                                        <!--{{niveau.description}}-->
+                                                    <!--</mat-option>-->
+                                                <!--</mat-select>-->
+                                            <!--</mat-form-field>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
+                                                <!--aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel-->
+                                        <!--</button>-->
+                                        <!--<button type="submit" value="submit" mdbBtn color="primary"-->
+                                                <!--(click)="editModal.hide();-->
+                                                    <!--editClasse(-->
+                                                        <!--id =_classe.id,-->
+                                                        <!--description =_classe.description,-->
+                                                        <!--parent = _classe.parent-->
+                                                    <!--)"-->
+                                                <!--class="relative waves-light  w-50" mdbWavesEffect>-->
+                                            <!--Save changes-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</form>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <h2 class="tz-dialog-title" mat-dialog-title>
+                                    Modifier {{_classe.description}}
+                                    <i class="fa fa-home"></i>
+                                </h2>
+                                <mat-dialog-content>
+                                    <form class="text-center border border-light">
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="id" id="orangeForm-name"
+                                                   value="{{_classe.id}}" class="form-control w-100 d-none validate">
+                                            <div class="form-group">
+                                                <label data-error="wrong" style="margin: 5px" data-success="right" for="orangeForm-name">Classe nom</label>
+                                                <input type="text"  name="description" style="margin: 5px"
+                                                       value="{{_classe.description}}" [(ngModel)]="_classe.description"
+                                                       class="form-control validate " mdbInputDirective>
+                                            </div>
+                                            <mat-form-field class="col-md-12 w-100">
+                                                <mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">
+                                                    <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
+                                                        {{niveau.description}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel
+                                            </button>
+                                            <button type="submit" value="submit" mdbBtn color="primary"
+                                                    (click)="editModal.hide();
+                                                    editClasse(
+                                                        id =_classe.id,
+                                                        description =_classe.description,
+                                                        parent = _classe.parent
+                                                    )"
+                                                    class="relative waves-light  w-50" mdbWavesEffect>
+                                                Save changes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </mat-dialog-content>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
+                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
+                        <!--<i class="fa fa-trash"></i>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;modal delete&ndash;&gt;-->
+                    <!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
+                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"-->
+                         <!--aria-labelledby="myBasicModalLabel">-->
+                        <!--<div class="modal-dialog modal-sm" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
+                                            <!--(click)="deleteModal.hide()">-->
+                                        <!--<span aria-hidden="true">×</span>-->
+                                    <!--</button>-->
+                                    <!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i>-->
+                                    <!--</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body d-flex">-->
+                                    <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
+                                            <!--aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel-->
+                                    <!--</button>-->
+                                    <!--<button type="button" mdbBtn color="primary"-->
+                                            <!--(click)="deleteModal.hide();deleteClasse(_classe.id)"-->
+                                            <!--class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect>Confirm-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</section>
+
+<div class="maskSpinner" *ngIf="loading">
+    <app-radar-spinner
+            [animationDuration]="4000"
+            [size]="200"
+            [color]="'#2e6bb1'"
+    ></app-radar-spinner>
+</div>

@@ -45,9 +45,15 @@ const MENUITEMS = [
       icon: 'settings'
     }, {
         state: ['/', 'menu', 'list-classe'],
-        name: 'Classe',
+        name: 'Niveau',
         type: 'link',
         icon: 'school'
+      },
+      {
+        state: ['/', 'menu', 'list-classe-eft'],
+        name: 'Classe',
+        type: 'link',
+        icon: 'class'
       }, {
       state: ['/', 'menu', 'payement'],
       name: 'Payement',

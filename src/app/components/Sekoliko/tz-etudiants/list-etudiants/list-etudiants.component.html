@@ -1,7 +1,13 @@
-
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white">Liste des Etudiants</h4>
-</div>
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span>
+    Liste des Etudiants
+  </span>
+  <span fxFlex></span>
+  <a mdbBtn  [routerLink]="['/menu/add-etudiant']"
+     class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
+    <i class="fa fa-plus-circle"></i>
+  </a>
+</mat-toolbar>
 <section class="mt-5">
   <mat-card>
   <div class="row p-2">

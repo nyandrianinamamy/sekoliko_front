@@ -6,6 +6,8 @@ export const urlList = {
   path_login: _api + 'users/login',
   path_list_class_parent: _api + 'classe/find',
   path_list_class_enfant: _api + 'classe-enfant/find',
+  path_edit_class_enfant: _api + 'classe-enfant/edit',
+  path_delete_class_enfant: _api + 'classe-enfant/delete/',
   path_edit_class: _api + 'classe/edit',
   path_mod_class: _api + 'classe/edit/',
   path_delete_class: _api + 'classe/delete/',
