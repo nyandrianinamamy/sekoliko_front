@@ -128,13 +128,14 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     TzFonctionProfComponent,
     EtudiantUpdateComponent,
     TzPayementsAjoutComponent,
-    TzEdtComponent
+    TzEdtComponent,
 
   ],
   entryComponents: [
     EtudiantUpdateComponent,
-    TzAjoutSalleComponent
+    TzAjoutSalleComponent,
   ],
+  providers: [],
 })
 export class SekolikoModule {
 }

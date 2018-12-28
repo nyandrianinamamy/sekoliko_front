@@ -13,24 +13,12 @@ import {DataService} from '../../../../shared/service/data.service';
 export class EtudiantUpdateComponent implements OnInit {
   etudiant: User;
   constructor(public dialogRef: MatDialogRef<EtudiantUpdateComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private dataService: DataService) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit() {
     this.etudiant = new User();
     Object.assign(this.etudiant, this.data)
   }
-
-/*
-  saveChange(etudiant: any) {
-    etudiant.type = true;
-    this.dataService.post(urlList.path_user_find + '/' +  this.etudiant.user_id, etudiant).subscribe(response => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.dialogRef.close(1);
-      }
-    })
-  }
-*/
 
   cancel() {
     this.dialogRef.close('Retour');

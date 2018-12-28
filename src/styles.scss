@@ -485,3 +485,11 @@ Responsive touche pas
   overflow-y: auto;
 }
 .cdk-overlay-pane{max-height: 50vh!important;}
+.mat-dialog-container{padding: 5px!important;}
+.modal-content{padding: 5px!important;}
+.tz-dialog-title{text-align: center;
+  background: #1976d2 !important;color: white;padding: 1rem;}
+.tz-modal-close-btn{width: 100%;margin-left: 0px!important;}
+mat-dialog-content ul li table tr td{text-align: left!important;}
+li table tr td{text-align: left!important;}
+li table tr td span{text-align: left!important;}

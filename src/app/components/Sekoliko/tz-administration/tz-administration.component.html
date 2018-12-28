@@ -52,10 +52,91 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
         <td mat-cell *matCellDef="let _admin">
-          <a mdbBtn  [routerLink]="['/menu/user/edit/', _admin.user_id]" data-toggle="modal"
-             class=" tz-btn-circle  text-center m-1 relative waves-light " style="background-color: #33b5e5!important;color: white">
+          <button type="button" mdbBtn color="primary" class=" tz-btn-circle  text-center m-1 relative waves-light"
+                  (click)="basicModal.show()"
+                  mdbWavesEffect><i class="fa fa-eye"></i>
+          </button>
+          <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel" aria-hidden="true"
+               [config]="{backdrop: false, ignoreBackdropClick: true}">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <h2 class="tz-dialog-title"  mat-dialog-title>
+                  Information sur {{_admin.firstname}}
+                  <i class="fa fa-user-circle"></i>
+                </h2>
+                <mat-dialog-content>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Sexe : </td>
+                          <td>{{_admin.sexe}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Nom : </td>
+                          <td>{{_admin.lastname}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Prénom : </td>
+                          <td>{{_admin.firstname}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Age : </td>
+                          <td>{{_admin.age}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Adresse : </td>
+                          <td>{{_admin.adresse}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Email : </td>
+                          <td>{{_admin.email}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Contact : </td>
+                          <td>{{_admin.contact}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                  </ul>
+                  <button type="button" mdbBtn class="d-block tz-modal-close-btn"
+                          color="secondary" (click)="basicModal.hide()" mdbWavesEffect>
+                    Fermer
+                  </button>
+                </mat-dialog-content>
+              </div>
+            </div>
+          </div>
+          <button type="button" [routerLink]="['/menu/user/edit/', _admin.user_id]"
+                  mdbBtn color="success" class=" tz-btn-circle  text-center m-1 relative waves-light"
+                  mdbWavesEffect>
             <i class="fa fa-edit"></i>
-          </a>
+          </button>
         </td>
       </ng-container>
 

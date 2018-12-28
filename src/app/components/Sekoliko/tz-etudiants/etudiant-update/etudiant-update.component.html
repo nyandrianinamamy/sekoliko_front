@@ -1,57 +1,68 @@
-<mat-toolbar color="primary">
-  <span>
-    Information sur {{etudiant.firstname}}
-  </span>
-</mat-toolbar>
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Modification Etudiant</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form #myForm="ngForm">
-      <mat-radio-group name="radioControl" [(ngModel)] = "etudiant.sexe">
-        <mat-radio-button value="Femme" #Femme name="Femme">Femme</mat-radio-button>
-        &nbsp;
-        <mat-radio-button value="Homme" #Homme name="Homme">Homme</mat-radio-button>
-      </mat-radio-group>
-      <mat-form-field class="full">
-        <input matInput name="lastName" type="text" [(ngModel)]="etudiant.lastname"
-               placeholder="Nom" required #lastName = "ngModel" disabled>
-        <mat-error [hidden]="lastName.valid">Nom non valide</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="full">
-        <input matInput name="firstname" type="text" [(ngModel)]="etudiant.firstname"
-               placeholder="Prénom" required #firstname = "ngModel" disabled>
-        <mat-error [hidden]="firstname.valid">firstname non valide</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="full">
-        <input matInput name="Age" type="number" [(ngModel)]="etudiant.age"
-               placeholder="age" required #age = "ngModel" disabled>
-        <mat-error [hidden]="age.valid">Age non valide</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="full">
-        <input matInput name="adresse" type="text" [(ngModel)]="etudiant.adresse"
-               placeholder="Adresse" required #adresse = "ngModel" disabled>
-        <mat-error [hidden]="adresse.valid">firstname non valide</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="full">
-        <input matInput name="email" type="text" [(ngModel)]="etudiant.email"
-               placeholder="Email" email #email = "ngModel" disabled>
-      </mat-form-field>
-
-      <mat-form-field class="full">
-        <input matInput name="contact" type="text" [(ngModel)]="etudiant.contact"
-               placeholder="Contact" #contact = "ngModel" disabled>
-        <mat-error [hidden]="contact.valid">Contact non valide</mat-error>
-      </mat-form-field>
-
-
-    <button mat-raised-button (click)="cancel()">Cancel</button>
-<!--    <button mat-raised-button [disabled]="!myForm.form.valid" (click)="saveChange(etudiant)">Ajouter</button>-->
-    </form>
-  </mat-card-content>
-</mat-card>
+<h2 class="tz-dialog-title"  mat-dialog-title>
+  Information sur {{etudiant.firstname}}
+  <i class="fa fa-user-circle"></i>
+</h2>
+<mat-dialog-content>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Sexe : </td>
+            <td>{{etudiant.sexe}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Nom : </td>
+            <td>{{etudiant.lastname}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Prénom : </td>
+            <td>{{etudiant.firstname}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Age : </td>
+            <td>{{etudiant.age}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Adresse : </td>
+            <td>{{etudiant.adresse}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Email : </td>
+            <td>{{etudiant.email}}</td>
+          </tr>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table>
+          <tr>
+            <td>Contact : </td>
+            <td>{{etudiant.contact}}</td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+    <button type="button" mdbBtn class="d-block tz-modal-close-btn"
+            color="secondary" (click)="cancel()" mdbWavesEffect>
+      Fermer
+    </button>
+</mat-dialog-content>

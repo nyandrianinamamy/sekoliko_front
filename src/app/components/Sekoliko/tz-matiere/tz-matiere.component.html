@@ -53,47 +53,57 @@
              class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
             <i class="fa fa-eye"></i>
           </a>
-
           <!--modal details-->
           <div mdbModal #detailsModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                aria-labelledby="myBasicModalLabel"
                [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close pull-right" aria-label="Close"
-                          (click)="detailsModal.hide()">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                  <h4 class="modal-title w-100">{{_matiere.description}} <i class="fa fa-home"></i>
-                  </h4>
-                </div>
-                <div class="modal-body">
-                  <ul class="list-group list-group-flush">
+                <h2 class="tz-dialog-title"  mat-dialog-title>
+                  {{_matiere.description}}
+                  <i class="fa fa-book"></i>
+                </h2>
+                <mat-dialog-content>
+                  <ul class="list-group">
                     <li class="list-group-item">
-                      <div class="text-left">Nom matiere</div>
-                      <div class="text-right">{{_matiere.description}}</div>
+                      <table>
+                        <tr>
+                          <td>Nom matiere : </td>
+                          <td>{{_matiere.description}}</td>
+                        </tr>
+                      </table>
                     </li>
                     <li class="list-group-item">
-                      <div class="text-left">Coefficient</div>
-                      <div class="text-right">{{_matiere.coefficient}}</div>
+                      <table>
+                        <tr>
+                          <td>Nom matiere : </td>
+                          <td>{{_matiere.coefficient}}</td>
+                        </tr>
+                      </table>
                     </li>
                     <li class="list-group-item">
-                      <div class="text-left">Classe</div>
-                      <div class="text-right">{{_matiere.classe.description}}</div>
+                      <table>
+                        <tr>
+                          <td>Classe : </td>
+                          <td>{{_matiere.classe.description}}</td>
+                        </tr>
+                      </table>
                     </li>
                     <li class="list-group-item">
-                      <div class="text-left">Prof</div>
-                      <div class="text-right">{{_matiere.profId ? _matiere.profId.lastname : ''}}</div>
+                      <table>
+                        <tr>
+                          <td>Profs : </td>
+                          <td>{{_matiere.profId ? _matiere.profId.lastname : ''}}</td>
+                        </tr>
+                      </table>
                     </li>
                   </ul>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" mdbBtn color="secondary"
-                          class="waves-light w-100" aria-label="Close" (click)="detailsModal.hide()"
-                          mdbWavesEffect>Close
+
+                  <button type="button" mdbBtn class="d-block tz-modal-close-btn"
+                          color="secondary" (click)="detailsModal.hide()"mdbWavesEffect>
+                    Fermer
                   </button>
-                </div>
+                </mat-dialog-content>
               </div>
             </div>
           </div>

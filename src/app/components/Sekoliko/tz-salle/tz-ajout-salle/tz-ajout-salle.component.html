@@ -1,18 +1,23 @@
-
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Ajout nouvelle salle </h4>
-</div>
-<form #salleform="ngForm" class="col-md-12 mt-5">
-    <mat-form-field class="col-md-12">
-      <input matInput placeholder="Nom salle" id="nom" type="text" name="description" required [(ngModel)]="salle.description"
-             #login="ngModel">
-    </mat-form-field>
-  <button class="btn btn-success btn-rounded float-right" type="submit" [disabled]="!salleform.form.valid" (click)="save(salle)">Ajouter</button>
-</form>
+<h2 class="tz-dialog-title"  mat-dialog-title>
+    Ajout nouvelle salle
+    <i class="fa fa-home"></i>
+</h2>
+<mat-dialog-content>
+    <form #salleform="ngForm" class="col-md-12 mt-5">
+        <mat-form-field class="col-md-12">
+            <input matInput placeholder="Nom salle" id="nom" type="text" name="description" required [(ngModel)]="salle.description"
+                   #login="ngModel">
+        </mat-form-field>
+        <button type="submit" mdbBtn class="d-block tz-modal-close-btn"
+                color="secondary" [disabled]="!salleform.form.valid" (click)="save(salle)" mdbWavesEffect>
+            Ajouter
+        </button>
+    </form>
+</mat-dialog-content>
 <div class="maskSpinner" *ngIf="loading">
-  <app-radar-spinner
-    [animationDuration]="4000"
-    [size]="200"
-    [color]="'#2e6bb1'"
-  ></app-radar-spinner>
+    <app-radar-spinner
+            [animationDuration]="4000"
+            [size]="200"
+            [color]="'#2e6bb1'"
+    ></app-radar-spinner>
 </div>

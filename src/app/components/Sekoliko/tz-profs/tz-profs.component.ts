@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit,Inject, ViewChild} from '@angular/core';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
 import {Classe} from '../../../shared/model/Classe';
 import {DataService} from '../../../shared/service/data.service';
 import {User} from "../../../shared/model/User";
 import {Role} from "../../../shared/model/Role";
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {ExcelService} from "../../../shared/service/excel.service";
 import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import * as jsPDF from '../../../../assets/jq/jspdf.min.js';
@@ -27,7 +27,8 @@ export class TzProfsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'adresse', 'contact', 'email', 'action'];
   constructor(private dataService: DataService,
-              private excelService: ExcelService) { }
+              private excelService: ExcelService,
+              public dialog: MatDialog) { }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -100,5 +101,6 @@ export class TzProfsComponent implements OnInit {
       console.log('null');
     }
   }
+
 
 }
