@@ -42,6 +42,7 @@ export class TzAjoutProfsComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   getConstant(etudiant: User) {
     etudiant.enabled = true;
     etudiant.role = Constants.TYPE_PROF;

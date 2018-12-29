@@ -36,6 +36,10 @@ export class UserListComponent implements OnInit {
     this.getListEtudiants(this.utilisateur);
     console.log(this.utilisateur)
   }
+
+  /**
+   * Fetch role type
+   */
   getTypeRole() {
     this.loading = true;
     this.dataService.post(urlList.path_find_role).subscribe(response => {
@@ -47,6 +51,11 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Fetch listes des utilisateurs
+   * @param utilisateur
+   */
   getListEtudiants(utilisateur: User) {
     this.loading = true;
     this.dataService.post(urlList.path_find_user, utilisateur).subscribe(response => {
@@ -62,6 +71,10 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * find user
+   */
   findUser() {
     this.utilisateur.page = this.paginator.pageIndex + 1;
     this.utilisateur.limit = this.paginator.pageSize;
@@ -82,6 +95,9 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  /**
+   * Export table
+   */
   exportCsv() {
     var options = {
       fieldSeparator: ',',

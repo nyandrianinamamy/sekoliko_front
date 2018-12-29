@@ -37,6 +37,10 @@ export class TzProfsComponent implements OnInit {
     this.getTypeRole();
     this.getListAdmin();
   }
+
+  /**
+   * Get roletype
+   */
   getTypeRole() {
     this.loading = true;
     this.dataService.post(urlList.path_find_role).subscribe(response => {
@@ -51,6 +55,9 @@ export class TzProfsComponent implements OnInit {
     });
   }
 
+  /**
+   * Get profs listes
+   */
   getListAdmin() {
     this.loading = true;
     this.dataService.post(urlList.path_find_user, {role :1}).subscribe(response => {

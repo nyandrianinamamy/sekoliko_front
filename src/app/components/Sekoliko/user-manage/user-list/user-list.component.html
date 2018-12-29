@@ -113,19 +113,10 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact</th>
       <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.contact}}</td>
     </ng-container>
-    <!--<ng-container matColumnDef="sexe">-->
-      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> sexe</th>-->
-      <!--<td mat-cell *matCellDef="let _etudiant"> {{_etudiant.sexe}}</td>-->
-    <!--</ng-container>-->
-    <!--<ng-container matColumnDef="role">-->
-      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie</th>-->
-      <!--<td mat-cell *matCellDef="let _etudiant"> {{_etudiant.roles.description}}</td>-->
-    <!--</ng-container>-->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
       <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.email}}</td>
     </ng-container>
-
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
       <td mat-cell *matCellDef="let _etudiant">

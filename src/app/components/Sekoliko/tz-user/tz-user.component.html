@@ -106,10 +106,6 @@
               <li class="list-group-item">{{etudiant.firstname}}</li>
               <li class="list-group-item">{{etudiant.sexe}}</li>
               <li class="list-group-item">{{etudiant.email}}</li>
-            </ul>
-          </td>
-          <td>
-            <ul class="list-group">
               <li class="list-group-item">{{etudiant.age}}</li>
               <li class="list-group-item">{{etudiant.adresse}}</li>
               <li class="list-group-item">{{etudiant.contact}}</li>
@@ -117,12 +113,11 @@
             </ul>
           </td>
         </tr>
+        <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button"
+                (click)="step1.style.display='block';step2.style.display='none'">Previous</button>
+        <button class="btn btn-success btn-rounded float-right" type="submit" (click)="push(etudiant)">Submit</button>
+        <a routerLink="/menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
       </table>
-
-      <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button"
-              (click)="step1.style.display='block';step2.style.display='none'">Previous</button>
-      <button class="btn btn-success btn-rounded float-right" type="submit" (click)="push(etudiant)">Submit</button>
-      <a routerLink="/menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
     </div>
   </div>
 </form>

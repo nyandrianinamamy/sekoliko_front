@@ -86,53 +86,6 @@
                     <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                          aria-labelledby="myBasicModalLabel"
                          [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
-                        <!--<div class="modal-dialog" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
-                                            <!--(click)="editModal.hide()">-->
-                                        <!--<span aria-hidden="true">×</span>-->
-                                    <!--</button>-->
-                                    <!--<h4 class="modal-title w-100">{{_classe.description}}  <i class="fa fa-home"></i>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<form class="text-center border border-light p-5">-->
-                                    <!--<div class="modal-body">-->
-                                        <!--<div class="md-form mb-5">-->
-                                            <!--<input type="text" name="id"-->
-                                                   <!--value="{{_classe.id}}" class="form-control d-none validate">-->
-                                            <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Classe-->
-                                                <!--nom</label>-->
-                                            <!--<input type="text" id="orangeForm-name" name="description"-->
-                                                   <!--value="{{_classe.description}}" [(ngModel)]="_classe.description"-->
-                                                   <!--class="form-control validate" mdbInputDirective>-->
-                                            <!--<mat-form-field class="col-md-12">-->
-                                                <!--<mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">-->
-                                                    <!--<mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">-->
-                                                        <!--{{niveau.description}}-->
-                                                    <!--</mat-option>-->
-                                                <!--</mat-select>-->
-                                            <!--</mat-form-field>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="modal-footer">-->
-                                        <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
-                                                <!--aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel-->
-                                        <!--</button>-->
-                                        <!--<button type="submit" value="submit" mdbBtn color="primary"-->
-                                                <!--(click)="editModal.hide();-->
-                                                    <!--editClasse(-->
-                                                        <!--id =_classe.id,-->
-                                                        <!--description =_classe.description,-->
-                                                        <!--parent = _classe.parent-->
-                                                    <!--)"-->
-                                                <!--class="relative waves-light  w-50" mdbWavesEffect>-->
-                                            <!--Save changes-->
-                                        <!--</button>-->
-                                    <!--</div>-->
-                                <!--</form>-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <h2 class="tz-dialog-title" mat-dialog-title>
@@ -178,38 +131,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--<a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"-->
-                       <!--class=" tz-btn-circle  m-1 relative waves-light" color="danger">-->
-                        <!--<i class="fa fa-trash"></i>-->
-                    <!--</a>-->
-                    <!--&lt;!&ndash;modal delete&ndash;&gt;-->
-                    <!--<div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"-->
-                         <!--[config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"-->
-                         <!--aria-labelledby="myBasicModalLabel">-->
-                        <!--<div class="modal-dialog modal-sm" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<button type="button" class="close pull-right" aria-label="Close"-->
-                                            <!--(click)="deleteModal.hide()">-->
-                                        <!--<span aria-hidden="true">×</span>-->
-                                    <!--</button>-->
-                                    <!--<h4 class="modal-title w-100" id="myModalLabel">Supprimer <i class="fa fa-home"></i>-->
-                                    <!--</h4>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body d-flex">-->
-                                    <!--<button type="button" mdbBtn color="secondary" class="waves-light w-50"-->
-                                            <!--aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Cancel-->
-                                    <!--</button>-->
-                                    <!--<button type="button" mdbBtn color="primary"-->
-                                            <!--(click)="deleteModal.hide();deleteClasse(_classe.id)"-->
-                                            <!--class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect>Confirm-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

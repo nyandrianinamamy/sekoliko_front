@@ -61,10 +61,17 @@ export class TzMatiereComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetch matiere listes
+   */
   getMatiere() {
     return this.dataService.post(urlList.path_list_matiere);
   }
 
+  /**
+   * supprimer un matiere
+   * @param id
+   */
   deleteMatiere(id: number) {
     console.log('la valeur de l id de la matiere est de :', id);
     this.loading = true;
@@ -111,7 +118,6 @@ export class TzMatiereComponent implements OnInit {
       var pageHeight = 295;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
-
       const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new jsPDF('p', 'mm', 'a4');
       var position = 0;

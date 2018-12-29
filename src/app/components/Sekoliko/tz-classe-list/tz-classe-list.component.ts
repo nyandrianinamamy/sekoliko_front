@@ -18,12 +18,9 @@ import {ExcelService} from "../../../shared/service/excel.service";
   styleUrls: ['./tz-classe-list.component.scss']
 })
 export class TzClasseListComponent implements OnInit {
-
-
   classe : Classe;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-  details = 'Cliquer pour voir details';
   loading: boolean;
   _classe: Classe[];
 
@@ -34,12 +31,14 @@ export class TzClasseListComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
   constructor(private dataService: DataService,
               private router: Router,
               private excelService: ExcelService) {
   }
 
+  /**
+   * Fetch niveau
+   */
   getNiveau() {
     return this.dataService.post(urlList.path_list_class_parent);
   }
@@ -58,6 +57,10 @@ export class TzClasseListComponent implements OnInit {
     });
   }
 
+  /**
+   * Suppression niveau
+   * @param id
+   */
   deleteClasse(id: number) {
     this.loading = true;
     return this.dataService.post(urlList.path_delete_class+id).subscribe(response=>{
@@ -69,6 +72,11 @@ export class TzClasseListComponent implements OnInit {
     });
   }
 
+  /**
+   * Modification niveau
+   * @param id
+   * @param description
+   */
   editClasse(id:number,
              description:string){
     this.loading = true;
@@ -79,6 +87,10 @@ export class TzClasseListComponent implements OnInit {
     });
   }
 
+  /**
+   * Ajouter nouveau niveau
+   * @param classe
+   */
   save(classe:Classe){
     this.loading = true;
     this.dataService.post(urlList.path_edit_class,classe).subscribe(response=>{
@@ -104,7 +116,7 @@ export class TzClasseListComponent implements OnInit {
   }
 
   /**
-   * Export
+   * Export tableau
    */
   exportCsv(){
     new Angular5Csv(this._classe,'liste_classe');

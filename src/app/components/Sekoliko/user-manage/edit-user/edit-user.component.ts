@@ -12,6 +12,7 @@ import {Constants} from '../../../../Utils/Constants';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
+
 export class EditUserComponent implements OnInit {
   loading: boolean;
   hide: boolean;
@@ -28,7 +29,6 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.userId = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
     this.typeId = this.currentRoute.snapshot.paramMap.get('type') ? +this.currentRoute.snapshot.paramMap.get('type') : null;
-    console.log('la valeur de l id est de', this.typeId);
     this.etudiant = new User();
     if (typeof this.typeId  === 'number' &&   this.typeId  > 0) {
       this.haveType = true;
@@ -42,6 +42,11 @@ export class EditUserComponent implements OnInit {
     }
     this.getTypeRole();
   }
+
+  /**
+   * Fetch current user
+   * @param id
+   */
   getUserById(id: number) {
     this.loading = true;
     this.dataService.get(urlList.path_find_user + '/' + id).subscribe(response => {
@@ -54,6 +59,10 @@ export class EditUserComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  /**
+   * Fetch role type
+   */
   getTypeRole() {
     this.loading = true;
     this.dataService.post(urlList.path_find_role).subscribe(response => {
@@ -63,20 +72,26 @@ export class EditUserComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Nouveau utilisateur
+   * @param etudiant
+   */
   ajouter(etudiant: User) {
     this.loading = true;
     if (this.updateAction) {
       this.dataService.post(urlList.path_user_find + '/' + this.userId, etudiant).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           window.alert(response.message);
+          this.loading = false;
+          this.router.navigate(['/menu/user/list']);
         }
-        this.loading = false;
       });
-
     } else {
       this.dataService.post(urlList.path_user_find, etudiant).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
          window.alert(response.message)
+          this.router.navigate(['/menu/user/list']);
         }
         if (this.haveType) {
           switch (this.typeId) {
@@ -88,7 +103,7 @@ export class EditUserComponent implements OnInit {
               break;
           }
         } else {
-          this.router.navigate(['/menu']);
+          this.router.navigate(['/menu/user/list']);
         }
         this.loading = false;
       });

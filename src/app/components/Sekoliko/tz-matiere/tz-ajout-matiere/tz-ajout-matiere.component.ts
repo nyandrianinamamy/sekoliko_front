@@ -29,6 +29,9 @@ export class TzAjoutMatiereComponent implements OnInit {
               private currentRoute: ActivatedRoute) {
   }
 
+  /**
+   * Fetch classe listes
+   */
   getListClasse() {
     this.loading = true;
     this.getNiveau().subscribe(response => {
@@ -39,6 +42,9 @@ export class TzAjoutMatiereComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetch profs listes
+   */
   getListProf() {
     this.loading = true;
     this.getListProffesseurs().subscribe((response: any) => {
@@ -62,6 +68,10 @@ export class TzAjoutMatiereComponent implements OnInit {
     this.getListProf();
   }
 
+  /**
+   * Fetch matiere par id
+   * @param id
+   */
   getMatiereById(id: number) {
     this.dataService.get(urlList.path_list_matiere + '/' + id).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
@@ -75,14 +85,24 @@ export class TzAjoutMatiereComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetch niveau
+   */
   getNiveau() {
     return this.dataService.post(urlList.path_list_classe);
   }
 
+  /**
+   * Fetch profs listes
+   */
   getListProffesseurs() {
     return this.dataService.post(urlList.path_find_user, {role: 1});
   }
 
+  /**
+   * Ajouter un matiere
+   * @param _matiere
+   */
   save(_matiere: MatiereParam) {
     this.loading = true;
     if (this.update) {

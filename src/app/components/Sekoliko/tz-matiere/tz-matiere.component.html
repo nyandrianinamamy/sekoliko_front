@@ -11,7 +11,6 @@
 
 <section class="mt-5">
   <div class="mat-elevation-z8">
-
     <div class="row p-2">
       <div class="col-md-6">
         <mat-form-field>
@@ -24,9 +23,7 @@
         <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
       </div>
     </div>
-
     <table mat-table [dataSource]="dataSource" class="w-100" id="matiereListe">
-
       <!-- Position Column -->
       <ng-container matColumnDef="nom">
         <th mat-header-cell *matHeaderCellDef class="text-center"> Nom matiere</th>

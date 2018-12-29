@@ -29,6 +29,10 @@ export class TzInscriptionComponent implements OnInit {
     this.getAllAnneeScolaire();
     this.idEtudiant = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
   }
+
+  /**
+   * Fetch liste classes
+   */
   getListClasse() {
     this.loading = true;
     this.dataService.post(urlList.path_list_classe).subscribe(response => {
@@ -38,6 +42,10 @@ export class TzInscriptionComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Fetch année scolaire
+   */
   getAllAnneeScolaire() {
     this.loading = true;
     this.dataService.get(urlList.path_find_annee_scolaire).subscribe(response => {
@@ -46,6 +54,11 @@ export class TzInscriptionComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Nouveau inscription
+   * @param inscription
+   */
   addInscription(inscription: InscriptionParam) {
     inscription.userid = this.idEtudiant;
     this.dataService.post(urlList.path_add_inscription, inscription).subscribe(response => {

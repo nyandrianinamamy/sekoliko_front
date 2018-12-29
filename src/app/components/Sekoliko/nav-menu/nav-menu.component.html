@@ -1,8 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    class="mat-sidenav"
+    class="mat-sidenav sidenav"
     #drawer
-    class="sidenav"
     fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"

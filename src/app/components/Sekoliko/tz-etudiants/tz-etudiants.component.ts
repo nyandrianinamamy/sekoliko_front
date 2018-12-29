@@ -41,8 +41,11 @@ export class TzEtudiantsComponent implements OnInit {
     });
   }
 
+  /**
+   * Check classe efant
+   * @param id
+   */
   checkEnfant(id: number) {
-    console.log('id find', id);
     this.router.navigate(['/menu/classe/' + id]);
   }
 }

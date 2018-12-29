@@ -36,6 +36,7 @@ export class TzAdministrationComponent implements OnInit {
         this.getTypeRole();
         this.getListAdmin();
     }
+
     getTypeRole() {
         this.loading = true;
         this.dataService.post(urlList.path_find_role).subscribe(response => {
@@ -88,6 +89,7 @@ export class TzAdministrationComponent implements OnInit {
             pdf.save('admin-liste.pdf');
         });
     }
+
     /**
      * Table filter
      */

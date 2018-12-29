@@ -64,15 +64,27 @@ export class TzEdtComponent implements OnInit {
   profs: User;
   classe : ClasseEnfant;
 
+  /**
+   * Fetch matiere liste
+   */
   getMatiere() {
     return this.dataService.post(urlList.path_list_matiere);
   }
+
+  /**
+   * Fetch profs listes
+   */
   getProfs() {
     return this.dataService.post(urlList.path_find_user,{role:1})
   }
+
+  /**
+   * Fetch classe listes
+   */
   getClasse(){
     return this.dataService.post(urlList.path_list_class_enfant)
   }
+
   ngOnInit(): void {
     this.getMatiere().subscribe(response=>{
       if(response.code === ConstantHTTP.CODE_SUCCESS){
@@ -165,7 +177,6 @@ export class TzEdtComponent implements OnInit {
   ];
 
   activeDayIsOpen: boolean = true;
-
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

@@ -18,6 +18,9 @@ export class TzDashboardComponent implements OnInit {
   listEtd : User;
   comptesProff = '';
 
+  /**
+   * Chartes
+   */
   public chartType: string = 'line';
 
   public chartDatasets: Array<any> = [
@@ -51,6 +54,7 @@ export class TzDashboardComponent implements OnInit {
   public chartOptions: any = {
     responsive: true
   };
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
@@ -143,6 +147,13 @@ export class TzDashboardComponent implements OnInit {
     ];
   }
 
+  /**
+   * End chartes
+   */
+
+  /**
+   * @param dataService
+   */
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -164,14 +175,23 @@ export class TzDashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetch etudiant liste
+   */
   getNbEtudiants() {
     return this.dataService.post(urlList.path_find_user, {role :2});
   }
 
+  /**
+   * Fetch salle liste
+   */
   getNbSalles() {
     return this.dataService.post(urlList.path_list_salle);
   }
 
+  /**
+   * Fetch profs liste
+   */
   getNbproff() {
     return this.dataService.post(urlList.path_find_user, {role :1});
   }

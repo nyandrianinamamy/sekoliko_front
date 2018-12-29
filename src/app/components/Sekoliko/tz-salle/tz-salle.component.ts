@@ -94,14 +94,19 @@ export class TzSalleComponent implements OnInit {
     return this.dataService.post(urlList.path_list_salle);
   }
 
+  /**
+   * Fetch liste salle libre
+   */
   getListSalleLibre() {
     this.dataService.post(urlList.path_list_salle, {occupation: false}).subscribe(response => {
       this.listSalleLibre = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
     });
   }
 
-
-
+  /**
+   * Supprimer un salle
+   * @param id
+   */
   deleteSalle(id: number) {
     this.loading = true;
     return this.dataService.post(urlList.path_delete_salle + id).subscribe(response => {
@@ -113,6 +118,10 @@ export class TzSalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Modifier salle
+   * @param id
+   */
   editSalle( id: number) {
     this.loading = true;
     this.dataService.post(urlList.path_mod_salle + id, {
@@ -126,6 +135,9 @@ export class TzSalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Réserver un salle
+   */
   reservations() {
     this.loading = true;
     this.dataService.post(urlList.path_reservation_salle + this.reservation.id, this.reservation).subscribe(response => {
@@ -137,15 +149,24 @@ export class TzSalleComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetch liste classe enfant
+   */
   getClasseEnfant() {
     return this.dataService.post(urlList.path_list_class_enfant);
   }
 
-
+  /**
+   * Fetch liste niveau
+   */
   getNiveau() {
     return this.dataService.post(urlList.path_list_class_parent);
   }
 
+  /**
+   * Ajouter un salle
+   * @param salle
+   */
   saveSalle(salle: Salle) {
     console.log('la valeur de recherche de salle est de :')
     this.loading = true;

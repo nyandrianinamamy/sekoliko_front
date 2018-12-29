@@ -16,6 +16,9 @@ export class TzProfileComponent implements OnInit {
     this.userProfile = this.getProfileUser();
   }
 
+  /**
+   * Fetch profile info in localstorage
+   */
   getProfileUser(){
      return this.Localstorage.getLocalstorage('user_info');
   }
