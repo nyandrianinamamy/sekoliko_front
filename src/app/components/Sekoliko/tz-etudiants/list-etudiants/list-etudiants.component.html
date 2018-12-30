@@ -69,9 +69,12 @@
            class=" tz-btn-circle  m-1 relative waves-light" color="success" >
           <i class="fa fa-edit"></i>
         </a>
+        <a mdbBtn (click)="addNote(_etudiant.NumInscription, idClasseEnfant, _etudiant.user_id.firstname)"
+           class=" tz-btn-circle m-1 rounded-circle relative waves-light text-center" color="primary" >
+          <i class="fa fa-plus-circle"></i>
+        </a>
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

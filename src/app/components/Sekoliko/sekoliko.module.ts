@@ -55,6 +55,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TzClasseEnfantComponent } from './tz-classe-enfant/tz-classe-enfant.component';
 import { TzAddEnfantComponent } from './tz-classe-enfant/tz-add-enfant/tz-add-enfant.component';
+import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
 
 @NgModule({
   imports: [
@@ -125,7 +126,8 @@ import { TzAddEnfantComponent } from './tz-classe-enfant/tz-add-enfant/tz-add-en
     TzPayementsAjoutComponent,
     TzEdtComponent,
     TzClasseEnfantComponent,
-    TzAddEnfantComponent
+    TzAddEnfantComponent,
+    AjoutNoteComponent
   ],
   entryComponents: [
     EtudiantUpdateComponent,
