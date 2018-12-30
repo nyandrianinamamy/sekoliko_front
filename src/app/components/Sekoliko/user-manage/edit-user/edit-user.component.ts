@@ -6,6 +6,9 @@ import {Role} from '../../../../shared/model/Role';
 import {User} from '../../../../shared/model/User';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Constants} from '../../../../Utils/Constants';
+import {MenuItems} from "../../../../shared/menu-items/menu-items";
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 
 @Component({
   selector: 'app-edit-user',
@@ -20,16 +23,27 @@ export class EditUserComponent implements OnInit {
   typeId: number;
   haveType: boolean;
   updateAction: boolean;
+  role:any;
   etudiant: User;
   userId: number;
   constructor(private dataService: DataService,
               private currentRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private menuItems:MenuItems,
+              private userConnected:UserConnectedService) { }
 
   ngOnInit() {
     this.userId = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
     this.typeId = this.currentRoute.snapshot.paramMap.get('type') ? +this.currentRoute.snapshot.paramMap.get('type') : null;
     this.etudiant = new User();
+
+    let role = this.getUserc();
+    if(role.role_type.id == ConstantRole.ETUDIANT){
+      this.haveType = true;
+    }else {
+      this.haveType = false;
+    }
+
     if (typeof this.typeId  === 'number' &&   this.typeId  > 0) {
       this.haveType = true;
       this.etudiant.role = this.typeId;
@@ -41,6 +55,13 @@ export class EditUserComponent implements OnInit {
       this.updateAction = false;
     }
     this.getTypeRole();
+  }
+
+  /**
+   * Get user connecté
+   */
+  getUserc(){
+    return this.userConnected.userConnected();
   }
 
   /**

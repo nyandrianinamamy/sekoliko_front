@@ -60,6 +60,7 @@ export class ListEtudiantsComponent implements OnInit {
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }
+
   openPopUpd(etudiant: User) {
     const openPopUp = this.dialog.open(EtudiantUpdateComponent, {
       data: etudiant
