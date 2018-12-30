@@ -81,7 +81,7 @@ export class AjoutNoteComponent implements OnInit {
     });
   }
   retour() {
-    this.router.navigate(['list-etudiant/' + this.idClasse]);
+    this.router.navigate(['/menu/list-etudiant/' + this.idClasse]);
   }
   checkIfUpdate(id: number) {
     console.log(id);

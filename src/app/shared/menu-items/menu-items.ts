@@ -197,11 +197,6 @@ const SECMENU = [
         name: 'Gestion utilisateurs',
         type: 'link',
         icon: 'account_circle'
-      },{
-        state: ['/', 'menu', 'etudiant'],
-        name: 'Etudiant',
-        type: 'link',
-        icon: 'account_circle'
       },
       {
         state: ['/', 'menu', 'edt'],

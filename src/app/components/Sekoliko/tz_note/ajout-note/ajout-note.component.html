@@ -7,34 +7,29 @@
           style="background: #a6c!important;color: aliceblue;" color="secondary" routerLinkActive="active-link"
           type="button" mdbBtn
           mdbWavesEffect>
-    <i class="fa fa-plus-circle"></i>
-    Retour à la liste
+    <i class="fa fa-reply"></i>
   </button>
 </mat-toolbar>
 <mat-card>
   <form #noteForm="ngForm">
     <div class="row">
       <mat-form-field class="col-md-6">
-        <mat-select name="matiere" placeholder="Matiere" name="type" [(ngModel)]="paramNote.idmat" #matiere="ngModel"
-                    (selectionChange) = "checkIfUpdate($event.value)" required>
-          <mat-option value="">Choisissez la matiere</mat-option>
-          <mat-option *ngFor="let listMatiere of listMatier" [value]="listMatiere.id"> {{listMatiere.description}}
+        <mat-select placeholder="Choisissez la matiere" name="matiere"  required
+                    [(ngModel)]="paramNote.idmat" #matiere="ngModel">
+          <mat-option *ngFor="let listMatiere of listMatier" [value]="listMatiere.id"  (onSelectionChange) = "checkIfUpdate(listMatiere.id)">
+            {{listMatiere.description}}
             Coefficient: {{listMatiere.coefficient}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field class="col-md-6">
         <input matInput type="number" placeholder="Note" name="note" [(ngModel)]="paramNote.note" required
                #note="ngModel">
       </mat-form-field>
-      <div class="right">
-        <button mat-raised-button (click)="showDetail()">
-          Voir de tails
-        </button>
-        <button mat-raised-button class="right" (click)="addNote(paramNote)" color="accent"
-                [disabled]="!noteForm.form.valid">
-          Ajouter
-        </button>
+      <div class="btn-content d-block w-100 text-center">
+        <button class="btn btn-primary" (click)="showDetail()">Voir les notes</button>
+        <button class="btn btn-secondary"  (click)="addNote(paramNote)" [disabled]="!noteForm.form.valid">Ajouter</button>
       </div>
     </div>
   </form>
