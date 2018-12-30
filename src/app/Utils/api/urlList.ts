@@ -29,5 +29,9 @@ export const urlList = {
   path_find_user: _api + 'user/find',
   path_find_annee_scolaire: _api + 'listans',
   path_add_inscription: _api + 'addins',
-  path_reservation_salle: _api + 'salle/reservation/'
+  path_reservation_salle: _api + 'salle/reservation/',
+  path_add_note: _api + 'addnote',
+  path_edit_note: _api + 'editnote',
+  path_get_note: _api + 'notes/find/',
+  path_get_note_etudiant: _api + 'notes-etudiant/find'
 };

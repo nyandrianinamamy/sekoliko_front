@@ -7,7 +7,7 @@ import {ConstantHTTP} from 'src/app/Utils/ConstantHTTP';
 import {Subject} from 'rxjs';
 import {User} from '../../../../shared/model/User';
 import {Inscription} from '../../../../shared/model/Inscription';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {EtudiantUpdateComponent} from '../etudiant-update/etudiant-update.component';
 import {Angular5Csv} from "angular5-csv/Angular5-csv";
@@ -37,7 +37,8 @@ export class ListEtudiantsComponent implements OnInit {
   constructor(private dataService: DataService,
               private currentRoute: ActivatedRoute,
               private dialog: MatDialog,
-              private excelService: ExcelService) {
+              private excelService: ExcelService,
+              private router: Router) {
 
   }
   ngOnInit() {
@@ -56,7 +57,9 @@ export class ListEtudiantsComponent implements OnInit {
       }
     });
   }
-
+  addNote(idInscription: number, idClasse: number, inscription: string) {
+    this.router.navigate(['/menu/note/' + idInscription + '/' + idClasse], { queryParams: {etudiant: inscription}});
+  }
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }

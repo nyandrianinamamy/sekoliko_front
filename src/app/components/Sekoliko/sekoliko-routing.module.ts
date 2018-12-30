@@ -24,6 +24,7 @@ import {TzFonctionProfComponent} from './tz-profs/tz-fonction-prof/tz-fonction-p
 import { TzEdtComponent } from './tz-edt/tz-edt.component';
 import {TzClasseEnfantComponent} from "./tz-classe-enfant/tz-classe-enfant.component";
 import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfant.component";
+import {AjoutNoteComponent} from './tz_note/ajout-note/ajout-note.component';
 
 const routes: Routes = [
     {
@@ -57,6 +58,7 @@ const routes: Routes = [
             {path: 'list-classe-eft', component: TzClasseEnfantComponent},
             {path: 'add-eft', component: TzAddEnfantComponent},
             {path: 'profile', component: TzProfileComponent},
+            {path: 'note/:id/:idClasse', component: AjoutNoteComponent},
             {path: '**', redirectTo: 'not-found'}
         ]
     }
