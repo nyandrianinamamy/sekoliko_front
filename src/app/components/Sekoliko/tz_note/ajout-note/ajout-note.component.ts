@@ -6,6 +6,8 @@ import {urlList} from '../../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
 import {ParamNote} from '../../../../shared/model/ParamNote';
 import {MatTableDataSource} from '@angular/material';
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../../Utils/ConstantRole";
 
 @Component({
   selector: 'app-ajout-note',
@@ -14,13 +16,13 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class AjoutNoteComponent implements OnInit {
 
+  etudiant:boolean;
   details: boolean;
   idInscription: number;
   idClasse: number;
   loading: boolean;
   order: any;
   displayedColumns: string[] = ['classe', 'note', 'coefficient', 'num_inscription'];
-  noteMatiere: any;
   listNode: any[];
   names: string;
   listMatier = [];
@@ -30,7 +32,8 @@ export class AjoutNoteComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   constructor(private currentRoute: ActivatedRoute,
               private dataService: DataService,
-              private router: Router) { }
+              private router: Router,
+              private userConnected: UserConnectedService) { }
 
   ngOnInit() {
     this.paramNote = new ParamNote();
@@ -42,7 +45,22 @@ export class AjoutNoteComponent implements OnInit {
     this.idInscription = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
     this.idClasse = this.currentRoute.snapshot.paramMap.get('idClasse') ? + this.currentRoute.snapshot.paramMap.get('idClasse') : null;
     this.getAllMatiere(this.idClasse);
+
+    /**
+     * Role
+     */
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.details = true;
+      this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse}).subscribe(response => {
+        this.listNode = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+        this.dataSource = new MatTableDataSource<any>(this.listNode);
+        this.loading = false;
+      });
+    }
   }
+
   getAllMatiere(idClass: number) {
     this.loading = true;
     this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
@@ -50,6 +68,7 @@ export class AjoutNoteComponent implements OnInit {
       this.loading = false;
     });
   }
+
   addNote(param: ParamNote) {
     param.numins = this.idInscription;
     this.loading = true;
@@ -69,8 +88,8 @@ export class AjoutNoteComponent implements OnInit {
         this.loading = false;
       });
     }
-
   }
+
   showDetail() {
     this.details = true;
     this.loading = true;
@@ -80,11 +99,12 @@ export class AjoutNoteComponent implements OnInit {
       this.loading = false;
     });
   }
+
   retour() {
     this.router.navigate(['/menu/list-etudiant/' + this.idClasse]);
   }
+
   checkIfUpdate(id: number) {
-    console.log(id);
     if (id > 0) {
       this.loading = true;
       this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse, mat: id}).subscribe(response => {
@@ -103,5 +123,9 @@ export class AjoutNoteComponent implements OnInit {
         }
       });
     }
+  }
+
+  getUserConnected(){
+    return this.userConnected.getRoleUser();
   }
 }

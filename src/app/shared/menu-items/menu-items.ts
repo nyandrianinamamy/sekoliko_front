@@ -110,11 +110,15 @@ const ETUDIANTMENU = [
         icon: 'dns'
       }, {
         state: ['/', 'menu', 'etudiant'],
-        name: 'Etudiant',
+        name: 'Mes collegues',
         type: 'link',
         icon: 'account_circle'
-      },
-      {
+      },{
+        state: ['/', 'menu', 'salle'],
+        name: 'Gestion salle',
+        type: 'link',
+        icon: 'home'
+      }, {
         state: ['/', 'menu', 'matiere-list'],
         name: 'Matieres',
         type: 'link',

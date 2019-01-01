@@ -57,7 +57,6 @@ export class TzEtudiantsComponent implements OnInit {
     }
 
 
-
     this.getNiveau().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         console.log('responece of response: ', response);

@@ -14,6 +14,8 @@ import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import {ExcelService} from "../../../../shared/service/excel.service";
 import * as jsPDF from '../../../../../assets/jq/jspdf.min.js';
 import html2canvas from 'html2canvas';
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../../Utils/ConstantRole";
 
 @Component({
   selector: 'app-list-etudiants',
@@ -27,20 +29,24 @@ export class ListEtudiantsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe', 'email', 'action'];
+  displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe', 'action'];
   inscription: Inscription;
   listEtudiants = [];
   idClasseEnfant: number;
   dtOptions: DataTables.Settings = {};
   loading: boolean;
+  etudiant_user:boolean;
+  idInscription: number;
+  idClasse: number;
+  inscriptionUser: string;
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
               private currentRoute: ActivatedRoute,
               private dialog: MatDialog,
               private excelService: ExcelService,
-              private router: Router) {
+              private router: Router,
+              private userConnected:UserConnectedService) {}
 
-  }
   ngOnInit() {
     if (window.screen.width >= 600) {
       this.mobileClass = "text-center";
@@ -56,12 +62,39 @@ export class ListEtudiantsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<any>(this.etudiant);
       }
     });
+
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant_user = true;
+      this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe'];
+    }
   }
+
+  voirNote(){
+    this.getUserInsc().subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+         this.idInscription = response.data[0].NumInscription
+         this.idClasse = response.data[0].id_classe.id;
+         this.inscriptionUser = response.data[0].user_id.user_id;
+        this.router.navigate(['/menu/note/' + this.idInscription + '/' + this.idClasse], { queryParams: {etudiant: this.inscriptionUser}});
+      }
+    });
+  }
+
   addNote(idInscription: number, idClasse: number, inscription: string) {
     this.router.navigate(['/menu/note/' + idInscription + '/' + idClasse], { queryParams: {etudiant: inscription}});
   }
+
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
+  }
+
+  /**
+   * Fetch inscription liste
+   */
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
   }
 
   openPopUpd(etudiant: User) {
@@ -73,6 +106,11 @@ export class ListEtudiantsComponent implements OnInit {
       }
     });
   }
+
+  getUserConnected(){
+    return this.userConnected.userConnected();
+  }
+
   /**
    * Touche pas
    */

@@ -1,6 +1,9 @@
 <mat-toolbar class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
-  <span>
+  <span *ngIf="!etudiant">
     Gestion des notes de {{names}} inscription: {{idInscription}}
+  </span>
+  <span *ngIf="etudiant">
+    Mes notes
   </span>
   <span fxFlex></span>
   <button (click)="retour()" class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
@@ -10,7 +13,7 @@
     <i class="fa fa-reply"></i>
   </button>
 </mat-toolbar>
-<mat-card>
+<mat-card *ngIf="!etudiant">
   <form #noteForm="ngForm">
     <div class="row">
       <mat-form-field class="col-md-6">
@@ -34,7 +37,7 @@
     </div>
   </form>
 </mat-card>
-<div *ngIf="details">
+<div *ngIf="details" class="mt-5">
   <mat-card>
     <table mat-table [dataSource]="dataSource" matSort class="full" id="etudiantListe">
       <ng-container matColumnDef="classe">

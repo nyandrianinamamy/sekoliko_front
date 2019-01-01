@@ -11,6 +11,8 @@ import {Classe} from '../../../shared/model/Classe';
 import * as jsPDF from "../../../../assets/jq/jspdf.min";
 import {ExcelService} from "../../../shared/service/excel.service";
 import html2canvas from 'html2canvas'
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
 
 @Component({
   selector: 'app-tz-matiere',
@@ -39,33 +41,69 @@ export class TzMatiereComponent implements OnInit {
   class: number;
   matiere: number;
   listClasse: Classe[];
+  listMatier = [];
+  etudiant:boolean;
+  idClasse:number;
 
   constructor(
     private dataService: DataService,
     private router: Router,
-    private excelService: ExcelService) {
+    private excelService: ExcelService,
+    private userConnected : UserConnectedService) {
   }
 
   ngOnInit() {
     this.matiereCreate = new MatiereParam();
     this.loading = true;
-    this.getMatiere().subscribe((response: any) => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.loading = false;
-        this.listMatiere = response.data;
-        this.dataSource = new MatTableDataSource<any>(this.listMatiere);
-        this.dataSource.paginator = this.paginator;
-        console.log(this.listMatiere);
-        this.dtTrigger.next();
-      }
-    });
+    let user = this.getUserConnected();
+    if(user.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.displayedColumns = ['nom', 'coefficient', 'prof'];
+      this.getUserInsc().subscribe(response => {
+        if(response.code === ConstantHTTP.CODE_SUCCESS){
+          this.idClasse = response.data[0].id_classe.id;
+          this.getAllMatiere(this.idClasse);
+        }
+      });
+    }else{
+      this.getMatiere().subscribe((response: any) => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.listMatiere = response.data;
+          this.dataSource = new MatTableDataSource<any>(this.listMatiere);
+          this.dataSource.paginator = this.paginator;
+          this.dtTrigger.next();
+        }
+      });
+    }
+  }
+
+  getUserConnected(){
+    return this.userConnected.userConnected();
   }
 
   /**
    * Fetch matiere listes
    */
+
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
+  }
+
   getMatiere() {
     return this.dataService.post(urlList.path_list_matiere);
+  }
+
+  getAllMatiere(idClass: number) {
+    this.loading = true;
+    this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
+      this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      this.dataSource = new MatTableDataSource<any>(this.listMatier);
+      this.dataSource.paginator = this.paginator;
+      this.loading = false;
+      console.log(this.listMatier);
+    });
   }
 
   /**

@@ -3,16 +3,16 @@
 </div>
 <form #salleform="ngForm" class="col-md-12 mt-5">
   <mat-form-field class="col-md-12">
-    <input matInput placeholder="Nom classe" id="description" type="text" name="description" required
-           [(ngModel)]="classe.description"
-           #description="ngModel">
-  </mat-form-field>
-  <mat-form-field class="col-md-12">
-    <mat-select placeholder="Classe" name="class" required [(ngModel)]="classe.parent" #parent="ngModel">
+    <mat-select placeholder="Selectionner le niveau" name="class" required [(ngModel)]="classe.parent" #parent="ngModel">
       <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
         {{niveau.description}}
       </mat-option>
     </mat-select>
+  </mat-form-field>
+  <mat-form-field class="col-md-12">
+    <input matInput placeholder="Nom classe" id="description" type="text" name="description" required
+           [(ngModel)]="classe.description"
+           #description="ngModel">
   </mat-form-field>
   <button class="btn btn-success btn-rounded float-right" [disabled]="!salleform.form.valid" type="submit"
           (click)="save(classe)">Ajouter

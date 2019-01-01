@@ -14,6 +14,8 @@ import {TzAjoutSalleComponent} from './tz-ajout-salle/tz-ajout-salle.component';
 import * as jsPDF from "../../../../assets/jq/jspdf.min";
 import {ExcelService} from "../../../shared/service/excel.service";
 import html2canvas from 'html2canvas';
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
 
 @Component({
   selector: 'app-tz-salle',
@@ -37,11 +39,12 @@ export class TzSalleComponent implements OnInit {
   public dateDebut: Date;
   public dateFin: Date;
   public classe: string;
+  etudiant : boolean;
 
   /**
    * Table
    */
-  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action'];
+  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action' , 'occupation'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -49,7 +52,8 @@ export class TzSalleComponent implements OnInit {
   constructor(private dataService: DataService,
               private router: Router,
               public dialog: MatDialog,
-              private excelService: ExcelService
+              private excelService: ExcelService,
+              private userConnected: UserConnectedService
   ) {
   }
 
@@ -63,6 +67,11 @@ export class TzSalleComponent implements OnInit {
     this.salle = new Salle();
     this.getListSalleLibre();
     this.loading = true;
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe', 'occupation'];
+    }
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.classe_enfant = response.data;
@@ -79,12 +88,20 @@ export class TzSalleComponent implements OnInit {
         this.loading = false;
         this.salle = data.data;
         this._salle = data.data;
+        console.log(this.salle);
+        console.log(this._salle);
         this.dataSource = new MatTableDataSource<any>(this._salle);
         this.dataSource.paginator = this.paginator;
       }
     });
 
+  }
 
+  /**
+   * Get user connected
+   */
+  getUserConnected(){
+    return this.userConnected.userConnected();
   }
 
   /**
@@ -144,6 +161,8 @@ export class TzSalleComponent implements OnInit {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
           this.router.navigate(['/menu/salle']));
+        this.reservation.occupation = true;
+        console.log(this.reservation.occupation);
         this.loading = false;
       }
     });
