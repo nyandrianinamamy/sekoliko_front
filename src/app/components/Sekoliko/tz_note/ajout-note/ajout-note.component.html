@@ -42,7 +42,7 @@
 <div *ngIf="details">
   <mat-card>
     <table mat-table [dataSource]="dataSource" matSort class="full" id="etudiantListe">
-      <ng-container matColumnDef="classe">
+      <ng-container matColumnDef="num_inscription">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Classe </th>
         <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.description }} </td>
       </ng-container>
@@ -54,9 +54,9 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Coefficient </th>
         <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.coefficient}} </td>
       </ng-container>
-      <ng-container matColumnDef="num_inscription">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro d'inscription </th>
-        <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.num_inscription}} </td>
+      <ng-container matColumnDef="classe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Matière </th>
+        <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.nomMatiere}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
