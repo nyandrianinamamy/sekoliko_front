@@ -51,6 +51,7 @@ export class AjoutNoteComponent implements OnInit {
      */
     let role = this.getUserConnected();
     if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.displayedColumns = ['classe', 'note', 'coefficient'];
       this.etudiant = true;
       this.details = true;
       this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse}).subscribe(response => {
