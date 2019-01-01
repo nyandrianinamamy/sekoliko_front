@@ -21,6 +21,7 @@ export class TzEtudiantsComponent implements OnInit {
   // lentgh = this.niveau.length;
   details = 'Cliquer pour voir details';
   loading: boolean;
+  etudiant_user:boolean;
   role:any;
   etudiant:User;
   inscription: any;
@@ -43,32 +44,28 @@ export class TzEtudiantsComponent implements OnInit {
     this.loading = true;
     let role = this.getUserConnected();
     if (role.role_type.id === ConstantRole.ETUDIANT){
-      // this.router.navigate(['/menu/list-etudiant/1']);
+      this.etudiant_user = true;
       this.etudiant = new User();
       this.getListEtudiants(this.etudiant);
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          console.log(response.data[0])
-          console.log(response.data[0].id_classe.id);
           let a = response.data[0].id_classe.id;
           this.router.navigate(['/menu/list-etudiant/'+a]);
         }
       });
-    }
-
-
-    this.getNiveau().subscribe(response => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        console.log('responece of response: ', response);
-        response.data.forEach(element => {
-          this.niveau.push({
-            id: element.id,
-            nom: element.description
+    }else{
+      this.getNiveau().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          response.data.forEach(element => {
+            this.niveau.push({
+              id: element.id,
+              nom: element.description
+            });
           });
-        });
-        this.loading = false;
-      }
-    });
+        }
+      });
+    }
+    this.loading = false;
   }
 
   /**

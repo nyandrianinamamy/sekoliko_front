@@ -8,7 +8,15 @@
         </div>
       </a>
 
-      <a class="col-md-3" routerLink="/menu/profs">
+      <a class="col-md-3"  *ngIf="!etudiant" routerLink="/menu/profs">
+        <div class="card-counter danger">
+          <i class="fa  fa-user-secret"></i>
+          <span class="count-numbers">{{listProfs}}</span>
+          <span class="count-name">Profs</span>
+        </div>
+      </a>
+
+      <a class="col-md-3" *ngIf="etudiant" routerLink="/menu/matiere-list">
         <div class="card-counter danger">
           <i class="fa  fa-user-secret"></i>
           <span class="count-numbers">{{listProfs}}</span>
@@ -63,3 +71,10 @@
     </div>
   </div>
 </section>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+          [animationDuration]="4000"
+          [size]="200"
+          [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

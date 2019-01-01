@@ -1,6 +1,6 @@
 <mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
   <span>
-    Liste des Etudiants
+    Liste des etudiants
   </span>
   <span fxFlex></span>
   <a mdbBtn *ngIf="!etudiant_user" [routerLink]="['/menu/add-etudiant']"
@@ -20,7 +20,7 @@
       <button class="btn btn-primary" *ngIf="!etudiant_user" (click)="exportCsv()">Export to CSV</button>
       <button class="btn btn-success" *ngIf="!etudiant_user" (click)="exportAsXLSX()">Export to XLS</button>
       <button class="btn btn-secondary" *ngIf="!etudiant_user" (click)="exportPdf()">Export to pdf</button>
-      <button class="btn btn-secondary" (click)="voirNote()">Voir mes notes</button>
+      <button class="btn btn-secondary" *ngIf="etudiant_user" (click)="voirNote()">Voir mes notes</button>
     </div>
   </div>
   <table mat-table [dataSource]="dataSource" matSort class="full" id="etudiantListe">

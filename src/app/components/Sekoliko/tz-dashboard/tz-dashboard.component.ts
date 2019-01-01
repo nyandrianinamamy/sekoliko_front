@@ -4,6 +4,10 @@ import { DataService } from 'src/app/shared/service/data.service';
 import { urlList } from 'src/app/Utils/api/urlList';
 import {Salle} from "../../../shared/model/Salle";
 import {User} from "../../../shared/model/User";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
+import {MatTableDataSource} from "@angular/material";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -17,7 +21,10 @@ export class TzDashboardComponent implements OnInit {
   listProfs : User;
   listEtd : User;
   comptesProff = '';
-
+  etudiant:boolean;
+  idClasse:number;
+  loading:boolean;
+  listMatier:any;
   /**
    * Chartes
    */
@@ -153,10 +160,14 @@ export class TzDashboardComponent implements OnInit {
 
   /**
    * @param dataService
+   * @param userConnected
    */
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+              private userConnected:UserConnectedService
+  ) { }
 
   ngOnInit() {
+    this.loading = true
     this.getNbSalles().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.compteSalles = response.data.length;
@@ -173,6 +184,32 @@ export class TzDashboardComponent implements OnInit {
         this.listProfs = response.data.list.length;
       }
     });
+
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          console.log(response.data);
+          this.idClasse = response.data[0].id_classe.id;
+          this.getListEtudiants(this.idClasse).subscribe(response => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+              this.listEtd = response.data.length;
+            }
+          });
+
+          this.idClasse = response.data[0].id_classe.id;
+          this.getAllMatiere(this.idClasse);
+        }
+      });
+    }else {
+      this.getNbEtudiants().subscribe((response: any) => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.listEtd = response.data.list.length;
+        }
+      });
+    }
+    this.loading = false;
   }
 
   /**
@@ -194,5 +231,40 @@ export class TzDashboardComponent implements OnInit {
    */
   getNbproff() {
     return this.dataService.post(urlList.path_find_user, {role :1});
+  }
+
+  /**
+   * Get user connected
+   */
+  getUserConnected(){
+    return this.userConnected.userConnected();
+  }
+
+  getListEtudiants(classe: number) {
+    return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
+  }
+
+  /**
+   * Get Liste profs
+   * @param idClass
+   */
+  getAllMatiere(idClass: number) {
+    this.loading = true;
+    let role = this.getUserConnected();
+    this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
+      this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      if(role.role_type.id === ConstantRole.ETUDIANT) {
+        this.etudiant = true;
+        this.listProfs = this.listMatier.length;
+        this.loading = false;
+      }
+    });
+  }
+  /**
+   * Get user inscription
+   */
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
   }
 }

@@ -115,7 +115,7 @@ const ETUDIANTMENU = [
         icon: 'account_circle'
       },{
         state: ['/', 'menu', 'salle'],
-        name: 'Gestion salle',
+        name: 'Salle',
         type: 'link',
         icon: 'home'
       }, {
