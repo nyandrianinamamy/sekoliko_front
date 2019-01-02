@@ -1,12 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    class="mat-sidenav"
+    class="mat-sidenav sidenav"
     #drawer
-    class="sidenav"
-    fixedInViewport="true"
+    fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="!(isHandset$ | async)" style="overflow-y: scroll!important;margin-bottom: 55px!important;">
 
     <mat-toolbar color="primary" class="header-box-shadow">
         <span>Techzara - Sekoliko</span>
@@ -14,7 +13,7 @@
     <div class="my-2" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div>
         <a routerLink="/menu/principal-interface">
-          <img class="circle" src="./assets/icons/techzara.jpg" width="100" height="100" style="border-radius:50%;margin-top: 15px">
+          <img class="circle" src="./assets/icons/logo.jpeg" width="100" height="100" style="border-radius:50%;margin-top: 15px">
         </a>
         <br/>
         <a>
@@ -44,21 +43,20 @@
           </button>
         </div>
         <div class="grid example">
-          <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-right: 5px">
-            <mat-icon>account_circle</mat-icon>
-          </button>
+          <label>
+            <span>Bienvenue {{userProfile.username}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-right: 5px">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </label>
           <mat-menu #menu="matMenu" overlapTrigger="false">
             <button mat-menu-item>
               <mat-icon>account_circle</mat-icon>
-              <span>My Account</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>settings</mat-icon>
-              <span>Settings</span>
+              <a routerLink="/menu/profile">My Account</a>
             </button>
             <button mat-menu-item (click)="logOut()">
-              <mat-icon>money</mat-icon>
-              <span>logout</span>
+              <mat-icon>navigate_next</mat-icon>
+              <span>Logout</span>
             </button>
           </mat-menu>
         </div>

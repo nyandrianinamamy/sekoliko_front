@@ -15,15 +15,24 @@ import {LocalStorageService} from '../../shared/service/local-storage.service';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  title = 'Techzara Ny Sekoliko';
+  title = 'Sekoliko';
   login: Login;
   submitted: boolean;
+  user_info : any;
   error: string;
   loading: boolean;
   constructor(private router: Router,
               private authData: AuthentificationService,
               private dataService: DataService,
-              private localStorageService: LocalStorageService) { }
+              private localStorageService: LocalStorageService) {
+              if (window.matchMedia("(max-width: 600px)").matches) {
+                document.body.style.overflow = "block";
+              } else {
+                document.body.style.overflow = "hidden";
+              }
+              document.body.style.background = "#2d6bb0";
+
+  }
 
   ngOnInit() {
     this.login = new Login();
@@ -41,6 +50,7 @@ export class LoginComponent implements OnInit {
     this.dataService.post(urlList.path_login, login).subscribe((log) => {
       if (log.code === ConstantHTTP.CODE_SUCCESS) {
         this.updateLocalStorage(log);
+        // this.user_info = log.data;
         this.router.navigate(['menu']);
         this.loading = false;
       } else {
@@ -50,8 +60,10 @@ export class LoginComponent implements OnInit {
     });
   }
   updateLocalStorage(log: any) {
+    localStorage.setItem('user_info',log.data);
     localStorage.setItem('token', log.data.token);
     localStorage.setItem('user_id', log.data.user_id);
     localStorage.setItem('jwt_token_ttl', log.data.jwt_token_ttl);
+    this.localStorageService.setLocalstorage('user_info',log.data);
   }
 }

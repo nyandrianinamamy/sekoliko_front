@@ -1,0 +1,12 @@
+
+<div class="view gradient-card-header blue darken-2">
+    <h4 class="h4-responsive text-white"> Ajouter un niveau </h4>
+</div>
+<form #salleform="ngForm" class="col-md-12 mt-5">
+    <mat-form-field class="col-md-12">
+        <input matInput placeholder="Nom classe" id="nom" type="text" name="description" [(ngModel)]="classe.description"
+               #login="ngModel">
+    </mat-form-field>
+    <button class="btn btn-success btn-rounded float-right" type="submit" (click)="save(classe)">Ajouter</button>
+</form>
+

@@ -1,0 +1,28 @@
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white"> Inscription Etudiant N°: {{idEtudiant}} </h4>
+</div>
+<form #form="ngForm">
+  <mat-form-field class="col-md-12">
+    <mat-select [(ngModel)]="inscription.idclasse" name="classe" #classe="ngModel" required placeholder="Classe">
+      <mat-option value="">Choisissez une Classe</mat-option>
+      <mat-option *ngFor="let listClass of listClasse" [value]="listClass.id"> {{listClass.parent.description}} : {{listClass.description}}</mat-option>
+    </mat-select>
+    <mat-error [hidden]="classe.valid || classe.untouched">Choisir une classe</mat-error>
+  </mat-form-field>
+  <mat-form-field class="col-md-12">
+    <mat-select [(ngModel)]="inscription.idas" name="annee" #annee="ngModel" required placeholder="Année Scolaire">
+      <mat-option value="">Choisissez l'année scolaire</mat-option>
+      <mat-option *ngFor="let listAnne of anneeScolaire" [value]="listAnne.AnneeScolaireID"> {{listAnne.date_debut | date:'dd-MM-yyyy'}} - {{listAnne.date_fin | date:'dd-MM-yyyy'}}</mat-option>
+    </mat-select>
+    <mat-error [hidden]="annee.valid || annee.untouched">Choisir une année scolaire</mat-error>
+  </mat-form-field>
+  <mat-checkbox name="activity" [(ngModel)]="inscription.status">Passant</mat-checkbox>
+  <button class="btn btn-success btn-rounded float-right" type="submit" (click)="addInscription(inscription)">Ajouter</button>
+</form>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

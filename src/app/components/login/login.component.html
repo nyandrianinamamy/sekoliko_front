@@ -1,12 +1,15 @@
+<style>
+
+  html, body{ background-color: #0c3750 }
+</style>
 <div class="login-content">
   <div class="flex-center">
     <mat-card>
       <h2 class="tz-header-login" style=" text-align: center">
-        Welcome to {{ title }}!
+        Bienvenue sur {{ title }}!
       </h2>
       <form class="login-form" (ngSubmit)="onSubmit()" #boxFormView="ngForm">
-        <img width="300" alt="Maison Logo" src="assets/icons/ecole.jpg" class="img-center">
-
+        <img  alt="sekoliko Logo" src="assets/icons/logo.jpeg" class="img-center">
         <mat-form-field class="input-full-width">
           <input matInput
                  placeholder="Login"
@@ -44,7 +47,7 @@
     </mat-card>
   </div>
 </div>
-<div class="mask" *ngIf="loading">
+<div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner
     [animationDuration]="4000"
     [size]="200"

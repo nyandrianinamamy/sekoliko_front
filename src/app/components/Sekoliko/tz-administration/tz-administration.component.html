@@ -1,37 +1,157 @@
-<div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Listes des administrateurs </h4>
-</div>
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span>
+    Listes des administrateurs
+  </span>
+  <span fxFlex></span>
+  <a mdbBtn  [routerLink]="['/menu/user/edit']"
+     class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
+    <i class="fa fa-plus-circle"></i>
+  </a>
+</mat-toolbar>
 <section class="mt-lg-5">
-  <div class="tz-btn-content text-right mb-2">
-    <a routerLink="/menu/add-admin" type="button" mdbBtn color="secondary" mdbWavesEffect>
-      <i class="fa fa-plus-circle m-2"></i>
-      Ajout un nouveau admin
-    </a>
-  </div>
-  <div class="row">
-    <div class="col-xl-3 col-md-6  m-5 mb-r m-5" *ngFor='let user of userList'>
-      <mdb-card>
-        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-          <div class="avatar mx-auto">
-            <img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" class="tz-pdc" alt="Card image cap">
-            <img src="{{user.photo}}" class="rounded-circle m-auto">
-          </div>
-          <a>
-            <div class="mask"></div>
-          </a>
-        </div>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h4 class="text-center">{{user.name}}</h4>
-          </mdb-card-title>
-          <p>
-            Some quick example text to build on the card title and make up the bulk of the card's
-            content.
-          </p>
-          <a routerLink="/menu/details-prof" mdbBtn color="primary" class="w-100" mdbWavesEffect>Voir le profils</a>
-        </mdb-card-body>
-      </mdb-card>
+  <mat-card>
+    <div class="row p-2">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
+        <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
+        <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
+      </div>
     </div>
+    <table mat-table [dataSource]="dataSource" matSort class="full" id="adminListe">
+      <ng-container matColumnDef="matricule">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricule</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.user_id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.lastname }}</td>
+      </ng-container>
+      <ng-container matColumnDef="prenom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.firstname}}</td>
+      </ng-container>
+      <ng-container matColumnDef="adresse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.adresse}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="contact">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.contact}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+        <td mat-cell *matCellDef="let _admin"> {{_admin.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+        <td mat-cell *matCellDef="let _admin">
+          <button type="button" mdbBtn color="primary" class=" tz-btn-circle  text-center m-1 relative waves-light"
+                  (click)="basicModal.show()"
+                  mdbWavesEffect><i class="fa fa-eye"></i>
+          </button>
+          <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel" aria-hidden="true"
+               [config]="{backdrop: false, ignoreBackdropClick: true}">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <h2 class="tz-dialog-title"  mat-dialog-title>
+                  Information sur {{_admin.firstname}}
+                  <i class="fa fa-user-circle"></i>
+                </h2>
+                <mat-dialog-content>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Sexe : </td>
+                          <td>{{_admin.sexe}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Nom : </td>
+                          <td>{{_admin.lastname}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Prénom : </td>
+                          <td>{{_admin.firstname}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Age : </td>
+                          <td>{{_admin.age}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Adresse : </td>
+                          <td>{{_admin.adresse}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Email : </td>
+                          <td>{{_admin.email}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                    <li class="list-group-item">
+                      <table>
+                        <tr>
+                          <td>Contact : </td>
+                          <td>{{_admin.contact}}</td>
+                        </tr>
+                      </table>
+                    </li>
+                  </ul>
+                  <button type="button" mdbBtn class="d-block tz-modal-close-btn"
+                          color="secondary" (click)="basicModal.hide()" mdbWavesEffect>
+                    Fermer
+                  </button>
+                </mat-dialog-content>
+              </div>
+            </div>
+          </div>
+          <button type="button" [routerLink]="['/menu/user/edit/', _admin.user_id]"
+                  mdbBtn color="success" class=" tz-btn-circle  text-center m-1 relative waves-light"
+                  mdbWavesEffect>
+            <i class="fa fa-edit"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator class="mat-paginator" [pageSizeOptions]="[5, 10, 20, 100]"
+                   showFirstLastButtons></mat-paginator>
+  </mat-card>
+  <div class="maskSpinner" *ngIf="loading">
+    <app-radar-spinner
+            [animationDuration]="4000"
+            [size]="200"
+            [color]="'#2e6bb1'"
+    ></app-radar-spinner>
   </div>
 </section>
 

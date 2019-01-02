@@ -1,0 +1,130 @@
+
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white" *ngIf="typeEtudiant"> Ajout un nouveau utilisateur </h4>
+  <h4 class="h4-responsive text-white" *ngIf="typeProf"> Ajout un nouveau prof </h4>
+</div>
+<!-- First Step -->
+<form #form="ngForm">
+  <div class="row setup-content-2" #step1 id="step-1">
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="login" type="text" name="login" required [(ngModel)]="etudiant.username"
+             #login="ngModel">
+      <mat-error [hidden]="login.valid || login.untouched">
+        Le login est <strong>obligatoire</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-12">
+      <input matInput
+             placeholder="Entrer le mots de passe"
+             [type]="hide ? 'password' : 'text'"
+             name="password"
+             required
+             [(ngModel)]="etudiant.password"
+             #password="ngModel">
+      <mat-error [hidden]="password.valid || password.untouched">
+        Le mots de passe est <strong>obligatoire</strong>
+      </mat-error>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Nom" type="text" name="login" required [(ngModel)]="etudiant.lastname"
+             #nom="ngModel">
+      <mat-error [hidden]="nom.valid || nom.untouched">
+        Le nom est <strong>obligatoire</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Prénom" type="text" name="prenom" required [(ngModel)]="etudiant.firstname"
+             #prenom="ngModel">
+      <mat-error [hidden]="prenom.valid || prenom.untouched">
+        Le prenom est <strong>obligatoire</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-radio-group name = "etudiant" [(ngModel)]="etudiant.sexe">
+      <mat-radio-button value="Femme" #Femme name="Femme">Femme</mat-radio-button>
+      <mat-radio-button value="Homme" #Homme name="Homme">Homme</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Age" type="number" name="age" required [(ngModel)]="etudiant.age"
+             #age="ngModel">
+      <mat-error [hidden]="age.valid || age.untouched">
+        L'age est <strong>obligatoire</strong>
+      </mat-error>
+    </mat-form-field>
+    <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button"
+            (click)="step2.style.display='block';step1.style.display='none'">Next</button>
+  </div>
+
+  <!-- Second Step -->
+  <div class="row setup-content-2" #step2 id="step-2" style="display: none">
+    <div class="col-md-12">
+      <h3 class="font-weight-bold pl-0 my-4 text-center"><strong>Information sur l'établissement</strong></h3>
+      <mat-form-field class="col-md-12">
+        <input matInput placeholder="Contact" type="text" name="Contact" required [(ngModel)]="etudiant.contact"
+               #Contact="ngModel">
+        <mat-error [hidden]="Contact.valid || Contact.untouched">
+          Le contact est <strong>obligatoire</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-12">
+        <input matInput placeholder="email" type="text" name="email" [(ngModel)]="etudiant.email"
+               #email="ngModel" email>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="etudiant.role" name="role" #role="ngModel" required placeholder="Role">
+          <mat-option value="">Choisissez le role</mat-option>
+          <mat-option *ngFor="let listRole of roles" [value]="listRole.id"> {{listRole.description}}</mat-option>
+        </mat-select>
+        <mat-error [hidden]="role.valid || role.untouched">Choisir le role</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-md-12">
+        <input matInput placeholder="adresse" type="text" name="adresse" [(ngModel)]="etudiant.adresse"
+               #adresse="ngModel">
+      </mat-form-field>
+
+      <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left"
+              (click)="step1.style.display='block';step2.style.display='none'" type="button">Previous</button>
+      <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right"
+              (click)="step1.style.display='none';step2.style.display='none';step3.style.display='block'"
+              type="button">Next</button>
+    </div>
+  </div>
+
+  <!-- Third Step -->
+  <div class="row setup-content-2 " #step3 style="display: none" id="step-3">
+    <div class="col-md-12">
+      <h2 class="text-center font-weight-bold my-4 text-center">Récapitulation nouveau l'étudiant</h2>
+      <table class="w-100">
+        <tr>
+          <td>
+            <ul class="list-group">
+              <li class="list-group-item">{{etudiant.username}}</li>
+              <li class="list-group-item">{{etudiant.lastname}}</li>
+              <li class="list-group-item">{{etudiant.firstname}}</li>
+              <li class="list-group-item">{{etudiant.sexe}}</li>
+              <li class="list-group-item">{{etudiant.email}}</li>
+              <li class="list-group-item">{{etudiant.age}}</li>
+              <li class="list-group-item">{{etudiant.adresse}}</li>
+              <li class="list-group-item">{{etudiant.contact}}</li>
+              <li class="list-group-item">{{etudiant.password}}</li>
+            </ul>
+          </td>
+        </tr>
+        <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button"
+                (click)="step1.style.display='block';step2.style.display='none'">Previous</button>
+        <button class="btn btn-success btn-rounded float-right" type="submit" (click)="push(etudiant)">Submit</button>
+        <a routerLink="/menu/etudiant" class="btn btn-warning btn-rounded float-right" type="submit" (click)="form.reset()">Cancel</a>
+      </table>
+    </div>
+  </div>
+</form>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

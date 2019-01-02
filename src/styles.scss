@@ -1,16 +1,39 @@
 @import '~@angular/material/theming';
 @import "~material-design-icons/iconfont/material-icons.css";
 @include mat-core();
-
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 *{font-family: 'Montserrat', sans-serif;font-weight: 500}
-html, body{ background-color: #0c3750!important; }
-body{margin: 0;width: 100%;height: 100vh;overflow: hidden}
-
+html , body{overflow: visible}
 .full {
   width: 100%;
 }
 .full-height {
   height: 100%;
+}
+.maskSpinner {
+  position: fixed;
+  z-index: 999;
+  height: 200px;
+  width: 100px;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* Absolute Center Spinner */
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #166B37;
+    opacity: 0.4;
+  }
 }
 .padding-bottom10 {
   padding-bottom: 10px;
@@ -367,8 +390,7 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 2%;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
-.tz-btn-circle{padding: 3%; border-radius: 50%;}
-.tz-btn-circle i{padding: 20% 22%;}
+
 .cascading-admin-card {
   margin-top: 20px; }
 .cascading-admin-card .admin-up {
@@ -412,4 +434,69 @@ a.text-dark:hover, a.text-dark:focus {
 .cascading-admin-card .admin-up .fa {
   -webkit-box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.2), 0 2px 13px 0 rgba(0, 0, 0, 0.19);
   box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.2), 0 2px 13px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tz-btn-circle {
+  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+  width: 47px;
+  height: 47px;
+  position: relative;
+  z-index: 1;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  margin: 10px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+}
+
+.tz-btn-circle i {
+  font-size: 1.25rem;
+  line-height: 47px;
+}
+.md-form label {
+  position: absolute!important;
+  top: auto!important;
+}
+
+
+/*
+  Touche pas
+ */
+.modal-dialog{ overflow-y: initial !important }
+.modal-body{ max-height: 350px;overflow-y: auto; }
+.cdk-overlay-pane{max-height: 50vh!important;}
+.mat-dialog-container{padding: 5px!important;}
+.modal-content{padding: 5px!important;}
+.tz-dialog-title{text-align: center;
+  background: #1976d2 !important;color: white;padding: 1rem;}
+.tz-modal-close-btn{width: 100%;margin-left: 0px!important;}
+mat-dialog-content ul li table tr td{text-align: left!important;}
+li table tr td{text-align: left!important;}
+li table tr td span{text-align: left!important;}
+.tz-text-head {width: inherit}
+
+/*
+Responsive touche pas
+ */
+@media screen and (max-width: 1200px){
+  .tz-md{margin-top: 15px}
+}
+@media screen and (max-width: 600px){
+  .tz-md{margin: 15px}
+  .tz-text-head{width: unset!important;}
+  .tz-btn-circle{
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+  }
+  .tz-btn-circle i{line-height: 0px;font-size: 0.6rem!important;}
+  td.mat-cell:last-child, td.mat-footer-cell:last-child, th.mat-header-cell:last-child{padding-right: 0px!important;}
 }
