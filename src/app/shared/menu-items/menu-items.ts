@@ -47,6 +47,11 @@ const RESPMENU = [
       type: 'link',
       icon: 'settings'
     }, {
+        state: ['/', 'menu', 'anne'],
+        name: 'Anne scolaire',
+        type: 'link',
+        icon: 'event'
+      },{
         state: ['/', 'menu', 'list-classe'],
         name: 'Niveau',
         type: 'link',
@@ -109,6 +114,11 @@ const ETUDIANTMENU = [
         type: 'link',
         icon: 'dns'
       }, {
+        state: ['/', 'menu', 'anne'],
+        name: 'Anne scolaire',
+        type: 'link',
+        icon: 'event'
+      },{
         state: ['/', 'menu', 'etudiant'],
         name: 'Mes collegues',
         type: 'link',
@@ -154,6 +164,11 @@ const SECMENU = [
         name: 'Dashboard',
         type: 'link',
         icon: 'dns'
+      }, {
+        state: ['/', 'menu', 'anne'],
+        name: 'Anne scolaire',
+        type: 'link',
+        icon: 'event'
       }, {
         state: ['/', 'menu', 'etudiant'],
         name: 'Etudiant',
@@ -231,6 +246,11 @@ const PROFSMENU = [
         name: 'Dashboard',
         type: 'link',
         icon: 'dns'
+      }, {
+        state: ['/', 'menu', 'anne'],
+        name: 'Anne scolaire',
+        type: 'link',
+        icon: 'event'
       }, {
         state: ['/', 'menu', 'etudiant'],
         name: 'Etudiant',

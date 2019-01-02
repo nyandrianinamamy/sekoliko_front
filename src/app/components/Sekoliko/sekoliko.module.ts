@@ -56,6 +56,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TzClasseEnfantComponent } from './tz-classe-enfant/tz-classe-enfant.component';
 import { TzAddEnfantComponent } from './tz-classe-enfant/tz-add-enfant/tz-add-enfant.component';
 import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
+import { TzAnneScolaireComponent } from './tz-anne-scolaire/tz-anne-scolaire.component';
 
 @NgModule({
   imports: [
@@ -127,7 +128,8 @@ import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
     TzEdtComponent,
     TzClasseEnfantComponent,
     TzAddEnfantComponent,
-    AjoutNoteComponent
+    AjoutNoteComponent,
+    TzAnneScolaireComponent
   ],
   entryComponents: [
     EtudiantUpdateComponent,

@@ -4,6 +4,8 @@ const _api = environment.base_url_api + '/';
 
 export const urlList = {
   path_login: _api + 'users/login',
+  path_anne_scolaire: _api + 'addas',
+  path_anne_list: _api + 'listans',
   path_list_class_parent: _api + 'classe/find',
   path_list_class_enfant: _api + 'classe-enfant/find',
   path_edit_class_enfant: _api + 'classe-enfant/edit',

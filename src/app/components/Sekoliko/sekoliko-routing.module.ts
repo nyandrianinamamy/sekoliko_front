@@ -25,6 +25,7 @@ import { TzEdtComponent } from './tz-edt/tz-edt.component';
 import {TzClasseEnfantComponent} from "./tz-classe-enfant/tz-classe-enfant.component";
 import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfant.component";
 import {AjoutNoteComponent} from './tz_note/ajout-note/ajout-note.component';
+import {TzAnneScolaireComponent} from "./tz-anne-scolaire/tz-anne-scolaire.component";
 
 const routes: Routes = [
     {
@@ -35,6 +36,7 @@ const routes: Routes = [
             {path: 'user', loadChildren: 'src/app/components/Sekoliko/user-manage/user-manage.module#UserManageModule'},
             {path: 'not-found', component: NotFoundComponent},
             {path: 'dashboard', component: TzDashboardComponent},
+            {path: 'anne', component: TzAnneScolaireComponent},
             {path: 'etudiant', component: TzEtudiantsComponent},
             {path: 'salle', component: TzSalleComponent},
             {path:  'add-salle', component: TzAjoutSalleComponent},

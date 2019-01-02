@@ -23,8 +23,9 @@ export class TzClasseEnfantComponent implements OnInit {
      */
     loading: boolean;
     description: string;
-    parent: number;
+    parent: any;
     listNiveau: Classe;
+    classe: ClasseEnfant;
     displayedColumns: string[] = ['numero', 'nom', 'action'];
     dataSource: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,11 +37,12 @@ export class TzClasseEnfantComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.classe = new ClasseEnfant();
         this.getClasseEnfant().subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                console.log(response.data);
                 this.classeEnfant = response.data;
                 this.dataSource = new MatTableDataSource<any>(this.classeEnfant);
+                this.dataSource.paginator = this.paginator;
             }
         });
         this.getClasseParent().subscribe(response => {
@@ -63,10 +65,8 @@ export class TzClasseEnfantComponent implements OnInit {
      */
     editClasse(id: number) {
         this.loading = true;
-        this.dataService.post(urlList.path_edit_class_enfant + '/' + id, {
-            'description': this.description,
-            'parent': this.parent,
-        }).subscribe(response => {
+        this.dataService.post(urlList.path_edit_class_enfant + '/' + id, {parent:this.parent.id,description:this.description}).subscribe(response => {
+            console.log({parent:this.parent,description:this.description});
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
                 this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
                     this.router.navigate(['/menu/list-classe-eft']));

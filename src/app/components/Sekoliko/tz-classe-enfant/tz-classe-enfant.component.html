@@ -97,12 +97,6 @@
                                         <div class="md-form mb-5">
                                             <input type="text" name="id" id="orangeForm-name"
                                                    value="{{_classe.id}}" class="form-control w-100 d-none validate">
-                                            <div class="form-group">
-                                                <label data-error="wrong" style="margin: 5px" data-success="right" for="orangeForm-name">Classe nom</label>
-                                                <input type="text"  name="description" style="margin: 5px"
-                                                       value="{{_classe.description}}" [(ngModel)]="_classe.description"
-                                                       class="form-control validate " mdbInputDirective>
-                                            </div>
                                             <mat-form-field class="col-md-12 w-100">
                                                 <mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">
                                                     <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
@@ -110,6 +104,17 @@
                                                     </mat-option>
                                                 </mat-select>
                                             </mat-form-field>
+                                            <mat-form-field class="col-md-12">
+                                                <input matInput placeholder="Classe Nom" type="text"  name="description" required
+                                                       value="{{_classe.description}}" [(ngModel)]="_classe.description"
+                                                       #descriptions="ngModel">
+                                            </mat-form-field>
+                                            <!--<div class="form-group">-->
+                                                <!--<label data-error="wrong" style="margin: 5px" data-success="right" for="orangeForm-name">Classe nom</label>-->
+                                                <!--<input type="text"  name="description" style="margin: 5px"-->
+                                                       <!--value="{{_classe.description}}" [(ngModel)]="_classe.description"-->
+                                                       <!--class="form-control validate " mdbInputDirective>-->
+                                            <!--</div>-->
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" mdbBtn color="secondary" class="waves-light w-50"
@@ -117,11 +122,9 @@
                                             </button>
                                             <button type="submit" value="submit" mdbBtn color="primary"
                                                     (click)="editModal.hide();
-                                                    editClasse(
-                                                        id =_classe.id,
-                                                        description =_classe.description,
-                                                        parent = _classe.parent
-                                                    )"
+                                                    editClasse(id =_classe.id,
+                                                    parent = _classe.parent,
+                                                    description = _classe.description )"
                                                     class="relative waves-light  w-50" mdbWavesEffect>
                                                 Save changes
                                             </button>
