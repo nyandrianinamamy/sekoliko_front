@@ -16,6 +16,7 @@ import * as jsPDF from '../../../../../assets/jq/jspdf.min.js';
 import html2canvas from 'html2canvas';
 import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {MobileService} from "../../../../shared/service/mobile.service";
 
 @Component({
   selector: 'app-list-etudiants',
@@ -25,7 +26,7 @@ import {ConstantRole} from "../../../../Utils/ConstantRole";
 export class ListEtudiantsComponent implements OnInit {
   etudiant: any[];
   pdf:boolean;
-  mobile = false;
+  mobile : boolean;
   mobileClass = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -46,31 +47,53 @@ export class ListEtudiantsComponent implements OnInit {
               private dialog: MatDialog,
               private excelService: ExcelService,
               private router: Router,
-              private userConnected:UserConnectedService) {}
+              private userConnected:UserConnectedService,
+  ) {}
 
   ngOnInit() {
-    if (window.screen.width >= 600) {
-      this.mobileClass = "text-center";
-    }else {
-      this.mobileClass = "d-none";
-    }
-    this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
-    this.loading = true;
-    this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.loading = false;
-        this.etudiant = response.data;
-        this.dataSource = new MatTableDataSource<any>(this.etudiant);
-      }
-    });
 
     let role = this.getUserConnected();
     if(role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant_user = true;
-      this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe'];
+      if (window.screen.width >= 600) {
+        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe'];
+      }else {
+        this.mobile = true;
+        this.displayedColumns = [ 'nom', 'prenom'];
+      }
+      this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+      this.loading = true;
+      this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.etudiant = response.data;
+          this.dataSource = new MatTableDataSource<any>(this.etudiant);
+          this.dataSource.paginator = this.paginator;
+        }
+      });
+    }else{
+      if (window.screen.width >= 600) {
+        this.mobileClass = "";
+      }else {
+        this.mobile = true;
+        this.displayedColumns = [ 'nom', 'prenom', 'action'];
+      }
+      this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+      this.loading = true;
+      this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.etudiant = response.data;
+          this.dataSource = new MatTableDataSource<any>(this.etudiant);
+          this.dataSource.paginator = this.paginator;
+        }
+      });
     }
   }
 
+  /**
+   * Note etudiant
+   */
   voirNote(){
     this.getUserInsc().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
@@ -82,13 +105,31 @@ export class ListEtudiantsComponent implements OnInit {
     });
   }
 
+  /**
+   * Ajout note
+   * @param idInscription
+   * @param idClasse
+   * @param inscription
+   */
   addNote(idInscription: number, idClasse: number, inscription: string) {
     this.router.navigate(['/menu/note/' + idInscription + '/' + idClasse], { queryParams: {etudiant: inscription}});
   }
 
+  /**
+   * Fetch etudiant liste
+   * @param classe
+   */
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }
+
+  /**
+   * retour
+   */
+  retour(){
+    this.router.navigate(['/menu/etudiant'])
+  }
+
 
   /**
    * Fetch inscription liste

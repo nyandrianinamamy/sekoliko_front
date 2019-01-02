@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChildren, QueryList, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
@@ -7,8 +7,9 @@ import {Router} from '@angular/router';
 import {UserConnectedService} from "../../../shared/service/user-connected.service";
 import {ConstantRole} from "../../../Utils/ConstantRole";
 import {User} from "../../../shared/model/User";
-import {MatTableDataSource} from "@angular/material";
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 import {Inscription} from "../../../shared/model/Inscription";
+import {Classe} from "../../../shared/model/Classe";
 
 @Component({
   selector: 'app-tz-etudiants',
@@ -26,6 +27,14 @@ export class TzEtudiantsComponent implements OnInit {
   etudiant:User;
   inscription: any;
   user:any;
+  class:Classe[];
+
+  /**
+   * Table
+   */
+  displayedColumns: string[] = ['ref', 'description', 'action'];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private dataService: DataService,
               private router: Router,
@@ -56,12 +65,16 @@ export class TzEtudiantsComponent implements OnInit {
     }else{
       this.getNiveau().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          response.data.forEach(element => {
-            this.niveau.push({
-              id: element.id,
-              nom: element.description
-            });
-          });
+          this.class = response.data ;
+          console.log(this.class);
+          this.dataSource= new MatTableDataSource<any>(this.class);
+          this.dataSource.paginator = this.paginator;
+          // response.data.forEach(element => {
+          //   this.niveau.push({
+          //     id: element.id,
+          //     nom: element.description
+          //   });
+          // });
         }
       });
     }
@@ -97,5 +110,18 @@ export class TzEtudiantsComponent implements OnInit {
    */
   checkEnfant(id: number) {
     this.router.navigate(['/menu/classe/' + id]);
+  }
+
+  /**
+   * Table filter
+   */
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource);
+    // @ts-ignore
+    if (this.dataSource.filteredData === 0) {
+      // @ts-ignore
+      console.log('null');
+    }
   }
 }
