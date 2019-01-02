@@ -37,6 +37,19 @@
                    #adresse="ngModel">
           </mat-form-field>
           <mat-form-field class="col-md-4">
+            <input matInput
+                   placeholder="Entrer le mots de passe"
+                   [type]="hide ? 'password' : 'text'"
+                   name="password"
+                   required
+                   [(ngModel)]="etudiant.password"
+                   #password="ngModel">
+            <mat-error [hidden]="password.valid || password.untouched">
+              Le mots de passe est <strong>obligatoire</strong>
+            </mat-error>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="col-md-4">
             <input matInput placeholder="Age" type="number" name="age" required [(ngModel)]="etudiant.age"
                    #age="ngModel">
             <mat-error [hidden]="age.valid || age.untouched">

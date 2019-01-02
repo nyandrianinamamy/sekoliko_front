@@ -40,6 +40,9 @@ export class EditUserComponent implements OnInit {
     let role = this.getUserc();
     if(role.role_type.id == ConstantRole.ETUDIANT){
       this.haveType = true;
+      if(this.userId != role.user_id){
+        this.router.navigate(['/menu/not-found'])
+      }
     }else {
       this.haveType = false;
     }

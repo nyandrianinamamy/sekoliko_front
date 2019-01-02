@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalStorageService} from "../../../shared/service/local-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tz-profile',
@@ -10,7 +11,8 @@ export class TzProfileComponent implements OnInit {
 
   userProfile : any[];
 
-  constructor(private Localstorage : LocalStorageService) { }
+  constructor(private Localstorage : LocalStorageService,
+              private router:Router) { }
 
   ngOnInit() {
     this.userProfile = this.getProfileUser();
@@ -23,4 +25,8 @@ export class TzProfileComponent implements OnInit {
      return this.Localstorage.getLocalstorage('user_info');
   }
 
+  editMe(){
+    // @ts-ignore
+    this.router.navigate(['/menu/user/edit/' + this.userProfile.user_id])
+  }
 }

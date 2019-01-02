@@ -14,7 +14,7 @@
   </mat-form-field>
   <mat-form-field class="col-md-12">
     <mat-select placeholder="Classe" name="class" required [(ngModel)]="_matiere.class" #class="ngModel">
-      <mat-option *ngFor="let classes of classe" [value]="classes.id">{{classes.parent.description}} :
+      <mat-option *ngFor="let classes of classe" [value]="classes.id">
         {{classes.description}}
       </mat-option>
     </mat-select>
