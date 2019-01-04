@@ -54,7 +54,6 @@ export class TzClasseEnfantComponent implements OnInit {
         })
     }
 
-
     getClasseEnfant() {
         return this.dataService.post(urlList.path_list_class_enfant);
     }
@@ -65,13 +64,14 @@ export class TzClasseEnfantComponent implements OnInit {
      */
     editClasse(id: number) {
         this.loading = true;
-        this.dataService.post(urlList.path_edit_class_enfant + '/' + id, {parent:this.parent.id,description:this.description}).subscribe(response => {
-            console.log({parent:this.parent,description:this.description});
-            if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
-                    this.router.navigate(['/menu/list-classe-eft']));
-                this.loading = false;
-            }
+        this.dataService.post(urlList.path_edit_class_enfant + '/' + id,
+            {parent:this.parent.id,description:this.description}).subscribe(
+                response => {
+                            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+                                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+                                    this.router.navigate(['/menu/list-classe-eft']));
+                                this.loading = false;
+                            }
         });
     }
 
