@@ -27,6 +27,7 @@
       <button class="btn btn-success" *ngIf="!etudiant_user" (click)="exportAsXLSX()">Export to XLS</button>
       <button class="btn btn-secondary" *ngIf="!etudiant_user" (click)="exportPdf()">Export to pdf</button>
       <button class="btn btn-secondary" *ngIf="etudiant_user" (click)="voirNote()">Voir mes notes</button>
+      <button class="btn btn-primary" *ngIf="etudiant_user" (click)="voirEdt()">Emploie du temps</button>
     </div>
   </div>
       <table mat-table [dataSource]="dataSource" matSort class="full" id="etudiantListe">

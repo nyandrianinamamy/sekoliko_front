@@ -31,6 +31,8 @@ import {User} from "../../../shared/model/User";
 import {ClasseEnfant} from "../../../shared/model/ClasseEnfant";
 import {Edt} from "../../../shared/model/EdtTs";
 import {ActivatedRoute, Route, Router} from "@angular/router";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
 
 const colors: any = {
   red: {
@@ -59,7 +61,8 @@ export class TzEdtComponent implements OnInit {
   constructor(private modal: NgbModal,
               private dataService: DataService,
               private router:Router,
-              private currentRoute: ActivatedRoute,) {}
+              private currentRoute: ActivatedRoute,
+              private userConnected:UserConnectedService) {}
 
   /**
    * Fetch matiere
@@ -69,6 +72,7 @@ export class TzEdtComponent implements OnInit {
   classe : any;
   emploie:Edt;
   add:boolean;
+  etudiant:boolean;
   edit:boolean;
   list:boolean;
   loading:boolean;
@@ -131,7 +135,6 @@ export class TzEdtComponent implements OnInit {
 
 
     this.getEdtListe().subscribe(response=>{
-      this.loading = true;
       if (response.code === ConstantHTTP.CODE_SUCCESS){
           response.data.forEach(edt => {
             console.log(edt);
@@ -141,7 +144,6 @@ export class TzEdtComponent implements OnInit {
               end:  new Date( edt.end),
               title:edt.title,
               color: colors.red,
-              actions: this.actions,
               allDay: true,
               resizable: {
                 beforeStart: true,
@@ -157,8 +159,25 @@ export class TzEdtComponent implements OnInit {
     })
   }
 
+  /**
+   * Fetch inscription liste
+   */
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
+  }
 
   getEdtListe(){
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.classes = response.data[0].id_classe.id;
+          return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
+        }
+      });
+    }
     this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
     return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
   }
@@ -256,8 +275,9 @@ export class TzEdtComponent implements OnInit {
             titre:string,
             debut:Date,
             fin:Date){
+    this.loading = true;
     this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
-    this.dataService.post(urlList.path_edt_add + id,{title:titre,start:debut,end:fin,classe:this.classes}).subscribe(response=>{
+    this.dataService.post(urlList.path_edt_edit + id,{title:titre,start:debut,end:fin,classe:this.classes}).subscribe(response=>{
       if (response.code === ConstantHTTP.CODE_SUCCESS){
         this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
             this.router.navigate(['/menu/edt/'+this.classes]));
@@ -265,6 +285,10 @@ export class TzEdtComponent implements OnInit {
         this.add = false;
       }
     })
+  }
+
+  getUserConnected(){
+    return this.userConnected.userConnected();
   }
 
 }

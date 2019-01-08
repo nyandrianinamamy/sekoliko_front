@@ -133,8 +133,8 @@
 <br><br><br>
 
 <h3>
-  Edit events
-  <button
+  Emploie du temps
+  <button  *ngIf="!etudiant"
           class="btn btn-primary pull-right"
           (click)="addEvent()">
     Ajouter
@@ -147,15 +147,15 @@
       <th>Matière</th>
       <th>Début</th>
       <th>Fin</th>
-      <th>Action</th>
+      <th *ngIf="!etudiant">Action</th>
     </tr>
     </thead>
     <tbody>
       <tr *ngFor="let event of events">
         <td>{{event.title}}</td>
-        <td>{{event.start}}</td>
-        <td>{{event.end}}</td>
-        <td>
+        <td>{{event.start | date:'medium' }}</td>
+        <td>{{event.end   | date:'medium' }}</td>
+        <td *ngIf="!etudiant">
           <button
                   class="btn btn-danger"
                   (click)="deleteEdt(event.id)">

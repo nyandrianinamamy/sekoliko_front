@@ -106,6 +106,18 @@ export class ListEtudiantsComponent implements OnInit {
   }
 
   /**
+   * Emploie du temps
+   */
+  voirEdt(){
+    this.getUserInsc().subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.idClasse = response.data[0].id_classe.id;
+        this.router.navigate(['/menu/edt/' + this.idClasse]);
+      }
+    });
+  }
+
+  /**
    * Ajout note
    * @param idInscription
    * @param idClasse
