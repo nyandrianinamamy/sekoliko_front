@@ -56,7 +56,7 @@ const routes: Routes = [
             {path: 'matiere-list', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
-            {path: 'edt', component: TzEdtComponent},
+            {path: 'edt/:id', component: TzEdtComponent},
             {path: 'list-classe-eft', component: TzClasseEnfantComponent},
             {path: 'add-eft', component: TzAddEnfantComponent},
             {path: 'profile', component: TzProfileComponent},

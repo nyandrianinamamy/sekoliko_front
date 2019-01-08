@@ -83,12 +83,6 @@ const RESPMENU = [
         name: 'Gestion utilisateurs',
         type: 'link',
         icon: 'account_circle'
-      },
-      {
-        state: ['/', 'menu', 'edt'],
-        name: 'Emploie du temps',
-        type: 'link',
-        icon: 'date_range'
       }
       ],
   },
@@ -133,12 +127,6 @@ const ETUDIANTMENU = [
         name: 'Matieres',
         type: 'link',
         icon: 'book'
-      },
-      {
-        state: ['/', 'menu', 'edt'],
-        name: 'Emploie du temps',
-        type: 'link',
-        icon: 'date_range'
       }
     ],
   },
@@ -216,12 +204,6 @@ const SECMENU = [
         name: 'Gestion utilisateurs',
         type: 'link',
         icon: 'account_circle'
-      },
-      {
-        state: ['/', 'menu', 'edt'],
-        name: 'Emploie du temps',
-        type: 'link',
-        icon: 'date_range'
       }
     ],
   },
@@ -277,12 +259,6 @@ const PROFSMENU = [
         name: 'Classe',
         type: 'link',
         icon: 'class'
-      },
-      {
-        state: ['/', 'menu', 'edt'],
-        name: 'Emploie du temps',
-        type: 'link',
-        icon: 'date_range'
       }
     ],
   },

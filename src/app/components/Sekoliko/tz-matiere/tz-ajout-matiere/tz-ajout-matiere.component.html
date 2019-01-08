@@ -1,5 +1,6 @@
 <div class="view gradient-card-header blue darken-2">
-  <h4 class="h4-responsive text-white"> Ajout nouveau matiere </h4>
+  <h4 class="h4-responsive text-white" *ngIf="!update"> Ajout nouveau matiere </h4>
+  <h4 class="h4-responsive text-white" *ngIf="update"> Modifier matiere </h4>
 </div>
 <form #salleform="ngForm" class="col-md-12 mt-5">
   <mat-form-field class="col-md-12">

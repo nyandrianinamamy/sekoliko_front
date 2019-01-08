@@ -29,6 +29,8 @@ import {DataService} from "../../../shared/service/data.service";
 import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {User} from "../../../shared/model/User";
 import {ClasseEnfant} from "../../../shared/model/ClasseEnfant";
+import {Edt} from "../../../shared/model/EdtTs";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 
 const colors: any = {
   red: {
@@ -55,14 +57,40 @@ const colors: any = {
 
 export class TzEdtComponent implements OnInit {
   constructor(private modal: NgbModal,
-              private dataService: DataService) {}
+              private dataService: DataService,
+              private router:Router,
+              private currentRoute: ActivatedRoute,) {}
 
   /**
    * Fetch matiere
    */
   listMatiere: MatiereParam[];
   profs: User;
-  classe : ClasseEnfant;
+  classe : any;
+  emploie:Edt;
+  add:boolean;
+  edit:boolean;
+  list:boolean;
+  loading:boolean;
+  classes:number;
+  emploidutemps:any;
+  refresh: Subject<any> = new Subject();
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fa fa-edit"></i>',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Edited', event);
+      }
+    },
+    {
+      label: '<i class="fa fa-fw fa-times"></i>',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.events = this.events.filter(iEvent => iEvent !== event);
+        this.handleEvent('Deleted', event);
+      }
+    }
+  ];
+  events: CalendarEvent[] = [];
 
   /**
    * Fetch matiere liste
@@ -82,7 +110,8 @@ export class TzEdtComponent implements OnInit {
    * Fetch classe listes
    */
   getClasse(){
-    return this.dataService.post(urlList.path_list_class_enfant)
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.get(urlList.path_list_class_enfant_edt + 10)
   }
 
   ngOnInit(): void {
@@ -91,19 +120,74 @@ export class TzEdtComponent implements OnInit {
         this.listMatiere = response.data;
       }
     });
+
+    this.emploie = new Edt();
+
     this.getProfs().subscribe(response=>{
       if(response.code === ConstantHTTP.CODE_SUCCESS){
         this.profs = response.data.list;
       }
+    });
+
+
+    this.getEdtListe().subscribe(response=>{
+      this.loading = true;
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+          response.data.forEach(edt => {
+            console.log(edt);
+            this.events.push({
+              id: edt.id,
+              start:new Date( edt.start),
+              end:  new Date( edt.end),
+              title:edt.title,
+              color: colors.red,
+              actions: this.actions,
+              allDay: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              draggable: true
+            });
+            this.refresh.next();
+            this.list= true
+          });
+      }
+      this.loading = false;
     })
-    this.getClasse().subscribe(response=>{
-      if(response.code === ConstantHTTP.CODE_SUCCESS){
-        this.classe = response.data;
+  }
+
+
+  getEdtListe(){
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
+  }
+
+  addEdt(emploie:Edt){
+    this.loading = true;
+    this.dataService.post(urlList.path_edt_add , {classe:this.classes,title:emploie.title,start:emploie.start,end:emploie.end}).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt/'+this.classes]));
+        this.loading = false;
+        this.add = false;
       }
     })
   }
 
-  @ViewChild('modalContent')
+  deleteEdt(id:number){
+    this.loading = true;
+    this.dataService.post(urlList.path_edt_del + id).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt']));
+        this.loading = false;
+      }
+    })
+  }
+
+
+  @ViewChild('mat-card')
   modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -112,69 +196,16 @@ export class TzEdtComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  modalData: {
+  dateData: {
     action: string;
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-edit"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }
-  ];
 
-  refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Mathématiques',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'Physique',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'Anglais',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'Bibliothèque',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+
+
+
 
   activeDayIsOpen: boolean = true;
 
@@ -205,23 +236,35 @@ export class TzEdtComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.dateData = { event, action };
+    console.log(this.dateData.event);
+    this.edit = true;
   }
 
   addEvent(): void {
-    this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
+    this.add = true;
+    this.getClasse().subscribe(response=>{
+      if(response.code === ConstantHTTP.CODE_SUCCESS){
+        this.classe = response.data;
+        console.log(this.classe);
       }
     });
-    this.refresh.next();
+
+  }
+
+  editEvent(id:number,
+            titre:string,
+            debut:Date,
+            fin:Date){
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    this.dataService.post(urlList.path_edt_add + id,{title:titre,start:debut,end:fin,classe:this.classes}).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt/'+this.classes]));
+        this.loading = false;
+        this.add = false;
+      }
+    })
   }
 
 }

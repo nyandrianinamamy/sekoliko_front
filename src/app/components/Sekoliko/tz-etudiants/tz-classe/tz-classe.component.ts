@@ -61,6 +61,14 @@ export class TzClasseComponent implements OnInit {
     }
 
     /**
+     * Fetch edt liste
+     * @param idClasse
+     */
+    checkListEdt(idClasse: number) {
+        this.router.navigate(['/menu/edt/' + idClasse]);
+    }
+
+    /**
      * Table filter
      */
     applyFilter(filterValue: string) {

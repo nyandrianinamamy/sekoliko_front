@@ -23,7 +23,7 @@ export class TzAjoutMatiereComponent implements OnInit {
   listProff: User[];
   loading: boolean;
   class: '';
-  update: boolean;
+  update:boolean;
 
   constructor(private dataService: DataService, private router: Router,
               private currentRoute: ActivatedRoute) {
