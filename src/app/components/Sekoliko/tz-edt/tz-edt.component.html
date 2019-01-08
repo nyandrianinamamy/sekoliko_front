@@ -230,7 +230,7 @@
       </tr>
     </tbody>
   </table>
-    <tr *ngIf="add">
+  <tr *ngIf="add">
       <td>
         <mat-form-field class="col-md-12">
           <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="emploie.title" required #title="ngModel">
@@ -272,6 +272,7 @@
         </button>
       </td>
     </tr>
+
 </div>
 <div class="maskSpinner" *ngIf="loading">
   <app-radar-spinner

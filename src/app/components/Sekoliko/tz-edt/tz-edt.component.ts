@@ -68,7 +68,6 @@ export class TzEdtComponent implements OnInit {
    * Fetch matiere
    */
   listMatiere: MatiereParam[];
-  profs: User;
   classe : any;
   emploie:Edt;
   add:boolean;
@@ -104,13 +103,6 @@ export class TzEdtComponent implements OnInit {
   }
 
   /**
-   * Fetch profs listes
-   */
-  getProfs() {
-    return this.dataService.post(urlList.path_find_user,{role:1})
-  }
-
-  /**
    * Fetch classe listes
    */
   getClasse(){
@@ -119,6 +111,9 @@ export class TzEdtComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /**
+     * Get Matiere liste
+     */
     this.getMatiere().subscribe(response=>{
       if(response.code === ConstantHTTP.CODE_SUCCESS){
         this.listMatiere = response.data;
@@ -127,13 +122,9 @@ export class TzEdtComponent implements OnInit {
 
     this.emploie = new Edt();
 
-    this.getProfs().subscribe(response=>{
-      if(response.code === ConstantHTTP.CODE_SUCCESS){
-        this.profs = response.data.list;
-      }
-    });
-
-
+    /**
+     * get liste oninit
+     */
     this.getEdtListe().subscribe(response=>{
       if (response.code === ConstantHTTP.CODE_SUCCESS){
           response.data.forEach(edt => {
@@ -167,6 +158,9 @@ export class TzEdtComponent implements OnInit {
     return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
   }
 
+  /**
+   * Get liste emploie du temps
+   */
   getEdtListe(){
     let role = this.getUserConnected();
     if (role.role_type.id === ConstantRole.ETUDIANT){
@@ -182,6 +176,10 @@ export class TzEdtComponent implements OnInit {
     return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
   }
 
+  /**
+   * Ajout emploie du temps
+   * @param emploie
+   */
   addEdt(emploie:Edt){
     this.loading = true;
     this.dataService.post(urlList.path_edt_add , {classe:this.classes,title:emploie.title,start:emploie.start,end:emploie.end}).subscribe(response=>{
@@ -194,12 +192,16 @@ export class TzEdtComponent implements OnInit {
     })
   }
 
+  /**
+   * supprimer un emploie du temps
+   * @param id
+   */
   deleteEdt(id:number){
     this.loading = true;
     this.dataService.post(urlList.path_edt_del + id).subscribe(response=>{
       if (response.code === ConstantHTTP.CODE_SUCCESS){
         this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
-            this.router.navigate(['/menu/edt']));
+            this.router.navigate(['/menu/edt/'+this.classes]));
         this.loading = false;
       }
     })
@@ -219,12 +221,6 @@ export class TzEdtComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-
-
-
-
-
-
 
   activeDayIsOpen: boolean = true;
 
@@ -254,23 +250,37 @@ export class TzEdtComponent implements OnInit {
     this.refresh.next();
   }
 
+  /**
+   * Handle click event
+   * @param action
+   * @param event
+   */
   handleEvent(action: string, event: CalendarEvent): void {
     this.dateData = { event, action };
     console.log(this.dateData.event);
     this.edit = true;
   }
 
+  /**
+   * Set event true
+   */
   addEvent(): void {
     this.add = true;
     this.getClasse().subscribe(response=>{
       if(response.code === ConstantHTTP.CODE_SUCCESS){
         this.classe = response.data;
-        console.log(this.classe);
       }
     });
 
   }
 
+  /**
+   * Modifier un emploie du temps
+   * @param id
+   * @param titre
+   * @param debut
+   * @param fin
+   */
   editEvent(id:number,
             titre:string,
             debut:Date,
@@ -287,6 +297,9 @@ export class TzEdtComponent implements OnInit {
     })
   }
 
+  /**
+   * Get user connected
+   */
   getUserConnected(){
     return this.userConnected.userConnected();
   }
