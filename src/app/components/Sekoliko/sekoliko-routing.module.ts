@@ -26,6 +26,7 @@ import {TzClasseEnfantComponent} from "./tz-classe-enfant/tz-classe-enfant.compo
 import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfant.component";
 import {AjoutNoteComponent} from './tz_note/ajout-note/ajout-note.component';
 import {TzAnneScolaireComponent} from "./tz-anne-scolaire/tz-anne-scolaire.component";
+import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
 
 const routes: Routes = [
     {
@@ -43,6 +44,7 @@ const routes: Routes = [
             {path: 'list-etudiant/:id', component: ListEtudiantsComponent},
             {path: 'add-etudiant', component: TzAjoutEtudiantComponent},
             {path: 'payement', component: TzPayementsComponent},
+            {path: 'add-payement', component: TzPayementsAjoutComponent},
             {path: 'administratif', component: TzAdministrationComponent},
             {path: 'fonction/:id', component: TzFonctionProfComponent},
             {path: 'ajout-utilisateur/:type', component: TzUserComponent},
@@ -53,7 +55,7 @@ const routes: Routes = [
             {path: 'add-prof', component: TzAjoutProfsComponent},
             {path: 'list-classe', component: TzClasseListComponent},
             {path: 'add-classe', component: TzAjoutClasseComponent},
-            {path: 'matiere-list', component: TzMatiereComponent},
+            {path: 'matiere-list/:id', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
             {path: 'edt/:id', component: TzEdtComponent},

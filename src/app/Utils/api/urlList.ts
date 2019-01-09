@@ -40,5 +40,6 @@ export const urlList = {
   path_add_note: _api + 'addnote',
   path_edit_note: _api + 'editnote',
   path_get_note: _api + 'notes/find/',
-  path_get_note_etudiant: _api + 'notes-etudiant/find'
+  path_get_note_etudiant: _api + 'notes-etudiant/find',
+  path_ets: _api + 'etablissement/find'
 };

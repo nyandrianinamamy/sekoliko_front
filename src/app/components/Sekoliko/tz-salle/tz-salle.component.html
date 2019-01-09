@@ -47,12 +47,12 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
-                  <input  autocomplete="off"  matInput [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12" name="dateDebut"
+                  <input  autocomplete="off"  placeholder="Début réservation"   matInput [owlDateTimeTrigger]="dt12" [owlDateTime]="dt12" name="dateDebut"
                          [(ngModel)]="reservation.dateDebut" required  #datedebut = "ngModel">
                   <owl-date-time #dt12></owl-date-time>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
-                  <input  autocomplete="off" readonly="readonly"   matInput [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13" name="dateFin"
+                  <input  autocomplete="off" readonly="readonly"  placeholder="Fin réservation" matInput [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13" name="dateFin"
                          [(ngModel)]="reservation.dateFin" required #dateFin = "ngModel">
                   <owl-date-time #dt13></owl-date-time>
                 </mat-form-field>

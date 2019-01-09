@@ -3,38 +3,77 @@
   <h4 class="h4-responsive text-white"> Ajout nouveau payement </h4>
 </div>
 <!-- Default form login -->
-<form class="text-center border border-light p-5">
-  <p class="h4 mb-4">Sign in</p>
-  <!--<input [matKeyboard]="'Azərbaycanca'">-->
-
-  <div class="d-flex justify-content-around">
-    <div>
-      <!--<mdb-checkbox [default]="true">Remember me</mdb-checkbox>-->
-    </div>
-    <div>
-      <a href="">Forgot password?</a>
-    </div>
-  </div>
-  <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
-
-  <p>Not a member?
-    <a href="">Register</a>
-  </p>
-  <p>or sign in with:</p>
-  <a type="button" class="light-blue-text mx-2">
-    <!-- <i class="fa fa-facebook"></i> -->
-    <mdb-icon icon="facebook"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <!-- <i class="fa fa-twitter"></i> -->
-    <mdb-icon icon="twitter"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <!-- <i class="fa fa-linkedin"></i> -->
-    <mdb-icon icon="linkedin"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <!-- <i class="fa fa-github"></i> -->
-    <mdb-icon icon="github"></mdb-icon>
-  </a>
-</form>
+<section class="mt-5">
+  <mat-card  *ngIf="!confirmation">
+      <mat-form-field class="col-md-12">
+        <mat-select placeholder="Type de payement" [(ngModel)]="payement_type" (selectionChange)="payementTypes($event)" name="food">
+          <mat-option *ngFor="let paye of payements" [value]="paye.value">
+            {{paye.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="getProf" >
+          <mat-form-field  class="col-md-12">
+              <mat-select  placeholder="Selectionner le profs" [(ngModel)]="profs" name="profs"  (selectionChange)="getListeMoi($event)" >
+                  <mat-option *ngFor="let prof of admin" [value]="prof.user_id">
+                      {{prof.username}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field  class="col-md-12" *ngIf="listMois">
+              <mat-select  placeholder="Selectionner le moi" [(ngModel)]="moi" name="profs">
+                  <mat-option *ngFor="let moi of mois" [value]="moi.id">
+                      {{moi.name}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div *ngIf="getEtd">
+          <mat-form-field class="col-md-12">
+              <mat-select placeholder="Niveau de l'étudiant" [(ngModel)]="niveau_d"  (selectionChange)="getClasseEnfant($event)" name="food">
+                  <mat-option *ngFor="let niveau of _classe" [value]="niveau.id">
+                      {{niveau.description}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" *ngIf="classe_enfant">
+              <mat-select placeholder="Selectionner une classe" [(ngModel)]="classe_d"  (selectionChange)="getListeEtudiants($event)" name="food">
+                  <mat-option *ngFor="let classes of classe" [value]="classes.id">
+                      {{classes.description}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-md-12" *ngIf="liste_etudiant">
+              <mat-select placeholder="Selectionner l'étudiant" [(ngModel)]="edt_liste" name="food" (selectionChange)="getListeMoi($event)" >
+                  <mat-option *ngFor="let etd of etudiantes" [value]="etd.user_id.user_id">
+                      {{etd.user_id.lastname}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field  class="col-md-12" *ngIf="listMois">
+              <mat-select  placeholder="Selectionner le moi" [(ngModel)]="moi" name="profs">
+                  <mat-option *ngFor="let moi of mois" [value]="moi.id">
+                      {{moi.name}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+    <button mdbBtn color="info" block="true" (click)="payer()" class="my-4" type="submit">Payer</button>
+  </mat-card>
+    <mat-card *ngIf="confirmation">
+        <h3 class="text-center">Confirmation de payement</h3>
+        <mat-card-content>
+            <ul *ngIf="getProf" >
+                <li>{{profs}}</li>
+                <li>{{moi}}</li>
+            </ul>
+            <ul *ngIf="getEtd" >
+                <li>{{niveau_d}}</li>
+                <li>{{classe_d}}</li>
+                <li>{{edt_liste}}</li>
+                <li>{{moi}}</li>
+            </ul>
+        </mat-card-content>
+        <button mdbBtn color="info" block="true" (click)="confirmer()" class="my-4" type="submit">Confirmer</button>
+    </mat-card>
+</section>

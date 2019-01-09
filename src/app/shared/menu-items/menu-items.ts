@@ -59,7 +59,7 @@ const RESPMENU = [
       },
       {
         state: ['/', 'menu', 'list-classe-eft'],
-        name: 'Classe',
+        name: 'Classe et Matiere',
         type: 'link',
         icon: 'class'
       }, {
@@ -72,11 +72,6 @@ const RESPMENU = [
         name: 'Gestion salle',
         type: 'link',
         icon: 'home'
-      } ,{
-        state: ['/', 'menu', 'matiere-list'],
-        name: 'Matieres',
-        type: 'link',
-        icon: 'book'
       },
       {
         state: ['/', 'menu', 'user'],
@@ -122,11 +117,6 @@ const ETUDIANTMENU = [
         name: 'Salle',
         type: 'link',
         icon: 'home'
-      }, {
-        state: ['/', 'menu', 'matiere-list'],
-        name: 'Matieres',
-        type: 'link',
-        icon: 'book'
       }
     ],
   },
@@ -180,7 +170,7 @@ const SECMENU = [
       },
       {
         state: ['/', 'menu', 'list-classe-eft'],
-        name: 'Classe',
+        name: 'Classe et Matiere',
         type: 'link',
         icon: 'class'
       }, {
@@ -193,12 +183,7 @@ const SECMENU = [
         name: 'Gestion salle',
         type: 'link',
         icon: 'home'
-      } ,{
-        state: ['/', 'menu', 'matiere-list'],
-        name: 'Matieres',
-        type: 'link',
-        icon: 'book'
-      },
+      } ,
       {
         state: ['/', 'menu', 'user'],
         name: 'Gestion utilisateurs',
@@ -243,12 +228,7 @@ const PROFSMENU = [
         name: 'Gestion salle',
         type: 'link',
         icon: 'home'
-      } ,{
-        state: ['/', 'menu', 'matiere-list'],
-        name: 'Matieres',
-        type: 'link',
-        icon: 'book'
-      },{
+      } , {
         state: ['/', 'menu', 'list-classe'],
         name: 'Niveau',
         type: 'link',
@@ -256,7 +236,7 @@ const PROFSMENU = [
       },
       {
         state: ['/', 'menu', 'list-classe-eft'],
-        name: 'Classe',
+        name: 'Classe et Matiere',
         type: 'link',
         icon: 'class'
       }

@@ -8,6 +8,7 @@ import {UserConnectedService} from "../../../shared/service/user-connected.servi
 import {ConstantRole} from "../../../Utils/ConstantRole";
 import {MatTableDataSource} from "@angular/material";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -25,6 +26,10 @@ export class TzDashboardComponent implements OnInit {
   idClasse:number;
   loading:boolean;
   listMatier:any;
+  listEts:any;
+  countEts:any;
+  superadmin:boolean;
+
   /**
    * Chartes
    */
@@ -163,7 +168,8 @@ export class TzDashboardComponent implements OnInit {
    * @param userConnected
    */
   constructor(private dataService: DataService,
-              private userConnected:UserConnectedService
+              private userConnected:UserConnectedService,
+              private router:Router
   ) { }
 
   ngOnInit() {
@@ -209,6 +215,16 @@ export class TzDashboardComponent implements OnInit {
         }
       });
     }
+    if (role.role_type.id === ConstantRole.SUPERADMIN){
+      this.getEts().subscribe(response =>{
+        console.log(response.data);
+        if (response.code === ConstantHTTP.CODE_SUCCESS){
+          this.superadmin = true;
+          this.listEts = response.data;
+          this.countEts = response.data.length;
+        }
+      });
+    }
     this.loading = false;
   }
 
@@ -217,6 +233,13 @@ export class TzDashboardComponent implements OnInit {
    */
   getNbEtudiants() {
     return this.dataService.post(urlList.path_find_user, {role :2});
+  }
+
+  /**
+   * Fetch ets liste
+   */
+  getEts(){
+    return this.dataService.post(urlList.path_ets);
   }
 
   /**
@@ -244,6 +267,23 @@ export class TzDashboardComponent implements OnInit {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }
 
+  /**
+   * Emploie du temps
+   */
+  edt(){
+    const role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          console.log(response.data);
+          this.idClasse = response.data[0].id_classe.id;
+          console.log(this.idClasse);
+          this.router.navigate(['/menu/edt/'+ this.idClasse])
+        }
+      });
+    }
+  }
   /**
    * Get Liste profs
    * @param idClass

@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 import {DataService} from '../../../shared/service/data.service';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatiereParam} from '../../../shared/model/MatiereParam';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {Angular5Csv} from 'angular5-csv/Angular5-csv';
@@ -39,6 +39,7 @@ export class TzMatiereComponent implements OnInit {
   nom: string;
   coeff: number;
   class: number;
+  idClasseEnfant: number;
   matiere: number;
   listClasse: Classe[];
   listMatier = [];
@@ -49,12 +50,14 @@ export class TzMatiereComponent implements OnInit {
     private dataService: DataService,
     private router: Router,
     private excelService: ExcelService,
+    private currentRoute: ActivatedRoute,
     private userConnected : UserConnectedService) {
   }
 
   ngOnInit() {
     this.matiereCreate = new MatiereParam();
     this.loading = true;
+
     let user = this.getUserConnected();
     if(user.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant = true;
@@ -92,7 +95,8 @@ export class TzMatiereComponent implements OnInit {
   }
 
   getMatiere() {
-    return this.dataService.post(urlList.path_list_matiere);
+    this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.post(urlList.path_list_matiere,{class: this.idClasseEnfant});
   }
 
   getAllMatiere(idClass: number) {

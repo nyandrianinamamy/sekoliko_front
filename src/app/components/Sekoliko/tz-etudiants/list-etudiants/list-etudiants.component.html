@@ -52,7 +52,7 @@
           <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.adresse}}
           </td>
         </ng-container>
-        <ng-container matColumnDef="contact" *ngIf="!mobile">
+        <ng-container matColumnDef="contact" *ngIf="!mobile && !etudiant_user">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
           <td mat-cell *matCellDef="let _etudiant">  {{_etudiant.user_id.contact}}  </td>
         </ng-container>

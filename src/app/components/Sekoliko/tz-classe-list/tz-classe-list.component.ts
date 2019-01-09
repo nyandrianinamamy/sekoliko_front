@@ -24,6 +24,7 @@ export class TzClasseListComponent implements OnInit {
   loading: boolean;
   _classe: Classe[];
 
+
   /**
    * Table
    */

@@ -52,6 +52,7 @@ export class TzClasseComponent implements OnInit {
     retour(){
         this.router.navigate(['/menu/etudiant'])
     }
+
     /**
      * Fetch liste etudiant
      * @param idClasse

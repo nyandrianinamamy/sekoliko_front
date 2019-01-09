@@ -79,6 +79,11 @@
                         </div>
                     </div>
 
+                    <a mdbBtn (click)="checkListEtudiant(_classe.id)"
+                       class=" tz-btn-circle  m-1 relative waves-light" color="success">
+                        <i class="fa fa-book"></i>
+                    </a>
+
                     <a mdbBtn data-toggle="modal" data-target="#editModal"
                        class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
                         <i class="fa fa-edit"></i>
@@ -94,31 +99,23 @@
                                 </h2>
                                 <mat-dialog-content>
                                     <form class="text-center border border-light">
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="id" id="orangeForm-name"
-                                                   value="{{_classe.id}}" class="form-control w-100 d-none validate">
-                                            <mat-form-field class="col-md-12 w-100">
-                                                <mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">
-                                                    <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
-                                                        {{niveau.description}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <mat-form-field class="col-md-12">
-                                                <input matInput placeholder="Classe Nom" type="text"  name="description" required
-                                                       value="{{_classe.description}}" [(ngModel)]="_classe.description"
-                                                       #descriptions="ngModel">
-                                            </mat-form-field>
-                                            <!--<div class="form-group">-->
-                                                <!--<label data-error="wrong" style="margin: 5px" data-success="right" for="orangeForm-name">Classe nom</label>-->
-                                                <!--<input type="text"  name="description" style="margin: 5px"-->
-                                                       <!--value="{{_classe.description}}" [(ngModel)]="_classe.description"-->
-                                                       <!--class="form-control validate " mdbInputDirective>-->
-                                            <!--</div>-->
-                                        </div>
+                                        <input type="text" name="id" id="orangeForm-name"
+                                               value="{{_classe.id}}" class="form-control w-100 d-none validate">
+                                        <mat-form-field class="col-md-12 w-100">
+                                            <mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">
+                                                <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
+                                                    {{niveau.description}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="col-md-12">
+                                            <input matInput type="text"  name="description" required
+                                                   value="{{_classe.description}}" [(ngModel)]="_classe.description"
+                                                   #descriptions="ngModel">
+                                        </mat-form-field>
                                         <div class="modal-footer">
                                             <button type="button" mdbBtn color="secondary" class="waves-light w-50"
-                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Cancel
+                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Annuler
                                             </button>
                                             <button type="submit" value="submit" mdbBtn color="primary"
                                                     (click)="editModal.hide();
@@ -126,7 +123,7 @@
                                                     parent = _classe.parent,
                                                     description = _classe.description )"
                                                     class="relative waves-light  w-50" mdbWavesEffect>
-                                                Save changes
+                                                Modifier
                                             </button>
                                         </div>
                                     </form>

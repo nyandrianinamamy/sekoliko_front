@@ -56,7 +56,7 @@ export class ListEtudiantsComponent implements OnInit {
     if(role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant_user = true;
       if (window.screen.width >= 600) {
-        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe'];
+        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'sexe'];
       }else {
         this.mobile = true;
         this.displayedColumns = [ 'nom', 'prenom'];

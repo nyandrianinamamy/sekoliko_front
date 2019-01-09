@@ -18,10 +18,10 @@
     <div class="row">
       <mat-form-field class="col-md-6">
         <mat-select placeholder="Choisissez la matiere" name="matiere"  required
-                    [(ngModel)]="paramNote.idmat" #matiere="ngModel">
-          <mat-option *ngFor="let listMatiere of listMatier" [value]="listMatiere.id"  (onSelectionChange) = "checkIfUpdate(listMatiere.id)">
+                    [(ngModel)]="paramNote.idmat" (selectionChange)="checkIfUpdate($event)">
+          <mat-option *ngFor="let listMatiere of listMatier" [value]="listMatiere.id">
             {{listMatiere.description}}
-            Coefficient: {{listMatiere.coefficient}}
+            Coeff : {{listMatiere.coefficient}}
           </mat-option>
         </mat-select>
       </mat-form-field>

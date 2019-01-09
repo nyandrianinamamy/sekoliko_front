@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tz-payements',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TzPayementsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private router:Router
+  ) { }
 
   ngOnInit() {
   }
+
+  ecolage(){
+    this.router.navigate(['/menu/etudiant'])
+  }
+
+  profs(){
+    this.router.navigate(['/menu/profs'])
+  }
+
+  admin(){
+    this.router.navigate(['/menu/administratif'])
+  }
+
+  achat(){
+    this.router.navigate(['/menu/'])
+  }
+
+
 
 }

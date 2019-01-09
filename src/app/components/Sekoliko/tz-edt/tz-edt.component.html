@@ -144,29 +144,51 @@
   <table class="table table-bordered" *ngIf="list">
     <thead>
     <tr>
-      <th>Matière</th>
-      <th>Début</th>
-      <th>Fin</th>
-      <th *ngIf="!etudiant">Action</th>
+      <th class="text-center">Matière</th>
+      <th class="text-center">Début</th>
+      <th class="text-center">Fin</th>
+      <th *ngIf="!etudiant" class="text-center">Action</th>
     </tr>
     </thead>
     <tbody>
       <tr *ngFor="let event of events">
-        <td>{{event.title}}</td>
-        <td>{{event.start | date:'medium' }}</td>
-        <td>{{event.end   | date:'medium' }}</td>
+        <td class="text-center">{{event.title}}</td>
+        <td class="text-center">{{event.start | date:'medium' }}</td>
+        <td class="text-center">{{event.end   | date:'medium' }}</td>
         <td *ngIf="!etudiant">
-          <button
-                  class="btn btn-danger"
-                  (click)="deleteEdt(event.id)">
-            Delete
-          </button>
-          <button
-                  class="btn btn-success"
-                  (click)="editModal.show()">
-            Edit
-          </button>
+          <a mdbBtn data-toggle="modal" data-target="#deleteModal" (click)="deleteModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+            <i class="fa fa-trash"></i>
+          </a>
+          <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"
+               aria-labelledby="myBasicModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close"
+                          (click)="deleteModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">Supprimer ? </h4>
+                </div>
+                <div class="modal-body d-flex">
+                  <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                          aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Non
+                  </button>
+                  <button type="button" mdbBtn color="primary"
+                          class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
+                          (click)="deleteEdt(event.id)">Oui
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <a mdbBtn data-toggle="modal" data-target="#deleteModal" (click)="editModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="success">
+            <i class="fa fa-edit"></i>
+          </a>
           <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
                aria-labelledby="myBasicModalLabel"
                [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
@@ -268,7 +290,7 @@
         <button
                 class="btn btn-success"
                 (click)="addEdt(emploie);">
-          Submit
+          Ajouter
         </button>
       </td>
     </tr>

@@ -98,6 +98,14 @@ export class TzClasseEnfantComponent implements OnInit {
     }
 
     /**
+     * Fetch liste matiere
+     * @param idClasse
+     */
+    checkListEtudiant(idClasse: number) {
+        this.router.navigate(['/menu/matiere-list/' + idClasse]);
+    }
+
+    /**
      * Table filter
      */
     applyFilter(filterValue: string) {

@@ -66,6 +66,7 @@ export class AjoutNoteComponent implements OnInit {
     this.loading = true;
     this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
       this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      console.log(this.listMatier)
       this.loading = false;
     });
   }
@@ -105,12 +106,10 @@ export class AjoutNoteComponent implements OnInit {
     this.router.navigate(['/menu/list-etudiant/' + this.idClasse]);
   }
 
-  checkIfUpdate(id: number) {
-    if (id > 0) {
-      this.loading = true;
-      this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse, mat: id}).subscribe(response => {
+  checkIfUpdate(id: any) {
+    if (id.value > 0) {
+      this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse, mat: id.value}).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          this.loading = false;
           if (response.data.length > 1) {
             window.alert('erreur, duplication des notes');
           } else if (response.data.length === 1) {
