@@ -1,6 +1,6 @@
 <mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important;text-align:center" color="primary">
   <span *ngIf="updateAction" class="text-center w-100">
-    Edition d'un utilisateur
+    Modification d'un utilisateur
   </span>
   <span *ngIf="!updateAction" class="text-center  w-100">
     Création d'un utilisateur
@@ -80,15 +80,19 @@
           </mat-radio-group>
           <mat-checkbox name="status" #status="ngModel" [(ngModel)]="etudiant.enabled" class="col-md-4">Actif</mat-checkbox>
         </div>
-        <div class="btn-content d-block w-100 text-right">
-          <button class="btn btn-mdb-color btn-rounded nextBtn-2 text-right" type="button"
-                  (click)="step2.style.display='block';step1.style.display='none'" [disabled]="!form.form.valid">Next
+        <div class="w-100" >
+          <a class="btn btn-mdb-color btn-danger text-left nextBtn-2" type="button" routerLink="/menu">Annuler</a>
+          <button class="btn btn-mdb-color nextBtn-2 pull-right" type="button"
+                  (click)="step2.style.display='block';step1.style.display='none'" [disabled]="!form.form.valid">Suivant
           </button>
         </div>
       </div>
       <div class="row setup-content-2" #step2 id="step-2" style="display: none">
         <div class="col-md-12">
-          <h2 class="text-center font-weight-bold my-4 text-center">Récapitulation du nouveau utilisateur</h2>
+          <h2 class="text-center font-weight-bold my-4 text-center" *ngIf="!updateAction">Récapitulation du nouveau utilisateur</h2>
+          <h2 class="text-center font-weight-bold my-4 text-center" *ngIf="updateAction">
+            Récapitulation du modification utilisateur
+          </h2>
           <table class="w-100">
             <tr>
               <td>
@@ -106,7 +110,7 @@
               </td>
             </tr>
             <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left"
-                    (click)="step1.style.display='block';step2.style.display='none'" type="button">Previous
+                    (click)="step1.style.display='block';step2.style.display='none'" type="button">Revenir
             </button>
             <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" (click)="ajouter(etudiant)"
                     type="button">Ajouter

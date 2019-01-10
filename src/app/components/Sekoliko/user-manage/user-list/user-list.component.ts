@@ -11,6 +11,9 @@ import * as jsPDF from '../../../../../assets/jq/jspdf.min.js';
 // import * as jspdf from 'jspdf/dist/jspdf.min.js';
 // console.log(jsPDF);
 import html2canvas from 'html2canvas';
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {Router} from "@angular/router";
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 
 @Component({
   selector: 'app-user-list',
@@ -23,18 +26,32 @@ export class UserListComponent implements OnInit {
   listUtilisateur: any;
   roles: Role[];
   loading: boolean;
+  superadmin:boolean;
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'email', 'action'];
   constructor(private dataService: DataService,
-              private excelService:ExcelService) { }
+              private excelService:ExcelService,
+              private router:Router,
+              private userConnected:UserConnectedService) { }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+      this.router.navigate(['/menu/not-found']);
+    }
+
     this.utilisateur = new User();
     this.getTypeRole();
     this.getListEtudiants(this.utilisateur);
-    console.log(this.utilisateur)
+  }
+
+  /**
+   * Get user connecté
+   */
+  getUserc(){
+    return this.userConnected.userConnected();
   }
 
   /**
@@ -65,6 +82,7 @@ export class UserListComponent implements OnInit {
         this.etudiant = response.data.list;
         console.log(this.etudiant)
         this.dataSource = new MatTableDataSource<any>(this.etudiant);
+        this.dataSource.paginator = this.paginator;
         this.loading = false;
       } else {
         console.log('verifieo le function aloha papie a :D ');

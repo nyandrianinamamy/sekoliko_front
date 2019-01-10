@@ -109,14 +109,14 @@ export class TzAjoutMatiereComponent implements OnInit {
       this.dataService.post(urlList.path_add_matiere + '/' + this.idMatiere, _matiere).subscribe((response) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.loading = false;
-          this.router.navigate(['/menu/matiere-list']);
+          this.router.navigate(['/menu/list-classe-eft']);
         }
       });
     } else {
       this.dataService.post(urlList.path_add_matiere, _matiere).subscribe((response) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.loading = false
-          this.router.navigate(['/menu/matiere-list']);
+          this.router.navigate(['/menu/list-classe-eft']);
         }
       });
     }

@@ -27,6 +27,7 @@ import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfa
 import {AjoutNoteComponent} from './tz_note/ajout-note/ajout-note.component';
 import {TzAnneScolaireComponent} from "./tz-anne-scolaire/tz-anne-scolaire.component";
 import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+import {TzEtsComponent} from "./tz-ets/tz-ets.component";
 
 const routes: Routes = [
     {
@@ -62,6 +63,7 @@ const routes: Routes = [
             {path: 'list-classe-eft', component: TzClasseEnfantComponent},
             {path: 'add-eft', component: TzAddEnfantComponent},
             {path: 'profile', component: TzProfileComponent},
+            {path: 'ets', component: TzEtsComponent},
             {path: 'note/:id/:idClasse', component: AjoutNoteComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

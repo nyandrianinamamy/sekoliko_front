@@ -166,6 +166,7 @@ export class TzDashboardComponent implements OnInit {
   /**
    * @param dataService
    * @param userConnected
+   * @param router
    */
   constructor(private dataService: DataService,
               private userConnected:UserConnectedService,
@@ -173,37 +174,18 @@ export class TzDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true
-    this.getNbSalles().subscribe((response: any) => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.compteSalles = response.data.length;
-      }
-    });
-    this.getNbEtudiants().subscribe((response: any) => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.listEtd = response.data.list.length;
-      }
-    });
-
-    this.getNbproff().subscribe((response: any) => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.listProfs = response.data.list.length;
-      }
-    });
-
+    this.loading = true;
     let role = this.getUserConnected();
     if(role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant = true;
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          console.log(response.data);
           this.idClasse = response.data[0].id_classe.id;
           this.getListEtudiants(this.idClasse).subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
               this.listEtd = response.data.length;
             }
           });
-
           this.idClasse = response.data[0].id_classe.id;
           this.getAllMatiere(this.idClasse);
         }
@@ -225,6 +207,25 @@ export class TzDashboardComponent implements OnInit {
         }
       });
     }
+
+    this.getNbSalles().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.compteSalles = response.data.length;
+      }
+    });
+    this.getNbEtudiants().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.listEtd = response.data.list.length;
+      }
+    });
+
+    this.getNbproff().subscribe((response: any) => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.listProfs = response.data.list.length;
+      }
+    });
+
+
     this.loading = false;
   }
 
@@ -263,6 +264,10 @@ export class TzDashboardComponent implements OnInit {
     return this.userConnected.userConnected();
   }
 
+  /**
+   * liste etudiant
+   * @param classe
+   */
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }

@@ -9,6 +9,9 @@ import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import * as jsPDF from "../../../../assets/jq/jspdf.min";
 import {ExcelService} from "../../../shared/service/excel.service";
 import html2canvas from 'html2canvas'
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-tz-administration',
@@ -27,14 +30,27 @@ export class TzAdministrationComponent implements OnInit {
     dataSource: MatTableDataSource<any>;
     displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'adresse', 'contact', 'email', 'action'];
     constructor(private dataService: DataService,
-                private excelService: ExcelService) { }
+                private excelService: ExcelService,
+                private userConnected:UserConnectedService,
+                private router:Router) { }
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     ngOnInit() {
+        let role = this.getUserc();
+        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+            this.router.navigate(['/menu/not-found']);
+        }
         this.utilisateur = new User();
         this.getTypeRole();
         this.getListAdmin();
+    }
+
+    /**
+     * Get user connecté
+     */
+    getUserc(){
+        return this.userConnected.userConnected();
     }
 
     getTypeRole() {

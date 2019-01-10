@@ -9,6 +9,7 @@ import {Constants} from '../../../../Utils/Constants';
 import {MenuItems} from "../../../../shared/menu-items/menu-items";
 import {ConstantRole} from "../../../../Utils/ConstantRole";
 import {UserConnectedService} from "../../../../shared/service/user-connected.service";
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 @Component({
   selector: 'app-edit-user',
@@ -19,10 +20,11 @@ import {UserConnectedService} from "../../../../shared/service/user-connected.se
 export class EditUserComponent implements OnInit {
   loading: boolean;
   hide: boolean;
-  roles: Role[];
+  roles: any;
   typeId: number;
   haveType: boolean;
   updateAction: boolean;
+  superadmin:boolean;
   role:any;
   etudiant: User;
   userId: number;
@@ -33,11 +35,15 @@ export class EditUserComponent implements OnInit {
               private userConnected:UserConnectedService) { }
 
   ngOnInit() {
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+      this.router.navigate(['/menu/not-found']);
+    }
+
     this.userId = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
     this.typeId = this.currentRoute.snapshot.paramMap.get('type') ? +this.currentRoute.snapshot.paramMap.get('type') : null;
     this.etudiant = new User();
 
-    let role = this.getUserc();
     if(role.role_type.id == ConstantRole.ETUDIANT){
       this.haveType = true;
       if(this.userId != role.user_id){
@@ -84,17 +90,29 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+
   /**
    * Fetch role type
    */
   getTypeRole() {
     this.loading = true;
-    this.dataService.post(urlList.path_find_role).subscribe(response => {
-      if (response.code === ConstantHTTP.CODE_SUCCESS) {
-        this.roles = response.data !== null ? response.data : [];
-        this.loading = false;
-      }
-    });
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.SUPERADMIN){
+      this.dataService.post(urlList.path_find_role).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.roles = response.data !== null ? response.data : [];
+          this.roles.splice(4, 1);
+        }
+      });
+    }else {
+      this.dataService.post(urlList.path_find_role).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.roles = response.data !== null ? response.data : [];
+          this.loading = false;
+        }
+      });
+    }
+    this.loading = false;
   }
 
   /**

@@ -47,7 +47,7 @@
       </a>
     </div>
     <div class="row" *ngIf="superadmin">
-      <a class="col-md-3">
+      <a class="col-md-3" routerLink="/menu/ets">
         <div class="card-counter primary">
           <i class="fa fa-group"></i>
           <span class="count-numbers">{{countEts}}</span>
@@ -59,24 +59,10 @@
         <div class="card-counter danger">
           <i class="fa  fa-user-secret"></i>
           <span class="count-numbers">{{listEtd}}</span>
-          <span class="count-name">Profs</span>
+          <span class="count-name">Etudiant liste</span>
         </div>
       </a>
 
-      <a class="col-md-3">
-        <div class="card-counter info">
-          <i class="fa fa-money"></i>
-          <span class="count-numbers">5</span>
-          <span class="count-name">Payement</span>
-        </div>
-      </a>
-      <a class="col-md-3" (click)="edt()">
-        <div class="card-counter info">
-          <i class="fa fa-money"></i>
-          <span class="count-numbers">5</span>
-          <span class="count-name">Emploi du temps</span>
-        </div>
-      </a>
     </div>
 </section>
 
