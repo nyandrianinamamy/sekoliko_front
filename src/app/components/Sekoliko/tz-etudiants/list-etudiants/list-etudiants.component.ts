@@ -1,131 +1,204 @@
-import {Component, OnInit, HostListener, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {Component, OnInit, HostListener, ViewChildren, QueryList, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {urlList} from "../../../../Utils/api/urlList";
+import {DataService} from '../../../../shared/service/data.service';
+import {Etudiants} from '../../../../shared/model/Etudiants';
+import {urlList} from 'src/app/Utils/api/urlList';
+import {ConstantHTTP} from 'src/app/Utils/ConstantHTTP';
+import {Subject} from 'rxjs';
+import {User} from '../../../../shared/model/User';
+import {Inscription} from '../../../../shared/model/Inscription';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {EtudiantUpdateComponent} from '../etudiant-update/etudiant-update.component';
+import {Angular5Csv} from "angular5-csv/Angular5-csv";
+import {ExcelService} from "../../../../shared/service/excel.service";
+import * as jsPDF from '../../../../../assets/jq/jspdf.min.js';
+import html2canvas from 'html2canvas';
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {MobileService} from "../../../../shared/service/mobile.service";
 
 @Component({
-    selector: 'app-list-etudiants',
-    templateUrl: './list-etudiants.component.html',
-    styleUrls: ['./list-etudiants.component.scss']
+  selector: 'app-list-etudiants',
+  templateUrl: './list-etudiants.component.html',
+  styleUrls: ['./list-etudiants.component.scss']
 })
 export class ListEtudiantsComponent implements OnInit {
-    @ViewChildren('list') list: QueryList<ElementRef>;
-    paginators: Array<any> = [];
-    activePage: number = 1;
-    firstVisibleIndex: number = 1;
-    lastVisibleIndex: number = 10;
-    per_page: string = '?per_page=' + 30;
-    url: any = urlList.path_teste_user;
-    tableData = [];
-    sorted = false;
-    searchText: string;
-    firstPageNumber: number = 1;
-    lastPageNumber: number;
-    maxVisibleItems: number = 5;
+  etudiant: any[];
+  pdf:boolean;
+  mobile : boolean;
+  mobileClass = '';
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe', 'action'];
+  inscription: Inscription;
+  listEtudiants = [];
+  idClasseEnfant: number;
+  dtOptions: DataTables.Settings = {};
+  loading: boolean;
+  etudiant_user:boolean;
+  idInscription: number;
+  idClasse: number;
+  inscriptionUser: string;
+  dtTrigger: Subject<any> = new Subject();
+  constructor(private dataService: DataService,
+              private currentRoute: ActivatedRoute,
+              private dialog: MatDialog,
+              private excelService: ExcelService,
+              private router: Router,
+              private userConnected:UserConnectedService,
+  ) {}
 
-    constructor(private http: HttpClient) {
-    }
+  ngOnInit() {
 
-    getData() {
-        console.log(this.url);
-        return this.http.get(this.url);
-    }
-
-    ngOnInit() {
-        this.getData().subscribe((next: any) => {
-            next.forEach((element: any) => {
-                console.log(element);
-                this.tableData.push({id: (element.id).toString(), name: element.name, email: element.email});
-            });
-        });
-
-        setTimeout(() => {
-            for (let i = 1; i <= this.tableData.length; i++) {
-                if (i % this.maxVisibleItems === 0) {
-                    this.paginators.push(i / this.maxVisibleItems);
-                }
-            }
-            if (this.tableData.length % this.paginators.length !== 0) {
-                this.paginators.push(this.paginators.length + 1);
-            }
-            this.lastPageNumber = this.paginators.length;
-            this.lastVisibleIndex = this.maxVisibleItems;
-        }, 200);
-
-    }
-
-    @HostListener('input') oninput() {
-        this.paginators = [];
-        for (let i = 1; i <= this.search().length; i++) {
-            if (!(this.paginators.indexOf(Math.ceil(i / this.maxVisibleItems)) !== -1)) {
-                this.paginators.push(Math.ceil(i / this.maxVisibleItems));
-            }
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant_user = true;
+      if (window.screen.width >= 600) {
+        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'sexe'];
+      }else {
+        this.mobile = true;
+        this.displayedColumns = [ 'nom', 'prenom'];
+      }
+      this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+      this.loading = true;
+      this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.etudiant = response.data;
+          this.dataSource = new MatTableDataSource<any>(this.etudiant);
+          this.dataSource.paginator = this.paginator;
         }
-        this.lastPageNumber = this.paginators.length;
-    }
-
-    changePage(event: any) {
-        if (event.target.text >= 1 && event.target.text <= this.maxVisibleItems) {
-            this.activePage = +event.target.text;
-            this.firstVisibleIndex = this.activePage * this.maxVisibleItems - this.maxVisibleItems + 1;
-            this.lastVisibleIndex = this.activePage * this.maxVisibleItems;
+      });
+    }else{
+      if (window.screen.width >= 600) {
+        this.mobileClass = "";
+      }else {
+        this.mobile = true;
+        this.displayedColumns = [ 'nom', 'prenom', 'action'];
+      }
+      this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+      this.loading = true;
+      this.getListEtudiants(this.idClasseEnfant).subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.loading = false;
+          this.etudiant = response.data;
+          this.dataSource = new MatTableDataSource<any>(this.etudiant);
+          this.dataSource.paginator = this.paginator;
         }
+      });
     }
+  }
 
-    nextPage() {
-        this.activePage += 1;
-        this.firstVisibleIndex = this.activePage * this.maxVisibleItems - this.maxVisibleItems + 1;
-        this.lastVisibleIndex = this.activePage * this.maxVisibleItems;
-    }
+  /**
+   * Note etudiant
+   */
+  voirNote(){
+    this.getUserInsc().subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+         this.idInscription = response.data[0].NumInscription
+         this.idClasse = response.data[0].id_classe.id;
+         this.inscriptionUser = response.data[0].user_id.user_id;
+        this.router.navigate(['/menu/note/' + this.idInscription + '/' + this.idClasse], { queryParams: {etudiant: this.inscriptionUser}});
+      }
+    });
+  }
 
-    previousPage() {
-        this.activePage -= 1;
-        this.firstVisibleIndex = this.activePage * this.maxVisibleItems - this.maxVisibleItems + 1;
-        this.lastVisibleIndex = this.activePage * this.maxVisibleItems;
-    }
+  /**
+   * Emploie du temps
+   */
+  voirEdt(){
+    this.getUserInsc().subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.idClasse = response.data[0].id_classe.id;
+        this.router.navigate(['/menu/edt/' + this.idClasse]);
+      }
+    });
+  }
 
-    firstPage() {
-        this.activePage = 1;
-        this.firstVisibleIndex = this.activePage * this.maxVisibleItems - this.maxVisibleItems + 1;
-        this.lastVisibleIndex = this.activePage * this.maxVisibleItems;
-    }
+  /**
+   * Ajout note
+   * @param idInscription
+   * @param idClasse
+   * @param inscription
+   */
+  addNote(idInscription: number, idClasse: number, inscription: string) {
+    this.router.navigate(['/menu/note/' + idInscription + '/' + idClasse], { queryParams: {etudiant: inscription}});
+  }
 
-    lastPage() {
-        this.activePage = this.lastPageNumber;
-        this.firstVisibleIndex = this.activePage * this.maxVisibleItems - this.maxVisibleItems + 1;
-        this.lastVisibleIndex = this.activePage * this.maxVisibleItems;
-    }
+  /**
+   * Fetch etudiant liste
+   * @param classe
+   */
+  getListEtudiants(classe: number) {
+    return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
+  }
 
-    sortBy(by: string | any): void {
-        if (by == 'id') {
-            this.search().reverse();
-        } else {
-            this.search().sort((a: any, b: any) => {
-                if (a[by] < b[by]) {
-                    return this.sorted ? 1 : -1;
-                }
-                if (a[by] > b[by]) {
-                    return this.sorted ? -1 : 1;
-                }
-                return 0;
-            });
-        }
-        this.sorted = !this.sorted;
-    }
+  /**
+   * retour
+   */
+  retour(){
+    this.router.navigate(['/menu/etudiant'])
+  }
 
-    filterIt(arr: any, searchKey: any) {
-        return arr.filter((obj: any) => {
-            return Object.keys(obj).some((key) => {
-                return obj[key].includes(searchKey);
-            });
-        });
-    }
 
-    search() {
-        if (!this.searchText) {
-            return this.tableData;
-        }
-        if (this.searchText) {
-            return this.filterIt(this.tableData, this.searchText);
-        }
-    }
+  /**
+   * Fetch inscription liste
+   */
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
+  }
+
+  openPopUpd(etudiant: User) {
+    const openPopUp = this.dialog.open(EtudiantUpdateComponent, {
+      data: etudiant
+    });
+    openPopUp.afterClosed().subscribe(response => {
+      if (response === 1) {
+      }
+    });
+  }
+
+  getUserConnected(){
+    return this.userConnected.userConnected();
+  }
+
+  /**
+   * Touche pas
+   */
+  ngOnDestroy() {
+    this.dtTrigger.unsubscribe();
+  }
+
+  /**
+   * Export
+   */
+  exportCsv(){
+    new Angular5Csv(this.etudiant,'liste_classe');
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.etudiant, 'etudiantListe');
+  }
+
+  exportPdf()
+  {
+      console.log("oui")
+      var data = document.getElementById('etudiantListe');
+      html2canvas(data).then(canvas => {
+        var imgWidth = 208;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+
+        const contentDataURL = canvas.toDataURL('image/png')
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        var position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+        pdf.save('etudiant-liste.pdf');
+      });
+  }
+
 }

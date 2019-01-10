@@ -20,8 +20,8 @@ export class AccessDeniedInterceptor implements HttpInterceptor {
       catchError(error => {
         console.log('AccessDeniedInterceptor > error', error);
         if (error instanceof HttpErrorResponse) {
-          if (error.status === 401) {
-            localStorage.removeItem('access_token');
+          if (error.status === 401 || error.status === 403 ) {
+            localStorage.removeItem('token');
             this.router.navigate(['/login']);
           }
         }

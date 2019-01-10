@@ -1,7 +1,7 @@
 export class Salle {
   id: number;
   description: string;
-  lieu: string;
+  classe: string;
   occupation: boolean;
   dateDebut: Date;
   dateFin: Date;

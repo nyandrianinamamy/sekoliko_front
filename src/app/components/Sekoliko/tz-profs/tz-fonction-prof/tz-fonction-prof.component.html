@@ -1,0 +1,13 @@
+<div class="view gradient-card-header blue darken-2">
+  <h4 class="h4-responsive text-white">Fonction du Prof N°: {{idProf}} </h4>
+</div>
+<form #form="ngForm">
+
+</form>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+    [animationDuration]="4000"
+    [size]="200"
+    [color]="'#2e6bb1'"
+  ></app-radar-spinner>
+</div>

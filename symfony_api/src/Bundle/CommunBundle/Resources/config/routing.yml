@@ -1,3 +1,0 @@
-commun_homepage:
-    path:     /
-    defaults: { _controller: CommunBundle:Default:index }
