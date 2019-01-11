@@ -10,6 +10,8 @@ import {urlList} from '../../../../Utils/api/urlList';
 import {MatTableDataSource} from '@angular/material';
 import {ConstantHTTP} from '../../../../Utils/ConstantHTTP';
 import {Constants} from '../../../../Utils/Constants';
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 
 @Component({
   selector: 'app-tz-ajout-profs',
@@ -31,11 +33,25 @@ export class TzAjoutProfsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   constructor(private fb: FormBuilder,
               private dataService: DataService,
-              private router: Router) { }
+              private router: Router,
+              private userConnected:UserConnectedService) { }
 
   ngOnInit() {
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+      this.router.navigate(['/menu/not-found']);
+    }
+
     this.reinit();
   }
+
+  /**
+   * Get user connecté
+   */
+  getUserc(){
+    return this.userConnected.userConnected();
+  }
+
   reinit() {
     this.etudiant = new User();
   }
@@ -50,7 +66,6 @@ export class TzAjoutProfsComponent implements OnInit {
 
   search(prof: User) {
     this.loading = true;
-    console.log('mihiditra ato');
     this.getConstant(prof);
     this.dataService.post(urlList.path_find_user, prof).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {

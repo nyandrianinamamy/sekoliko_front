@@ -281,10 +281,24 @@ export class TzDashboardComponent implements OnInit {
       this.etudiant = true;
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          console.log(response.data);
           this.idClasse = response.data[0].id_classe.id;
-          console.log(this.idClasse);
           this.router.navigate(['/menu/edt/'+ this.idClasse])
+        }
+      });
+    }
+  }
+
+  /**
+   * navigate étudiant to matiere et profs
+   */
+  matProfs(){
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.idClasse = response.data[0].id_classe.id;
+          this.router.navigate(['/menu/matiere-list/'+ this.idClasse])
         }
       });
     }

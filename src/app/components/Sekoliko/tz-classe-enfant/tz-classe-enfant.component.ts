@@ -10,6 +10,8 @@ import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {MatPaginator, MatTableDataSource} from "@angular/material";
 import {Router} from "@angular/router";
 import {Classe} from "../../../shared/model/Classe";
+import {ConstantRole} from "../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
 
 @Component({
     selector: 'app-tz-classe-enfant',
@@ -33,10 +35,16 @@ export class TzClasseEnfantComponent implements OnInit {
 
     constructor(private excelService: ExcelService,
                 private dataService: DataService,
-                private router: Router) {
+                private router: Router,
+                private userConnected:UserConnectedService) {
     }
 
     ngOnInit() {
+        let role = this.getUserc();
+        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+            this.router.navigate(['/menu/not-found']);
+        }
+
         this.classe = new ClasseEnfant();
         this.getClasseEnfant().subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
@@ -54,6 +62,16 @@ export class TzClasseEnfantComponent implements OnInit {
         })
     }
 
+    /**
+     * Get user connecté
+     */
+    getUserc(){
+        return this.userConnected.userConnected();
+    }
+
+    /**
+     * Fetch classe enfant
+     */
     getClasseEnfant() {
         return this.dataService.post(urlList.path_list_class_enfant);
     }

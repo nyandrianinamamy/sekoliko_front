@@ -52,12 +52,16 @@
                   <owl-date-time #dt12></owl-date-time>
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
-                  <input  autocomplete="off" readonly="readonly"  placeholder="Fin réservation" matInput [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13" name="dateFin"
-                         [(ngModel)]="reservation.dateFin" required #dateFin = "ngModel">
+                  <input  autocomplete="off" readonly="readonly"  placeholder="Fin réservation" matInput
+                          [owlDateTimeTrigger]="dt13" [owlDateTime]="dt13" name="dateFin"
+                         [(ngModel)]="reservation.dateFin"  required #dateFin = "ngModel">
                   <owl-date-time #dt13></owl-date-time>
                 </mat-form-field>
+                <div *ngIf="error.isError" class="alert alert-danger">
+                  {{ error.errorMessage }}
+                </div>
                 <mat-form-field class="col-md-12">
-                  <mat-select placeholder="Classe" readonly="readonly" name="class" [(ngModel)]="reservation.classe" required>
+                  <mat-select placeholder="Classe" (blur)="compareTwoDates()" name="class" [(ngModel)]="reservation.classe" required>
                     <mat-option *ngFor="let classe of classe_enfant" value="{{classe.id}}">
                       {{classe.description}}
                     </mat-option>

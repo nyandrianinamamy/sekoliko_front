@@ -8,6 +8,8 @@ import {Profs} from '../../../../shared/model/Profs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNull} from 'util';
 import {User} from '../../../../shared/model/User';
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 
 @Component({
   selector: 'app-tz-ajout-matiere',
@@ -25,8 +27,10 @@ export class TzAjoutMatiereComponent implements OnInit {
   class: '';
   update:boolean;
 
-  constructor(private dataService: DataService, private router: Router,
-              private currentRoute: ActivatedRoute) {
+  constructor(private dataService: DataService,
+              private router: Router,
+              private currentRoute: ActivatedRoute,
+              private userConnected:UserConnectedService) {
   }
 
   /**
@@ -55,7 +59,19 @@ export class TzAjoutMatiereComponent implements OnInit {
     });
   }
 
+  /**
+   * Get user connecté
+   */
+  getUserc(){
+    return this.userConnected.userConnected();
+  }
+
   ngOnInit() {
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+      this.router.navigate(['/menu/not-found']);
+    }
+
     this._matiere = new MatiereParam();
     this.idMatiere = this.currentRoute.snapshot.paramMap.get('id') ? +this.currentRoute.snapshot.paramMap.get('id') : null;
     if (!isNull(this.idMatiere) && typeof this.idMatiere === 'number') {

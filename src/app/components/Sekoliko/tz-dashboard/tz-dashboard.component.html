@@ -16,11 +16,11 @@
         </div>
       </a>
 
-      <a class="col-md-3" *ngIf="etudiant" routerLink="/menu/matiere-list">
+      <a class="col-md-3" *ngIf="etudiant" (click)="matProfs()">
         <div class="card-counter danger">
           <i class="fa  fa-user-secret"></i>
           <span class="count-numbers">{{listProfs}}</span>
-          <span class="count-name">Profs</span>
+          <span class="count-name">Matiere et Profs</span>
         </div>
       </a>
 
@@ -40,7 +40,7 @@
       </a>
       <a class="col-md-3" *ngIf="etudiant"  (click)="edt()">
         <div class="card-counter info">
-          <i class="fa fa-money"></i>
+          <i class="fa fa-calendar"></i>
           <span class="count-numbers">5</span>
           <span class="count-name">Emploi du temps</span>
         </div>

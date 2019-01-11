@@ -40,6 +40,8 @@ export class TzSalleComponent implements OnInit {
   public dateFin: Date;
   public classe: string;
   etudiant : boolean;
+  dateok:boolean;
+  error:any={isError:false,errorMessage:''};
 
   /**
    * Table
@@ -105,6 +107,18 @@ export class TzSalleComponent implements OnInit {
   }
 
   /**
+   * Compare date
+   */
+  compareTwoDates(){
+    console.log(this.reservation.dateDebut);
+    if(new Date(this.reservation.dateFin) < new Date(this.reservation.dateDebut)){
+      this.error={isError:true,errorMessage:'End Date can\'t before start date'};
+      }else{
+        this.error.isError = false;
+      }
+    }
+
+    /**
    * Function list , edit , delete , Modifiable
    */
   getListSalle() {

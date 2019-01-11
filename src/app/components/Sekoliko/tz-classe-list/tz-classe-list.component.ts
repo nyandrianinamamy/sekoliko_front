@@ -11,6 +11,8 @@ import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import * as jsPDF from "../../../../assets/jq/jspdf.min";
 import html2canvas from 'html2canvas';
 import {ExcelService} from "../../../shared/service/excel.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
 
 @Component({
   selector: 'app-tz-classe-list',
@@ -34,7 +36,8 @@ export class TzClasseListComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private router: Router,
-              private excelService: ExcelService) {
+              private excelService: ExcelService,
+              private userConnected:UserConnectedService) {
   }
 
   /**
@@ -44,7 +47,18 @@ export class TzClasseListComponent implements OnInit {
     return this.dataService.post(urlList.path_list_class_parent);
   }
 
+  /**
+   * Get user connecté
+   */
+  getUserc(){
+    return this.userConnected.userConnected();
+  }
+
   ngOnInit() {
+    let role = this.getUserc();
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+      this.router.navigate(['/menu/not-found']);
+    }
     this.loading = true;
     this.classe = new Classe();
     this.getNiveau().subscribe(response => {

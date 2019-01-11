@@ -5,6 +5,8 @@ import {ConstantHTTP} from "../../../../Utils/ConstantHTTP";
 import {Classe} from "../../../../shared/model/Classe";
 import {ClasseEnfant} from "../../../../shared/model/ClasseEnfant";
 import {Router} from "@angular/router";
+import {ConstantRole} from "../../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../../shared/service/user-connected.service";
 
 @Component({
     selector: 'app-tz-add-enfant',
@@ -18,10 +20,16 @@ export class TzAddEnfantComponent implements OnInit {
     classe: ClasseEnfant;
 
     constructor(private dataService: DataService,
-                private router: Router) {
+                private router: Router,
+                private userConnected:UserConnectedService) {
     }
 
     ngOnInit() {
+        let role = this.getUserc();
+        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+            this.router.navigate(['/menu/not-found']);
+        }
+
         this.loading = true;
         this.classe = new ClasseEnfant();
         this.getClasseParent().subscribe(response => {
@@ -31,6 +39,13 @@ export class TzAddEnfantComponent implements OnInit {
                 this.loading = false;
             }
         })
+    }
+
+    /**
+     * Get user connecté
+     */
+    getUserc(){
+        return this.userConnected.userConnected();
     }
 
     /**
