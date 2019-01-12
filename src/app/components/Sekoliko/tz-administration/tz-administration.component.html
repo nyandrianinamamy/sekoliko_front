@@ -8,6 +8,19 @@
     <i class="fa fa-plus-circle"></i>
   </a>
 </mat-toolbar>
+<mat-card class="mt-lg-5">
+  <form #form = "ngForm">
+    <mat-form-field class="col-md-5">
+      <input matInput type="text" placeholder="Nom" [(ngModel)] = "utilisateur.firstname" name="nom" #nom = "ngModel">
+    </mat-form-field>
+    <mat-form-field class="col-md-5">
+      <input matInput type="text" placeholder="Prenom" [(ngModel)] = "utilisateur.lastname" name="prenom" #prenom = "ngModel">
+    </mat-form-field>
+    <button mat-raised-button class="col-md-2" (click)="getListAdmin()">
+      Rechercher
+    </button>
+  </form>
+</mat-card>
 <section class="mt-lg-5">
   <mat-card>
     <div class="row p-2">
@@ -143,7 +156,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator class="mat-paginator" [pageSizeOptions]="[5, 10, 20, 100]"
+    <mat-paginator class="mat-paginator" (page)="findUser()" [pageSizeOptions]="[5, 10, 20, 100]"
                    showFirstLastButtons></mat-paginator>
   </mat-card>
   <div class="maskSpinner" *ngIf="loading">

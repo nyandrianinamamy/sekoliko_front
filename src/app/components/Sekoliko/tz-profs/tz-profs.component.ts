@@ -18,7 +18,7 @@ import html2canvas from 'html2canvas';
 })
 export class TzProfsComponent implements OnInit {
   etudiant: any[];
-  admin: any[];
+  admin: User[];
   utilisateur: User;
   listUtilisateur: any;
   roles: Role[];
@@ -59,14 +59,24 @@ export class TzProfsComponent implements OnInit {
    * Get profs listes
    */
   getListAdmin() {
+    this.utilisateur.role = 1;
     this.loading = true;
-    this.dataService.post(urlList.path_find_user, {role :1}).subscribe(response => {
+    this.dataService.post(urlList.path_find_user, this.utilisateur).subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.admin = response.data.list;
         this.dataSource = new MatTableDataSource<any>(this.admin);
+        this.paginator.length = +response.data.total;
+        this.paginator.pageSize = +this.utilisateur.limit;
         this.loading = false;
+        console.log('la valeur est de ', this.paginator.length );
       }
     });
+  }
+
+  findUser() {
+    this.utilisateur.page = this.paginator.pageIndex + 1;
+    this.utilisateur.limit = this.paginator.pageSize;
+    this.getListAdmin();
   }
 
   /**
