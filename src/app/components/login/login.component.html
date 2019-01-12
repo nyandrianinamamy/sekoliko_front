@@ -4,10 +4,10 @@
 </style>
 <div class="login-content">
   <div class="flex-center">
-    <mat-card>
-      <h2 class="tz-header-login" style=" text-align: center">
+    <mat-card style="padding: 5px!important;">
+      <h3 class="tz-header-login" style="font-family: 'Montserrat', sans-serif; text-align: center">
         Bienvenue sur {{ title }}!
-      </h2>
+      </h3>
       <form class="login-form" (ngSubmit)="onSubmit()" #boxFormView="ngForm">
         <img  alt="sekoliko Logo" src="assets/icons/logo.jpeg" class="img-center">
         <mat-form-field class="input-full-width">
@@ -15,6 +15,7 @@
                  placeholder="Login"
                  type="text"
                  name="loginInput"
+                 autocomplete="off"
                  required
                  [(ngModel)]="login.username"
                  #loginInput="ngModel">
@@ -28,6 +29,7 @@
                  placeholder="Entrer votre mots de passe"
                  [type]="hide ? 'password' : 'text'"
                  name="password"
+                 autocomplete="off"
                  required
                  [(ngModel)]="login.password"
                  #password="ngModel">
@@ -36,7 +38,7 @@
           </mat-error>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
-        <div>
+        <div style="padding-bottom: 10px">
           <!--<img *ngIf="loading" src="../assets/icons/loadtest.gif" class="loginImg"/>-->
           <button mat-raised-button type="submit" class="mat-raised-button mat-primary tz-button"
                   [disabled]=" !boxFormView.form.valid"

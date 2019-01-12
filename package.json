@@ -57,6 +57,7 @@
     "jspdf-autotable": "^2.3.5",
     "jwt-decode": "^2.2.0",
     "material-design-icons": "^3.0.1",
+    "ng-animate": "^0.3.4",
     "ng-pick-datetime": "^6.0.16",
     "ng2-canvas-whiteboard": "^3.0.4",
     "ngrx": "^2.0.1",

@@ -9,7 +9,7 @@ html, body{ background-color: #0c3750 }
 }
 .login-form {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
 }
 
@@ -81,9 +81,12 @@ responsive touche pas
 @media screen and (max-width: 600px){
   .login-content{ margin: 16% 7px!important;}
 }
-@media screen and (max-width: 900px){
-  .login-content{ margin: 25% 7px!important;}
+@media screen and (max-width: 900px) {
+  .login-content {
+    margin: 25% 7px !important;
+  }
 }
+.mat-input-element{padding: 2%}
 
 
 
