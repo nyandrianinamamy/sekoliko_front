@@ -40,6 +40,8 @@ export class ListEtudiantsComponent implements OnInit {
   etudiant_user:boolean;
   idInscription: number;
   idClasse: number;
+  classes:number;
+  href:any;
   inscriptionUser: string;
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
@@ -53,8 +55,31 @@ export class ListEtudiantsComponent implements OnInit {
   ngOnInit() {
 
     let role = this.getUserConnected();
+
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
+    }
+
     if(role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant_user = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
+
       if (window.screen.width >= 600) {
         this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'sexe'];
       }else {

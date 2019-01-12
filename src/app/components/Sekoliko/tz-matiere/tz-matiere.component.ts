@@ -45,6 +45,8 @@ export class TzMatiereComponent implements OnInit {
   listMatier = [];
   etudiant:boolean;
   idClasse:number;
+  href:any;
+  classes:number;
 
   constructor(
     private dataService: DataService,
@@ -64,7 +66,11 @@ export class TzMatiereComponent implements OnInit {
       this.displayedColumns = ['nom', 'coefficient', 'prof'];
       this.getUserInsc().subscribe(response => {
         if(response.code === ConstantHTTP.CODE_SUCCESS){
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
           this.idClasse = response.data[0].id_classe.id;
+          if (this.href != this.idClasse) {
+            this.router.navigate(['/menu/not-found']);
+          }
           this.getAllMatiere(this.idClasse);
         }
       });
@@ -81,6 +87,9 @@ export class TzMatiereComponent implements OnInit {
     }
   }
 
+  /**
+   * get user connected
+   */
   getUserConnected(){
     return this.userConnected.userConnected();
   }

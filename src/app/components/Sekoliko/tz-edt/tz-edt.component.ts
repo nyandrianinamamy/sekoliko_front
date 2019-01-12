@@ -94,7 +94,7 @@ export class TzEdtComponent implements OnInit {
     }
   ];
   events: CalendarEvent[] = [];
-
+  public href: any ;
   /**
    * Fetch matiere liste
    */
@@ -119,6 +119,22 @@ export class TzEdtComponent implements OnInit {
         this.listMatiere = response.data;
       }
     });
+
+
+
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
+    }
 
     this.emploie = new Edt();
 

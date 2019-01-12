@@ -181,6 +181,7 @@ export class TzDashboardComponent implements OnInit {
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.idClasse = response.data[0].id_classe.id;
+          console.log(response.data);
           this.getListEtudiants(this.idClasse).subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
               this.listEtd = response.data.length;
@@ -282,6 +283,7 @@ export class TzDashboardComponent implements OnInit {
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.idClasse = response.data[0].id_classe.id;
+          console.log(this.idClasse);
           this.router.navigate(['/menu/edt/'+ this.idClasse])
         }
       });
