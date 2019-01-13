@@ -3,7 +3,7 @@
     Liste des Matieres
   </span>
   <span fxFlex></span>
-  <a mdbBtn *ngIf="!etudiant"  [routerLink]="['/menu/add-matiere']"
+  <a mdbBtn *ngIf="!etudiant &&!profs"  [routerLink]="['/menu/add-matiere']"
      class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
     <i class="fa fa-plus-circle"></i>
   </a>
@@ -12,17 +12,17 @@
 <section class="mt-5">
   <mat-card>
     <div class="row p-2">
-      <div class="col-md-12"  *ngIf="etudiant">
+      <div class="col-md-12"  *ngIf="etudiant && profs">
         <mat-form-field class="w-100">
           <input  class="w-100" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-      <div class="col-md-6"  *ngIf="!etudiant">
+      <div class="col-md-6"  *ngIf="!etudiant && !profs">
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-      <div class="col-md-6 text-right" *ngIf="!etudiant">
+      <div class="col-md-6 text-right" *ngIf="!etudiant && !profs">
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
         <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
         <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
@@ -110,12 +110,12 @@
             </div>
           </div>
           <!--fin modal details-->
-          <a mdbBtn *ngIf="!etudiant"
+          <a mdbBtn *ngIf="!etudiant && !profs"
              class=" tz-btn-circle  m-1 relative waves-light" color="success" routerLinkActive="active-link"
              routerLink="/menu/add-matiere/{{_matiere.id}}">
             <i class="fa fa-edit"></i>
           </a>
-          <a mdbBtn *ngIf="!etudiant" data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
+          <a mdbBtn *ngIf="!etudiant &&  !profs" data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
              class=" tz-btn-circle  m-1 relative waves-light" color="danger">
             <i class="fa fa-trash"></i>
           </a>

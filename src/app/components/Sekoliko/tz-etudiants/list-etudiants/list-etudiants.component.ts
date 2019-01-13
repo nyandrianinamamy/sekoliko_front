@@ -38,6 +38,7 @@ export class ListEtudiantsComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   loading: boolean;
   etudiant_user:boolean;
+  profs_user:boolean;
   idInscription: number;
   idClasse: number;
   classes:number;
@@ -55,7 +56,9 @@ export class ListEtudiantsComponent implements OnInit {
   ngOnInit() {
 
     let role = this.getUserConnected();
-
+    if (role.role_type.id === ConstantRole.PROFS) {
+      this.profs_user = true;
+    }
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.getUserInsc().subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {

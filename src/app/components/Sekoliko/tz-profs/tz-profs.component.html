@@ -3,7 +3,7 @@
     Listes des profs
   </span>
   <span fxFlex></span>
-  <a mdbBtn  [routerLink]="['/menu/user/edit']"
+  <a mdbBtn  *ngIf="!profs"  [routerLink]="['/menu/user/edit']"
      class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
     <i class="fa fa-plus-circle"></i>
   </a>
@@ -30,7 +30,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-      <div class="col-md-6 text-right">
+      <div class="col-md-6 text-right" *ngIf="!profs" >
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
         <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
         <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
@@ -146,7 +146,7 @@
               </div>
             </div>
           </div>
-          <button  [routerLink]="['/menu/user/edit/', _admin.user_id]" type="button" mdbBtn color="success"
+          <button *ngIf="!profs" [routerLink]="['/menu/user/edit/', _admin.user_id]" type="button" mdbBtn color="success"
                    class=" tz-btn-circle  text-center m-1 relative waves-light"
                   mdbWavesEffect><i class="fa fa-edit"></i>
           </button>

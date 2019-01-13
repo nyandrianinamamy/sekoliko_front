@@ -28,6 +28,7 @@ export class TzEtudiantsComponent implements OnInit {
   inscription: any;
   user:any;
   class:Classe[];
+  profs:boolean;
 
   /**
    * Table
@@ -52,6 +53,9 @@ export class TzEtudiantsComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.PROFS){
+      this.profs = true;
+    }
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant_user = true;
       this.etudiant = new User();

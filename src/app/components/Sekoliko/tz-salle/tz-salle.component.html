@@ -3,7 +3,7 @@
     Liste des salles
   </span>
   <span fxFlex></span>
-  <button *ngIf="!etudiant" class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
+  <button *ngIf="!etudiant && profs" class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
           style="background: #a6c!important;color: aliceblue;" color="secondary" routerLinkActive="active-link"
           type="button" mdbBtn
           mdbWavesEffect (click)="openDialog()">
@@ -91,7 +91,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-      <div class="col-md-6 text-right" *ngIf="!etudiant">
+      <div class="col-md-6 text-right" *ngIf="!etudiant && profs">
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
         <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
         <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
@@ -234,7 +234,7 @@
           </div>
 
           <!--fin modal details-->
-          <a mdbBtn data-toggle="modal" data-target="#editModal"
+          <a mdbBtn data-toggle="modal" *ngIf="profs" data-target="#editModal"
              class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
             <i class="fa fa-edit"></i>
           </a>
@@ -272,7 +272,7 @@
             </div>
           </div>
           <!--fin modal edit-->
-          <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
+          <a mdbBtn data-toggle="modal" *ngIf="profs"  data-target="#detailsModal" (click)="deleteModal.show()"
              class=" tz-btn-circle  m-1 relative waves-light" color="danger">
             <i class="fa fa-trash"></i>
           </a>

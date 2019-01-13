@@ -40,6 +40,7 @@ export class TzSalleComponent implements OnInit {
   public dateFin: Date;
   public classe: string;
   etudiant : boolean;
+  profs:boolean;
   dateok:boolean;
   error:any={isError:false,errorMessage:''};
 
@@ -70,6 +71,9 @@ export class TzSalleComponent implements OnInit {
     this.getListSalleLibre();
     this.loading = true;
     let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.profs = true;
+    }
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant = true;
       this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe', 'occupation'];

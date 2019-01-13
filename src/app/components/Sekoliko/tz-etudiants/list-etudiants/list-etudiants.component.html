@@ -8,7 +8,7 @@
   <div class="text-center tz-text-head">
     Liste des etudiants
   </div>
-  <a mdbBtn  [routerLink]="['/menu/add-etudiant']" *ngIf="!etudiant_user"
+  <a mdbBtn  [routerLink]="['/menu/add-etudiant']" *ngIf="!etudiant_user && !profs_user"
      class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"
      color="secondary" mdbWavesEffect>
     <i class="fa fa-plus-circle"></i>
@@ -22,7 +22,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-6 text-right" *ngIf="!profs_user">
       <button class="btn btn-primary" *ngIf="!etudiant_user" (click)="exportCsv()">Export to CSV</button>
       <button class="btn btn-success" *ngIf="!etudiant_user" (click)="exportAsXLSX()">Export to XLS</button>
       <button class="btn btn-secondary" *ngIf="!etudiant_user" (click)="exportPdf()">Export to pdf</button>
@@ -68,7 +68,7 @@
                class="tz-btn-circle m-1 rounded-circle relative waves-light" color="info">
               <i class="fa fa-eye"></i>
             </a>
-            <a mdbBtn routerLink="/menu/user/edit/{{_etudiant.user_id.user_id}}"
+            <a *ngIf="!profs_user" mdbBtn routerLink="/menu/user/edit/{{_etudiant.user_id.user_id}}"
                class=" tz-btn-circle  m-1 relative waves-light" color="success" >
               <i class="fa fa-edit"></i>
             </a>

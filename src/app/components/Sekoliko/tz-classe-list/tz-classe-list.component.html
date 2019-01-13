@@ -3,7 +3,7 @@
     Liste des niveaux
   </span>
     <span fxFlex></span>
-    <a mdbBtn [routerLink]="['/menu/add-classe']"
+    <a mdbBtn  *ngIf="profs" [routerLink]="['/menu/add-classe']"
        class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
        style="background: #a6c!important;color: aliceblue;" color="secondary" mdbWavesEffect>
         <i class="fa fa-plus-circle"></i>
@@ -12,12 +12,17 @@
 <section class="mt-5">
     <mat-card>
         <div class="row p-2">
-            <div class="col-md-6">
+            <div class="col-md-12" *ngIf="!profs">
+                <mat-form-field class="w-100">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6" *ngIf="profs">
                 <mat-form-field>
                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                 </mat-form-field>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-right" *ngIf="profs">
                 <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
                 <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
                 <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
@@ -76,7 +81,7 @@
                         </div>
                     </div>
 
-                    <a mdbBtn data-toggle="modal" data-target="#editModal"
+                    <a mdbBtn *ngIf="profs" data-toggle="modal" data-target="#editModal"
                        class=" tz-btn-circle  m-1 relative waves-light" color="success" (click)="editModal.show()">
                         <i class="fa fa-edit"></i>
                     </a>

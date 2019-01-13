@@ -41,6 +41,7 @@ export class TzMatiereComponent implements OnInit {
   class: number;
   idClasseEnfant: number;
   matiere: number;
+  profs:boolean;
   listClasse: Classe[];
   listMatier = [];
   etudiant:boolean;
@@ -61,7 +62,7 @@ export class TzMatiereComponent implements OnInit {
     this.loading = true;
 
     let user = this.getUserConnected();
-    if(user.role_type.id === ConstantRole.ETUDIANT){
+    if(user.role_type.id === ConstantRole.ETUDIANT) {
       this.etudiant = true;
       this.displayedColumns = ['nom', 'coefficient', 'prof'];
       this.getUserInsc().subscribe(response => {
@@ -78,10 +79,12 @@ export class TzMatiereComponent implements OnInit {
       this.getMatiere().subscribe((response: any) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.loading = false;
+          if(user.role_type.id === ConstantRole.PROFS){
+            this.profs = true;
+          }
           this.listMatiere = response.data;
           this.dataSource = new MatTableDataSource<any>(this.listMatiere);
           this.dataSource.paginator = this.paginator;
-          this.dtTrigger.next();
         }
       });
     }

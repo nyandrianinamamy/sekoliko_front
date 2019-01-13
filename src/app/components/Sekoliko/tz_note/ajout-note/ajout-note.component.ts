@@ -36,6 +36,7 @@ export class AjoutNoteComponent implements OnInit {
               private userConnected: UserConnectedService) { }
 
   ngOnInit() {
+    let role = this.getUserConnected();
     this.paramNote = new ParamNote();
     this.currentRoute.queryParams
       .pipe(filter(params => params.etudiant))
@@ -44,12 +45,17 @@ export class AjoutNoteComponent implements OnInit {
       });
     this.idInscription = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
     this.idClasse = this.currentRoute.snapshot.paramMap.get('idClasse') ? + this.currentRoute.snapshot.paramMap.get('idClasse') : null;
-    this.getAllMatiere(this.idClasse);
+    let idProf = role.user_id;
+    if(role.role_type.id === ConstantRole.PROFS){
+      this.getProfMatiere(this.idClasse,idProf);
+    }else{
+      this.getAllMatiere(this.idClasse);
+    }
 
     /**
      * Role
      */
-    let role = this.getUserConnected();
+
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.displayedColumns = ['classe', 'note', 'coefficient'];
       this.etudiant = true;
@@ -62,11 +68,21 @@ export class AjoutNoteComponent implements OnInit {
     }
   }
 
+
   getAllMatiere(idClass: number) {
     this.loading = true;
     this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
       this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
-      console.log(this.listMatier)
+      console.log(this.listMatier);
+      this.loading = false;
+    });
+  }
+
+  getProfMatiere(idClass:number,idProf:number){
+    this.loading = true;
+    this.dataService.post(urlList.path_list_matiere, {class:idClass,prof: idProf}).subscribe(response => {
+      this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      console.log(this.listMatier);
       this.loading = false;
     });
   }

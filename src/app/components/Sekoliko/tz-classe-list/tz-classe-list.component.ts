@@ -24,6 +24,7 @@ export class TzClasseListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   loading: boolean;
+  profs:boolean;
   _classe: Classe[];
 
 
@@ -56,8 +57,11 @@ export class TzClasseListComponent implements OnInit {
 
   ngOnInit() {
     let role = this.getUserc();
-    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+    if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT && role.role_type.id != ConstantRole.PROFS){
       this.router.navigate(['/menu/not-found']);
+    }
+    if(role.role_type.id != ConstantRole.PROFS){
+      this.profs = true;
     }
     this.loading = true;
     this.classe = new Classe();

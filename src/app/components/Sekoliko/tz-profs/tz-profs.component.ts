@@ -10,6 +10,8 @@ import {ExcelService} from "../../../shared/service/excel.service";
 import {Angular5Csv} from "angular5-csv/Angular5-csv";
 import * as jsPDF from '../../../../assets/jq/jspdf.min.js';
 import html2canvas from 'html2canvas';
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
 
 @Component({
     selector: 'app-tz-profs',
@@ -23,19 +25,31 @@ export class TzProfsComponent implements OnInit {
   listUtilisateur: any;
   roles: Role[];
   loading: boolean;
+  profs: boolean;
   listProff:any[];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ['matricule', 'nom', 'prenom', 'adresse', 'contact', 'email', 'action'];
   constructor(private dataService: DataService,
               private excelService: ExcelService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private userConnected:UserConnectedService) { }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    let role = this.getUserc();
+    if(role.role_type.id === ConstantRole.PROFS){
+      this.profs = true;
+    }
     this.utilisateur = new User();
     this.getTypeRole();
     this.getListAdmin();
+  }
+  /**
+   * Get user connecté
+   */
+  getUserc() {
+    return this.userConnected.userConnected();
   }
 
   /**
@@ -50,7 +64,6 @@ export class TzProfsComponent implements OnInit {
         this.loading = false;
       }else {
         this.roles = response.data = [];
-        console.log(this.roles)
       }
     });
   }

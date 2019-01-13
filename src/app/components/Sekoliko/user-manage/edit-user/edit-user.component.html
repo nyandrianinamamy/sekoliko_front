@@ -67,10 +67,22 @@
             <input matInput placeholder="email" type="text" name="email" [(ngModel)]="etudiant.email"
                    #email="ngModel" email>
           </mat-form-field>
-          <mat-form-field class="col-md-4">
+          <mat-form-field class="col-md-4" *ngIf="!profs && !etd">
             <mat-select [(ngModel)]="etudiant.role" name="role" #role="ngModel" required placeholder="Role" [disabled]="haveType">
               <mat-option value="">Choisissez le role</mat-option>
               <mat-option *ngFor="let listRole of roles" [value]="listRole.id" > {{listRole.description}}</mat-option>
+            </mat-select>
+            <mat-error [hidden]="role.valid || role.untouched">Choisir le role</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" *ngIf="profs">
+            <mat-select [(ngModel)]="etudiant.role" name="role" #role="ngModel" required placeholder="Role" [disabled]="haveType">
+              <mat-option  [value]="1" > PROFS</mat-option>
+            </mat-select>
+            <mat-error [hidden]="role.valid || role.untouched">Choisir le role</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-md-4" *ngIf="etd">
+            <mat-select [(ngModel)]="etudiant.role" name="role" #role="ngModel" required placeholder="Role" [disabled]="haveType">
+              <mat-option  [value]="2" > ETUDIANT</mat-option>
             </mat-select>
             <mat-error [hidden]="role.valid || role.untouched">Choisir le role</mat-error>
           </mat-form-field>

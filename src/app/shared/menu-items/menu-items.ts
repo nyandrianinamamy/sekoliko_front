@@ -183,6 +183,11 @@ const PROFSMENU = [
                 type: 'link',
                 icon: 'account_circle'
             }, {
+                state: ['/', 'menu', 'profs'],
+                name: 'Professeur',
+                type: 'link',
+                icon: 'perm_identity'
+            }, {
                 state: ['/', 'menu', 'salle'],
                 name: 'Gestion salle',
                 type: 'link',
@@ -192,8 +197,7 @@ const PROFSMENU = [
                 name: 'Niveau',
                 type: 'link',
                 icon: 'school'
-            },
-            {
+            }, {
                 state: ['/', 'menu', 'list-classe-eft'],
                 name: 'Classe et Matiere',
                 type: 'link',

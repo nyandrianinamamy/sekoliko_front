@@ -24,6 +24,7 @@ export class TzClasseEnfantComponent implements OnInit {
      * Table
      */
     loading: boolean;
+    profs:boolean;
     description: string;
     parent: any;
     listNiveau: Classe;
@@ -41,8 +42,11 @@ export class TzClasseEnfantComponent implements OnInit {
 
     ngOnInit() {
         let role = this.getUserc();
-        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT){
+        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT &&  role.role_type.id != ConstantRole.PROFS){
             this.router.navigate(['/menu/not-found']);
+        }
+        if( role.role_type.id != ConstantRole.PROFS){
+            this.profs = true;
         }
 
         this.classe = new ClasseEnfant();
