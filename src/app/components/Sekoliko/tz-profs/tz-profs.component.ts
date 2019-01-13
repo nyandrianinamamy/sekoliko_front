@@ -68,7 +68,6 @@ export class TzProfsComponent implements OnInit {
         this.paginator.length = +response.data.total;
         this.paginator.pageSize = +this.utilisateur.limit;
         this.loading = false;
-        console.log('la valeur est de ', this.paginator.length );
       }
     });
   }

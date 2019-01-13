@@ -98,35 +98,37 @@
                                     <i class="fa fa-home"></i>
                                 </h2>
                                 <mat-dialog-content>
-                                    <form class="text-center border border-light">
-                                        <input type="text" name="id" id="orangeForm-name"
-                                               value="{{_classe.id}}" class="form-control w-100 d-none validate">
-                                        <mat-form-field class="col-md-12 w-100">
-                                            <mat-select placeholder="{{_classe.parent.description}}" name="class" required [(ngModel)]="_classe.parent" #parentid="ngModel">
-                                                <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
-                                                    {{niveau.description}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        <mat-form-field class="col-md-12">
-                                            <input matInput type="text"  name="description" required
-                                                   value="{{_classe.description}}" [(ngModel)]="_classe.description"
-                                                   #descriptions="ngModel">
-                                        </mat-form-field>
-                                        <div class="modal-footer">
-                                            <button type="button" mdbBtn color="secondary" class="waves-light w-50"
-                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Annuler
-                                            </button>
-                                            <button type="submit" value="submit" mdbBtn color="primary"
-                                                    (click)="editModal.hide();
-                                                    editClasse(id =_classe.id,
-                                                    parent = _classe.parent,
-                                                    description = _classe.description )"
-                                                    class="relative waves-light  w-50" mdbWavesEffect>
-                                                Modifier
-                                            </button>
+                                    <div class="modal-body">
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="id" id="orangeForm-name"
+                                                   value="{{_classe.id}}" class="form-control w-100 d-none validate">
+                                            <mat-form-field class="col-md-12 w-100">
+                                                <mat-select name="class" required [(ngModel)]="_classe.parent.id" #parentid="ngModel">
+                                                    <mat-option *ngFor="let niveau of listNiveau" [value]="niveau.id">
+                                                        {{niveau.description}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field class="col-md-12">
+                                                <input matInput type="text"  name="description" required
+                                                       value="{{_classe.description}}" [(ngModel)]="_classe.description"
+                                                       #descriptions="ngModel">
+                                            </mat-form-field>
+                                            <div class="d-flex">
+                                                <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                                                        aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Annuler
+                                                </button>
+                                                <button type="submit" value="submit" mdbBtn color="primary"
+                                                        (click)="editModal.hide();
+                                                        editClasse(id =_classe.id,
+                                                        parent = _classe.parent,
+                                                        description = _classe.description )"
+                                                        class="relative waves-light  w-50" mdbWavesEffect>
+                                                    Modifier
+                                                </button>
+                                            </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </mat-dialog-content>
                             </div>
                         </div>

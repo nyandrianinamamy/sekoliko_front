@@ -93,35 +93,34 @@
                                     <h4 class="modal-title w-100">{{_classe.description}}  <i class="fa fa-home"></i>
                                     </h4>
                                 </div>
-                                <form class="text-center border border-light p-5">
-                                    <div class="modal-body">
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="id"
-                                                   value="{{_classe.id}}" class="form-control d-none validate">
-                                            <label data-error="wrong" data-success="right" for="orangeForm-name">Classe
-                                                nom</label>
-                                            <input type="text" id="orangeForm-name" name="description"
-                                                   value="{{_classe.description}}" [(ngModel)]="_classe.description"
-                                                   class="form-control validate" mdbInputDirective>
+                                <div class="modal-body">
+                                    <div class="md-form mb-5">
+                                        <input type="text" name="id"
+                                               value="{{_classe.id}}" class="form-control d-none validate">
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Classe
+                                            nom</label>
+                                        <input type="text" id="orangeForm-name" name="description"
+                                               value="{{_classe.description}}" [(ngModel)]="_classe.description"
+                                               class="form-control validate" mdbInputDirective>
+                                        <div class="d-flex">
+                                            <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                                                    aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>
+                                                Annuler
+                                            </button>
+                                            <button type="submit" value="submit" mdbBtn color="primary"
+                                                    (click)="editModal.hide();editClasse(id=_classe.id,description =_classe.description)"
+                                                    class="relative waves-light  w-50" mdbWavesEffect>
+                                                Modifier
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" mdbBtn color="secondary" class="waves-light w-50"
-                                                aria-label="Close" (click)="editModal.hide()" mdbWavesEffect>Annuler
-                                        </button>
-                                        <button type="submit" value="submit" mdbBtn color="primary"
-                                                (click)="editModal.hide();editClasse(id=_classe.id,description =_classe.description)"
-                                                class="relative waves-light  w-50" mdbWavesEffect>
-                                            Modifier
-                                        </button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <a mdbBtn data-toggle="modal" data-target="#detailsModal" (click)="deleteModal.show()"
-                       class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+                       class=" tz-btn-circle  m-1 relative waves-light d-none" color="danger">
                         <i class="fa fa-trash"></i>
                     </a>
                     <!--modal delete-->

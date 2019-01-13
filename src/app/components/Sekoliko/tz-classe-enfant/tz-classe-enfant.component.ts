@@ -55,7 +55,6 @@ export class TzClasseEnfantComponent implements OnInit {
         });
         this.getClasseParent().subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                console.log(response.data);
                 this.listNiveau = response.data
                 this.loading = false;
             }

@@ -112,8 +112,11 @@
             <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left"
                     (click)="step1.style.display='block';step2.style.display='none'" type="button">Revenir
             </button>
-            <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" (click)="ajouter(etudiant)"
+            <button mdbBtn *ngIf="!updateAction" color="secondary" mdbWavesEffect  class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" (click)="ajouter(etudiant)"
                     type="button">Ajouter
+            </button>
+            <button mdbBtn *ngIf="updateAction" color="secondary" mdbWavesEffect class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" (click)="ajouter(etudiant)"
+                    type="button">Modifier
             </button>
           </table>
         </div>

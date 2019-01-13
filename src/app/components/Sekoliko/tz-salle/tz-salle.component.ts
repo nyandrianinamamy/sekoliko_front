@@ -77,7 +77,6 @@ export class TzSalleComponent implements OnInit {
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.classe_enfant = response.data;
-        console.log(this.classe_enfant);
       }
     });
     this.getNiveau().subscribe(response => {
@@ -90,8 +89,6 @@ export class TzSalleComponent implements OnInit {
         this.loading = false;
         this.salle = data.data;
         this._salle = data.data;
-        console.log(this.salle);
-        console.log(this._salle);
         this.dataSource = new MatTableDataSource<any>(this._salle);
         this.dataSource.paginator = this.paginator;
       }
@@ -176,7 +173,6 @@ export class TzSalleComponent implements OnInit {
         this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
           this.router.navigate(['/menu/salle']));
         this.reservation.occupation = true;
-        console.log(this.reservation.occupation);
         this.loading = false;
       }
     });

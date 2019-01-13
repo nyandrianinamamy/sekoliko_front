@@ -194,7 +194,7 @@
                         </tr>
                       </table>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" *ngIf=" _salle.date_debut_occupation">
                       <table>
                         <tr>
                           <td>Début réservation : </td>
@@ -202,7 +202,7 @@
                         </tr>
                       </table>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" *ngIf="_salle.date_fin_occupation">
                       <table>
                         <tr>
                           <td>Début réservation : </td>
@@ -210,13 +210,13 @@
                         </tr>
                       </table>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item"  *ngIf="_salle.classe">
                       <table>
                         <tr>
                           <td>Réservateur : </td>
                           <td>
                         <span *ngIf="_salle.classe">
-                            {{_salle.classe.parent.description}}  {{ _salle.classe.description}}
+                            {{ _salle.classe.description}}
                         </span>
                           </td>
                         </tr>
@@ -290,11 +290,11 @@
                 </div>
                 <div class="modal-body d-flex">
                   <button type="button" mdbBtn color="secondary" class="waves-light w-50" aria-label="Close"
-                          (click)="deleteModal.hide()" mdbWavesEffect>Cancel
+                          (click)="deleteModal.hide()" mdbWavesEffect>Non
                   </button>
                   <a routerLink="/menu/salle" type="button" mdbBtn color="primary"
                      class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
-                     (click)="deleteModal.hide(); deleteSalle(_salle.id)">Confirm</a>
+                     (click)="deleteModal.hide(); deleteSalle(_salle.id)">Oui</a>
                 </div>
               </div>
             </div>
