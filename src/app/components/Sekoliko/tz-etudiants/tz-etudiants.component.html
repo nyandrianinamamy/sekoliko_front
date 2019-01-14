@@ -1,13 +1,16 @@
 
 <mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
-  <span *ngIf="!etudiant_user">
+  <span *ngIf="!etudiant_user && !profs">
     Liste niveau
   </span>
+    <div class="text-center w-100" *ngIf="profs">
+        Liste niveau
+    </div>
     <span *ngIf="etudiant_user">
         Liste des etudiants
     </span>
     <span fxFlex></span>
-    <a mdbBtn  *ngIf="profs" [routerLink]="['/menu/add-classe']"
+    <a mdbBtn  *ngIf="!profs" [routerLink]="['/menu/add-classe']"
        class="tz-btn-circle m-1 rounded-circle relative waves-light text-center" style="background: #a6c!important;color: aliceblue;"  color="secondary" mdbWavesEffect>
         <i class="fa fa-plus-circle"></i>
     </a>

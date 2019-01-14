@@ -14,7 +14,7 @@ import {
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSidenavModule, MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,MatProgressSpinnerModule
 } from '@angular/material';
 import {CanvasWhiteboardModule} from 'ng2-canvas-whiteboard'
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -94,6 +94,7 @@ import { TzEtsComponent } from './tz-ets/tz-ets.component';
     MatTableModule,
     MaterialModule,
     DataTablesModule,
+    MatProgressSpinnerModule,
     MDBBootstrapModule.forRoot(),
     NgbModalModule,
     NgxPermissionsModule.forRoot(),

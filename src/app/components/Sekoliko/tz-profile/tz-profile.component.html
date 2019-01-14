@@ -5,7 +5,9 @@
   <div class="row">
     <div class="col-md-4 text-center">
       <img class="circle" src="./assets/icons/logo.jpeg" width="200" height="200" style="border-radius:50%;margin-top: 15px">
-      <button class="btn btn-primary" (click)="editMe()" mdbBtn color="secondary">Modifier mon profil</button>
+      <a mdbBtn (click)="editMe()" style="padding: 1rem; border-radius: 50%;" color="secondary" mdbWavesEffect>
+        <i class="fa fa-edit"></i>
+      </a>
     </div>
     <div class="col-md-6 table-responsive">
       <table class="table table-bordered">

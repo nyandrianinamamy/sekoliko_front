@@ -13,6 +13,7 @@ import {ExcelService} from "../../../shared/service/excel.service";
 import html2canvas from 'html2canvas'
 import {UserConnectedService} from "../../../shared/service/user-connected.service";
 import {ConstantRole} from "../../../Utils/ConstantRole";
+import {MobileService} from "../../../shared/service/mobile.service";
 
 @Component({
   selector: 'app-tz-matiere',
@@ -48,18 +49,21 @@ export class TzMatiereComponent implements OnInit {
   idClasse:number;
   href:any;
   classes:number;
+  mobile:boolean;
 
   constructor(
     private dataService: DataService,
     private router: Router,
     private excelService: ExcelService,
     private currentRoute: ActivatedRoute,
-    private userConnected : UserConnectedService) {
+    private userConnected : UserConnectedService,
+    private mobiles:MobileService) {
   }
 
   ngOnInit() {
     this.matiereCreate = new MatiereParam();
     this.loading = true;
+    this.mobile = this.mobileS();
 
     let user = this.getUserConnected();
     if(user.role_type.id === ConstantRole.ETUDIANT) {
@@ -88,6 +92,10 @@ export class TzMatiereComponent implements OnInit {
         }
       });
     }
+  }
+
+  mobileS(){
+    return this.mobiles.getScreenSize();
   }
 
   /**
