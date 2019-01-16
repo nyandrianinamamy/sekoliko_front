@@ -3,7 +3,7 @@
     Liste des salles
   </span>
   <span fxFlex></span>
-  <button *ngIf="!etudiant && profs" class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
+  <button *ngIf="!etudiant && !profs" class="tz-btn-circle m-1 rounded-circle relative waves-light text-center"
           style="background: #a6c!important;color: aliceblue;" color="secondary" routerLinkActive="active-link"
           type="button" mdbBtn
           mdbWavesEffect (click)="openDialog()">
@@ -91,7 +91,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
       </div>
-      <div class="col-md-6 text-right" *ngIf="!etudiant && profs">
+      <div class="col-md-6 text-right" *ngIf="!etudiant && !profs">
         <button class="btn btn-primary" (click)="exportCsv()">Export to CSV</button>
         <button class="btn btn-success" (click)="exportAsXLSX()">Export to XLS</button>
         <button class="btn btn-secondary" (click)="exportPdf()">Export to pdf</button>
@@ -104,7 +104,7 @@
         <th mat-header-cell *matHeaderCellDef class="text-center"> ID</th>
         <td mat-cell *matCellDef="let _salle" class="text-center">
                     <span *ngIf="_salle">
-                        {{ _salle.id}}
+                        SALLE - {{ _salle.id}}
                     </span>
           <span *ngIf="!_salle">
                         0
@@ -150,14 +150,14 @@
             </span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="occupation">
-        <th mat-header-cell *matHeaderCellDef class="text-center"> classe</th>
-        <td mat-cell *matCellDef="let _salle" class="text-center">
-            <span *ngIf="_salle.classe">
-                {{ _salle.classe.occupation}}
-            </span>
-        </td>
-      </ng-container>
+      <!--<ng-container matColumnDef="occupation">-->
+        <!--<th mat-header-cell *matHeaderCellDef class="text-center"> classe</th>-->
+        <!--<td mat-cell *matCellDef="let _salle" class="text-center">-->
+            <!--<span *ngIf="_salle.classe">-->
+                <!--{{ _salle.classe.occupation}}-->
+            <!--</span>-->
+        <!--</td>-->
+      <!--</ng-container>-->
 
 
       <ng-container matColumnDef="action"  *ngIf="!etudiant">

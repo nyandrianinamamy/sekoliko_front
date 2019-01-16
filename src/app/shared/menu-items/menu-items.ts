@@ -62,11 +62,6 @@ const ETUDIANTMENU = [
                 type: 'link',
                 icon: 'dns'
             }, {
-                state: ['/', 'menu', 'anne'],
-                name: 'Anne scolaire',
-                type: 'link',
-                icon: 'event'
-            }, {
                 state: ['/', 'menu', 'etudiant'],
                 name: 'Mes collegues',
                 type: 'link',
@@ -76,6 +71,11 @@ const ETUDIANTMENU = [
                 name: 'Salle',
                 type: 'link',
                 icon: 'home'
+            }, {
+                state: ['/', 'menu', 'anne'],
+                name: 'Années scolaires',
+                type: 'link',
+                icon: 'event'
             }
         ],
     },
@@ -102,18 +102,13 @@ const SECMENU = [
                 type: 'link',
                 icon: 'dns'
             }, {
-                state: ['/', 'menu', 'anne'],
-                name: 'Anne scolaire',
-                type: 'link',
-                icon: 'event'
-            }, {
                 state: ['/', 'menu', 'etudiant'],
-                name: 'Etudiant',
+                name: 'Étudiants par classes',
                 type: 'link',
                 icon: 'account_circle'
             }, {
                 state: ['/', 'menu', 'profs'],
-                name: 'Professeur',
+                name: 'Professeurs',
                 type: 'link',
                 icon: 'perm_identity'
             }, {
@@ -123,23 +118,23 @@ const SECMENU = [
                 icon: 'settings'
             }, {
                 state: ['/', 'menu', 'list-classe'],
-                name: 'Niveau',
+                name: 'Niveaux',
                 type: 'link',
                 icon: 'school'
             },
             {
                 state: ['/', 'menu', 'list-classe-eft'],
-                name: 'Classe et Matiere',
+                name: 'Classe et Matieres',
                 type: 'link',
                 icon: 'class'
             }, {
                 state: ['/', 'menu', 'payement'],
-                name: 'Payement',
+                name: 'Paiement',
                 type: 'link',
                 icon: 'attach_money'
             }, {
                 state: ['/', 'menu', 'salle'],
-                name: 'Gestion salle',
+                name: 'Gestion salles',
                 type: 'link',
                 icon: 'home'
             },
@@ -148,6 +143,11 @@ const SECMENU = [
                 name: 'Gestion utilisateurs',
                 type: 'link',
                 icon: 'account_circle'
+            }, {
+                state: ['/', 'menu', 'anne'],
+                name: 'Années scolaires',
+                type: 'link',
+                icon: 'event'
             }
         ],
     },
@@ -173,35 +173,35 @@ const PROFSMENU = [
                 type: 'link',
                 icon: 'dns'
             }, {
-                state: ['/', 'menu', 'anne'],
-                name: 'Anne scolaire',
-                type: 'link',
-                icon: 'event'
-            }, {
                 state: ['/', 'menu', 'etudiant'],
                 name: 'Etudiant',
                 type: 'link',
                 icon: 'account_circle'
             }, {
                 state: ['/', 'menu', 'profs'],
-                name: 'Professeur',
+                name: 'Professeurs',
                 type: 'link',
                 icon: 'perm_identity'
             }, {
                 state: ['/', 'menu', 'salle'],
-                name: 'Gestion salle',
+                name: 'Gestion salles',
                 type: 'link',
                 icon: 'home'
             }, {
                 state: ['/', 'menu', 'list-classe'],
-                name: 'Niveau',
+                name: 'Niveaux',
                 type: 'link',
                 icon: 'school'
             }, {
                 state: ['/', 'menu', 'list-classe-eft'],
-                name: 'Classe et Matiere',
+                name: 'Classe et Matieres',
                 type: 'link',
                 icon: 'class'
+            }, {
+                state: ['/', 'menu', 'anne'],
+                name: 'Années scolaires',
+                type: 'link',
+                icon: 'event'
             }
         ],
     },

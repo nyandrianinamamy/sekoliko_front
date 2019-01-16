@@ -1,41 +1,46 @@
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span class="text-center d-block w-100">Paiements status</span>
+</mat-toolbar>
 <section class="mt-lg-5">
-  <div class="tz-btn-content text-right mb-2">
-    <a routerLink="/menu/add-payement" routerLinkActive="active-link" type="button" mdbBtn color="secondary" mdbWavesEffect>
-      <i class="fa fa-plus-circle m-2"></i>
-      Ajout un payement
-    </a>
-  </div>
-  <div class="row">
-    <div class="col-md-3" (click)="ecolage()">
-      <div class="card-counter primary">
-        <i class="fa fa-money"></i>
-        <span class="count-numbers">5</span>
-        <span class="count-name">Ecolage</span>
-      </div>
+  <mat-card>
+    <div class="tz-btn-content text-right mb-2">
+      <a routerLink="/menu/add-payement" routerLinkActive="active-link" type="button" mdbBtn color="secondary" mdbWavesEffect>
+        <i class="fa fa-plus-circle m-2"></i>
+        Ajout un paiement
+      </a>
     </div>
+    <div class="row">
+      <div class="col-md-3" (click)="ecolage()">
+        <div class="card-counter primary">
+          <i class="fa fa-money"></i>
+          <span class="count-numbers">5</span>
+          <span class="count-name">Ecolage</span>
+        </div>
+      </div>
 
-    <div class="col-md-3" (click)="profs()">
-      <div class="card-counter danger">
-        <i class="fa  fa-money"></i>
-        <span class="count-numbers">5</span>
-        <span class="count-name">Payement profs</span>
+      <div class="col-md-3" (click)="profs()">
+        <div class="card-counter danger">
+          <i class="fa  fa-money"></i>
+          <span class="count-numbers">5</span>
+          <span class="count-name">Paiement profs</span>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-3" (click)="admin()">
-      <div class="card-counter success">
-        <i class="fa fa-money"></i>
-        <span class="count-numbers">4</span>
-        <span class="count-name">Payement administration</span>
+      <div class="col-md-3" (click)="admin()">
+        <div class="card-counter success">
+          <i class="fa fa-money"></i>
+          <span class="count-numbers">4</span>
+          <span class="count-name">Paiement administration</span>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-3" (click)="achat()">
-      <div class="card-counter info">
-        <i class="fa fa-money"></i>
-        <span class="count-numbers">5</span>
-        <span class="count-name">Payements achat</span>
+      <div class="col-md-3" (click)="achat()">
+        <div class="card-counter info">
+          <i class="fa fa-money"></i>
+          <span class="count-numbers">5</span>
+          <span class="count-name">Paiements achat</span>
+        </div>
       </div>
     </div>
-  </div>
-  </section>
+  </mat-card>
+</section>

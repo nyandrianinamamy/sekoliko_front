@@ -38,7 +38,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="full" id="adminListe">
       <ng-container matColumnDef="matricule">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricule</th>
-        <td mat-cell *matCellDef="let _admin"> {{_admin.user_id }}</td>
+        <td mat-cell *matCellDef="let _admin">ADM - {{_admin.user_id }}</td>
       </ng-container>
       <ng-container matColumnDef="nom">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>

@@ -1,6 +1,6 @@
 <mat-toolbar class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
   <span>
-    Anne scolaire
+    Années Scolaires
   </span>
 </mat-toolbar>
 <section class="mt-5">
@@ -8,11 +8,11 @@
     <table mat-table [dataSource]="dataSource" class="w-100" id="matiereListe">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef class="text-center"> Numero</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Numeros</th>
         <td mat-cell *matCellDef="let _ann" class="text-center"> {{_ann.AnneeScolaireID}}</td>
       </ng-container>
       <ng-container matColumnDef="debut">
-        <th mat-header-cell *matHeaderCellDef class="text-center"> Debut</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Début</th>
         <td mat-cell *matCellDef="let _ann" class="text-center"> {{_ann.date_debut | date: 'dd/MM/yyyy' }}</td>
       </ng-container>
       <ng-container matColumnDef="fin">

@@ -33,7 +33,7 @@
       <table mat-table [dataSource]="dataSource" matSort class="full" id="etudiantListe">
         <ng-container matColumnDef="matricule" *ngIf="!mobile">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricule </th>
-          <td mat-cell *matCellDef="let _etudiant"> {{_etudiant.user_id.user_id }} </td>
+          <td mat-cell *matCellDef="let _etudiant"> ETD - {{_etudiant.user_id.user_id }} </td>
         </ng-container>
         <ng-container matColumnDef="nom">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>

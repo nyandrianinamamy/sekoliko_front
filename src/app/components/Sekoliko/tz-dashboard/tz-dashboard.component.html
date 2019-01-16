@@ -12,7 +12,7 @@
         <div class="card-counter danger">
           <i class="fa  fa-user-secret"></i>
           <span class="count-numbers">{{listProfs}}</span>
-          <span class="count-name">Profs</span>
+          <span class="count-name">Professeurs</span>
         </div>
       </a>
 
@@ -28,20 +28,20 @@
         <div class="card-counter success">
           <i class="fa fa-home"></i>
           <span class="count-numbers">{{compteSalles}}</span>
-          <span class="count-name">Salle</span>
+          <span class="count-name">Salles</span>
         </div>
       </a>
       <a class="col-md-3" *ngIf="!etudiant">
         <div class="card-counter info">
           <i class="fa fa-money"></i>
           <span class="count-numbers">5</span>
-          <span class="count-name">Payement</span>
+          <span class="count-name">Payements</span>
         </div>
       </a>
       <a class="col-md-3" *ngIf="etudiant"  (click)="edt()">
         <div class="card-counter info">
           <i class="fa fa-calendar"></i>
-          <span class="count-numbers">5</span>
+          <span class="count-numbers">1</span>
           <span class="count-name">Emploi du temps</span>
         </div>
       </a>

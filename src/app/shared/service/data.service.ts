@@ -52,9 +52,7 @@ export class DataService {
         if (response.code === ConstantHTTP.CODE_MISSING_INVALID_TOKEN) {
           this.router.navigate(['/login']);
         }
-        console.log(response);
-        // return response.data.
-
+        console.log('Get Service');
       }),
       catchError(this.handleError<DataResponse>('Get service'))
     );

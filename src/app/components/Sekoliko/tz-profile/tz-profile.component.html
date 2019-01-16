@@ -1,34 +1,35 @@
-<section>
-  <div class="mb-3">
-    <h1 class="text-center">A propos de {{userProfile.nom}}</h1>
-  </div>
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <img class="circle" src="./assets/icons/logo.jpeg" width="200" height="200" style="border-radius:50%;margin-top: 15px">
-      <a mdbBtn (click)="editMe()" style="padding: 1rem; border-radius: 50%;" color="secondary" mdbWavesEffect>
-        <i class="fa fa-edit"></i>
-      </a>
+<mat-toolbar  class="view gradient-card-header blue darken-2" style="padding:3%!important" color="primary">
+  <span class="text-center d-block w-100">A propos de {{userProfile.nom}}</span>
+</mat-toolbar>
+<section class="mt-5">
+  <mat-card>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <img class="circle" src="./assets/icons/logo.jpeg" width="200" height="200" style="border-radius:50%;margin-top: 15px">
+        <a mdbBtn (click)="editMe()" style="padding: 1rem; border-radius: 50%;" color="secondary" mdbWavesEffect>
+          <i class="fa fa-edit"></i>
+        </a>
+      </div>
+      <div class="col-md-6 table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <td>Login : </td>
+            <td>{{userProfile.username}}</td>
+          </tr>
+          <tr>
+            <td>Nom : </td>
+            <td>{{userProfile.nom}}</td>
+          </tr>
+          <tr>
+            <td>Prénom : </td>
+            <td>{{userProfile.prenom}}</td>
+          </tr>
+          <tr>
+            <td>Email : </td>
+            <td>{{userProfile.email}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div class="col-md-6 table-responsive">
-      <table class="table table-bordered">
-        <tr>
-          <td>Login : </td>
-          <td>{{userProfile.username}}</td>
-        </tr>
-        <tr>
-          <td>Nom : </td>
-          <td>{{userProfile.nom}}</td>
-        </tr>
-        <tr>
-          <td>Prénom : </td>
-          <td>{{userProfile.prenom}}</td>
-        </tr>
-        <tr>
-          <td>Email : </td>
-          <td>{{userProfile.email}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
+  </mat-card>
 </section>

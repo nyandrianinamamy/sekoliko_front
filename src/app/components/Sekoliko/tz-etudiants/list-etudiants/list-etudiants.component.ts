@@ -119,6 +119,21 @@ export class ListEtudiantsComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Table filter
+   */
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource);
+    // @ts-ignore
+    if(this.dataSource.filteredData == 0){
+      // @ts-ignore
+      console.log('null')
+    }
+  }
+
+
   /**
    * Note etudiant
    */
@@ -199,6 +214,7 @@ export class ListEtudiantsComponent implements OnInit {
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
   }
+
 
   /**
    * Export

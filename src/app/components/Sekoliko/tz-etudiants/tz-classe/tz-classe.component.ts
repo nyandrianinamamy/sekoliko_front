@@ -16,13 +16,13 @@ export class TzClasseComponent implements OnInit {
 
     details = 'Cliquer pour voir les details';
     idClasse: number;
-    classe: Classe[];
+    classe: any = [];
     loading: boolean;
 
     /**
      * Table
      */
-    displayedColumns: string[] = ['ref', 'description', 'action'];
+    displayedColumns: string[] = ['ref', 'description' ,  'action'];
     dataSource: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -41,10 +41,17 @@ export class TzClasseComponent implements OnInit {
       this.loading = true;
       this.dataService.post(urlList.path_list_class_enfant, {parent: parentId}).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          this.classe = response.data;
+            this.classe = response.data;
+            // response.data.forEach(element=>{
+            //     this.getListEtudiants(element.id).subscribe((etd)=>{
+            //         this.classe.push({
+            //             nbEtd: etd.data.length
+            //         });
+            //     });
+            // });
             this.dataSource= new MatTableDataSource<any>(this.classe);
             this.dataSource.paginator = this.paginator;
-          this.loading = false;
+            this.loading = false;
         }
       });
     }
@@ -59,6 +66,10 @@ export class TzClasseComponent implements OnInit {
      */
     checkListEtudiant(idClasse: number) {
       this.router.navigate(['/menu/list-etudiant/' + idClasse]);
+    }
+
+    getListEtudiants(classe: number) {
+        return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
     }
 
     /**

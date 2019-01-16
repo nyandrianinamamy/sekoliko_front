@@ -47,7 +47,7 @@ export class TzSalleComponent implements OnInit {
   /**
    * Table
    */
-  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action' , 'occupation'];
+  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action' ];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -71,12 +71,12 @@ export class TzSalleComponent implements OnInit {
     this.getListSalleLibre();
     this.loading = true;
     let role = this.getUserConnected();
-    if(role.role_type.id === ConstantRole.ETUDIANT){
+    if(role.role_type.id === ConstantRole.PROFS){
       this.profs = true;
     }
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant = true;
-      this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe', 'occupation'];
+      this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe'];
     }
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
