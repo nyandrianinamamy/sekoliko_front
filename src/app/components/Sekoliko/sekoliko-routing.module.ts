@@ -25,6 +25,9 @@ import { TzEdtComponent } from './tz-edt/tz-edt.component';
 import {TzClasseEnfantComponent} from "./tz-classe-enfant/tz-classe-enfant.component";
 import {TzAddEnfantComponent} from "./tz-classe-enfant/tz-add-enfant/tz-add-enfant.component";
 import {AjoutNoteComponent} from './tz_note/ajout-note/ajout-note.component';
+import {TzAnneScolaireComponent} from "./tz-anne-scolaire/tz-anne-scolaire.component";
+import {TzPayementsAjoutComponent} from "./tz-payements/tz-payements-ajout/tz-payements-ajout.component";
+import {TzEtsComponent} from "./tz-ets/tz-ets.component";
 
 const routes: Routes = [
     {
@@ -35,12 +38,14 @@ const routes: Routes = [
             {path: 'user', loadChildren: 'src/app/components/Sekoliko/user-manage/user-manage.module#UserManageModule'},
             {path: 'not-found', component: NotFoundComponent},
             {path: 'dashboard', component: TzDashboardComponent},
+            {path: 'anne', component: TzAnneScolaireComponent},
             {path: 'etudiant', component: TzEtudiantsComponent},
             {path: 'salle', component: TzSalleComponent},
             {path:  'add-salle', component: TzAjoutSalleComponent},
             {path: 'list-etudiant/:id', component: ListEtudiantsComponent},
             {path: 'add-etudiant', component: TzAjoutEtudiantComponent},
             {path: 'payement', component: TzPayementsComponent},
+            {path: 'add-payement', component: TzPayementsAjoutComponent},
             {path: 'administratif', component: TzAdministrationComponent},
             {path: 'fonction/:id', component: TzFonctionProfComponent},
             {path: 'ajout-utilisateur/:type', component: TzUserComponent},
@@ -51,13 +56,14 @@ const routes: Routes = [
             {path: 'add-prof', component: TzAjoutProfsComponent},
             {path: 'list-classe', component: TzClasseListComponent},
             {path: 'add-classe', component: TzAjoutClasseComponent},
-            {path: 'matiere-list', component: TzMatiereComponent},
+            {path: 'matiere-list/:id', component: TzMatiereComponent},
             {path: 'add-matiere', component: TzAjoutMatiereComponent},
             {path: 'add-matiere/:id', component: TzAjoutMatiereComponent},
-            {path: 'edt', component: TzEdtComponent},
+            {path: 'edt/:id', component: TzEdtComponent},
             {path: 'list-classe-eft', component: TzClasseEnfantComponent},
             {path: 'add-eft', component: TzAddEnfantComponent},
             {path: 'profile', component: TzProfileComponent},
+            {path: 'ets', component: TzEtsComponent},
             {path: 'note/:id/:idClasse', component: AjoutNoteComponent},
             {path: '**', redirectTo: 'not-found'}
         ]

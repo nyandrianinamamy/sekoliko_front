@@ -8,6 +8,7 @@ import {UserConnectedService} from "../../../shared/service/user-connected.servi
 import {ConstantRole} from "../../../Utils/ConstantRole";
 import {MatTableDataSource} from "@angular/material";
 import {el} from "@angular/platform-browser/testing/src/browser_util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tz-dashboard',
@@ -25,6 +26,10 @@ export class TzDashboardComponent implements OnInit {
   idClasse:number;
   loading:boolean;
   listMatier:any;
+  listEts:any;
+  countEts:any;
+  superadmin:boolean;
+
   /**
    * Chartes
    */
@@ -161,13 +166,49 @@ export class TzDashboardComponent implements OnInit {
   /**
    * @param dataService
    * @param userConnected
+   * @param router
    */
   constructor(private dataService: DataService,
-              private userConnected:UserConnectedService
+              private userConnected:UserConnectedService,
+              private router:Router
   ) { }
 
   ngOnInit() {
-    this.loading = true
+    this.loading = true;
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.idClasse = response.data[0].id_classe.id;
+          console.log(response.data);
+          this.getListEtudiants(this.idClasse).subscribe(response => {
+            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+              this.listEtd = response.data.length;
+            }
+          });
+          this.idClasse = response.data[0].id_classe.id;
+          this.getAllMatiere(this.idClasse);
+        }
+      });
+    }else {
+      this.getNbEtudiants().subscribe((response: any) => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.listEtd = response.data.list.length;
+        }
+      });
+    }
+    if (role.role_type.id === ConstantRole.SUPERADMIN){
+      this.getEts().subscribe(response =>{
+        console.log(response.data);
+        if (response.code === ConstantHTTP.CODE_SUCCESS){
+          this.superadmin = true;
+          this.listEts = response.data;
+          this.countEts = response.data.length;
+        }
+      });
+    }
+
     this.getNbSalles().subscribe((response: any) => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.compteSalles = response.data.length;
@@ -185,30 +226,7 @@ export class TzDashboardComponent implements OnInit {
       }
     });
 
-    let role = this.getUserConnected();
-    if(role.role_type.id === ConstantRole.ETUDIANT){
-      this.etudiant = true;
-      this.getUserInsc().subscribe(response => {
-        if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          console.log(response.data);
-          this.idClasse = response.data[0].id_classe.id;
-          this.getListEtudiants(this.idClasse).subscribe(response => {
-            if (response.code === ConstantHTTP.CODE_SUCCESS) {
-              this.listEtd = response.data.length;
-            }
-          });
 
-          this.idClasse = response.data[0].id_classe.id;
-          this.getAllMatiere(this.idClasse);
-        }
-      });
-    }else {
-      this.getNbEtudiants().subscribe((response: any) => {
-        if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          this.listEtd = response.data.list.length;
-        }
-      });
-    }
     this.loading = false;
   }
 
@@ -217,6 +235,13 @@ export class TzDashboardComponent implements OnInit {
    */
   getNbEtudiants() {
     return this.dataService.post(urlList.path_find_user, {role :2});
+  }
+
+  /**
+   * Fetch ets liste
+   */
+  getEts(){
+    return this.dataService.post(urlList.path_ets);
   }
 
   /**
@@ -240,10 +265,46 @@ export class TzDashboardComponent implements OnInit {
     return this.userConnected.userConnected();
   }
 
+  /**
+   * liste etudiant
+   * @param classe
+   */
   getListEtudiants(classe: number) {
     return this.dataService.post(urlList.path_list_etudiants, {idclasse: classe, list: 'liste'});
   }
 
+  /**
+   * Emploie du temps
+   */
+  edt(){
+    const role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.idClasse = response.data[0].id_classe.id;
+          console.log(this.idClasse);
+          this.router.navigate(['/menu/edt/'+ this.idClasse])
+        }
+      });
+    }
+  }
+
+  /**
+   * navigate étudiant to matiere et profs
+   */
+  matProfs(){
+    let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.idClasse = response.data[0].id_classe.id;
+          this.router.navigate(['/menu/matiere-list/'+ this.idClasse])
+        }
+      });
+    }
+  }
   /**
    * Get Liste profs
    * @param idClass

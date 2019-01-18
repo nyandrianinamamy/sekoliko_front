@@ -29,6 +29,10 @@ import {DataService} from "../../../shared/service/data.service";
 import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {User} from "../../../shared/model/User";
 import {ClasseEnfant} from "../../../shared/model/ClasseEnfant";
+import {Edt} from "../../../shared/model/EdtTs";
+import {ActivatedRoute, Route, Router} from "@angular/router";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
+import {ConstantRole} from "../../../Utils/ConstantRole";
 
 const colors: any = {
   red: {
@@ -55,68 +59,25 @@ const colors: any = {
 
 export class TzEdtComponent implements OnInit {
   constructor(private modal: NgbModal,
-              private dataService: DataService) {}
+              private dataService: DataService,
+              private router:Router,
+              private currentRoute: ActivatedRoute,
+              private userConnected:UserConnectedService) {}
 
   /**
    * Fetch matiere
    */
   listMatiere: MatiereParam[];
-  profs: User;
-  classe : ClasseEnfant;
-
-  /**
-   * Fetch matiere liste
-   */
-  getMatiere() {
-    return this.dataService.post(urlList.path_list_matiere);
-  }
-
-  /**
-   * Fetch profs listes
-   */
-  getProfs() {
-    return this.dataService.post(urlList.path_find_user,{role:1})
-  }
-
-  /**
-   * Fetch classe listes
-   */
-  getClasse(){
-    return this.dataService.post(urlList.path_list_class_enfant)
-  }
-
-  ngOnInit(): void {
-    this.getMatiere().subscribe(response=>{
-      if(response.code === ConstantHTTP.CODE_SUCCESS){
-        this.listMatiere = response.data;
-      }
-    });
-    this.getProfs().subscribe(response=>{
-      if(response.code === ConstantHTTP.CODE_SUCCESS){
-        this.profs = response.data.list;
-      }
-    })
-    this.getClasse().subscribe(response=>{
-      if(response.code === ConstantHTTP.CODE_SUCCESS){
-        this.classe = response.data;
-      }
-    })
-  }
-
-  @ViewChild('modalContent')
-  modalContent: TemplateRef<any>;
-
-  view: CalendarView = CalendarView.Month;
-
-  CalendarView = CalendarView;
-
-  viewDate: Date = new Date();
-
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
+  classe : any;
+  emploie:Edt;
+  add:boolean;
+  etudiant:boolean;
+  edit:boolean;
+  list:boolean;
+  loading:boolean;
+  classes:number;
+  emploidutemps:any;
+  refresh: Subject<any> = new Subject();
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-edit"></i>',
@@ -132,49 +93,150 @@ export class TzEdtComponent implements OnInit {
       }
     }
   ];
+  events: CalendarEvent[] = [];
+  public href: any ;
+  /**
+   * Fetch matiere liste
+   */
+  getMatiere() {
+    return this.dataService.post(urlList.path_list_matiere);
+  }
 
-  refresh: Subject<any> = new Subject();
+  /**
+   * Fetch classe listes
+   */
+  getClasse(){
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.get(urlList.path_list_class_enfant_edt + 10)
+  }
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Mathématiques',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'Physique',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'Anglais',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'Bibliothèque',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
+  ngOnInit(): void {
+    /**
+     * Get Matiere liste
+     */
+    this.getMatiere().subscribe(response=>{
+      if(response.code === ConstantHTTP.CODE_SUCCESS){
+        this.listMatiere = response.data;
+      }
+    });
+
+
+
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
     }
-  ];
+
+    this.emploie = new Edt();
+
+    /**
+     * get liste oninit
+     */
+    this.getEdtListe().subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+          response.data.forEach(edt => {
+            console.log(edt);
+            this.events.push({
+              id: edt.id,
+              start:new Date( edt.start),
+              end:  new Date( edt.end),
+              title:edt.title,
+              color: colors.red,
+              allDay: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              draggable: true
+            });
+            this.refresh.next();
+            this.list= true
+          });
+      }
+      this.loading = false;
+    })
+  }
+
+  /**
+   * Fetch inscription liste
+   */
+  getUserInsc(){
+    let role = this.getUserConnected();
+    return this.dataService.post(urlList.path_list_etudiants,{userid:role.user_id});
+  }
+
+  /**
+   * Get liste emploie du temps
+   */
+  getEdtListe(){
+    let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.etudiant = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.classes = response.data[0].id_classe.id;
+          return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
+        }
+      });
+    }
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.post(urlList.path_edt_list,{classe: this.classes});
+  }
+
+  /**
+   * Ajout emploie du temps
+   * @param emploie
+   */
+  addEdt(emploie:Edt){
+    this.loading = true;
+    this.dataService.post(urlList.path_edt_add , {classe:this.classes,title:emploie.title,start:emploie.start,end:emploie.end}).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt/'+this.classes]));
+        this.loading = false;
+        this.add = false;
+      }
+    })
+  }
+
+  /**
+   * supprimer un emploie du temps
+   * @param id
+   */
+  deleteEdt(id:number){
+    this.loading = true;
+    this.dataService.post(urlList.path_edt_del + id).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt/'+this.classes]));
+        this.loading = false;
+      }
+    })
+  }
+
+
+  @ViewChild('mat-card')
+  modalContent: TemplateRef<any>;
+
+  view: CalendarView = CalendarView.Month;
+
+  CalendarView = CalendarView;
+
+  viewDate: Date = new Date();
+
+  dateData: {
+    action: string;
+    event: CalendarEvent;
+  };
 
   activeDayIsOpen: boolean = true;
 
@@ -204,24 +266,58 @@ export class TzEdtComponent implements OnInit {
     this.refresh.next();
   }
 
+  /**
+   * Handle click event
+   * @param action
+   * @param event
+   */
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.dateData = { event, action };
+    console.log(this.dateData.event);
+    this.edit = true;
   }
 
+  /**
+   * Set event true
+   */
   addEvent(): void {
-    this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
+    this.add = true;
+    this.getClasse().subscribe(response=>{
+      if(response.code === ConstantHTTP.CODE_SUCCESS){
+        this.classe = response.data;
       }
     });
-    this.refresh.next();
+
+  }
+
+  /**
+   * Modifier un emploie du temps
+   * @param id
+   * @param titre
+   * @param debut
+   * @param fin
+   */
+  editEvent(id:number,
+            titre:string,
+            debut:Date,
+            fin:Date){
+    this.loading = true;
+    this.classes = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    this.dataService.post(urlList.path_edt_edit + id,{title:titre,start:debut,end:fin,classe:this.classes}).subscribe(response=>{
+      if (response.code === ConstantHTTP.CODE_SUCCESS){
+        this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+            this.router.navigate(['/menu/edt/'+this.classes]));
+        this.loading = false;
+        this.add = false;
+      }
+    })
+  }
+
+  /**
+   * Get user connected
+   */
+  getUserConnected(){
+    return this.userConnected.userConnected();
   }
 
 }

@@ -1,197 +1,108 @@
-
 <app-sk-navbar></app-sk-navbar>
-<div class="view intro tz-view-intro" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2844%29.jpg); background-attachment: fixed; height: 100vh;">
+<div class="view intro tz-view-intro"
+     style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2844%29.jpg); background-attachment: fixed; height: 100vh;">
     <div class="full-bg-img mask rgba-white-light">
         <div class="container">
             <div class="d-flex align-items-center d-flex justify-content-center tz-d-flex" style="height: 100vh">
                 <div class="row mt-5">
                     <div class="col-md-12 wow fadeIn mb-3">
                         <div class="intro-info-content text-center">
-                            <h2 class="h1 display-1 mb-2 wow fadeInDown" data-wow-delay="0.3s">TECHZARA<a class="indigo-text font-bold">SEKOLIKO</a></h2>
-                            <h5 class="font-up mb-3 mt-1 font-bold wow fadeIn" data-wow-delay="0.4s">OpenSoure Project </h5>
+                            <h2 class="h1 display-1 mb-2 wow fadeInDown" data-wow-delay="0.3s">{{techzara}}<a
+                                    class="indigo-text font-bold">{{titles}}</a></h2>
+                            <h5 class="font-up mb-3 mt-1 font-bold wow fadeIn" data-wow-delay="0.4s">
+                                <strong>{{opensource}}</strong></h5>
                             <a mdbBtn color="light-blue" routerLink="/login" routerLinkActive="active" size="lg"
-                               class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i class="fa fa-arrow-circle-o-right"></i> &nbsp;Login</a>
-                            <a mdbBtn color="light-blue" href="https://github.com/Techzara/sekoly-numerika" target="_blank" size="lg"
-                               class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i class="fa fa-github"></i> &nbsp;Github</a>
-                            <a mdbBtn href="#team" color="indigo" size="lg" class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i class="fa fa-group"></i>&nbsp;Team</a> </div>
+                               class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i
+                                    class="fa fa-arrow-circle-o-right"></i> &nbsp;{{loginName}}</a>
+                            <a mdbBtn color="light-blue" href="https://github.com/Techzara/sekoly-numerika"
+                               target="_blank" size="lg"
+                               class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s"><i
+                                    class="fa fa-github"></i> &nbsp;{{githubName}}</a>
+                            <a mdbBtn href="#team" color="indigo" size="lg"
+                               class="wow fadeIn waves-light tz-landing-button" mdbWavesEffect data-wow-delay="0.4s">
+                                <i class="fa fa-group"></i>&nbsp;{{Team}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <section>
     <div class="container-fluid">
-        <!--Grid row-->
         <div class="row">
-            <!--Grid column-->
-            <div class="col-md-6 text-center mb-5">
-                <h2 class="h1 font-bold light-blue-text my-5">SEKOLIKO?</h2>
-                        {{but}} :
-                        <ol class="text-left">
-                            <li>{{but1}}</li>
-                            <li>{{but4}}</li>
-                            <li>{{but2}}</li>
-                            <li>{{but3}}</li>
-                            <li>...</li>
-                        </ol>
+            <div class="col-md-6 text-center mb-5" [@bounce]="bounce">
+                <h2 class="h1 font-bold light-blue-text my-5">{{titles}}</h2>
+                {{but}} :
+                <ol class="text-left" *ngFor="let butss of buts">
+                    <li>{{butss.name}}</li>
+                </ol>
 
                 <h1><strong>{{soutient}}</strong></h1>
                 <ul class="list-group list-group-flush text-left">
-                    <li class="list-group-item">{{soutient1}}</li>
-                    <li class="list-group-item">{{soutient2}}.</li>
-                    <li class="list-group-item">{{soutient3}}</li>
-                    <li class="list-group-item">{{soutient4}}</li>
-                    <li class="list-group-item">{{soutient5}} <a href="https://github.com/Techzara/sekoly-numerika" target="_blank">{{sout1}}</a> {{sout2}}</li>
+                    <div *ngFor="let soute of soutients">
+                        <li class="list-group-item">{{soute.name}}</li>
+                    </div>
+                    <li class="list-group-item">{{soutient5}} <a href="{{gitTz}}"
+                                                                 target="_blank">{{sout1}}</a> {{sout2}}</li>
                 </ul>
 
 
             </div>
-            <div class="col-md-6 text-center " >
-                <img style="width: 66%; height: 400px;margin-top:15% ;  position: relative;" src="./assets/images/school.svg" alt="">
+            <div class="col-md-6 text-center " [@bounceInLeft]="bounceInLeft">
+                <img style="width: 66%; height: 400px;margin-top:15% ;  position: relative;" src="{{imageright}}"
+                     alt="">
             </div>
-            <!--Grid column-->
         </div>
-        <!--Grid row-->
     </div>
 </section>
 
-
+<section class="col-md-12">
+    <h2 class="text-center indigo-text h1 py-5">
+        <strong>{{sekoliko_vue}} 🏫 </strong>
+    </h2>
+    <div class="row">
+        <div class="col-md-4 mx-auto my-5" *ngFor="let image of imagesBasic">
+            <a><img (click)="video1.show()" class="img-fluid z-depth-1" src="{{image.img}}"
+                    alt="video" data-toggle="modal" data-target="#modal1"></a>
+            <div mdbModal #video1="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="myBasicModalLabel"
+                 [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <mat-dialog-content>
+                            <img src="{{image.img}}" style="width: 100%" height="auto" alt="">
+                        </mat-dialog-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="container-fluid" id="team">
-    <!--Grid row-->
     <div class="row">
-        <!--Grid column-->
         <div class="col-md-12 text-center my-5">
-            <!-- Section: Team v.1 -->
             <section class="team-section text-center my-5">
-                <!-- Section heading -->
                 <h2 class="h1-responsive font-weight-bold indigo-text my-5">{{equipe}} <i class="fa fa-group"></i></h2>
-                <!-- Section description -->
                 <p class="grey-text w-responsive mx-auto mb-5">{{pre_equipe}}</p>
                 <div class="row">
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
+                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5" *ngFor="let dev of developer">
                         <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars3.githubusercontent.com/u/32259364?s=400&v=4" class="rounded-circle z-depth-1"
+                            <img width="70%" src="{{dev.img}}" class="rounded-circle z-depth-1"
                                  alt="Sample avatar">
                         </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Tahiana</h5>
+                        <h5 class="font-weight-bold mt-4 mb-3">{{dev.name}}</h5>
                         <p class="text-uppercase blue-text">
-                            <strong>{{Tahiana_dev}}</strong>
+                            <strong>{{dev.dev}}</strong>
                         </p>
-                        <p class="grey-text">{{Tahiana_tache}}</p>
+                        <p class="grey-text">{{dev.tache}}</p>
                         <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://www.facebook.com/kala.Nance" target="_blank" class="p-2 fa-lg fb-ic">
+                            <a href="{{dev.facebook}}" target="_blank" class="p-2 fa-lg fb-ic">
                                 <i class="fa fa-facebook blue-text"> </i>
                             </a>
-                            <!-- Instagram -->
-                            <a href="https://github.com/Tax16" target="_blank" class="p-2 fa-lg ins-ic">
-                                <i class="fa fa-github blue-text"> </i>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
-                        <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars1.githubusercontent.com/u/35923219?s=400&v=4" class="rounded-circle z-depth-1"
-                                 alt="Sample avatar">
-                        </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Ny Antso</h5>
-                        <p class="text-uppercase blue-text">
-                            <strong>{{Antso_dev}}</strong>
-                        </p>
-                        <p class="grey-text">{{Antso_tache}}</p>
-                        <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://www.facebook.com/nyantso.rak" target="_blank" class="p-2 fa-lg fb-ic">
-                                <i class="fa fa-facebook blue-text"> </i>
-                            </a>
-                            <!-- Instagram -->
-                            <a href="https://github.com/NyAntsoRK" target="_blank" class="p-2 fa-lg ins-ic">
-                                <i class="fa fa-github blue-text"> </i>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
-                        <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars1.githubusercontent.com/u/21168538?s=400&v=4" class="rounded-circle z-depth-1"
-                                 alt="Sample avatar">
-                        </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Daulis</h5>
-                        <p class="text-uppercase blue-text">
-                            <strong>{{Daulis_dev}}</strong>
-                        </p>
-                        <p class="grey-text">{{Daulis_tache}}</p>
-                        <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://www.facebook.com/odonfidaulis.andrianjakatiana" target="_blank" class="p-2 fa-lg fb-ic">
-                                <i class="fa fa-facebook blue-text"> </i>
-                            </a>
-                            <!-- Instagram -->
-                            <a href="https://github.com/Fidaulis" target="_blank" class="p-2 fa-lg ins-ic">
-                                <i class="fa fa-github blue-text"> </i>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
-                        <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars1.githubusercontent.com/u/44327690?s=460&v=4" class="rounded-circle z-depth-1"
-                                 alt="Sample avatar">
-                        </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Janny</h5>
-                        <p class="text-uppercase blue-text">
-                            <strong>{{Janny_dev}}</strong>
-                        </p>
-                        <p class="grey-text">{{Janny_tache}}</p>
-                        <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://github.com/jmRakoto" target="_blank" class="p-2 fa-lg fb-ic">
-                                <i class="fa fa-facebook blue-text"> </i>
-                            </a>
-                            <!-- Instagram -->
-                            <a href="https://www.facebook.com/jm.rakoto.7" target="_blank" class="p-2 fa-lg ins-ic">
-                                <i class="fa fa-github blue-text"> </i>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
-                        <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars2.githubusercontent.com/u/45004342?s=460&v=4" class="rounded-circle z-depth-1"
-                                 alt="Sample avatar">
-                        </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Andry</h5>
-                        <p class="text-uppercase blue-text">
-                            <strong>{{Andry_dev}}</strong>
-                        </p>
-                        <p class="grey-text">{{Andry_tache}}</p>
-                        <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://www.facebook.com/andry.an.37604" target="_blank" class="p-2 fa-lg fb-ic">
-                                <i class="fa fa-facebook blue-text"> </i>
-                            </a>
-                            <!-- Instagram -->
-                            <a href="https://github.com/m0r7y" target="_blank" class="p-2 fa-lg ins-ic">
-                                <i class="fa fa-github blue-text"> </i>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2  mb-lg-0 mb-5">
-                        <div class="avatar mx-auto">
-                            <img width="70%" src="https://avatars1.githubusercontent.com/u/30557565?s=460&v=4" class="rounded-circle z-depth-1"
-                                 alt="Sample avatar">
-                        </div>
-                        <h5 class="font-weight-bold mt-4 mb-3">Julien</h5>
-                        <p class="text-uppercase blue-text">
-                            <strong>{{Jul_resp}}</strong>
-                        </p>
-                        <p class="grey-text">{{Jul_tache}}.</p>
-                        <ul class="list-unstyled mb-0">
-                            <!-- Facebook -->
-                            <a href="https://www.facebook.com/julkwel" target="_blank" class="p-2 fa-lg fb-ic">
-                                <i class="fa fa-facebook blue-text"> </i>
-                            </a>
-                            <!-- Instagram -->
-                            <a href="https://github.com/julkwel" target="_blank" class="p-2 fa-lg ins-ic">
+                            <a href="{{dev.githube}}" target="_blank" class="p-2 fa-lg ins-ic">
                                 <i class="fa fa-github blue-text"> </i>
                             </a>
                         </ul>
@@ -204,130 +115,27 @@
 
 
 <div class="container-fluid">
-    <h2 class="text-center indigo-text h1 py-5">
-        <strong>{{sekoliko_vue}} 🏫 </strong>
-    </h2>
-
-    <!--Section description-->
-    <!--<p class="grey-text pb-5 text-center">Indro misy fonctionnalité vitsivitsy asehonay antsary aminao</p>-->
-
-    <!--Grid row-->
-    <div class="row text-center">
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-12 mb-4">
-
-            <!--Featured image-->
-            <div class="view overlay rounded z-depth-1 waves-light" mdbWavesEffect>
-                <img src="./assets/images/img1.jpeg" class="img-fluid" alt="Sample project image">
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
-            <mdb-card-body class="mt-3">
-                <h4>
-                    <strong>{{sekoliko_vue1}}</strong>
-                </h4>
-                <p class="grey-text">
-                    {{dashboard}}
-                </p>
-            </mdb-card-body>
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-            <!--Featured image-->
-            <div class="view overlay rounded z-depth-1  waves-light" mdbWavesEffect>
-                <img src="./assets/images/img2.jpeg" class="img-fluid" alt="Sample project image">
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
-
-            <!--Excerpt-->
-            <mdb-card-body class="mt-3">
-                <h4>
-                    <strong>{{sekoliko_vue2}}</strong>
-                </h4>
-                <p class="grey-text">{{liste_etudiant}}
-                </p>
-            </mdb-card-body>
-
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="view overlay rounded z-depth-1  waves-light" mdbWavesEffect>
-                <img src="./assets/images/img3.jpeg" class="img-fluid" alt="Sample project image">
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
-            <mdb-card-body class="mt-3">
-                <h4>
-                    <strong>{{sekoliko_vue3}}</strong>
-                </h4>
-                <p class="grey-text">
-                    {{liste_salle}}
-                </p>
-            </mdb-card-body>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <!--Grid row-->
     <div class="row">
-        <!--Grid column-->
         <div class="col-md-12 text-center my-5">
             <h2 class="h1 font-bold indigo-text mb-5">{{contributeur}}</h2>
             <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-                <mdb-carousel-item>
+                <mdb-carousel-item *ngFor="let part of imageSlide">
                     <div class="view w-100">
-                        <img class="d-block w-100" src="./assets/images/google.jpeg" alt="First slide">
+                        <img class="d-block w-100" src="{{part.img}}" alt="First slide">
                         <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
                     </div>
                     <div class="carousel-caption black-text">
-                        <h3 class="h3-responsive">Google</h3>
-                        <p>{{google}}</p>
-                    </div>
-                </mdb-carousel-item>
-                <mdb-carousel-item>
-                    <div class="view w-100">
-                        <img class="d-block w-100" src="./assets/images/stack.jpeg" alt="Second slide">
-                        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
-                    </div>
-                    <div class="carousel-caption black-text">
-                        <h3 class="h3-responsive">Stackoverflow</h3>
-                        <p>{{stackoverflow}}</p>
-                    </div>
-                </mdb-carousel-item>
-                <mdb-carousel-item>
-                    <div class="view w-100">
-                        <img class="d-block w-100" src="./assets/images/gith.jpeg" alt="Third slide">
-                        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
-                    </div>
-                    <div class="carousel-caption black-text">
-                        <h3 class="h3-responsive">Github</h3>
-                        <p>{{github}}</p>
+                        <h3 class="h3-responsive">{{part.partenaire}}</h3>
+                        <p>{{part.thanks}}</p>
                     </div>
                 </mdb-carousel-item>
             </mdb-carousel>
         </div>
-        <!--Grid column-->
     </div>
-    <!--Grid row-->
 </div>
 
-<!-- Footer -->
-<footer class="page-footer font-small blue">
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-        <a href="https://www.techzara.org">Techzara</a>
+<footer class="page-footer font-small blue" *ngFor="let foot of footer">
+    <div class="footer-copyright text-center py-3">{{foot.right}}
+        <a href="https://www.techzara.org">{{foot.cop}}</a>
     </div>
-    <!-- Copyright -->
-
 </footer>
-<!-- Footer -->

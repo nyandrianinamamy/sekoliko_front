@@ -42,7 +42,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="col-md-4">
-            <mat-select name="role" placeholder="Type" name="type" [(ngModel)]="utilisateur.role" #type="ngModel">
+            <mat-select  placeholder="Type" name="type" [(ngModel)]="utilisateur.role" #type="ngModel">
               <mat-option value="">Choisissez le role</mat-option>
               <mat-option *ngFor="let listRole of roles" [value]="listRole.id"> {{listRole.description}}</mat-option>
             </mat-select>

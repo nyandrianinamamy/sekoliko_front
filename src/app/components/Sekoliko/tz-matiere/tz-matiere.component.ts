@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 import {DataService} from '../../../shared/service/data.service';
 import {urlList} from '../../../Utils/api/urlList';
 import {ConstantHTTP} from '../../../Utils/ConstantHTTP';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatiereParam} from '../../../shared/model/MatiereParam';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {Angular5Csv} from 'angular5-csv/Angular5-csv';
@@ -13,6 +13,7 @@ import {ExcelService} from "../../../shared/service/excel.service";
 import html2canvas from 'html2canvas'
 import {UserConnectedService} from "../../../shared/service/user-connected.service";
 import {ConstantRole} from "../../../Utils/ConstantRole";
+import {MobileService} from "../../../shared/service/mobile.service";
 
 @Component({
   selector: 'app-tz-matiere',
@@ -39,29 +40,42 @@ export class TzMatiereComponent implements OnInit {
   nom: string;
   coeff: number;
   class: number;
+  idClasseEnfant: number;
   matiere: number;
+  profs:boolean;
   listClasse: Classe[];
   listMatier = [];
   etudiant:boolean;
   idClasse:number;
+  href:any;
+  classes:number;
+  mobile:boolean;
 
   constructor(
     private dataService: DataService,
     private router: Router,
     private excelService: ExcelService,
-    private userConnected : UserConnectedService) {
+    private currentRoute: ActivatedRoute,
+    private userConnected : UserConnectedService,
+    private mobiles:MobileService) {
   }
 
   ngOnInit() {
     this.matiereCreate = new MatiereParam();
     this.loading = true;
+    this.mobile = this.mobileS();
+
     let user = this.getUserConnected();
-    if(user.role_type.id === ConstantRole.ETUDIANT){
+    if(user.role_type.id === ConstantRole.ETUDIANT) {
       this.etudiant = true;
       this.displayedColumns = ['nom', 'coefficient', 'prof'];
       this.getUserInsc().subscribe(response => {
         if(response.code === ConstantHTTP.CODE_SUCCESS){
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
           this.idClasse = response.data[0].id_classe.id;
+          if (this.href != this.idClasse) {
+            this.router.navigate(['/menu/not-found']);
+          }
           this.getAllMatiere(this.idClasse);
         }
       });
@@ -69,15 +83,24 @@ export class TzMatiereComponent implements OnInit {
       this.getMatiere().subscribe((response: any) => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
           this.loading = false;
+          if(user.role_type.id === ConstantRole.PROFS){
+            this.profs = true;
+          }
           this.listMatiere = response.data;
           this.dataSource = new MatTableDataSource<any>(this.listMatiere);
           this.dataSource.paginator = this.paginator;
-          this.dtTrigger.next();
         }
       });
     }
   }
 
+  mobileS(){
+    return this.mobiles.getScreenSize();
+  }
+
+  /**
+   * get user connected
+   */
   getUserConnected(){
     return this.userConnected.userConnected();
   }
@@ -92,7 +115,8 @@ export class TzMatiereComponent implements OnInit {
   }
 
   getMatiere() {
-    return this.dataService.post(urlList.path_list_matiere);
+    this.idClasseEnfant = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
+    return this.dataService.post(urlList.path_list_matiere,{class: this.idClasseEnfant});
   }
 
   getAllMatiere(idClass: number) {

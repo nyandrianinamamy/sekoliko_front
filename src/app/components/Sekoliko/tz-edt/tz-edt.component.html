@@ -1,11 +1,5 @@
-<ng-template #modalContent let-close="close">
-  <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
-    <button type="button" class="close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
+<ng-template #matCard let-close="close">
+  <div>
     <div>
       Action:
       <pre>{{ modalData?.action }}</pre>
@@ -14,9 +8,41 @@
       Event:
       <pre>{{ modalData?.event | json }}</pre>
     </div>
+    <mat-form-field class="col-md-12">
+      <mat-select placeholder="Classe" name="class" required [(ngModel)]="emploie.classe" #classes="ngModel">
+        <mat-option *ngFor="let classes of classe" [value]="classes.id">
+          {{emploie.classe}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="emploie.title" required #title="ngModel">
+        <mat-option *ngFor="let matiere of listMatiere" [value]="matiere.description">
+          {{modalData?.event.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput
+             [owlDateTimeTrigger]="dt12"
+             [owlDateTime]="dt12" name="dateDebut"
+             [(ngModel)]="emploie.start"
+             placeholder="date début"
+             required  #start="ngModel">
+      <owl-date-time #dt12></owl-date-time>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput
+             [owlDateTimeTrigger]="dt14"
+             [owlDateTime]="dt14" name="dateFin"
+             [(ngModel)]="emploie.end"
+             placeholder="date fin"
+             required  #end="ngModel">
+      <owl-date-time #dt14></owl-date-time>
+    </mat-form-field>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+  <div>
+    <button type="button" class="btn btn-outline-secondary" (click)="editEdt(); close()">Edit</button>
   </div>
 </ng-template>
 
@@ -107,43 +133,130 @@
 <br><br><br>
 
 <h3>
-  Edit events
-  <button
+  Emploie du temps
+  <button  *ngIf="!etudiant"
           class="btn btn-primary pull-right"
           (click)="addEvent()">
-    Add new
+    Ajouter
   </button>
   <div class="clearfix"></div>
 </h3>
-  <table class="table table-bordered">
-
+  <table class="table table-bordered" *ngIf="list">
     <thead>
     <tr>
-      <th>Classe</th>
-      <th>Matiere</th>
-      <th>Profs</th>
-      <th>Color</th>
-      <th>Début le</th>
-      <th>Terminer le </th>
-      <th>Remove</th>
+      <th class="text-center">Matière</th>
+      <th class="text-center">Début</th>
+      <th class="text-center">Fin</th>
+      <th *ngIf="!etudiant" class="text-center">Action</th>
     </tr>
     </thead>
-
     <tbody>
-    <tr *ngFor="let event of events; let index = index">
+      <tr *ngFor="let event of events">
+        <td class="text-center">{{event.title}}</td>
+        <td class="text-center">{{event.start | date:'medium' }}</td>
+        <td class="text-center">{{event.end   | date:'medium' }}</td>
+        <td *ngIf="!etudiant">
+          <a mdbBtn data-toggle="modal" data-target="#deleteModal" (click)="deleteModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="danger">
+            <i class="fa fa-trash"></i>
+          </a>
+          <div mdbModal #deleteModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true"
+               aria-labelledby="myBasicModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close"
+                          (click)="deleteModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">Supprimer ? </h4>
+                </div>
+                <div class="modal-body d-flex">
+                  <button type="button" mdbBtn color="secondary" class="waves-light w-50"
+                          aria-label="Close" (click)="deleteModal.hide()" mdbWavesEffect>Non
+                  </button>
+                  <button type="button" mdbBtn color="primary"
+                          class="relative waves-light w-50 mt-2 h-50" mdbWavesEffect
+                          (click)="deleteEdt(event.id)">Oui
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a mdbBtn data-toggle="modal" data-target="#deleteModal" (click)="editModal.show()"
+             class=" tz-btn-circle  m-1 relative waves-light" color="success">
+            <i class="fa fa-edit"></i>
+          </a>
+          <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+               aria-labelledby="myBasicModalLabel"
+               [config]="{backdrop: false, ignoreBackdropClick: false}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100">{{event.title}} <i class="fa fa-home"></i></h4>
+                </div>
+                <div class="modal-body">
+                  <form action="">
+                    <mat-form-field class="col-md-12">
+                      <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="emploie.title" required #title="ngModel">
+                        <mat-option *ngFor="let matiere of listMatiere" [value]="matiere.description">
+                          {{matiere.description}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-12">
+                      <input matInput
+                             [owlDateTimeTrigger]="dt12"
+                             [owlDateTime]="dt12" name="dateDebut"
+                             [(ngModel)]="emploie.start"
+                             value="{{event.start}}"
+                             required
+                             autocomplete="off"
+                             #start="ngModel">
+                      <owl-date-time #dt12></owl-date-time>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-12">
+                      <input matInput
+                             [owlDateTimeTrigger]="dt14"
+                             [owlDateTime]="dt14" name="dateFin"
+                             [(ngModel)]="emploie.end"
+                             value="{{event.end}}"
+                             required
+                             autocomplete="off"
+                             #end="ngModel">
+                      <owl-date-time #dt14></owl-date-time>
+                    </mat-form-field>
+                    <div class="text-center w-100">
+                      <a class="btn btn-success btn-rounded float-right" type="submit"
+                         style="width: 35%"
+                         (click)="editModal.hide();editEvent(
+                         id=event.id,
+                         titre=emploie.title,
+                         debut=emploie.start,
+                         fin=emploie.end
+                         )">Modifier</a>
+                      <a routerLink="/menu/salle" (click)="editModal.hide()"
+                         class="btn btn-warning btn-rounded float-left" style="width: 35%" type="submit">Cancel</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <tr *ngIf="add">
       <td>
         <mat-form-field class="col-md-12">
-          <mat-select placeholder="Classe" name="class" required [(ngModel)]="event.title" #classes="ngModel">
-            <mat-option *ngFor="let classes of classe" (keyup)="refresh.next()" [value]="classes.id">
-              {{classes.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="col-md-12">
-          <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="teste" required #matiere="ngModel">
-            <mat-option *ngFor="let matiere of listMatiere" (keyup)="refresh.next()" [value]="matiere.id">
+          <mat-select placeholder="Matiere" name="matiere" [(ngModel)]="emploie.title" required #title="ngModel">
+            <mat-option *ngFor="let matiere of listMatiere" [value]="matiere.description">
               {{matiere.description}}
             </mat-option>
           </mat-select>
@@ -151,28 +264,13 @@
       </td>
       <td>
         <mat-form-field class="col-md-12">
-          <mat-select placeholder="Profs" name="profs" [(ngModel)]="testa"  required #prof="ngModel">
-            <mat-option *ngFor="let prof of profs" (keyup)="refresh.next()" [value]="prof.user_id">
-              {{prof.username}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <input
-                type="color"
-                [(ngModel)]="event.color.secondary"
-                (change)="refresh.next()">
-      </td>
-      <td>
-        <mat-form-field class="col-md-12">
           <input matInput
                  [owlDateTimeTrigger]="dt12"
                  [owlDateTime]="dt12" name="dateDebut"
-                 [(ngModel)]="event.start"
-                 (ngModelChange)="refresh.next()"
+                 [(ngModel)]="emploie.start"
                  placeholder="date début"
-                 required  #datedebut = "ngModel">
+                 autocomplete="off"
+                 required  #start="ngModel">
           <owl-date-time #dt12></owl-date-time>
         </mat-form-field>
       </td>
@@ -181,22 +279,27 @@
           <input matInput
                  [owlDateTimeTrigger]="dt14"
                  [owlDateTime]="dt14" name="dateFin"
-                 [(ngModel)]="event.end"
-                 (ngModelChange)="refresh.next()"
+                 [(ngModel)]="emploie.end"
+                 autocomplete="off"
                  placeholder="date fin"
-                 required  #dateFin = "ngModel">
+                 required  #end="ngModel">
           <owl-date-time #dt14></owl-date-time>
         </mat-form-field>
       </td>
       <td>
         <button
-                class="btn btn-danger"
-                (click)="events.splice(index, 1); refresh.next()">
-          Delete
+                class="btn btn-success"
+                (click)="addEdt(emploie);">
+          Ajouter
         </button>
       </td>
     </tr>
-    </tbody>
 
-  </table>
+</div>
+<div class="maskSpinner" *ngIf="loading">
+  <app-radar-spinner
+          [animationDuration]="4000"
+          [size]="200"
+          [color]="'#2e6bb1'"
+  ></app-radar-spinner>
 </div>

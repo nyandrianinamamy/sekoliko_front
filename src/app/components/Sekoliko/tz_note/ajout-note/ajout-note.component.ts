@@ -36,6 +36,7 @@ export class AjoutNoteComponent implements OnInit {
               private userConnected: UserConnectedService) { }
 
   ngOnInit() {
+    let role = this.getUserConnected();
     this.paramNote = new ParamNote();
     this.currentRoute.queryParams
       .pipe(filter(params => params.etudiant))
@@ -44,12 +45,17 @@ export class AjoutNoteComponent implements OnInit {
       });
     this.idInscription = this.currentRoute.snapshot.paramMap.get('id') ? + this.currentRoute.snapshot.paramMap.get('id') : null;
     this.idClasse = this.currentRoute.snapshot.paramMap.get('idClasse') ? + this.currentRoute.snapshot.paramMap.get('idClasse') : null;
-    this.getAllMatiere(this.idClasse);
+    let idProf = role.user_id;
+    if(role.role_type.id === ConstantRole.PROFS){
+      this.getProfMatiere(this.idClasse,idProf);
+    }else{
+      this.getAllMatiere(this.idClasse);
+    }
 
     /**
      * Role
      */
-    let role = this.getUserConnected();
+
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.displayedColumns = ['classe', 'note', 'coefficient'];
       this.etudiant = true;
@@ -62,10 +68,21 @@ export class AjoutNoteComponent implements OnInit {
     }
   }
 
+
   getAllMatiere(idClass: number) {
     this.loading = true;
     this.dataService.post(urlList.path_list_matiere, {class: idClass}).subscribe(response => {
       this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      console.log(this.listMatier);
+      this.loading = false;
+    });
+  }
+
+  getProfMatiere(idClass:number,idProf:number){
+    this.loading = true;
+    this.dataService.post(urlList.path_list_matiere, {class:idClass,prof: idProf}).subscribe(response => {
+      this.listMatier = response.code === ConstantHTTP.CODE_SUCCESS ? response.data : [];
+      console.log(this.listMatier);
       this.loading = false;
     });
   }
@@ -105,12 +122,10 @@ export class AjoutNoteComponent implements OnInit {
     this.router.navigate(['/menu/list-etudiant/' + this.idClasse]);
   }
 
-  checkIfUpdate(id: number) {
-    if (id > 0) {
-      this.loading = true;
-      this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse, mat: id}).subscribe(response => {
+  checkIfUpdate(id: any) {
+    if (id.value > 0) {
+      this.dataService.post(urlList.path_get_note_etudiant, {numins: this.idInscription, class: this.idClasse, mat: id.value}).subscribe(response => {
         if (response.code === ConstantHTTP.CODE_SUCCESS) {
-          this.loading = false;
           if (response.data.length > 1) {
             window.alert('erreur, duplication des notes');
           } else if (response.data.length === 1) {

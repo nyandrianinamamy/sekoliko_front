@@ -40,11 +40,14 @@ export class TzSalleComponent implements OnInit {
   public dateFin: Date;
   public classe: string;
   etudiant : boolean;
+  profs:boolean;
+  dateok:boolean;
+  error:any={isError:false,errorMessage:''};
 
   /**
    * Table
    */
-  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action' , 'occupation'];
+  displayedColumns: string[] = ['id', 'nom', 'debut', 'fin', 'classe', 'action' ];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -68,14 +71,16 @@ export class TzSalleComponent implements OnInit {
     this.getListSalleLibre();
     this.loading = true;
     let role = this.getUserConnected();
+    if(role.role_type.id === ConstantRole.PROFS){
+      this.profs = true;
+    }
     if (role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant = true;
-      this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe', 'occupation'];
+      this.displayedColumns  = ['id', 'nom', 'debut', 'fin', 'classe'];
     }
     this.getClasseEnfant().subscribe(response => {
       if (response.code === ConstantHTTP.CODE_SUCCESS) {
         this.classe_enfant = response.data;
-        console.log(this.classe_enfant);
       }
     });
     this.getNiveau().subscribe(response => {
@@ -88,8 +93,6 @@ export class TzSalleComponent implements OnInit {
         this.loading = false;
         this.salle = data.data;
         this._salle = data.data;
-        console.log(this.salle);
-        console.log(this._salle);
         this.dataSource = new MatTableDataSource<any>(this._salle);
         this.dataSource.paginator = this.paginator;
       }
@@ -105,6 +108,18 @@ export class TzSalleComponent implements OnInit {
   }
 
   /**
+   * Compare date
+   */
+  compareTwoDates(){
+    console.log(this.reservation.dateDebut);
+    if(new Date(this.reservation.dateFin) < new Date(this.reservation.dateDebut)){
+      this.error={isError:true,errorMessage:'End Date can\'t before start date'};
+      }else{
+        this.error.isError = false;
+      }
+    }
+
+    /**
    * Function list , edit , delete , Modifiable
    */
   getListSalle() {
@@ -162,7 +177,6 @@ export class TzSalleComponent implements OnInit {
         this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
           this.router.navigate(['/menu/salle']));
         this.reservation.occupation = true;
-        console.log(this.reservation.occupation);
         this.loading = false;
       }
     });

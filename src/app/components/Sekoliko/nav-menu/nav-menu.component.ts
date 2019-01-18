@@ -39,6 +39,8 @@ constructor(media: ObservableMedia,
     });
   }
   logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_info');
     this.router.navigate(['']);
   }
 

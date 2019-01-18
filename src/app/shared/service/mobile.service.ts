@@ -15,9 +15,13 @@ export class MobileService {
     }
 
     @HostListener('window:resize', ['$event'])
-    getScreenSize(event?) {
+    getScreenSize() {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
-        console.log(this.screenHeight, this.screenWidth);
+        if (this.screenWidth  <= 479){
+            return this.mobile = true;
+        } else if(this.screenWidth >= 479){
+            return this.mobile = false;
+        }
     }
 }

@@ -10,6 +10,8 @@ import {ConstantHTTP} from "../../../Utils/ConstantHTTP";
 import {MatPaginator, MatTableDataSource} from "@angular/material";
 import {Router} from "@angular/router";
 import {Classe} from "../../../shared/model/Classe";
+import {ConstantRole} from "../../../Utils/ConstantRole";
+import {UserConnectedService} from "../../../shared/service/user-connected.service";
 
 @Component({
     selector: 'app-tz-classe-enfant',
@@ -22,9 +24,11 @@ export class TzClasseEnfantComponent implements OnInit {
      * Table
      */
     loading: boolean;
+    profs:boolean;
     description: string;
-    parent: number;
+    parent: any;
     listNiveau: Classe;
+    classe: ClasseEnfant;
     displayedColumns: string[] = ['numero', 'nom', 'action'];
     dataSource: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,27 +36,45 @@ export class TzClasseEnfantComponent implements OnInit {
 
     constructor(private excelService: ExcelService,
                 private dataService: DataService,
-                private router: Router) {
+                private router: Router,
+                private userConnected:UserConnectedService) {
     }
 
     ngOnInit() {
+        let role = this.getUserc();
+        if (role.role_type.id !== ConstantRole.ADMIN && role.role_type.id != ConstantRole.SECRETARIAT &&  role.role_type.id != ConstantRole.PROFS){
+            this.router.navigate(['/menu/not-found']);
+        }
+        if( role.role_type.id != ConstantRole.PROFS){
+            this.profs = true;
+        }
+
+        this.classe = new ClasseEnfant();
         this.getClasseEnfant().subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                console.log(response.data);
                 this.classeEnfant = response.data;
                 this.dataSource = new MatTableDataSource<any>(this.classeEnfant);
+                this.dataSource.paginator = this.paginator;
             }
         });
         this.getClasseParent().subscribe(response => {
             if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                console.log(response.data);
                 this.listNiveau = response.data
                 this.loading = false;
             }
         })
     }
 
+    /**
+     * Get user connecté
+     */
+    getUserc(){
+        return this.userConnected.userConnected();
+    }
 
+    /**
+     * Fetch classe enfant
+     */
     getClasseEnfant() {
         return this.dataService.post(urlList.path_list_class_enfant);
     }
@@ -63,15 +85,14 @@ export class TzClasseEnfantComponent implements OnInit {
      */
     editClasse(id: number) {
         this.loading = true;
-        this.dataService.post(urlList.path_edit_class_enfant + '/' + id, {
-            'description': this.description,
-            'parent': this.parent,
-        }).subscribe(response => {
-            if (response.code === ConstantHTTP.CODE_SUCCESS) {
-                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
-                    this.router.navigate(['/menu/list-classe-eft']));
-                this.loading = false;
-            }
+        this.dataService.post(urlList.path_edit_class_enfant + '/' + id,
+            {parent:this.parent.id,description:this.description}).subscribe(
+                response => {
+                            if (response.code === ConstantHTTP.CODE_SUCCESS) {
+                                this.router.navigateByUrl('/menu', {skipLocationChange: true}).then(() =>
+                                    this.router.navigate(['/menu/list-classe-eft']));
+                                this.loading = false;
+                            }
         });
     }
 
@@ -95,6 +116,14 @@ export class TzClasseEnfantComponent implements OnInit {
      */
     getClasseParent() {
         return this.dataService.post(urlList.path_list_class_parent);
+    }
+
+    /**
+     * Fetch liste matiere
+     * @param idClasse
+     */
+    checkListEtudiant(idClasse: number) {
+        this.router.navigate(['/menu/matiere-list/' + idClasse]);
     }
 
     /**

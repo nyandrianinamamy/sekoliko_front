@@ -14,8 +14,10 @@ import {
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSidenavModule, MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,MatProgressSpinnerModule
 } from '@angular/material';
+import {CanvasWhiteboardModule} from 'ng2-canvas-whiteboard'
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -56,6 +58,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TzClasseEnfantComponent } from './tz-classe-enfant/tz-classe-enfant.component';
 import { TzAddEnfantComponent } from './tz-classe-enfant/tz-add-enfant/tz-add-enfant.component';
 import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
+import { TzAnneScolaireComponent } from './tz-anne-scolaire/tz-anne-scolaire.component';
+import { TzEtsComponent } from './tz-ets/tz-ets.component';
 
 @NgModule({
   imports: [
@@ -90,8 +94,11 @@ import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
     MatTableModule,
     MaterialModule,
     DataTablesModule,
+    MatProgressSpinnerModule,
     MDBBootstrapModule.forRoot(),
     NgbModalModule,
+    NgxPermissionsModule.forRoot(),
+    CanvasWhiteboardModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -127,7 +134,9 @@ import { AjoutNoteComponent } from './tz_note/ajout-note/ajout-note.component';
     TzEdtComponent,
     TzClasseEnfantComponent,
     TzAddEnfantComponent,
-    AjoutNoteComponent
+    AjoutNoteComponent,
+    TzAnneScolaireComponent,
+    TzEtsComponent
   ],
   entryComponents: [
     EtudiantUpdateComponent,

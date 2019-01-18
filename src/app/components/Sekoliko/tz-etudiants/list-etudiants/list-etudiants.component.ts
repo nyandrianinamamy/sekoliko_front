@@ -38,8 +38,11 @@ export class ListEtudiantsComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   loading: boolean;
   etudiant_user:boolean;
+  profs_user:boolean;
   idInscription: number;
   idClasse: number;
+  classes:number;
+  href:any;
   inscriptionUser: string;
   dtTrigger: Subject<any> = new Subject();
   constructor(private dataService: DataService,
@@ -53,10 +56,35 @@ export class ListEtudiantsComponent implements OnInit {
   ngOnInit() {
 
     let role = this.getUserConnected();
+    if (role.role_type.id === ConstantRole.PROFS) {
+      this.profs_user = true;
+    }
+    if (role.role_type.id === ConstantRole.ETUDIANT){
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
+    }
+
     if(role.role_type.id === ConstantRole.ETUDIANT){
       this.etudiant_user = true;
+      this.getUserInsc().subscribe(response => {
+        if (response.code === ConstantHTTP.CODE_SUCCESS) {
+          this.href = this.currentRoute.snapshot.paramMap.get('id');
+          this.classes = response.data[0].id_classe.id;
+          if (this.href != this.classes) {
+            this.router.navigate(['/menu/not-found']);
+          }
+        }
+      });
+
       if (window.screen.width >= 600) {
-        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'contact', 'sexe'];
+        this.displayedColumns = ['matricule', 'nom', 'prenom', 'age', 'adresse', 'sexe'];
       }else {
         this.mobile = true;
         this.displayedColumns = [ 'nom', 'prenom'];
@@ -91,6 +119,21 @@ export class ListEtudiantsComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Table filter
+   */
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource);
+    // @ts-ignore
+    if(this.dataSource.filteredData == 0){
+      // @ts-ignore
+      console.log('null')
+    }
+  }
+
+
   /**
    * Note etudiant
    */
@@ -101,6 +144,18 @@ export class ListEtudiantsComponent implements OnInit {
          this.idClasse = response.data[0].id_classe.id;
          this.inscriptionUser = response.data[0].user_id.user_id;
         this.router.navigate(['/menu/note/' + this.idInscription + '/' + this.idClasse], { queryParams: {etudiant: this.inscriptionUser}});
+      }
+    });
+  }
+
+  /**
+   * Emploie du temps
+   */
+  voirEdt(){
+    this.getUserInsc().subscribe(response => {
+      if (response.code === ConstantHTTP.CODE_SUCCESS) {
+        this.idClasse = response.data[0].id_classe.id;
+        this.router.navigate(['/menu/edt/' + this.idClasse]);
       }
     });
   }
@@ -159,6 +214,7 @@ export class ListEtudiantsComponent implements OnInit {
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
   }
+
 
   /**
    * Export

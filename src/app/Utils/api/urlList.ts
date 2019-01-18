@@ -4,8 +4,15 @@ const _api = environment.base_url_api + '/';
 
 export const urlList = {
   path_login: _api + 'users/login',
+  path_anne_scolaire: _api + 'addas',
+  path_anne_list: _api + 'listans',
+  path_edt_list: _api + 'edt/find',
+  path_edt_add: _api + 'edt/edit',
+  path_edt_edit: _api + 'edt/edit/',
+  path_edt_del: _api + 'edt/delete/',
   path_list_class_parent: _api + 'classe/find',
   path_list_class_enfant: _api + 'classe-enfant/find',
+  path_list_class_enfant_edt: _api + 'classe-enfant/find/',
   path_edit_class_enfant: _api + 'classe-enfant/edit',
   path_delete_class_enfant: _api + 'classe-enfant/delete/',
   path_edit_class: _api + 'classe/edit',
@@ -33,5 +40,6 @@ export const urlList = {
   path_add_note: _api + 'addnote',
   path_edit_note: _api + 'editnote',
   path_get_note: _api + 'notes/find/',
-  path_get_note_etudiant: _api + 'notes-etudiant/find'
+  path_get_note_etudiant: _api + 'notes-etudiant/find',
+  path_ets: _api + 'etablissement/find'
 };
