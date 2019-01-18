@@ -1,18 +1,17 @@
 # Techzara sekoliko App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8 on october 2018.
+Update to Angular 7 please
 
 ## Initialisation Environnement de DEV
 
-  git clone  https://github.com/julkwel/sekoliko_front.git
+git clone https://github.com/julkwel/sekoliko_front.git
 
-  cd sekoliko_front
+cd sekoliko_front
 
-  npm install
+npm install
 
-  ng serve --o
-  
-  
+ng serve --o
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
@@ -23,14 +22,14 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 The app will automatically reload if you change any of the source files.
 
 ## Production Test server
 
-Run `ng build --prod` for a production application with Service Worker. 
+Run `ng build --prod` for a production application with Service Worker.
 Run `http-server dist/techzara-sekoliko-app` for a production server.
-Navigate to `http://localhost:8080/`. 
+Navigate to `http://localhost:8080/`.
 
 ## Methode Post et Get
 
@@ -42,7 +41,7 @@ ex: this.dataService.post(url).subscribe()
 
 ajouter dans MenuItem.ts
 
-## Color chart graphique 
+## Color chart graphique
 
 indigo => #aa66cc
 
@@ -53,10 +52,10 @@ Grey => #e9ebee
 Thanks
 
 **Thanks for our team**
+
 <table>
   
   </table>
-
 
 <table>
     <tr>
