@@ -14,13 +14,13 @@ Let's assume that you need to implement a new feature called for example "Login 
 
 - Next, create a branch related to the current issue, open your code editor and pull changes
 
-```
+```bash
 git pull
 ```
 
 - You should see the newly created branch, then checkout to.
 
-```
+```bash
 git checkout {the-branch}
 ```
 
@@ -32,19 +32,19 @@ git checkout {the-branch}
 
 The template
 
-```
+```bash
 git commit -m [{zone}] {work summary} #{branch}
 ```
 
 For example
 
-```
+```bash
 git commit -m [LOGIN] implement login controller #2-login
 ```
 
 or
 
-```
+```bash
 git commit -m [DASHBOARD] integrate dashboard html-css #4-dashboard
 ```
 
