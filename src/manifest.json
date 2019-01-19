@@ -1,7 +1,7 @@
 {
-  "name": "your-home-app",
-  "short_name": "your-home-app",
-  "theme_color": "#01723c", //VERT #ffdf01 : JAUNE
+  "name": "sekoliko-front",
+  "short_name": "sekoliko-front",
+  "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
@@ -20,6 +20,31 @@
     {
       "src": "assets/icons/icon-128x128.png",
       "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
