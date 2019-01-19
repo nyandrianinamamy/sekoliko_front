@@ -26,7 +26,7 @@ types and isolated ngrx infrastructure, you must specify the feature's
 from your Angular project workspace.
 
 ```bash
-schematics @egervari/schematics-angular:feature --name=my-feature --path=src/app --prefix=rng
+schematics @egervari/schematics-angular:feature --name=my-feature --path=src/app
 ```
 
 If your project currently does not have a `/features` folder, the
